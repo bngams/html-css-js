@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Le squelette d'une page HTML</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le squelette d'une page HTML</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> les cinq éléments que
+      contient <em>toute</em> page web, sans exception. Une fois ces cinq-là compris,
+      vous pouvez lire le début de n'importe quelle page du web.</p>
+    </div>
+
+    <h2>Une page HTML, c'est quoi ?</h2>
+
+    <p>
+      Un fichier texte. Rien d'autre. Ce qui le distingue d'un texte ordinaire, ce sont
+      les <strong>balises</strong> : des mots entre chevrons qui décrivent le rôle de
+      chaque morceau de contenu.
+    </p>
+
+    <p>Une balise s'ouvre et se ferme, et elle entoure le contenu qu'elle décrit :</p>
+
+<pre><code>&lt;p&gt;Ceci est un paragraphe.&lt;/p&gt;
+ ↑                          ↑
+ ouverture              fermeture (avec /)</code></pre>
+
+    <p>
+      Le navigateur lit ces balises et en déduit comment afficher la page. Il n'affiche
+      jamais les balises elles-mêmes — seulement leur contenu.
+    </p>
+
+    <h3>Les commentaires : du texte que le navigateur ignore</h3>
+
+    <p>
+      On peut écrire dans un fichier HTML du texte destiné <strong>aux humains
+      uniquement</strong> : des notes, des explications, des rappels. Le navigateur
+      les lit, comprend qu'ils ne sont pas du contenu, et ne les affiche pas.
+    </p>
+
+    <p>Un commentaire s'ouvre par <code>&lt;!--</code> et se ferme par <code>--&gt;</code> :</p>
+
+<pre><code>&lt;!-- Ceci est un commentaire : il n'apparaît pas dans la page --&gt;
+&lt;p&gt;Ceci est un paragraphe : il apparaît.&lt;/p&gt;</code></pre>
+
+    <p>Il peut tenir sur plusieurs lignes :</p>
+
+<pre><code>&lt;!--
+  Tout ce bloc est ignoré par le navigateur,
+  même s'il fait dix lignes.
+--&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Vous allez en voir beaucoup.</strong> Dans l'onglet
+        « À vous de jouer », les consignes sont écrites en commentaires,
+        directement dans le fichier que vous modifiez. C'est pour cette raison que
+        la page s'affiche vide au départ : elle ne contient <em>que</em> des
+        commentaires, donc le navigateur n'a rien à afficher. À vous d'écrire le
+        vrai contenu à côté.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Un commentaire n'est pas un secret.</strong> N'importe qui peut lire
+        le code source d'une page (clic droit → « Afficher le code source »). N'y
+        écrivez jamais un mot de passe ou une information confidentielle.
+      </p>
+    </div>
+
+    <h3>L'exception : les balises auto-fermantes</h3>
+
+    <p>
+      Certaines balises <strong>ne se ferment pas</strong>, et pour une raison simple :
+      elles n'entourent aucun contenu. Elles ne décrivent pas un morceau de texte,
+      elles <em>insèrent</em> quelque chose à un endroit précis.
+    </p>
+
+    <p>
+      Comparez. Un paragraphe entoure du texte, donc il a besoin d'un début et d'une fin :
+    </p>
+
+<pre><code>&lt;p&gt;Ceci est un paragraphe.&lt;/p&gt;</code></pre>
+
+    <p>
+      <code>&lt;br&gt;</code>, qui force un retour à la ligne, n'entoure rien : il
+      <em>est</em> l'action. Rien à fermer, donc :
+    </p>
+
+<pre><code>&lt;p&gt;Première ligne&lt;br&gt;Seconde ligne&lt;/p&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        Il y en a d'autres — vous en écrirez une dès la notion 3 de ce cours
+        (<code>&lt;meta charset="UTF-8"&gt;</code>), et le doctype juste en dessous
+        suit la même logique. La liste complète est sur
+        <a href="https://developer.mozilla.org/fr/docs/Glossary/Void_element"
+           target="_blank" rel="noopener">MDN</a> ; inutile de l'apprendre par cœur,
+        vous les reconnaîtrez à l'usage.
+      </p>
+    </div>
+
+    <h2>1 · Le doctype</h2>
+
+    <p>
+      Toute première ligne du fichier. Elle annonce au navigateur : « ceci est du HTML
+      moderne ». Sans elle, le navigateur bascule dans un mode de compatibilité ancien
+      où certains styles se comportent bizarrement.
+    </p>
+
+<pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+
+    <p>
+      Particularité : elle commence par un point d'exclamation et <strong>ne se ferme
+      pas</strong>. C'est la seule ligne de ce genre.
+    </p>
+
+    <h2>2 · La balise <code>&lt;html&gt;</code> et la langue</h2>
+
+    <p>
+      Elle enveloppe absolument tout le reste de la page. On lui ajoute un
+      <strong>attribut</strong> <code>lang</code> qui déclare la langue du contenu.
+    </p>
+
+<pre><code>&lt;html lang="fr"&gt;
+  ...tout le contenu de la page...
+&lt;/html&gt;</code></pre>
+
+    <div class="astuce">
+      <p><strong>À quoi sert <code>lang</code> ?</strong> Il n'a aucun effet visible,
+      mais : les lecteurs d'écran prononcent correctement le texte, le navigateur propose
+      la traduction au bon moment, et la césure des mots en fin de ligne suit les règles
+      du français. C'est une ligne gratuite qui rend la page accessible.</p>
+    </div>
+
+    <h3>Au passage : un attribut, c'est quoi ?</h3>
+
+    <p>
+      Une information supplémentaire écrite <em>dans</em> la balise ouvrante, sous la
+      forme <code>nom="valeur"</code>. Ici <code>lang="fr"</code>. Vous en verrez
+      beaucoup d'autres.
+    </p>
+
+    <h2>3 · Le <code>&lt;head&gt;</code> et l'encodage</h2>
+
+    <p>
+      Le <code>&lt;head&gt;</code> contient les informations <strong>invisibles</strong>
+      pour le visiteur, mais lues par le navigateur. La plus importante est l'encodage
+      des caractères :
+    </p>
+
+<pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;</code></pre>
+
+    <div class="attention">
+      <p><strong>Oubliez cette ligne et vos accents cassent.</strong> « créé » devient
+      « crÃ©Ã© ». UTF-8 est l'encodage qui couvre les accents français, les emojis et
+      la quasi-totalité des langues du monde. Mettez-le toujours, et le plus haut
+      possible dans le <code>&lt;head&gt;</code>.</p>
+    </div>
+
+    <p>
+      Voici la première auto-fermante annoncée plus haut : <code>&lt;meta&gt;</code>
+      insère une information, elle n'entoure rien.
+    </p>
+
+    <h2>4 · Le <code>&lt;title&gt;</code></h2>
+
+    <p>
+      Le titre de la page. Il ne s'affiche <em>pas</em> dans la page elle-même, mais :
+    </p>
+
+    <ul>
+      <li>dans l'onglet du navigateur</li>
+      <li>dans les favoris, si on enregistre la page</li>
+      <li>comme ligne bleue cliquable dans les résultats Google</li>
+    </ul>
+
+<pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Ma première page&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+
+    <p>
+      C'est le seul élément du <code>&lt;head&gt;</code> que le visiteur perçoit.
+    </p>
+
+    <h2>5 · Le <code>&lt;body&gt;</code> : titres et paragraphes</h2>
+
+    <p>
+      Tout ce que le visiteur voit à l'écran est dans le <code>&lt;body&gt;</code>.
+      Les deux balises de base :
+    </p>
+
+    <table>
+      <tr>
+        <th>Balise</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>&lt;h1&gt;</code></td>
+        <td>Le titre principal du contenu. <strong>Un seul par page.</strong>
+            <code>h</code> pour <em>heading</em> (titre).</td>
+      </tr>
+      <tr>
+        <td><code>&lt;p&gt;</code></td>
+        <td>Un paragraphe de texte. <code>p</code> pour <em>paragraph</em>.</td>
+      </tr>
+    </table>
+
+<pre><code>&lt;body&gt;
+  &lt;h1&gt;Ma première page&lt;/h1&gt;
+  &lt;p&gt;Bonjour, voici mon premier site web.&lt;/p&gt;
+&lt;/body&gt;</code></pre>
+
+    <div class="astuce">
+      <p><strong>Les retours à la ligne que vous tapez ne comptent pas.</strong>
+      Le HTML ignore les espaces et sauts de ligne en trop : c'est la balise
+      <code>&lt;p&gt;</code> qui crée la séparation visuelle entre deux paragraphes,
+      pas la touche Entrée.</p>
+    </div>
+
+    <h2>Tout ensemble</h2>
+
+    <p>Voici les cinq éléments assemblés — c'est la structure de départ de toute page :</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Ma première page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Ma première page&lt;/h1&gt;
+  &lt;p&gt;Bonjour, voici mon premier site web.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <p>
+      Remarquez l'<strong>emboîtement</strong> : <code>html</code> contient
+      <code>head</code> et <code>body</code>, qui contiennent eux-mêmes d'autres balises.
+      L'indentation (les décalages) n'est pas obligatoire, mais elle rend cet
+      emboîtement lisible. Prenez l'habitude tout de suite.
+    </p>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <p>
+      Tout ce qui précède tient sur une page. Voici où creuser — ces ressources sont
+      celles des professionnels, pas des supports simplifiés, et elles vous serviront
+      longtemps après la formation.
+    </p>
+
+    <h3>La référence</h3>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn/HTML/Introduction_to_HTML"
+             target="_blank" rel="noopener">MDN — Introduction à HTML</a>
+        </td>
+        <td>
+          Le cours complet de Mozilla, en français, qui reprend et approfondit tout
+          ce chapitre. <strong>Si vous ne gardez qu'un lien, gardez celui-là.</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element"
+             target="_blank" rel="noopener">MDN — Référence des éléments HTML</a>
+        </td>
+        <td>
+          La liste de <em>toutes</em> les balises, chacune avec sa description, ses
+          attributs et des exemples. C'est le dictionnaire : on ne le lit pas, on le
+          consulte.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Glossary/Void_element"
+             target="_blank" rel="noopener">MDN — Éléments vides (auto-fermants)</a>
+        </td>
+        <td>
+          La liste officielle et complète des balises qui ne se ferment pas —
+          la notion vue plus haut.
+        </td>
+      </tr>
+    </table>
+
+    <h3>Vérifier son code</h3>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://validator.w3.org/#validate_by_upload"
+             target="_blank" rel="noopener">Validateur HTML du W3C</a>
+        </td>
+        <td>
+          Vous déposez votre fichier, il liste les erreurs avec le numéro de ligne.
+          L'organisme qui édite la norme HTML. Bien plus rapide que chercher à l'œil.
+        </td>
+      </tr>
+    </table>
+
+    <h3>Approfondir</h3>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://web.dev/learn/html" target="_blank" rel="noopener">web.dev — Learn HTML</a>
+        </td>
+        <td>
+          Cours structuré de l'équipe Chrome, en anglais. Plus exigeant que MDN,
+          avec un vrai accent sur les bonnes pratiques modernes.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://html.spec.whatwg.org/multipage/" target="_blank" rel="noopener">La spécification HTML (WHATWG)</a>
+        </td>
+        <td>
+          Le texte de loi du HTML. Aride, énorme, et <em>la</em> source de vérité quand
+          deux tutoriels se contredisent. À connaître, pas à lire d'un trait.
+        </td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Un mot sur W3Schools.</strong> C'est souvent le premier résultat Google,
+        c'est pratique pour un exemple rapide, mais le site n'a aucun lien avec le W3C
+        malgré son nom, et il contient des imprécisions ou des conseils dépassés. En cas
+        de doute, <strong>vérifiez sur MDN</strong>.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

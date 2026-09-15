@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Images et contenus embarqués</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 3</p>
+  <h1 class="titre-exo">Images et contenus embarqués</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a> :
+      même une tentative ratée rend cette page bien plus utile.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>&lt;h2&gt;Une image&lt;/h2&gt;
+
+&lt;img src="../../assets/photo.svg"
+     alt="Un paysage stylisé : des collines vertes sous un soleil jaune"
+     width="400"&gt;
+
+&lt;h2&gt;Une image légendée&lt;/h2&gt;
+
+&lt;figure&gt;
+  &lt;img src="../../assets/photo.svg"
+       alt="Un paysage stylisé : des collines vertes sous un soleil jaune"
+       width="400"&gt;
+  &lt;figcaption&gt;Illustration d'exemple, dessinée en SVG.&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h2&gt;Un dessin SVG&lt;/h2&gt;
+
+&lt;svg width="120" height="120" viewBox="0 0 120 120"
+     role="img" aria-label="Un cercle bleu"&gt;
+  &lt;circle cx="60" cy="60" r="50" fill="#0b6bcb" /&gt;
+&lt;/svg&gt;
+
+&lt;h2&gt;Une vidéo&lt;/h2&gt;
+
+&lt;video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+       controls
+       width="400"&gt;
+  Votre navigateur ne sait pas lire les vidéos.
+&lt;/video&gt;
+
+&lt;h2&gt;Une carte&lt;/h2&gt;
+
+&lt;iframe
+  src="https://www.openstreetmap.org/export/embed.html?bbox=1.42,43.59,1.46,43.61"
+  width="600"
+  height="300"
+  title="Carte du centre de Toulouse"&gt;&lt;/iframe&gt;
+
+&lt;h2&gt;Un document&lt;/h2&gt;
+
+&lt;p&gt;
+  &lt;a href="../../assets/programme.pdf" target="_blank" rel="noopener"&gt;
+    Le programme de la formation (PDF)
+  &lt;/a&gt;
+&lt;/p&gt;</code></pre>
+    </details>
+
+    <div class="attention">
+      <p>
+        <strong>Attention aux chemins si vous comparez avec le fichier corrigé.</strong>
+        Le code ci-dessus est écrit pour <code>travail.html</code> et remonte de
+        <strong>deux</strong> dossiers (<code>../../assets/</code>). Le fichier
+        <code>solution/index.html</code> est rangé un niveau plus bas et en remonte
+        donc <strong>trois</strong> (<code>../../../assets/</code>). Même destination,
+        profondeur différente — c'est exactement le piège de la notion 1.
+      </p>
+    </div>
+
+    <p>
+      Le fichier complet et commenté est dans <code>solution/index.html</code> —
+      ouvrez-le dans VSCode, ou
+      <a href="solution/">affichez-le dans le navigateur</a>.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>À la place de l'image, un texte ou une icône cassée</td>
+        <td>Le chemin est faux. Comptez les <code>../</code> : depuis
+            <code>travail.html</code>, il en faut <strong>deux</strong> pour atteindre
+            <code>assets/</code></td>
+      </tr>
+      <tr>
+        <td>L'image ne s'affiche pas <em>et</em> rien ne la remplace</td>
+        <td>L'attribut <code>alt</code> manque — il n'y a donc aucun texte de
+            remplacement à afficher</td>
+      </tr>
+      <tr>
+        <td>La vidéo s'affiche mais sans aucun bouton</td>
+        <td><code>controls</code> manque. Il s'écrit seul, sans <code>=</code> ni
+            valeur</td>
+      </tr>
+      <tr>
+        <td>Le lecteur vidéo reste noir, la carte reste vide</td>
+        <td>Pas de connexion Internet — les deux viennent de sites extérieurs.
+            Ce n'est pas une erreur de votre code</td>
+      </tr>
+      <tr>
+        <td>Le SVG n'apparaît pas</td>
+        <td>Une balise interne non fermée : <code>&lt;circle … /&gt;</code> se termine
+            par une barre oblique avant le chevron</td>
+      </tr>
+      <tr>
+        <td>La légende s'affiche mais n'est pas liée à l'image</td>
+        <td>Le <code>&lt;figcaption&gt;</code> est en dehors du
+            <code>&lt;figure&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Le validateur signale « An img element must have an alt attribute »</td>
+        <td>Exactement ce qu'il dit : une image sans <code>alt</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui fait gagner du temps sur les chemins :</strong> dans
+        VSCode, tapez <code>src="</code> puis <code>../</code> — l'éditeur propose la
+        liste des dossiers disponibles à cet endroit. Si <code>assets</code> n'apparaît
+        pas, c'est que vous n'êtes pas remonté assez haut.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à mon code</a>
+      <a class="bouton" href="../../">Fin du projet 1 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

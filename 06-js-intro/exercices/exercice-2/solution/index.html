@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Inscription</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #253044;
+      background-color: #f6f8fb;
+    }
+    .page { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #1d6fa5; margin-top: 0; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <h1>Médiathèque des Trois Rivières</h1>
+
+    <div class="encadre">
+      <p>
+        <strong>Ceci est le corrigé en fonctionnement.</strong> Les boîtes de
+        dialogue s'ouvrent les unes après les autres dès le chargement.
+      </p>
+      <p>
+        Ouvrez la console (<kbd>F12</kbd>) <strong>avant</strong> de recharger :
+        la moitié du résultat s'y affiche.
+      </p>
+    </div>
+
+    <h2>Ce que vous devez observer</h2>
+
+    <ol>
+      <li>Dans la console : <code>Le script est chargé</code></li>
+      <li>Une alerte de bienvenue</li>
+      <li>Une question : votre prénom</li>
+      <li>Une alerte qui vous salue par ce prénom</li>
+      <li>Une question : votre âge</li>
+      <li>Dans la console, le calcul <strong>faux</strong> puis le calcul juste</li>
+      <li>Une question à deux boutons, puis le récapitulatif dans la console</li>
+    </ol>
+
+    <p>
+      <a class="retour" href="../solution.html">← Revenir aux explications</a>
+    </p>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

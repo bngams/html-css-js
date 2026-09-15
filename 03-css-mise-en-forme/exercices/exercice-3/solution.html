@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Disposer avec Flexbox</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 3</p>
+  <h1 class="titre-exo">Disposer avec Flexbox</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>.banniere {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #14457b;
+  padding: 15px;
+}
+
+.logo {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.grille {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.carte {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  flex: 1 1 380px;
+  transition: box-shadow 0.3s;
+}
+
+.carte:hover,
+.carte:focus {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.date {
+  color: #0b6bcb;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-top: 0;
+}</code></pre>
+    </details>
+
+    <p>
+      Le fichier commenté ligne par ligne est dans
+      <code>solution/style.css</code> — et la page habillée est
+      <a href="solution/">visible ici</a>.
+    </p>
+
+    <h2>Les trois points qui comptent</h2>
+
+    <h3>1 · Le conteneur, jamais les enfants</h3>
+
+    <p>
+      Nous avons écrit <code>display: flex</code> <strong>trois fois</strong> —
+      sur <code>.banniere</code>, <code>.menu</code> et <code>.grille</code>. Jamais
+      sur <code>.carte</code> ni sur <code>.logo</code>.
+    </p>
+
+    <p>
+      Et remarquez que <code>.menu</code> est un conteneur flex <em>à l'intérieur</em>
+      d'un autre : la bannière dispose le logo et le menu, puis le menu dispose ses
+      trois liens. Cette imbrication est parfaitement courante.
+    </p>
+
+    <h3>2 · <code>flex: 1 1 380px</code>, la ligne qui rend la grille adaptable</h3>
+
+    <p>Trois valeurs, trois rôles :</p>
+
+    <table>
+      <tr>
+        <th>Valeur</th>
+        <th>Signifie</th>
+      </tr>
+      <tr>
+        <td><code>1</code></td>
+        <td>La carte peut <strong>grandir</strong> pour occuper l'espace libre</td>
+      </tr>
+      <tr>
+        <td><code>1</code></td>
+        <td>Elle peut <strong>rétrécir</strong> si nécessaire</td>
+      </tr>
+      <tr>
+        <td><code>380px</code></td>
+        <td>Sa <strong>largeur de départ</strong></td>
+      </tr>
+    </table>
+
+    <p>
+      Combinée à <code>flex-wrap: wrap</code>, cette règle produit deux cartes par
+      ligne sur un écran large et une seule sur téléphone — <strong>sans aucune règle
+      supplémentaire</strong>.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>C'est la base qui décide du nombre par ligne.</strong> La ligne utile
+        fait 860 px (900 moins les 2 × 20 px de padding) : deux cartes de 380 px plus
+        20 px d'espace font 780 px, elles tiennent ; trois feraient 1180 px, elles ne
+        tiennent pas. Avec une base de 250 px, trois cartes passeraient et la
+        quatrième se retrouverait seule, étirée sur toute la largeur.
+      </p>
+    </div>
+
+    <p> C'est le premier mécanisme du responsive, que vous
+      approfondirez au projet 4.
+    </p>
+
+    <h3>3 · La transition va sur l'état normal</h3>
+
+<pre><code>.carte {
+  transition: box-shadow 0.3s;   ✅ ici
+}
+
+.carte:hover {
+  box-shadow: …;                 ❌ pas ici
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Posée sur <code>:hover</code> seulement</strong>, l'animation ne joue
+        qu'à l'aller : l'ombre s'accentue doucement, puis disparaît brutalement quand
+        la souris sort. L'élément doit « connaître » sa transition dans son état de
+        repos.
+      </p>
+    </div>
+
+    <h3>Et un point d'accessibilité</h3>
+
+    <p>
+      Nous avons écrit <code>.carte:hover, .carte:focus</code> — les deux ensemble.
+      <code>:hover</code> ne concerne que la souris : une personne qui navigue au
+      clavier, avec la touche Tab, ne verrait jamais l'effet. Prenez l'habitude de les
+      associer sur tout élément interactif.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>Les cartes restent empilées</td>
+        <td><code>display: flex</code> a été posé sur <code>.carte</code> au lieu de
+            <code>.grille</code> — la règle va sur le parent</td>
+      </tr>
+      <tr>
+        <td>Les cartes se compriment au lieu de passer à la ligne</td>
+        <td><code>flex-wrap: wrap</code> manque</td>
+      </tr>
+      <tr>
+        <td>Le logo et le menu sont collés à gauche</td>
+        <td><code>justify-content: space-between</code> manque sur
+            <code>.banniere</code></td>
+      </tr>
+      <tr>
+        <td>Le survol est instantané, sans animation</td>
+        <td><code>transition</code> a été écrite dans le bloc <code>:hover</code> au
+            lieu du bloc normal</td>
+      </tr>
+      <tr>
+        <td>Les liens du menu sont bleus et soulignés</td>
+        <td>Le sélecteur descendant <code>.menu a</code> est mal écrit — l'espace
+            entre les deux est significatif</td>
+      </tr>
+      <tr>
+        <td>La bannière est déséquilibrée en hauteur</td>
+        <td><code>margin: 0</code> manque sur <code>.logo</code> : la marge par défaut
+            du paragraphe décale tout</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe Flexbox :</strong> dans l'inspecteur, un badge
+        <code>flex</code> apparaît à côté de chaque conteneur flex. S'il n'apparaît pas
+        où vous l'attendiez, votre <code>display: flex</code> n'est pas au bon endroit.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à ma page</a>
+      <a class="bouton" href="../exercice-4/">Exercice 4 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

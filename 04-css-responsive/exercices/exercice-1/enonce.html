@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Le viewport et les unités</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le viewport et les unités</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Réparer une page qui déborde sur téléphone,
+      sans écrire une seule media query.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> le projet 3.
+        Vous savez écrire des règles, viser des classes et manier le modèle de boîte.
+      </p>
+    </div>
+
+    <h2>📄 Les fichiers</h2>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>travail.html</code></td>
+        <td>🔒 Fourni et figé</td>
+      </tr>
+      <tr>
+        <td><code>style.css</code></td>
+        <td>👉 <strong>LE FICHIER QUE VOUS MODIFIEZ</strong> — il contient déjà trois
+            règles <strong>volontairement mal écrites</strong>, en largeurs fixes</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Cet exercice commence par un constat, pas par du code.</strong> Ouvrez
+        <code>travail.html</code> et réduisez la fenêtre à environ 400 px de large :
+        une barre de défilement horizontale apparaît, l'image déborde, le texte sort
+        de l'écran. C'est ce que vous allez réparer.
+      </p>
+    </div>
+
+    <h2>🔍 Comment tester — la nouveauté de ce projet</h2>
+
+    <p>
+      Recharger ne suffit plus. Il faut <strong>faire varier la largeur</strong> :
+    </p>
+
+    <table>
+      <tr>
+        <th>Méthode</th>
+        <th>Comment</th>
+      </tr>
+      <tr>
+        <td><strong>La fenêtre</strong></td>
+        <td>Attrapez son bord et faites-la glisser lentement</td>
+      </tr>
+      <tr>
+        <td><strong>Mode appareil mobile</strong></td>
+        <td>Clic droit → <em>Inspecter</em>, puis l'icône 📱 en haut du panneau
+            (<code>Ctrl+Maj+M</code> / <code>Cmd+Maj+M</code>). La largeur en pixels
+            s'affiche en haut</td>
+      </tr>
+    </table>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <p>Deux règles à <strong>corriger</strong> (étapes 3 et 4), six à <strong>écrire</strong> :</p>
+
+    <ol class="criteres">
+      <li>
+        <strong>Sélecteur universel</strong> — <code>box-sizing: border-box</code>
+      </li>
+      <li>
+        <strong><code>img</code></strong> — <code>max-width: 100%</code> et
+        <code>height: auto</code>
+      </li>
+      <li>
+        <strong><code>.conteneur</code></strong> — <em>corriger</em> :
+        <code>max-width: 900px</code> au lieu de <code>width</code>, padding en
+        <code>1rem</code>
+      </li>
+      <li>
+        <strong><code>.fiche</code> et <code>.encadre</code></strong> — <em>corriger</em> :
+        <code>max-width: 600px</code>, paddings en <code>1rem</code>
+      </li>
+      <li>
+        <strong><code>body</code></strong> — police avec repli, <code>#333</code>, fond
+        <code>#eef1f5</code>, <code>margin: 0</code>, <code>font-size: 1rem</code>,
+        <code>line-height: 1.6</code>
+      </li>
+      <li>
+        <strong><code>.banniere</code></strong> — fond <code>#14457b</code>, blanc,
+        centré, <code>padding: 1.5rem</code>
+      </li>
+      <li>
+        <strong><code>.auteur</code></strong> — <code>#5a6570</code>,
+        <code>0.9rem</code>, italique, sans marge haute ·
+        <strong><code>.resume</code></strong> — <code>1.05rem</code>
+      </li>
+      <li>
+        <strong><code>.pied-page</code></strong> — centré, <code>0.875rem</code>,
+        <code>#6b7280</code>, <code>padding: 1.5rem</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td><strong>À 360 px de large</strong></td>
+        <td><strong>Aucune barre de défilement horizontale.</strong> C'est le test
+            décisif de cet exercice</td>
+      </tr>
+      <tr>
+        <td>L'image</td>
+        <td>Elle rétrécit avec la page, sans jamais dépasser, et garde ses proportions
+            (elle ne s'écrase pas)</td>
+      </tr>
+      <tr>
+        <td>La fiche et l'encadré</td>
+        <td>Ils occupent toute la largeur disponible sur petit écran, et se limitent à
+            600 px sur grand écran</td>
+      </tr>
+      <tr>
+        <td>Le texte</td>
+        <td>Lisible sans zoomer, bien aéré</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — voir le débordement, et sa cause</strong></p>
+      <ol>
+        <li>
+          <strong>Avant de corriger quoi que ce soit</strong>, réduisez la fenêtre à
+          400 px. Constatez la barre horizontale.
+        </li>
+        <li>
+          Clic droit sur la page → <em>Inspecter</em>, puis survolez les éléments dans
+          le panneau HTML : le navigateur les surligne. Repérez lesquels dépassent du
+          cadre de l'écran.
+        </li>
+        <li>
+          Corrigez d'abord la seule règle <code>img</code> (étape 2), rechargez.
+          <strong>Une bonne partie du problème disparaît déjà.</strong>
+        </li>
+      </ol>
+      <p>
+        Les images sont le coupable n°1 du débordement, et cette règle de deux lignes
+        règle le cas définitivement.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — <code>rem</code> et le réglage de l'utilisateur</strong></p>
+      <ol>
+        <li>Terminez d'abord l'exercice.</li>
+        <li>
+          Dans les réglages de votre navigateur, cherchez la taille de police par
+          défaut (Chrome : <em>Paramètres → Apparence → Taille de police</em>) et
+          passez-la à <strong>Grande</strong> ou <strong>Très grande</strong>.
+        </li>
+        <li>Rechargez votre page.</li>
+      </ol>
+      <p>
+        Tous vos textes en <code>rem</code> ont grandi — c'est exactement ce dont a
+        besoin une personne malvoyante. Des tailles en <code>px</code> seraient
+        restées figées, ignorant purement et simplement son réglage.
+      </p>
+      <p><strong>Remettez la taille normale</strong> ensuite.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>
+        <strong>Le test décisif :</strong> à 360 px, aucune barre de défilement
+        horizontale
+      </li>
+      <li>
+        Dans <code>style.css</code>, <code>Ctrl+F</code> sur <code>TODO</code> : aucun
+        résultat
+      </li>
+      <li>
+        <code>Ctrl+F</code> sur <code>width: 9</code> et <code>width: 6</code> — il ne
+        doit plus rester de largeur fixe, seulement des <code>max-width</code>
+      </li>
+      <li>
+        Le <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload"
+        target="_blank" rel="noopener">validateur CSS du W3C</a> ne signale aucune
+        erreur
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>30 à 40 minutes.</strong> Les corrections (étapes 3 et 4) vont vite ; le
+      temps se passe surtout à tester aux différentes largeurs, et c'est le plus
+      instructif.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page à réparer →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

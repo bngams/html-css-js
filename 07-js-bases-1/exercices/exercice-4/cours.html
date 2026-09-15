@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Le jeu de devinette</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 4</p>
+  <h1 class="titre-exo">Le jeu de devinette</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> rien de neuf — et c'est
+      le but. Cet exercice <strong>assemble</strong> tout ce que vous savez depuis le
+      projet 6 en un vrai petit programme.</p>
+    </div>
+
+    <h2>1 · Un programme, pas une suite d'instructions</h2>
+
+    <p>
+      Jusqu'ici, chaque exercice illustrait une notion. Ici, vous écrivez un
+      <strong>jeu qui tourne</strong> : le programme tire un nombre, interroge le
+      joueur, compare, et répond.
+    </p>
+
+    <table>
+      <tr><th>Étape du jeu</th><th>Ce que vous savez déjà</th><th>Vu au</th></tr>
+      <tr>
+        <td>Tirer un nombre au hasard</td>
+        <td><code>Math.floor(Math.random() * 10) + 1</code></td>
+        <td>projet 6, exercice 3</td>
+      </tr>
+      <tr>
+        <td>Poser une question</td>
+        <td><code>prompt()</code></td>
+        <td>projet 6, exercice 2</td>
+      </tr>
+      <tr>
+        <td>Annoncer le résultat</td>
+        <td><code>alert()</code></td>
+        <td>projet 6, exercice 2</td>
+      </tr>
+      <tr>
+        <td>Convertir la réponse</td>
+        <td><code>Number()</code></td>
+        <td>projet 6, exercice 2</td>
+      </tr>
+      <tr>
+        <td>Comparer et décider</td>
+        <td><code>if</code> / <code>else if</code> / <code>else</code></td>
+        <td>exercices 1 et 3</td>
+      </tr>
+      <tr>
+        <td>Ranger le tout dans un bloc</td>
+        <td><code>function</code> et <code>return</code></td>
+        <td>exercice 2</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est le moment où le parcours prend son sens.</strong> Aucune notion
+        nouvelle : seulement l'assemblage. Si une étape vous bloque, la réponse est
+        dans un exercice précédent.
+      </p>
+    </div>
+
+    <h2>2 · Le squelette d'un jeu de devinette</h2>
+
+<pre><code>const secret = Math.floor(Math.random() * 10) + 1;
+const saisie = prompt("Devinez un nombre entre 1 et 10");
+const proposition = Number(saisie);
+
+if (proposition === secret) {
+  alert("Gagné !");
+} else {
+  alert("Perdu. C'était " + secret);
+}</code></pre>
+
+    <p>
+      Quatre lignes de préparation, une décision. Tout le reste de cet exercice
+      consiste à <strong>rendre ce jeu plus juste et plus aimable</strong>.
+    </p>
+
+    <h2>3 · Le piège numéro un : comparer sans convertir</h2>
+
+    <div class="attention">
+      <p>
+        <code>prompt()</code> renvoie <strong>toujours du texte</strong>. Le nombre
+        tiré, lui, est un vrai nombre. Les comparer directement avec
+        <code>===</code> ne fonctionne <strong>jamais</strong> :
+      </p>
+<pre><code>const secret = 7;      // un NOMBRE
+const saisie = "7";    // ce que rend prompt : du TEXTE
+
+saisie === secret           → false    ⚠️ toujours faux
+Number(saisie) === secret   → true     ✅</code></pre>
+      <p>
+        Un joueur qui tape la bonne réponse perdrait à tous les coups, sans la
+        moindre erreur rouge. <strong>Convertissez une fois, au début</strong>, puis
+        travaillez avec le nombre.
+      </p>
+    </div>
+
+    <h2>4 · Le piège numéro deux : « plus grand » sur du texte</h2>
+
+    <p>
+      Pour dire au joueur « c'est plus grand » ou « c'est plus petit », il faut
+      comparer l'ordre. Là encore, le type décide :
+    </p>
+
+<pre><code>"10" &gt; "9"          → false    ⚠️ comparaison alphabétique
+Number("10") &gt; 9    → true     ✅</code></pre>
+
+    <div class="astuce">
+      <p>
+        Vous l'aviez vu à l'exercice 1 : deux textes se comparent
+        <strong>caractère par caractère</strong>, comme dans un dictionnaire. Le
+        <code>"1"</code> de <code>"10"</code> vient avant <code>"9"</code>, et
+        JavaScript s'arrête là. Encore une raison de convertir d'abord.
+      </p>
+    </div>
+
+    <h2>5 · Une saisie n'est pas toujours un nombre</h2>
+
+    <p>
+      Le joueur peut taper n'importe quoi, ou annuler. Voici ce que vous recevez
+      réellement :
+    </p>
+
+    <table>
+      <tr><th>Le joueur…</th><th><code>prompt()</code> rend</th><th><code>Number(…)</code> donne</th></tr>
+      <tr><td>tape <code>7</code></td><td><code>"7"</code></td><td><code>7</code></td></tr>
+      <tr><td>tape <code>abc</code></td><td><code>"abc"</code></td><td><code>NaN</code></td></tr>
+      <tr><td>valide sans rien taper</td><td><code>""</code></td><td><code>0</code></td></tr>
+      <tr><td>clique sur Annuler</td><td><code>null</code></td><td><code>0</code></td></tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Deux surprises à connaître.</strong> Une saisie vide et une
+        annulation donnent toutes deux <code>0</code> une fois converties — alors que
+        le joueur n'a proposé aucun nombre. Et un texte non numérique donne
+        <code>NaN</code>, pour <em>Not a Number</em>.
+      </p>
+      <p>
+        <code>NaN</code> a une propriété déroutante : il n'est
+        <strong>égal à rien</strong>, pas même à lui-même. On le teste donc avec une
+        fonction dédiée :
+      </p>
+<pre><code>isNaN(Number("abc"))    → true
+isNaN(Number("7"))      → false</code></pre>
+    </div>
+
+    <h2>6 · Un seul essai — pour l'instant</h2>
+
+    <p>
+      Un vrai jeu redemanderait tant que le joueur n'a pas trouvé. Cela demande une
+      <strong>boucle</strong>, que vous verrez au <strong>projet 8</strong>. Ici,
+      votre jeu donnera <strong>un seul essai</strong>, puis la réponse.
+    </p>
+
+    <div class="astuce">
+      <p>
+        Ce n'est pas une limite gênante : un jeu à un essai contient déjà toute la
+        logique. La boucle ne fera que la répéter.
+      </p>
+    </div>
+
+    <h2>7 · Écrire un programme lisible</h2>
+
+    <p>
+      Quand un fichier grandit, l'organisation compte autant que le code :
+    </p>
+
+    <table>
+      <tr><th>Principe</th><th>En pratique</th></tr>
+      <tr>
+        <td>Les valeurs fixes en haut</td>
+        <td><code>const MINIMUM = 1;</code> avant tout le reste</td>
+      </tr>
+      <tr>
+        <td>Une fonction = une tâche</td>
+        <td><code>tirerSecret()</code>, <code>comparer()</code> — pas une fonction qui fait tout</td>
+      </tr>
+      <tr>
+        <td>Un nom qui dit quoi</td>
+        <td><code>proposition</code> plutôt que <code>p</code></td>
+      </tr>
+      <tr>
+        <td>Le programme principal en bas</td>
+        <td>on lit d'abord les outils, puis leur usage</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi cela compte dès maintenant :</strong> c'est le premier
+        fichier du parcours où vous écrivez plus de vingt lignes. L'habitude se prend
+        ici, pas au projet 12.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/A_first_splash"
+             target="_blank" rel="noopener">MDN — Un premier pas en JavaScript</a>
+        </td>
+        <td>Le même jeu de devinette, en version complète avec boucle.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/isNaN"
+             target="_blank" rel="noopener">MDN — <code>isNaN()</code></a>
+        </td>
+        <td>La référence sur le test d'une valeur non numérique.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/task/check-standard"
+             target="_blank" rel="noopener">javascript.info — Exercices sur les conditions</a>
+        </td>
+        <td>De quoi s'entraîner au-delà de cet exercice.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

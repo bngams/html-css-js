@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Changer ce qu'on a trouvé</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 2</p>
+  <h1 class="titre-exo">Changer ce qu'on a trouvé</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Votre code diffère du mien ? Tant mieux.</strong>
+      Seuls les critères d'acceptation comptent : si la page a changé aux quatre
+      endroits et que les cinq lignes sortent, vous avez réussi.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>document.querySelector("#titre-page").textContent =
+  "Tableau de bord — mise à jour";
+
+const bandeau = document.querySelector("#bandeau");
+
+bandeau.textContent = "Médiathèque ouverte";
+bandeau.classList.add("ouvert");
+
+console.log("Bandeau :", bandeau.className);
+
+let volumineux = 0;
+
+for (const livre of document.querySelectorAll(".livre")) {
+  const texte = livre.querySelector(".livre__pages").textContent;
+  const pages = Number(texte.split(" ")[0]);
+
+  if (pages &gt; 700) {
+    livre.classList.add("volumineux");
+    volumineux = volumineux + 1;
+  }
+}
+
+console.log("Volumineux :", volumineux);
+
+const premier = document.querySelector(".livre");
+
+console.log("Le premier est-il disponible ?",
+            premier.classList.contains("disponible"));
+
+const livres = document.querySelectorAll(".livre");
+const dernier = livres[livres.length - 1];
+
+dernier.classList.remove("emprunte");
+dernier.classList.add("disponible");
+
+console.log("Dernier :", dernier.className);
+
+const etat1 = bandeau.classList.toggle("ferme");
+const etat2 = bandeau.classList.toggle("ferme");
+
+console.log("toggle 1 :", etat1, "· toggle 2 :", etat2);</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Aucune couleur dans le JavaScript</h3>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est le critère le plus important, et il ne se voit pas à
+        l'écran.</strong> Le corrigé fait changer quatre couleurs sans en nommer une
+        seule : il pose des classes, et le CSS fait le reste.
+      </p>
+      <p>
+        Conséquence concrète : pour changer le vert du bandeau, on modifie
+        <em>une ligne de CSS</em>. Avec <code>.style</code>, il aurait fallu
+        retrouver l'endroit dans le JavaScript.
+      </p>
+    </div>
+
+    <h3>2 · Texte et classes sont indépendants</h3>
+
+<pre><code>bandeau.textContent = "Médiathèque ouverte";   ← le TEXTE
+bandeau.classList.add("ouvert");               ← l'APPARENCE</code></pre>
+
+    <p>
+      Deux gestes distincts, sur le même élément. Changer le texte ne touche pas aux
+      classes, et poser une classe ne change pas le texte. C'est pourquoi le critère 2
+      demande les deux.
+    </p>
+
+    <h3>3 · Le nombre caché dans le texte</h3>
+
+    <div class="attention">
+      <p>
+        La page affiche <code>712 pages</code>. <code>Number()</code> seul échoue :
+      </p>
+<pre><code>Number("712 pages")               → NaN     ⚠️
+Number("712 pages".split(" ")[0]) → 712     ✅</code></pre>
+      <p>
+        <code>.split(" ")</code> rend un tableau — <code>["712", "pages"]</code> — et
+        l'on prend sa première case. Un tableau, un index à partir de zéro : le
+        projet 8, appliqué à du texte.
+      </p>
+    </div>
+
+    <h3>4 · <code>toggle</code> agit <em>et</em> répond</h3>
+
+    <table>
+      <tr><th>Appel</th><th>Effet</th><th>Valeur rendue</th></tr>
+      <tr>
+        <td>1<sup>er</sup> <code>toggle("ferme")</code></td>
+        <td>la classe est <strong>ajoutée</strong></td>
+        <td><code>true</code></td>
+      </tr>
+      <tr>
+        <td>2<sup>e</sup> <code>toggle("ferme")</code></td>
+        <td>la classe est <strong>retirée</strong></td>
+        <td><code>false</code></td>
+      </tr>
+    </table>
+
+    <p>
+      Deux appels de suite ramènent donc à l'état de départ — le bandeau finit sans la
+      classe <code>ferme</code>, et reste vert grâce à <code>ouvert</code>.
+    </p>
+
+    <div class="astuce">
+      <p>
+        La valeur rendue répond à la question « est-elle là <em>maintenant</em> ? ».
+        C'est ce qui rend <code>toggle</code> pratique pour un bouton qui ouvre et
+        ferme : on sait dans quel état on vient de basculer.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Rien ne change, aucune erreur</td>
+        <td>
+          Le <code>=</code> manque : vous <em>lisez</em> <code>.textContent</code> au
+          lieu de lui affecter une valeur
+        </td>
+      </tr>
+      <tr>
+        <td><code>TypeError: livres.classList is undefined</code></td>
+        <td>
+          <code>classList</code> appelé sur la <strong>liste</strong> au lieu de
+          chaque élément — il faut une boucle
+        </td>
+      </tr>
+      <tr>
+        <td>La classe ne s'applique pas</td>
+        <td>
+          Vous avez écrit <code>classList.add(".ouvert")</code> avec le point : le nom
+          de la classe s'écrit <strong>sans</strong>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Volumineux : 0</code></td>
+        <td>
+          <code>Number("712 pages")</code> rend <code>NaN</code>, et
+          <code>NaN &gt; 700</code> est faux. Il faut découper le texte d'abord
+        </td>
+      </tr>
+      <tr>
+        <td><code>Volumineux : 5</code></td>
+        <td>
+          La classe est posée hors du <code>if</code> — chaque livre la reçoit
+        </td>
+      </tr>
+      <tr>
+        <td>Le fond ne revient pas après un essai avec <code>.style</code></td>
+        <td>
+          Un style en ligne neutralise la classe. Videz-le :
+          <code>el.style.backgroundColor = ""</code>
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Exercice 3 — à venir ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

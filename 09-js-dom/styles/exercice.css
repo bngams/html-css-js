@@ -1,0 +1,209 @@
+/* Style commun aux pages d'exercice (cours, énoncé, travail, solution).
+   Fourni — vous n'avez pas à le modifier.
+
+   💡 Curieux ? La barre d'onglets ci-dessous est faite uniquement
+   en HTML et CSS, sans JavaScript. Vous saurez bientôt la lire. */
+
+:root {
+  --bleu: #0b6bcb;
+  --bleu-clair: #e8f1fb;
+  --texte: #1c2024;
+  --gris: #5a6570;
+  --bordure: #dde3e9;
+  --fond: #f7f9fb;
+  --vert: #1a7f4b;
+  --vert-clair: #e7f6ee;
+  --ambre: #8a6100;
+  --ambre-clair: #fdf4e3;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 1rem 4rem;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.65;
+  color: var(--texte);
+  background: var(--fond);
+}
+
+.page { max-width: 820px; margin-inline: auto; }
+
+/* ─── En-tête ─────────────────────────────────────────────── */
+
+.fil {
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--gris);
+}
+.fil a { color: var(--gris); }
+
+.titre-exo {
+  margin: 0.4rem 0 1.25rem;
+  font-size: clamp(1.45rem, 3.5vw, 1.9rem);
+}
+
+/* ─── Barre d'onglets (HTML + CSS seulement) ───────────────── */
+
+.onglets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0 0 -1px;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--bordure);
+}
+
+.onglets a {
+  display: block;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--gris);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px 8px 0 0;
+}
+
+.onglets a:hover {
+  color: var(--bleu);
+  background: var(--bleu-clair);
+}
+
+/* L'onglet de la page courante : la classe est posée à la main
+   dans chaque fichier HTML. Pas de JavaScript ici. */
+.onglets a[aria-current="page"] {
+  color: var(--bleu);
+  font-weight: 650;
+  background: #fff;
+  border-color: var(--bordure);
+  border-bottom-color: #fff;
+}
+
+/* ─── Contenu ──────────────────────────────────────────────── */
+
+.contenu {
+  padding: 1.75rem;
+  background: #fff;
+  border: 1px solid var(--bordure);
+  border-radius: 0 10px 10px 10px;
+}
+
+.contenu > :first-child { margin-top: 0; }
+.contenu > :last-child { margin-bottom: 0; }
+
+h2 {
+  margin: 2rem 0 0.6rem;
+  font-size: 1.2rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid var(--bleu-clair);
+}
+
+h3 { margin: 1.4rem 0 0.4rem; font-size: 1.02rem; }
+
+code {
+  padding: 0.12em 0.38em;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--bleu-clair);
+  border-radius: 4px;
+}
+
+pre {
+  margin: 0.8rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.87rem;
+  line-height: 1.5;
+  background: #1c2024;
+  border-radius: 8px;
+}
+pre code {
+  padding: 0;
+  color: #e6edf3;
+  background: none;
+  font-size: inherit;
+}
+
+table {
+  width: 100%;
+  margin: 0.8rem 0;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+}
+th, td {
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  border: 1px solid var(--bordure);
+  vertical-align: top;
+}
+th { background: var(--fond); }
+
+/* ─── Encadrés ─────────────────────────────────────────────── */
+
+.objectif, .astuce, .attention, .fichier {
+  margin: 1.1rem 0;
+  padding: 0.85rem 1.1rem;
+  border-left: 4px solid;
+  border-radius: 0 8px 8px 0;
+}
+.objectif  { background: var(--bleu-clair);  border-color: var(--bleu); }
+.astuce    { background: var(--vert-clair);  border-color: var(--vert); }
+.attention { background: var(--ambre-clair); border-color: var(--ambre); }
+.fichier   { background: var(--fond);        border-color: var(--gris); }
+
+.objectif p:first-child, .astuce p:first-child,
+.attention p:first-child, .fichier p:first-child { margin-top: 0; }
+.objectif p:last-child, .astuce p:last-child,
+.attention p:last-child, .fichier p:last-child { margin-bottom: 0; }
+
+/* ─── Navigation bas de page ───────────────────────────────── */
+
+.nav-bas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  font-size: 0.93rem;
+}
+
+.bouton {
+  display: inline-block;
+  padding: 0.6rem 1.15rem;
+  text-decoration: none;
+  color: #fff;
+  background: var(--bleu);
+  border-radius: 8px;
+  font-weight: 550;
+}
+.bouton:hover { background: #0a5aac; }
+
+.bouton--clair {
+  color: var(--bleu);
+  background: #fff;
+  border: 1px solid var(--bordure);
+}
+.bouton--clair:hover { background: var(--bleu-clair); }
+
+/* Liste de critères avec cases à cocher visuelles */
+.criteres { padding-left: 1.2rem; }
+.criteres li { margin-bottom: 0.45rem; }
+
+/* ─── Badges de recommandation (cours CSS) ─────────────────── */
+
+.badge-ok, .badge-mid, .badge-no {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1em 0.5em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 99px;
+  vertical-align: middle;
+}
+.badge-ok  { color: #0f5132; background: #d1e7dd; }
+.badge-mid { color: #664d03; background: #fff3cd; }
+.badge-no  { color: #842029; background: #f8d7da; }

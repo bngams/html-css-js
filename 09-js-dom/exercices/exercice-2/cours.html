@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Changer ce qu'on a trouvé</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 2</p>
+  <h1 class="titre-exo">Changer ce qu'on a trouvé</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> les trois façons de
+      modifier un élément — son texte, ses classes, son style — et surtout
+      <strong>laquelle choisir</strong>.</p>
+    </div>
+
+    <h2>1 · Trois leviers, trois usages</h2>
+
+    <p>
+      À l'exercice 1, vous avez appris à <em>trouver</em>. Maintenant, on modifie.
+      Trois outils, et ils ne sont pas interchangeables :
+    </p>
+
+    <table>
+      <tr><th>Ce que vous voulez changer</th><th>L'outil</th></tr>
+      <tr><td>le <strong>texte</strong> affiché</td><td><code>.textContent</code></td></tr>
+      <tr><td>l'<strong>apparence</strong>, définie en CSS</td><td><code>.classList</code></td></tr>
+      <tr><td>une propriété CSS <strong>précise</strong>, à la main</td><td><code>.style</code></td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>La règle du métier, en une phrase :</strong> on change la
+        <em>classe</em>, pas le <em>style</em>. La section 5 explique pourquoi, et
+        ce n'est pas qu'une question de goût.
+      </p>
+    </div>
+
+    <h2>2 · <code>.textContent</code> — changer le texte</h2>
+
+    <p>Vous le connaissez depuis le projet 6 :</p>
+
+<pre><code>document.querySelector("#compteur").textContent = "5 livres";</code></pre>
+
+    <p>
+      Il <strong>remplace</strong> tout le contenu textuel de l'élément. Ce qui s'y
+      trouvait — y compris d'autres balises — disparaît.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Lire ou écrire, selon le côté du <code>=</code>.</strong>
+      </p>
+<pre><code>const t = element.textContent;      ← LIRE
+element.textContent = "Nouveau";    ← ÉCRIRE</code></pre>
+      <p>
+        C'est la même propriété. À gauche du <code>=</code> elle reçoit, à droite
+        elle donne. Oublier le <code>=</code> est l'erreur la plus fréquente : le
+        texte ne change pas, et rien ne le signale.
+      </p>
+    </div>
+
+    <h2>3 · <code>.classList</code> — ajouter et retirer des classes</h2>
+
+    <p>
+      Une classe CSS, c'est une apparence déjà écrite dans votre feuille de style.
+      <code>classList</code> permet de la poser ou de la retirer :
+    </p>
+
+    <table>
+      <tr><th>Instruction</th><th>Effet</th></tr>
+      <tr><td><code>el.classList.add("dispo")</code></td><td>ajoute la classe</td></tr>
+      <tr><td><code>el.classList.remove("dispo")</code></td><td>la retire</td></tr>
+      <tr><td><code>el.classList.contains("dispo")</code></td><td>répond <code>true</code> ou <code>false</code></td></tr>
+      <tr><td><code>el.classList.toggle("dispo")</code></td><td>l'ajoute si absente, la retire si présente</td></tr>
+    </table>
+
+<pre><code>Au départ :   class="badge"
+
+el.classList.add("dispo")       → class="badge dispo"
+el.classList.contains("dispo")  → true
+el.classList.remove("dispo")    → class="badge"</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong><code>toggle</code> rend une valeur utile :</strong> <code>true</code>
+        si la classe vient d'être <em>ajoutée</em>, <code>false</code> si elle vient
+        d'être <em>retirée</em>. Deux appels de suite ramènent donc au point de
+        départ.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Les noms de classes s'écrivent SANS le point.</strong>
+        <code>classList.add("dispo")</code>, jamais
+        <code>classList.add(".dispo")</code> — le point appartient au
+        <em>sélecteur</em>, pas au nom.
+      </p>
+    </div>
+
+    <h3>Lire toutes les classes d'un coup : <code>.className</code></h3>
+
+    <p>
+      <code>classList</code> sert à <em>agir</em>. Pour simplement
+      <strong>voir</strong> où l'on en est, <code>.className</code> rend toutes les
+      classes en un seul texte :
+    </p>
+
+<pre><code>el.className        → "badge dispo"</code></pre>
+
+    <div class="astuce">
+      <p>
+        Pratique pour vérifier son travail dans la console. L'exercice 1 ne
+        l'exigeait pas ; ici, deux critères le demandent, parce qu'afficher l'état
+        des classes est le meilleur moyen de constater qu'on les a bien posées.
+      </p>
+    </div>
+
+    <h2>4 · <code>.style</code> — écrire une propriété à la main</h2>
+
+<pre><code>el.style.backgroundColor = "gold";
+el.style.color = "black";</code></pre>
+
+    <p>
+      Cela écrit un <strong>attribut <code>style</code></strong> directement sur la
+      balise, exactement comme si vous aviez tapé
+      <code>&lt;p style="background-color: gold;"&gt;</code> dans le HTML.
+    </p>
+
+    <table>
+      <tr><th>En CSS</th><th>En JavaScript</th></tr>
+      <tr><td><code>background-color</code></td><td><code>backgroundColor</code></td></tr>
+      <tr><td><code>font-size</code></td><td><code>fontSize</code></td></tr>
+      <tr><td><code>color</code></td><td><code>color</code></td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le tiret disparaît, la lettre suivante prend une majuscule.</strong>
+        C'est le <em>camelCase</em> des noms de variables, vu au projet 6 : un tiret
+        n'est pas autorisé dans un nom de propriété JavaScript.
+      </p>
+    </div>
+
+    <h2>5 · ⚠️ Pourquoi préférer la classe au style</h2>
+
+    <div class="attention">
+      <p>
+        Ce n'est pas une préférence d'école. Un style écrit en ligne
+        <strong>écrase</strong> ce que dit votre feuille CSS, et le neutralise :
+      </p>
+<pre><code>&lt;p class="badge dispo"&gt;        ← la classe dispo met un fond vert
+
+el.style.backgroundColor = "black";
+→ le fond devient NOIR : la classe est toujours là, mais elle ne
+  s'applique plus.
+
+el.style.backgroundColor = "";
+→ le fond redevient VERT : la classe reprend la main.</code></pre>
+      <p>
+        Tant que le style en ligne est posé, <strong>la classe est sans effet</strong>.
+        Et pour revenir en arrière, il faut le vider explicitement — une chaîne vide
+        — ce qu'on oublie presque toujours.
+      </p>
+    </div>
+
+    <table>
+      <tr><th></th><th><code>classList</code></th><th><code>.style</code></th></tr>
+      <tr>
+        <td>Où est décrite l'apparence</td>
+        <td>dans le fichier CSS</td>
+        <td>éparpillée dans le JavaScript</td>
+      </tr>
+      <tr>
+        <td>Pour changer une couleur</td>
+        <td>on modifie le CSS</td>
+        <td>on cherche dans le code</td>
+      </tr>
+      <tr>
+        <td>Revenir en arrière</td>
+        <td><code>remove()</code></td>
+        <td>réaffecter <code>""</code></td>
+      </tr>
+      <tr>
+        <td>Quand l'utiliser</td>
+        <td><strong>presque toujours</strong></td>
+        <td>valeur calculée (une largeur, une position)</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Vous avez déjà entendu cet argument.</strong> Au projet 3, la balise
+        <code>&lt;style&gt;</code> dans la page était présentée comme un
+        <em>dépannage ou une contrainte technique</em>, jamais comme la façon normale
+        de travailler. <code>.style</code> en JavaScript, c'est la même chose :
+        possible, parfois utile, rarement souhaitable.
+      </p>
+    </div>
+
+    <h2>6 · Lire un nombre caché dans un texte</h2>
+
+    <p>
+      Une page affiche rarement un nombre nu. Elle écrit
+      <code>712 pages</code> — du texte, dont seul le début est un nombre.
+    </p>
+
+    <div class="attention">
+      <p>
+        <code>Number()</code> ne s'en sort pas : il exige que <strong>tout</strong> le
+        texte soit un nombre.
+      </p>
+<pre><code>Number("712 pages")    → NaN     ⚠️</code></pre>
+      <p>
+        On découpe donc le texte avant de convertir. <code>.split(" ")</code> coupe à
+        chaque espace et rend un <strong>tableau</strong> — celui du projet 8 :
+      </p>
+<pre><code>"712 pages".split(" ")        → ["712", "pages"]
+"712 pages".split(" ")[0]     → "712"        ← la première case
+Number("712 pages".split(" ")[0])  → 712     ✅</code></pre>
+      <p>
+        <strong>Et sur un texte lu dans la page</strong>, ce qui est le cas réel :
+      </p>
+<pre><code>const texte = livre.querySelector(".livre__pages").textContent;   ← "712 pages"
+Number(texte.split(" ")[0])                                        → 712</code></pre>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Rien de neuf sur le fond :</strong> un tableau, un index à partir de
+        zéro, et <code>Number()</code> du projet 6. Seul <code>.split()</code> est
+        nouveau — retenez-le tel quel, il vous resservira.
+      </p>
+    </div>
+
+    <h2>7 · Modifier plusieurs éléments d'un coup</h2>
+
+    <p>
+      Rien de neuf : on combine l'exercice 1 et la boucle du projet 8.
+    </p>
+
+<pre><code>for (const livre of document.querySelectorAll(".livre")) {
+  livre.classList.add("lu");
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Une erreur classique :</strong> appeler <code>classList</code> sur la
+        <em>liste</em> au lieu de chaque élément.
+      </p>
+<pre><code>const livres = document.querySelectorAll(".livre");
+livres.classList.add("lu");
+→ TypeError: livres.classList is undefined</code></pre>
+      <p>
+        Une NodeList n'a pas de classes — ses <em>éléments</em> en ont. Il faut donc
+        la parcourir.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Element/classList"
+             target="_blank" rel="noopener">MDN — <code>classList</code></a>
+        </td>
+        <td>La référence, avec toutes les méthodes.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/style"
+             target="_blank" rel="noopener">MDN — <code>style</code></a>
+        </td>
+        <td>Et la liste des noms en camelCase.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/styles-and-classes"
+             target="_blank" rel="noopener">javascript.info — Styles et classes</a>
+        </td>
+        <td>Le même chapitre en français, avec la comparaison des deux approches.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

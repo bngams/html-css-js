@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Le tableau de bord</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    .page { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #1d6fa5; margin-top: 0; }
+    h2 { font-size: 1.15rem; color: #14507a; margin-top: 0; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .fichier-nom {
+      display: inline-block;
+      background-color: #14507a;
+      color: #fff;
+      padding: 0.2em 0.6em;
+      border-radius: 5px;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 0.95em;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+
+    /* ═══ LE COMPOSANT ONGLETS ═══════════════════════════════════
+       Tout est déjà écrit ici. Votre JavaScript n'a qu'à poser et
+       retirer les classes « tab-active » et « active ».
+       N'écrivez AUCUNE couleur, AUCUN display, dans votre code. */
+
+    .tabs-container {
+      margin: 0 auto 1.5rem;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #ccc;
+      background-color: #f8f8f8;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px 20px;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font: inherit;
+      font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .tab:hover { background-color: #e0e0e0; }
+    .tab:focus-visible { outline: 2px solid #007BFF; outline-offset: -2px; }
+
+    /* ← la classe que votre code pose sur l'onglet choisi */
+    .tab-active {
+      background-color: #fff;
+      font-weight: bold;
+      color: #007BFF;
+      border-bottom: 3px solid #007BFF;
+    }
+
+    .tabs-content { padding: 20px; }
+
+    /* Un panneau est CACHÉ par défaut… */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    /* …et visible seulement s'il porte la classe « active » */
+    .tab-content.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Les listes de la médiathèque, reprises des projets 9 et 10 */
+    .liste { list-style: none; padding: 0; margin: 0; }
+    .liste li {
+      border-bottom: 1px solid #eee;
+      padding: 0.6rem 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .liste li:last-child { border-bottom: none; }
+    .titre { font-weight: 600; }
+    .meta { color: #5a6570; font-size: 0.92rem; white-space: nowrap; }
+    .retard .meta { color: #a3261c; font-weight: 600; }
+
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     🔒 NE TOUCHEZ PAS À CE FICHIER.
+
+     Cette page est FOURNIE et FIGÉE.
+
+     👉 LE FICHIER QUE VOUS MODIFIEZ EST : app.js
+
+     ⚠️ REGARDEZ BIEN : les trois panneaux sont CACHÉS par le CSS
+        (.tab-content { display: none }). Au chargement, la zone de
+        contenu est donc vide — c'est normal, et c'est à votre code
+        d'y remédier.
+
+     Les classes « tab-active » et « active » existent déjà dans le
+     CSS ci-dessus. Vous n'avez qu'à les poser et les retirer.
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="page">
+
+    <h1>Médiathèque — le tableau de bord</h1>
+
+    <div class="tabs-container">
+
+      <div class="tabs">
+        <button class="tab" data-content-id="content1">Catalogue</button>
+        <button class="tab" data-content-id="content2">Emprunts</button>
+        <button class="tab" data-content-id="content3">Retards</button>
+      </div>
+
+      <div class="tabs-content">
+
+        <div id="content1" class="tab-content">
+          <h2>Le catalogue</h2>
+          <ul class="liste">
+            <li><span class="titre">La Horde du Contrevent</span><span class="meta">712 pages</span></li>
+            <li><span class="titre">Dune</span><span class="meta">900 pages</span></li>
+            <li><span class="titre">Fondation</span><span class="meta">420 pages</span></li>
+            <li><span class="titre">Le Nom du vent</span><span class="meta">850 pages</span></li>
+            <li><span class="titre">Les Fourmis</span><span class="meta">300 pages</span></li>
+          </ul>
+        </div>
+
+        <div id="content2" class="tab-content">
+          <h2>Les emprunts en cours</h2>
+          <ul class="liste">
+            <li><span class="titre">Dune</span><span class="meta">Karim · 21 jours</span></li>
+            <li><span class="titre">Fondation</span><span class="meta">Léa · 14 jours</span></li>
+            <li><span class="titre">Les Fourmis</span><span class="meta">Tomas · 8 jours</span></li>
+          </ul>
+        </div>
+
+        <div id="content3" class="tab-content">
+          <h2>Les retards</h2>
+          <ul class="liste">
+            <li class="retard"><span class="titre">Le Nom du vent</span><span class="meta">Amina · 45 jours</span></li>
+            <li class="retard"><span class="titre">Chroniques martiennes</span><span class="meta">Léa · 30 jours</span></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="encadre">
+      <p>
+        <strong>Le fichier que vous modifiez :</strong>
+        <span class="fichier-nom">app.js</span>
+      </p>
+      <p>
+        <strong>Les trois onglets sont inertes</strong> et la zone de contenu est
+        vide. Cliquez : il ne se passe rien, aucun panneau n'apparaît. C'est normal,
+        aucun code ne les écoute encore.
+      </p>
+      <p>
+        <strong>Le CSS est déjà complet.</strong> Il sait afficher un panneau qui
+        porte la classe <code>active</code>, et souligner un onglet qui porte la
+        classe <code>tab-active</code>. Votre code ne décide pas de l'apparence : il
+        décide de <strong>l'état</strong>.
+      </p>
+    </div>
+
+    <h2>Avant de commencer</h2>
+
+    <ol>
+      <li>Ouvrez la console : <kbd>F12</kbd> → onglet <strong>Console</strong></li>
+      <li>Ouvrez <code>app.js</code> dans VSCode</li>
+      <li>Enregistrez avec <kbd>Ctrl+S</kbd>, puis rechargez avec <kbd>F5</kbd></li>
+    </ol>
+
+    <p>
+      <strong>Inspectez un panneau</strong> (clic droit → <em>Inspecter</em>) pendant
+      que vous cliquez sur les onglets : vous verrez la classe <code>active</code>
+      apparaître et disparaître. C'est tout ce que fait votre code.
+    </p>
+
+    <p>
+      <a class="retour" href="enonce.html">← Revenir à l'énoncé</a>
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

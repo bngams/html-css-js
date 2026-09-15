@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Le squelette d'une page HTML</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le squelette d'une page HTML</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Écrire de A à Z le squelette minimal d'une page
+      web valide, et vérifier qu'elle s'affiche correctement dans le navigateur.</p>
+      <p>
+        <strong>Niveau : débutant absolu.</strong> Aucun prérequis : si vous savez
+        enregistrer un fichier et ouvrir un navigateur, vous avez tout ce qu'il faut.
+        Aucune installation, aucune ligne de commande. Vous écrivez du texte dans un
+        fichier, vous rechargez la page, vous regardez le résultat.
+      </p>
+    </div>
+
+    <h2>📄 Le fichier à modifier</h2>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-1/travail.html</code>
+      </p>
+      <p>
+        Il existe déjà — vous n'avez rien à créer. Il contient les consignes sous forme
+        de <strong>commentaires HTML</strong>, ces lignes encadrées par
+        <code>&lt;!--</code> et <code>--&gt;</code> que le navigateur n'affiche pas
+        (voir la notion « Les commentaires » dans le <a href="cours.html">cours</a>).
+      </p>
+    </div>
+
+    <h2>🚀 Première fois : ouvrir le fichier</h2>
+
+    <p>
+      Vous allez travailler avec <strong>deux fenêtres côte à côte</strong> : VSCode
+      pour écrire, le navigateur pour voir le résultat. Voici comment les mettre en
+      place — une seule fois, au début.
+    </p>
+
+    <div class="fichier">
+      <ol class="criteres">
+        <li>
+          <strong>Dans VSCode</strong>, ouvrez le dossier de la formation :
+          menu <em>Fichier</em> → <em>Ouvrir le dossier…</em> → choisissez le dossier
+          <code>01-html-structure</code> qui vous a été remis.
+          L'arborescence apparaît à gauche.
+        </li>
+        <li>
+          Dépliez <code>exercices</code> → <code>exercice-1</code> et
+          <strong>cliquez sur <code>travail.html</code></strong>. Le fichier s'ouvre
+          dans l'éditeur : vous y voyez les commentaires de consigne.
+        </li>
+        <li>
+          <strong>Pour l'ouvrir dans le navigateur</strong>, au choix :
+          <ul>
+            <li>
+              clic droit sur <code>travail.html</code> dans l'arborescence →
+              <em>Révéler dans le Finder</em> (Windows : <em>Afficher dans
+              l'explorateur</em>), puis <strong>double-cliquez</strong> le fichier ;
+            </li>
+            <li>
+              ou, si l'extension <em>Live Preview</em> est installée : clic droit →
+              <em>Show Preview</em>.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Placez les deux fenêtres côte à côte</strong> — VSCode à gauche,
+          le navigateur à droite. Vous ne les quitterez plus de l'exercice.
+        </li>
+      </ol>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>La page est blanche ? C'est normal et c'est prévu.</strong> Le fichier
+        ne contient que des commentaires, et le navigateur ne les affiche pas. Votre
+        page se remplira au fur et à mesure que vous écrirez du contenu.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🔁 La boucle de travail</strong>, à répéter à chaque <code>TODO</code> :</p>
+      <ol>
+        <li>j'écris dans VSCode</li>
+        <li>j'<strong>enregistre</strong> — <code>Ctrl+S</code> (Windows) / <code>Cmd+S</code> (Mac)</li>
+        <li>je passe au navigateur et je <strong>recharge</strong> — <code>Ctrl+R</code> / <code>Cmd+R</code> (ou <code>F5</code>)</li>
+        <li>je regarde ce qui a changé</li>
+      </ol>
+      <p>
+        Si rien ne change à l'écran, c'est presque toujours
+        <strong>l'enregistrement qui manque</strong>. C'est l'erreur numéro un des débuts.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <p>Votre page doit contenir :</p>
+
+    <ol class="criteres">
+      <li>
+        Une déclaration de type de document (<em>doctype</em>) en
+        <strong>première ligne de code</strong> — aucune balise avant lui.
+        <em>(Pensez à supprimer les commentaires de consigne au fur et à mesure :
+        à la fin, le doctype doit être la première ligne du fichier.)</em>
+      </li>
+      <li>Une balise <code>&lt;html&gt;</code> avec la langue déclarée en français</li>
+      <li>
+        Une section <code>&lt;head&gt;</code> contenant :
+        <ul>
+          <li>l'encodage des caractères en UTF-8</li>
+          <li>
+            un <code>&lt;title&gt;</code> — mettez-y un texte
+            <strong>différent</strong> du titre de la page, par exemple votre prénom
+            ou « Mon premier site »
+          </li>
+        </ul>
+      </li>
+      <li>
+        Une section <code>&lt;body&gt;</code> contenant :
+        <ul>
+          <li>un titre de niveau 1 avec le texte « Ma première page »</li>
+          <li>un paragraphe qui se présente en une phrase, avec au moins un accent</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi deux textes différents ?</strong> Parce que
+        <code>&lt;title&gt;</code> et <code>&lt;h1&gt;</code> ne s'affichent pas au
+        même endroit, et c'est le point subtil de cet exercice :
+      </p>
+      <ul>
+        <li>
+          <code>&lt;title&gt;</code> s'affiche <strong>dans l'onglet du
+          navigateur</strong> (et dans les favoris, et dans les résultats Google) —
+          jamais dans la page elle-même
+        </li>
+        <li>
+          <code>&lt;h1&gt;</code> s'affiche <strong>dans la page</strong>, en gros,
+          tout en haut du contenu
+        </li>
+      </ul>
+      <p>
+        En leur donnant le même texte, on ne verrait pas la différence. En les
+        distinguant, vous la constatez d'un coup d'œil.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>Ouvrez <code>travail.html</code> dans le navigateur. Vous devez constater que :</p>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>Le titre principal</td>
+        <td>« Ma première page » s'affiche en gros, en haut de la page</td>
+      </tr>
+      <tr>
+        <td>Le paragraphe</td>
+        <td>Votre phrase de présentation s'affiche en dessous</td>
+      </tr>
+      <tr>
+        <td>L'onglet du navigateur</td>
+        <td>
+          Il affiche le titre que vous avez choisi. <strong>Avant</strong> que vous
+          n'écriviez le <code>&lt;title&gt;</code>, il affiche l'adresse du fichier —
+          c'est le navigateur qui bouche le trou, faute de titre
+        </td>
+      </tr>
+      <tr>
+        <td>Les accents</td>
+        <td>é, à, ç s'affichent normalement — si vous voyez « Ã© », l'encodage manque</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — à quoi sert vraiment le charset</strong></p>
+      <ol>
+        <li>Supprimez la ligne <code>&lt;meta charset="UTF-8"&gt;</code>, enregistrez, rechargez.</li>
+        <li>Observez vos accents.</li>
+      </ol>
+      <p>
+        <strong>Vos accents cassent</strong> : <code>Ma premiÃ¨re page</code>,
+        <code>crÃ©Ã©</code>. Vous venez de voir le bug en vrai — c'est exactement
+        ce que verront vos visiteurs si vous oubliez cette ligne.
+      </p>
+      <p>
+        <strong>Remettez-la</strong>, enregistrez, rechargez : tout redevient normal.
+      </p>
+      <p>
+        <em>Une nuance pour plus tard :</em> il arrive que les accents tiennent malgré
+        l'absence de la ligne, parce que le navigateur devine juste — cela dépend de la
+        façon dont la page est servie. Ne comptez jamais là-dessus : sur un autre poste
+        ou un vrai serveur, la devinette échoue. On écrit toujours la ligne.
+      </p>
+    </div>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>30 à 40 minutes</strong> si c'est votre première page web — le temps de
+      lire le cours, de prendre VSCode en main et d'installer la boucle
+      enregistrer / recharger. La frappe elle-même prend 15 minutes.
+    </p>
+
+    <div class="astuce">
+      <p>💡 <strong>Bloqué ?</strong> Relisez l'onglet <a href="cours.html">Cours</a> —
+      les cinq éléments y sont expliqués un par un avec un exemple. La
+      <a href="solution.html">Solution</a> est là aussi, mais cherchez d'abord :
+      c'est en bloquant un peu que ça rentre.</p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Commencer l'exercice →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

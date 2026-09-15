@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Une page entièrement adaptative</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 3</p>
+  <h1 class="titre-exo">Une page entièrement adaptative</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Rendre adaptative une page complète, en
+      n'écrivant qu'<strong>une seule</strong> media query.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> les exercices
+        1 et 2 de ce projet, et Flexbox (projet 3).
+      </p>
+    </div>
+
+    <h2>📄 Les fichiers</h2>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>travail.html</code></td>
+        <td>🔒 Fourni et figé — la page la plus riche du projet</td>
+      </tr>
+      <tr>
+        <td><code>style.css</code></td>
+        <td>👉 <strong>LE FICHIER QUE VOUS MODIFIEZ</strong></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>La contrainte de l'exercice : une seule media query.</strong> Tout le
+        reste doit s'adapter grâce aux fondations (exercice 1), à
+        <code>flex-wrap</code> et <code>flex-basis</code> (projet 3), à
+        <code>clamp()</code> et à <code>object-fit</code> (notions 4 et 5 du cours).
+      </p>
+      <p>
+        C'est la méthode professionnelle : une page bien construite en compte deux ou
+        trois, pas dix.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <h3>Partie 2 — le style de base</h3>
+
+    <ol class="criteres">
+      <li>
+        <strong><code>.banniere img</code></strong> — <code>width: 100%</code>,
+        <code>height: 180px</code>, et la propriété qui remplit sans déformer
+      </li>
+      <li>
+        <strong><code>.banniere__texte</code></strong> — fond <code>#14457b</code>,
+        <code>padding: 1rem</code>, centré
+      </li>
+      <li>
+        <strong><code>.logo</code></strong>, <strong><code>.menu</code></strong>,
+        <strong><code>.menu a</code></strong> — voir les consignes dans le fichier
+      </li>
+      <li>
+        <strong><code>h1</code></strong> — <code>clamp(1.6rem, 5vw, 2.8rem)</code> et
+        <code>margin-bottom: 0.5rem</code>
+      </li>
+      <li>
+        <strong><code>.chapo</code></strong> — <code>#5a6570</code>,
+        <code>1.1rem</code>, sans marge haute
+      </li>
+      <li>
+        <strong><code>.grille</code> et <code>.evenement</code></strong> — flex avec
+        passage à la ligne, <code>gap: 1rem</code>, et
+        <code>flex: 1 1 300px</code> sur les cartes. <strong>Sans media query</strong>
+      </li>
+      <li>
+        <strong><code>.date</code></strong> — <code>#0b6bcb</code>, gras,
+        <code>0.85rem</code>, majuscules (<code>text-transform: uppercase</code>),
+        sans marge
+      </li>
+      <li><strong><code>.lateral</code></strong> — <code>margin-top: 1rem</code></li>
+    </ol>
+
+    <h3>Partie 3 — l'unique enrichissement</h3>
+
+    <ol class="criteres" start="9">
+      <li>
+        <strong><code>@media (min-width: 900px)</code></strong> contenant
+        <code>.disposition</code> en flex avec <code>gap: 1.5rem</code>,
+        <code>.principal</code> en <code>flex: 1 1 auto</code>, et
+        <code>.lateral</code> en <code>flex: 0 0 260px</code> avec
+        <code>margin-top: 0</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Cette page a <strong>trois comportements</strong>. Les largeurs ci-dessous sont
+      calculées à partir de vos valeurs — vous pouvez les retrouver vous-même.
+    </p>
+
+    <table>
+      <tr>
+        <th>Largeur</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td><strong>360 px</strong></td>
+        <td>
+          Image de bannière non déformée · logo au-dessus du menu, liens centrés sur
+          une ou deux lignes selon votre police système · <strong>une carte par
+          ligne</strong> · encadré bleu <strong>sous</strong> les cartes · titre à sa
+          taille minimale
+        </td>
+      </tr>
+      <tr>
+        <td><strong>700 px</strong></td>
+        <td>
+          <strong>Deux cartes par ligne</strong> · encadré toujours dessous · le titre
+          a grandi <em>progressivement</em>, sans saut
+        </td>
+      </tr>
+      <tr>
+        <td><strong>1200 px</strong></td>
+        <td>
+          L'encadré est passé <strong>à droite</strong>, en colonne · deux cartes par
+          ligne dans la colonne principale · titre à sa taille maximale
+        </td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Un détail à ne pas prendre pour un bug :</strong> juste après la
+        bascule des 900 px, la colonne principale se réduit brutalement de 260 px.
+        Les cartes repassent donc momentanément à <strong>une par ligne</strong>, puis
+        à deux dès que la fenêtre s'élargit un peu. C'est le comportement attendu, pas
+        une erreur de votre part.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — la grille se débrouille seule</strong></p>
+      <ol>
+        <li>
+          Redimensionnez lentement de 360 px à 900 px, en regardant les cartes.
+        </li>
+        <li>
+          Elles passent de une à deux par ligne <strong>sans qu'aucun seuil n'ait été
+          écrit</strong>.
+        </li>
+        <li>
+          Changez <code>flex: 1 1 300px</code> en <code>flex: 1 1 200px</code>,
+          rechargez, et recommencez : elles passent maintenant à <strong>trois</strong>
+          par ligne, et la quatrième se retrouve <strong>seule et étirée</strong>.
+        </li>
+      </ol>
+      <p>
+        <strong>C'est la base qui décide du nombre par ligne</strong>, et elle se
+        choisit par le calcul : <code>n × base + (n−1) × gap ≤ largeur disponible</code>.
+        Avec 300 px, trois cartes demanderaient 932 px — plus que les 828 px
+        disponibles à 860 px de fenêtre. Elles restent donc deux.
+      </p>
+      <p><strong>Remettez 300px</strong> avant de continuer.</p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — <code>clamp()</code> contre une taille fixe</strong></p>
+      <ol>
+        <li>
+          Remplacez votre <code>clamp()</code> par <code>font-size: 5vw</code> seul.
+          Rechargez.
+        </li>
+        <li>Testez à 360 px, puis à 1600 px.</li>
+      </ol>
+      <p>
+        À 360 px le titre fait 18 px — plus petit que le texte courant. À 1600 px il
+        fait 80 px et dévore l'écran. <strong>Le minimum et le maximum de
+        <code>clamp()</code> sont ce qui rend la technique utilisable</strong> ; sans
+        eux, <code>vw</code> seul est inexploitable pour du texte.
+      </p>
+      <p><strong>Remettez le <code>clamp()</code>.</strong></p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les <strong>trois comportements</strong> du tableau sont constatés</li>
+      <li>
+        <code>Ctrl+F</code> sur <code>@media</code> : <strong>exactement un</strong>
+        résultat
+      </li>
+      <li>
+        <code>Ctrl+F</code> sur <code>TODO</code> : plus aucun marqueur
+        <em>en dehors de l'en-tête du fichier</em>
+      </li>
+      <li>
+        <strong>Aucune barre de défilement horizontale</strong>, à aucune largeur entre
+        360 et 1600 px
+      </li>
+      <li>
+        Le <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload"
+        target="_blank" rel="noopener">validateur CSS du W3C</a> ne signale aucune
+        erreur
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 60 minutes.</strong> C'est l'exercice le plus long du projet — et
+      celui qui ressemble le plus à une vraie page.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

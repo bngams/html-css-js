@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Des moules à objets : les classes</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 4</p>
+  <h1 class="titre-exo">Des moules à objets : les classes</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> fabriquer plusieurs
+      objets sur le même moule, et leur donner des <strong>savoir-faire</strong> —
+      pas seulement des données.</p>
+    </div>
+
+    <h2>1 · Le problème : cent fiches, cent copies</h2>
+
+    <p>
+      À l'exercice 3, vous écriviez chaque objet à la main. Pour trois livres, cela
+      va. Pour cent rectangles, on recopie cent fois la même structure — et si l'on
+      oublie une clé quelque part, rien ne le signale.
+    </p>
+
+<pre><code>const r1 = { largeur: 10, hauteur: 5 };
+const r2 = { largeur: 2, hauteur: 3 };
+const r3 = { largeur: 7 };              ← hauteur oubliée, aucune alerte</code></pre>
+
+    <p>
+      Une <strong>classe</strong> est un moule : on la décrit <em>une fois</em>, et
+      l'on fabrique autant d'objets qu'on veut, tous bâtis pareil.
+    </p>
+
+    <h2>2 · Écrire une classe</h2>
+
+<pre><code>class Rectangle {
+  constructor(largeur, hauteur) {
+    this.largeur = largeur;
+    this.hauteur = hauteur;
+  }
+}</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>class</code></td><td>« je décris un moule »</td></tr>
+      <tr><td><code>Rectangle</code></td><td>son nom — <strong>majuscule initiale</strong>, par convention</td></tr>
+      <tr><td><code>constructor</code></td><td>la recette de fabrication, appelée automatiquement</td></tr>
+      <tr><td><code>this</code></td><td>« l'objet qu'on est en train de fabriquer »</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>La majuscule n'est pas décorative.</strong> Tout le métier écrit les
+        noms de classes avec une majuscule (<code>Rectangle</code>,
+        <code>Date</code>) et les variables en minuscule (<code>rectangle</code>).
+        C'est ce qui permet de reconnaître un moule d'un coup d'œil.
+      </p>
+    </div>
+
+    <h2>3 · Fabriquer : le mot-clé <code>new</code></h2>
+
+<pre><code>const r = new Rectangle(10, 5);
+
+r.largeur     → 10
+r.hauteur     → 5</code></pre>
+
+    <p>
+      <code>new</code> crée un objet vide, exécute le <code>constructor</code> dessus
+      — c'est lui que <code>this</code> désigne — et vous le rend.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Oublier <code>new</code> ne passe pas inaperçu</strong>, et c'est une
+        bonne nouvelle :
+      </p>
+<pre><code>Rectangle(10, 5)
+→ TypeError: Class constructor Rectangle cannot be invoked without 'new'</code></pre>
+      <p>
+        Le message dit exactement quoi faire. Contrairement à la plupart des pièges
+        de ce cours, celui-là <strong>se voit</strong>.
+      </p>
+    </div>
+
+    <h2>4 · Donner un savoir-faire : les méthodes</h2>
+
+    <p>
+      Jusqu'ici vos objets ne contenaient que des <em>données</em>. Une classe leur
+      ajoute des <strong>actions</strong> :
+    </p>
+
+<pre><code>class Rectangle {
+  constructor(largeur, hauteur) {
+    this.largeur = largeur;
+    this.hauteur = hauteur;
+  }
+
+  calculAire() {
+    return this.largeur * this.hauteur;
+  }
+}
+
+const r = new Rectangle(10, 5);
+r.calculAire()     → 50</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Une méthode est une fonction rangée dans un objet.</strong> Vous
+        savez déjà tout faire : des paramètres, un <code>return</code> — comme au
+        projet 7. Deux différences d'écriture seulement : <strong>pas de
+        <code>function</code></strong> devant, et <strong>pas de virgule</strong>
+        entre les méthodes.
+      </p>
+    </div>
+
+    <h2>5 · ⚠️ <code>this</code> n'est pas optionnel</h2>
+
+    <div class="attention">
+      <p>
+        <strong>L'erreur la plus fréquente des débutants sur ce chapitre.</strong>
+        Dans une méthode, les données de l'objet ne sont pas accessibles par leur nom
+        seul :
+      </p>
+<pre><code>calculAire() {
+  return largeur * hauteur;     ← ✋ sans this
+}
+→ ReferenceError: largeur is not defined</code></pre>
+      <p>
+        JavaScript cherche une <em>variable</em> nommée <code>largeur</code>, pas la
+        propriété de l'objet. <strong>Il faut écrire <code>this.largeur</code></strong>
+        — « la largeur <em>de cet objet-ci</em> ».
+      </p>
+      <p>
+        La même règle vaut dans le <code>constructor</code> : sans
+        <code>this.</code>, la valeur reçue n'est rangée nulle part.
+      </p>
+    </div>
+
+    <h3>Une méthode peut en appeler une autre</h3>
+
+<pre><code>decrire() {
+  return "Aire : " + this.calculAire();
+}</code></pre>
+
+    <p>
+      Là encore, <code>this.</code> est nécessaire : c'est ainsi qu'on désigne
+      « la méthode de cet objet ».
+    </p>
+
+    <h2>6 · Chaque objet vit sa vie</h2>
+
+<pre><code>const a = new Rectangle(2, 3);
+const b = new Rectangle(10, 10);
+
+a.largeur = 99;
+
+a.largeur     → 99
+b.largeur     → 10     ← intact</code></pre>
+
+    <div class="astuce">
+      <p>
+        Le moule sert à fabriquer ; une fois sortis, les objets sont
+        <strong>indépendants</strong>. Modifier l'un ne touche pas les autres, ni la
+        classe elle-même.
+      </p>
+    </div>
+
+    <h2>7 · Un tableau d'objets… fabriqués</h2>
+
+    <p>
+      Vous savez déjà parcourir un tableau d'objets — c'était l'exercice 3. Rien ne
+      change, sinon qu'on peut maintenant appeler leurs méthodes :
+    </p>
+
+<pre><code>const formes = [
+  new Rectangle(2, 3),
+  new Rectangle(4, 5)
+];
+
+for (const f of formes) {
+  console.log(f.calculAire());
+}</code></pre>
+
+    <h2>8 · Classe ou objet littéral ?</h2>
+
+    <table>
+      <tr><th></th><th>Objet littéral <code>{ … }</code></th><th>Classe</th></tr>
+      <tr>
+        <td>Pour</td>
+        <td><strong>une</strong> chose, décrite une fois</td>
+        <td><strong>plusieurs</strong> choses du même genre</td>
+      </tr>
+      <tr>
+        <td>Contient</td>
+        <td>des données</td>
+        <td>des données <strong>et</strong> des savoir-faire</td>
+      </tr>
+      <tr>
+        <td>Exemple</td>
+        <td>la fiche de <em>votre</em> médiathèque</td>
+        <td>le moule d'un livre, d'un rectangle</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Et JSON dans tout ça ?</strong> Souvenez-vous de l'exercice 3 : les
+        fonctions ne survivent pas à <code>JSON.stringify</code>. C'est vrai aussi
+        des méthodes :
+      </p>
+<pre><code>JSON.stringify(r)      → {"largeur":10,"hauteur":5}      ← que les données
+
+const copie = JSON.parse(JSON.stringify(r));
+copie.calculAire()     → TypeError: copie.calculAire is not a function</code></pre>
+      <p>
+        L'objet revenu de JSON <strong>ressemble</strong> à un rectangle, mais ce
+        n'en est plus un : il a perdu son moule. Encore une fois,
+        <strong>l'apparence n'est pas le type</strong>.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Object_building_practice"
+             target="_blank" rel="noopener">MDN — Construire des objets en pratique</a>
+        </td>
+        <td>Un exercice guidé, dans le prolongement de celui-ci.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Classes"
+             target="_blank" rel="noopener">MDN — Les classes</a>
+        </td>
+        <td>La référence complète, pour plus tard.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/class"
+             target="_blank" rel="noopener">javascript.info — Les classes</a>
+        </td>
+        <td>Le même chapitre en français, avec exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

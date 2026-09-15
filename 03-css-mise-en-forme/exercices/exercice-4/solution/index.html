@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Nous rejoindre</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="banniere">
+    <h1>Nous rejoindre</h1>
+    <p>L'inscription est gratuite pour les habitants de la commune.</p>
+  </header>
+
+  <div class="conteneur">
+
+    <p class="intro">
+      Trois formules d'adhésion, sans engagement de durée. Le prêt est illimité
+      dans les trois cas.
+    </p>
+
+    <div class="rangee">
+
+      <article class="formule">
+        <h2>Individuelle</h2>
+        <p class="prix">12 €</p>
+        <p>Pour une personne, valable un an.</p>
+      </article>
+
+      <article class="formule formule--conseillee">
+        <h2>Famille</h2>
+        <p class="prix">25 €</p>
+        <p>Jusqu'à cinq personnes du même foyer.</p>
+      </article>
+
+      <article class="formule">
+        <h2>Étudiante</h2>
+        <p class="prix">6 €</p>
+        <p>Sur présentation d'une carte étudiante.</p>
+      </article>
+
+    </div>
+
+    <section id="contact">
+      <h2>Une question ?</h2>
+      <p>Écrivez-nous à contact@exemple.fr ou passez nous voir aux horaires
+         d'ouverture.</p>
+    </section>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EXERCICE 4 — SOLUTION COMMENTÉE (le HTML)
+
+       Les explications sont ici, APRÈS le contenu, et jamais en tête
+       de fichier : le doctype doit occuper la première ligne, et le
+       navigateur cesse de chercher la déclaration d'encodage au-delà
+       des 1024 premiers octets.
+
+       ── LES ACCROCHES AJOUTÉES ─────────────────────────────────────
+
+       header  → class="banniere"
+         Une classe, car ce style pourrait resservir sur d'autres
+         pages du site.
+
+       p       → class="intro"
+         Idem : plusieurs pages auront un paragraphe d'introduction.
+
+       div     → class="rangee"
+         Ce div n'existe QUE pour aligner les trois formules. C'est
+         un groupement purement visuel : div est le bon choix, et y
+         mettre section annoncerait une partie thématique qui
+         n'existe pas.
+
+       article → class="formule"  (x3)
+         La même classe sur les trois : c'est tout l'intérêt d'une
+         classe par rapport à un id.
+
+       article → class="formule formule--conseillee"  (le 2e)
+         DEUX classes séparées par une espace. L'élément reçoit les
+         deux règles : le style de base, puis la variante qui ne
+         redéfinit que la bordure et le fond.
+
+       section → id="contact"
+         Un id, car ce bloc est UNIQUE et destiné à servir de cible
+         à un lien interne (href="#contact"). C'est le bon usage de
+         l'id : désigner, plutôt que styler.
+
+       ── CE QUI EXISTAIT DÉJÀ ───────────────────────────────────────
+
+       class="prix" était fournie sur les trois paragraphes de prix.
+       Une accroche existante : inutile d'en créer une autre. Le
+       premier réflexe est toujours de regarder ce qui est déjà là.
+       ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

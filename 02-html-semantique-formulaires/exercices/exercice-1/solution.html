@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Les balises sémantiques</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 1</p>
+  <h1 class="titre-exo">Les balises sémantiques</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>&lt;header&gt;
+  &lt;h1&gt;Les Marcheurs du Dimanche&lt;/h1&gt;
+  &lt;p&gt;Le blog du club de randonnée de Haute-Garonne&lt;/p&gt;
+
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Nos sorties&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Nous rejoindre&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;h2&gt;Nos derniers récits&lt;/h2&gt;
+
+  &lt;div&gt;
+    &lt;article&gt;
+      &lt;h3&gt;Le pic du Midi par la face nord&lt;/h3&gt;
+      &lt;p&gt;…&lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;article&gt;
+      &lt;h3&gt;Boucle des trois lacs&lt;/h3&gt;
+      &lt;p&gt;…&lt;/p&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+
+  &lt;aside&gt;
+    &lt;h3&gt;Le saviez-vous ?&lt;/h3&gt;
+    &lt;p&gt;…&lt;/p&gt;
+  &lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;© 2026 Les Marcheurs du Dimanche — contact@exemple.fr&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+    </details>
+
+    <h2>Les deux choix qui se discutent</h2>
+
+    <h3>Pourquoi <code>&lt;article&gt;</code> et non <code>&lt;section&gt;</code> pour les billets</h3>
+
+    <p>
+      Appliquez le test de la notion 3 : <em>ce contenu aurait-il encore du sens,
+      publié seul ailleurs ?</em> Un récit de randonnée republié dans un email ou un
+      flux RSS reste parfaitement compréhensible. C'est un
+      <code>&lt;article&gt;</code>.
+    </p>
+
+    <p>
+      Une <code>&lt;section&gt;</code> aurait aussi « fonctionné » sans erreur de
+      validation — mais elle aurait dit quelque chose de faux : que ces récits sont
+      des parties d'un tout qui ne se comprennent que dans cette page.
+    </p>
+
+    <h3>Pourquoi ce <code>&lt;div&gt;</code> reste un <code>&lt;div&gt;</code></h3>
+
+    <p>
+      Il groupe les deux billets pour une raison <strong>purement visuelle</strong> —
+      les disposer en colonnes au projet 3. Il n'a pas de titre propre et ne forme pas
+      une partie thématique du document.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Le remplacer par <code>&lt;section&gt;</code> serait une erreur.</strong>
+        Une balise sémantique posée sur une zone qui n'a pas ce sens est pire qu'un
+        <code>&lt;div&gt;</code> neutre : elle annonce au lecteur d'écran une structure
+        qui n'existe pas.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>La mise en page s'effondre ou du texte disparaît</td>
+        <td>Une balise ouvrante a été remplacée mais pas sa fermante — ou l'inverse.
+            Chaque <code>&lt;div&gt;</code> ouvrant a son <code>&lt;/div&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Le validateur signale un <code>&lt;main&gt;</code> en trop</td>
+        <td>Deux <code>&lt;main&gt;</code> dans la page : il ne peut y en avoir qu'un</td>
+      </tr>
+      <tr>
+        <td>Il reste plusieurs <code>&lt;div&gt;</code></td>
+        <td>Une étape a été oubliée. Un seul <code>&lt;div&gt;</code> doit subsister,
+            celui qui groupe les billets</td>
+      </tr>
+      <tr>
+        <td>Le mode lecture ne s'active pas, même après l'exercice</td>
+        <td><strong>C'est attendu :</strong> cette page est trop courte pour le
+            déclencher, avant comme après. Le mode lecture exige plusieurs paragraphes
+            longs. L'onglet Accessibilité, lui, montre l'effet immédiatement</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui évite l'erreur n°1 :</strong> traitez une zone
+        complètement — ouvrante <em>et</em> fermante — avant de passer à la suivante.
+        Dans VSCode, cliquer sur une balise met en surbrillance celle qui lui
+        correspond.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à mon code</a>
+      <a class="bouton" href="../exercice-2/">Exercice 2 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

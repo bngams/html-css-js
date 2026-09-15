@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Une page entièrement adaptative</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 3</p>
+  <h1 class="titre-exo">Une page entièrement adaptative</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>/* ── PARTIE 2 : le style de base ── */
+
+.banniere img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.banniere__texte {
+  background-color: #14457b;
+  padding: 1rem;
+  text-align: center;
+}
+
+.logo {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  margin-bottom: 0.5rem;
+}
+
+.chapo {
+  color: #5a6570;
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+
+.grille {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.evenement {
+  flex: 1 1 300px;
+}
+
+.date {
+  color: #0b6bcb;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.lateral {
+  margin-top: 1rem;
+}
+
+
+/* ── PARTIE 3 : l'unique media query ── */
+
+@media (min-width: 900px) {
+
+  .disposition {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .principal {
+    flex: 1 1 auto;
+  }
+
+  .lateral {
+    flex: 0 0 260px;
+    margin-top: 0;
+  }
+
+}</code></pre>
+    </details>
+
+    <p>
+      Le fichier commenté est dans <code>solution/style.css</code> — et la page est
+      <a href="solution/">visible ici</a>. Redimensionnez-la de 360 à 1600 px.
+    </p>
+
+    <h2>Une seule media query — et c'est le but</h2>
+
+    <p>
+      Comptez : il n'y en a <strong>qu'une</strong> dans tout le fichier, pour la
+      colonne latérale. Tout le reste s'adapte sans aucun seuil écrit.
+    </p>
+
+    <table>
+      <tr>
+        <th>Ce qui s'adapte</th>
+        <th>Grâce à</th>
+      </tr>
+      <tr>
+        <td>La grille d'événements</td>
+        <td><code>flex-wrap</code> + <code>flex: 1 1 300px</code></td>
+      </tr>
+      <tr>
+        <td>Le menu de quatre liens</td>
+        <td><code>flex-wrap: wrap</code></td>
+      </tr>
+      <tr>
+        <td>La taille du titre</td>
+        <td><code>clamp(1.6rem, 5vw, 2.8rem)</code></td>
+      </tr>
+      <tr>
+        <td>L'image de bannière</td>
+        <td><code>object-fit: cover</code> + <code>max-width: 100%</code></td>
+      </tr>
+      <tr>
+        <td>La largeur du contenu</td>
+        <td><code>max-width</code> + <code>margin: 0 auto</code></td>
+      </tr>
+      <tr>
+        <td><strong>La colonne latérale</strong></td>
+        <td><strong>la media query</strong> — le seul cas qui l'exigeait</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi la latérale exige un seuil :</strong> les autres éléments
+        peuvent <em>rétrécir</em> jusqu'à une taille acceptable. Une colonne de 260 px
+        à côté du contenu, non : sous une certaine largeur, il faut <em>décider</em>
+        qu'elle passe dessous. C'est un changement de disposition, pas de taille — et
+        c'est exactement ce à quoi servent les media queries.
+      </p>
+    </div>
+
+    <h2>Le calcul de la base, et pourquoi il compte</h2>
+
+    <p>
+      <code>flex: 1 1 300px</code> n'a pas été choisi au hasard. La règle :
+    </p>
+
+<pre><code>n × base + (n − 1) × gap ≤ largeur disponible</code></pre>
+
+    <p>
+      À 860 px de fenêtre, la ligne utile fait 828 px (moins les paddings). Trois
+      cartes de 300 px demanderaient <code>3 × 300 + 2 × 16 = 932 px</code> : elles ne
+      tiennent pas. Deux en demandent 616 : elles tiennent.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Avec une base de 260 px, trois cartes seraient passées</strong>
+        (812 ≤ 828) — et la quatrième se serait retrouvée <strong>seule sur sa ligne,
+        étirée sur toute la largeur</strong>, puisque <code>flex-grow</code> vaut 1.
+        Un résultat déséquilibré, qui ressemble à un bug.
+      </p>
+      <p>
+        <strong>La base n'est pas un minimum : c'est un point de départ.</strong> Elle
+        se choisit en faisant ce calcul.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>L'image de bannière est écrasée, aplatie</td>
+        <td><code>object-fit: cover</code> manque : <code>height: 180px</code> déforme
+            l'image sans lui</td>
+      </tr>
+      <tr>
+        <td>Le titre est minuscule sur téléphone ou énorme sur grand écran</td>
+        <td><code>vw</code> a été utilisé seul, sans les bornes de
+            <code>clamp()</code></td>
+      </tr>
+      <tr>
+        <td>Trois cartes par ligne, la quatrième seule et étirée</td>
+        <td>La base est trop petite. Refaites le calcul ci-dessus</td>
+      </tr>
+      <tr>
+        <td>L'encadré reste sous le contenu même sur grand écran</td>
+        <td>La media query manque, ou <code>display: flex</code> a été posé sur
+            <code>.principal</code> au lieu de <code>.disposition</code> — la règle va
+            sur le parent</td>
+      </tr>
+      <tr>
+        <td>L'encadré occupe la moitié de la largeur</td>
+        <td><code>flex: 0 0 260px</code> a été écrit <code>1 1 260px</code> : il grandit
+            au lieu de rester fixe</td>
+      </tr>
+      <tr>
+        <td>Un écart vertical subsiste au-dessus de l'encadré</td>
+        <td><code>margin-top: 0</code> manque dans la media query : la marge de
+            l'étape 8 reste active</td>
+      </tr>
+      <tr>
+        <td>Les liens du menu débordent sur téléphone</td>
+        <td><code>flex-wrap: wrap</code> manque sur <code>.menu</code></td>
+      </tr>
+    </table>
+
+    <h2>🎉 Fin du projet 4</h2>
+
+    <p>
+      Vous savez maintenant construire une page qui s'adapte à tous les écrans : les
+      fondations, les media queries, et surtout <strong>l'ordre dans lequel les
+      employer</strong> — les fondations d'abord, le contenu qui se place seul ensuite,
+      et une media query seulement pour ce qui résiste.
+    </p>
+
+    <p>
+      Le <strong>projet 5</strong> est libre : votre page, votre thème, avec tout ce
+      que vous avez appris depuis le projet 1.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à ma page</a>
+      <a class="bouton" href="../../">Fin du projet 4 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

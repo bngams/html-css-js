@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Un formulaire qui ne recharge pas</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 3</p>
+  <h1 class="titre-exo">Un formulaire qui ne recharge pas</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> intercepter l'envoi d'un
+      formulaire, et empêcher le navigateur de recharger la page.</p>
+      <p>
+        <strong>Trois notions nouvelles :</strong> l'événement <code>submit</code>,
+        <code>preventDefault()</code> et <code>.trim()</code>.
+      </p>
+    </div>
+
+    <h2>1 · Le navigateur a ses propres réflexes</h2>
+
+    <p>
+      Jusqu'ici, sans votre code, il ne se passait <em>rien</em> : un bouton inerte
+      reste inerte. Un formulaire, lui, a un comportement
+      <strong>par défaut</strong> — envoyer ses données et
+      <strong>recharger la page</strong>.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Essayez avant de lire la suite.</strong> Ouvrez la page de travail,
+        tapez un titre, appuyez sur <kbd>Entrée</kbd>.
+      </p>
+      <p>
+        La page clignote, les champs se vident, la console se vide aussi, et l'URL
+        change : elle se termine désormais par un <code>?</code>. Rien n'a été
+        enregistré.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Ce réflexe date d'avant JavaScript.</strong> Le formulaire envoyait
+        les données à un serveur, qui renvoyait une nouvelle page. C'est toujours le
+        comportement par défaut — et c'est celui qu'on remplace.
+      </p>
+    </div>
+
+    <h2>2 · L'événement <code>submit</code></h2>
+
+<pre><code>form.addEventListener("submit", function (evenement) {
+  // …
+});</code></pre>
+
+    <table>
+      <tr><th>Événement</th><th>Sur quoi</th><th>Quand</th></tr>
+      <tr><td><code>"click"</code></td><td>un bouton</td><td>au clic</td></tr>
+      <tr><td><code>"input"</code></td><td>un champ</td><td>à chaque frappe</td></tr>
+      <tr><td><code>"submit"</code></td><td>le <code>&lt;form&gt;</code></td><td>à l'envoi</td></tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>L'écouteur se pose sur le <code>&lt;form&gt;</code>, pas sur le
+        bouton.</strong> C'est le formulaire qui est envoyé, pas le bouton qui est
+        cliqué.
+      </p>
+      <p>
+        L'avantage est concret : <code>submit</code> se déclenche aussi quand on
+        appuie sur <kbd>Entrée</kbd> dans un champ, sans toucher au bouton. Un
+        écouteur <code>click</code> sur le bouton raterait ce cas.
+      </p>
+    </div>
+
+    <h2>3 · <code>preventDefault()</code> — couper le réflexe</h2>
+
+    <p>
+      La fonction reçoit un <strong>paramètre</strong> : l'événement lui-même. C'est
+      lui qui porte le moyen d'annuler le comportement par défaut.
+    </p>
+
+<pre><code>form.addEventListener("submit", function (evenement) {
+
+  evenement.preventDefault();   ← la page ne se rechargera pas
+
+  // votre code prend le relais
+});</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le nom du paramètre est libre.</strong> Vous verrez souvent
+        <code>e</code> ou <code>event</code> ; ici <code>evenement</code>, pour que ce
+        soit lisible. C'est le <strong>premier</strong> paramètre qui compte, pas son
+        nom — comme pour n'importe quelle fonction du projet 7.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Sans <code>preventDefault</code>, votre code s'exécute quand
+        même</strong> — puis la page se recharge et efface tout. C'est ce qui rend
+        l'erreur déroutante : on voit parfois la liste s'allonger une fraction de
+        seconde avant de disparaître.
+      </p>
+    </div>
+
+    <h2>4 · Des données qui grandissent</h2>
+
+    <p>
+      Nouveauté de cet exercice : le tableau n'est plus figé. Chaque envoi valide y
+      ajoute une ligne, avec <code>push</code> du projet 8 :
+    </p>
+
+<pre><code>emprunts.push({ titre: titre, lecteur: lecteur });</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Rappel du projet 8 :</strong> <code>push</code> fonctionne même sur un
+        tableau déclaré avec <code>const</code>. On ne remplace pas le tableau, on le
+        <em>modifie</em> — ce que <code>const</code> autorise.
+      </p>
+    </div>
+
+    <h2>5 · Le cycle complet</h2>
+
+<pre><code>1. l'utilisateur envoie   → submit
+2. on coupe le réflexe    → preventDefault()
+3. on lit les champs      → .value
+4. on vérifie             → si vide, on refuse et on s'arrête
+5. on ajoute aux données  → push
+6. on reconstruit la page → la fonction de l'exercice 2
+7. on vide les champs     → .value = ""</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>L'étape 6 ne change pas d'un iota.</strong> C'est exactement la
+        fonction « vider puis reconstruire » de l'exercice 2 et du projet 9. Les
+        données ont changé, l'affichage se refait pareil.
+      </p>
+    </div>
+
+    <h2>6 · <code>.trim()</code> — enlever les espaces autour</h2>
+
+<pre><code>"   Le Horla   ".trim()    → "Le Horla"
+"   ".trim()               → ""           ← devient vide !</code></pre>
+
+    <p>
+      Sans <code>trim</code>, un visiteur qui tape trois espaces passe la
+      vérification : <code>"   "</code> n'est pas une chaîne vide.
+    </p>
+
+<pre><code>"   " === ""            → false    ⚠️ accepté à tort
+"   ".trim() === ""     → true     ✅ refusé</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>On nettoie avant de vérifier, et on stocke la version
+        nettoyée.</strong> Sinon le titre s'afficherait avec ses espaces parasites.
+      </p>
+    </div>
+
+    <h2>7 · Refuser et s'arrêter</h2>
+
+<pre><code>if (titre === "" || lecteur === "") {
+  message.textContent = "Remplissez les deux champs.";
+  message.classList.add("erreur");
+  return;                        ← on sort de la fonction ICI
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Sans le <code>return</code>, le code continue</strong> : un emprunt
+        vide serait ajouté juste après le message d'erreur.
+      </p>
+      <p>
+        <code>return</code> sans valeur, c'est le « on s'arrête là » du projet 7. Le
+        reste de la fonction n'est pas exécuté.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Et le message doit pouvoir redevenir normal.</strong> Si vous ajoutez
+        la classe <code>erreur</code> sans jamais la retirer, le message restera rouge
+        même après un ajout réussi — l'erreur de l'exercice 2 avec la classe
+        <code>vide</code>.
+      </p>
+      <p>
+        <strong>Un seul message pour les deux cas : c'est volontairement simple.</strong>
+        Il s'affiche aussi quand un seul des deux champs manque. Un vrai formulaire
+        dirait <em>lequel</em> — c'est le même <code>if</code>, avec deux branches de
+        plus.
+      </p>
+    </div>
+
+    <h2>8 · ⚠️ Ce qui disparaît au rechargement</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Vos ajouts ne survivent pas à un <kbd>F5</kbd>.</strong> Le tableau
+        vit en mémoire, dans la page ; recharger repart du tableau écrit dans le
+        fichier.
+      </p>
+      <p>
+        <strong>Ce n'est pas un défaut de votre code.</strong> Conserver des données
+        demande un serveur ou un stockage — ce n'est pas au programme de ce cours.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/HTMLFormElement/submit_event"
+             target="_blank" rel="noopener">MDN — l'événement <code>submit</code></a>
+        </td>
+        <td>La référence.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Event/preventDefault"
+             target="_blank" rel="noopener">MDN — <code>preventDefault()</code></a>
+        </td>
+        <td>Et la liste des comportements par défaut qu'on peut couper.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

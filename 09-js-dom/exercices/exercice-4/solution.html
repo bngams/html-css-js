@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Une page qui se construit seule</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 4</p>
+  <h1 class="titre-exo">Une page qui se construit seule</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé la manip du ménage déplacé ?</strong> C'est elle
+      qui montre qu'un code peut tourner sans erreur et produire une page vide. Si ce
+      n'est pas fait, retournez à la
+      <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <p>
+      Une solution possible. <strong>Seuls les critères comptent</strong> : une autre
+      écriture qui les remplit tous est tout aussi juste.
+    </p>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const emprunts = [
+  { titre: "La Horde du Contrevent", lecteur: "Amina",  jours: 3  },
+  { titre: "Dune",                   lecteur: "Karim",  jours: 21 },
+  { titre: "Fondation",              lecteur: "Léa",    jours: 14 },
+  { titre: "Le Nom du vent",         lecteur: "Amina",  jours: 45 },
+  { titre: "Les Fourmis",            lecteur: "Tomas",  jours: 8  },
+  { titre: "Chroniques martiennes",  lecteur: "Léa",    jours: 30 }
+];
+
+/* 1 · Le ménage */
+
+const liste = document.querySelector("#emprunts");
+
+for (const ancien of liste.querySelectorAll("li")) {
+  ancien.remove();
+}
+
+console.log("Après le ménage :", liste.children.length, "élément(s)");
+
+/* 2 · La construction */
+
+let enRetard = 0;
+
+for (const emprunt of emprunts) {
+
+  const li = document.createElement("li");
+  li.classList.add("emprunt");
+
+  const titre = document.createElement("span");
+  titre.classList.add("emprunt__titre");
+  titre.textContent = emprunt.titre;
+
+  const lecteur = document.createElement("span");
+  lecteur.classList.add("emprunt__lecteur");
+  lecteur.textContent = emprunt.lecteur;
+
+  const duree = document.createElement("span");
+  duree.classList.add("emprunt__jours");
+  duree.textContent = emprunt.jours + " jours";
+
+  li.append(titre, lecteur, duree);
+
+  if (emprunt.jours &gt; 28) {
+    li.classList.add("retard");
+    enRetard = enRetard + 1;
+  }
+
+  liste.append(li);
+}
+
+console.log("Lignes construites :", liste.children.length);
+console.log("En retard :", enRetard);
+
+/* 3 · Relire la page */
+
+let totalJours = 0;
+
+for (const ligne of liste.querySelectorAll(".emprunt__jours")) {
+  totalJours = totalJours + Number(ligne.textContent.split(" ")[0]);
+}
+
+console.log("Total des jours :", totalJours);
+
+const moyenne = Math.round(totalJours / emprunts.length);
+console.log("Durée moyenne :", moyenne, "jours");
+
+/* 4 · Le bandeau */
+
+const bandeau = document.querySelector("#bilan");
+bandeau.textContent = emprunts.length + " emprunts, dont " + enRetard + " en retard";
+
+if (enRetard &gt; 0) {
+  bandeau.classList.add("alerte");
+}
+
+console.log("Bandeau :", bandeau.className);</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Le ménage d'abord, toujours</h3>
+
+    <p>
+      La première ligne de console n'est pas décorative : elle prouve que le ménage a
+      eu lieu <em>avant</em> la construction.
+    </p>
+
+<pre><code>Après le ménage : 0 élément(s)   ✅ la liste est bien vide
+Après le ménage : 3 élément(s)   ❌ le remove() n'a rien fait
+Après le ménage : 6 élément(s)   ❌ vous avez construit avant de vider</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Placer un affichage à un moment précis est une technique de
+        débogage</strong>, pas une exigence de l'énoncé. Vous venez de l'utiliser
+        sans qu'on vous le dise : un compteur bien placé remplace dix minutes de
+        relecture.
+      </p>
+    </div>
+
+    <h3>2 · Une boucle qui fait deux choses</h3>
+
+    <p>
+      La boucle de construction pose la classe <code>retard</code>
+      <strong>et</strong> incrémente le compteur, au même endroit :
+    </p>
+
+<pre><code>if (emprunt.jours &gt; 28) {
+  li.classList.add("retard");   ← ce qu'on voit
+  enRetard = enRetard + 1;      ← ce qu'on compte
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>L'affichage et le compte ne peuvent alors pas diverger.</strong> Avec
+        deux boucles séparées et deux conditions écrites deux fois, il suffit d'en
+        modifier une pour que le bandeau mente.
+      </p>
+    </div>
+
+    <h3>3 · Relire la page, pas les données</h3>
+
+    <p>
+      Le total aurait pu se calculer sur le tableau. L'énoncé demande de le lire
+      <strong>dans la page</strong> :
+    </p>
+
+<pre><code>for (const ligne of liste.querySelectorAll(".emprunt__jours")) {
+  totalJours = totalJours + Number(ligne.textContent.split(" ")[0]);
+}</code></pre>
+
+    <table>
+      <tr><th>Étape</th><th>Valeur</th></tr>
+      <tr><td><code>ligne.textContent</code></td><td><code>"30 jours"</code> — du texte</td></tr>
+      <tr><td><code>.split(" ")</code></td><td><code>["30", "jours"]</code> — un tableau</td></tr>
+      <tr><td><code>[0]</code></td><td><code>"30"</code> — toujours du texte</td></tr>
+      <tr><td><code>Number(…)</code></td><td><code>30</code> — enfin un nombre</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Les deux méthodes donnent 121 ici</strong>, et c'est rassurant : la
+        page dit bien ce que disent les données. Elles divergeront au projet 10,
+        quand l'utilisateur modifiera la page après sa construction.
+      </p>
+    </div>
+
+    <h3>4 · La moyenne est arrondie</h3>
+
+<pre><code>121 / 6            → 20.166666666666668
+Math.round(…)      → 20</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>Math.round</code> vient du projet 6. Sans lui, le bandeau afficherait
+        seize décimales — ce que personne ne veut lire.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Neuf lignes s'affichent : trois grises puis six</td>
+        <td>Le ménage manque, ou il boucle sur autre chose que les <code>li</code></td>
+      </tr>
+      <tr>
+        <td>
+          La page est vide, et la console annonce <code>0</code> alors que la boucle
+          a construit six éléments
+        </td>
+        <td>
+          Le ménage est placé <strong>après</strong> la construction : il efface vos
+          propres lignes
+        </td>
+      </tr>
+      <tr>
+        <td><code>Après le ménage : 3 élément(s)</code></td>
+        <td>
+          La boucle de <code>remove()</code> parcourt <code>.children</code>, qui est
+          vivant — voir exercice 3, section 3 bis
+        </td>
+      </tr>
+      <tr>
+        <td><code>Total des jours : NaN</code></td>
+        <td>
+          <code>Number("30 jours")</code> sans <code>.split(" ")[0]</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Durée moyenne : 20.166666666666668</code></td>
+        <td><code>Math.round</code> oublié</td>
+      </tr>
+      <tr>
+        <td>Le bandeau est rouge alors qu'il n'y a aucun retard</td>
+        <td>
+          La classe <code>alerte</code> est posée sans condition, hors du
+          <code>if</code>
+        </td>
+      </tr>
+    </table>
+
+    <h2>Ce que vous savez faire maintenant</h2>
+
+    <div class="objectif">
+      <p>
+        Vous venez d'écrire, <strong>sans notion nouvelle</strong>, le schéma qui
+        porte la plupart des interfaces web : des données en entrée, une page en
+        sortie.
+      </p>
+      <p>
+        Il manque encore une chose : <strong>réagir à l'utilisateur</strong>. Pour
+        l'instant, votre page se construit une fois, au chargement, et ne bouge plus.
+        C'est l'objet du projet 10.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Projet 9 terminé ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+/* Style de la page d'accueil du projet.
+   Fourni — vous n'avez pas à le modifier.
+   (Le CSS, c'est le projet 3 !) */
+
+:root {
+  --bleu: #0b6bcb;
+  --bleu-clair: #e8f1fb;
+  --texte: #1c2024;
+  --gris: #5a6570;
+  --bordure: #dde3e9;
+  --fond: #f7f9fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem 3rem;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: var(--texte);
+  background: var(--fond);
+}
+
+.entete,
+main,
+.pied {
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.entete {
+  margin-bottom: 2.5rem;
+}
+
+.entete__projet {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bleu);
+}
+
+.entete h1 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+.entete__intro {
+  margin: 0;
+  color: var(--gris);
+}
+
+.grille-exos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.carte {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  height: 100%;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.carte:hover,
+.carte:focus-visible {
+  border-color: var(--bleu);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(11, 107, 203, 0.12);
+}
+
+.carte__num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--bleu);
+}
+
+.carte__titre {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.carte__concept {
+  font-size: 0.9rem;
+  color: var(--gris);
+}
+
+/* Cartes des exercices pas encore disponibles */
+
+.carte--bientot {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+
+.carte--bientot .carte__num {
+  color: var(--gris);
+}
+
+.badge-bientot {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1em 0.5em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--gris);
+  border-radius: 99px;
+  vertical-align: middle;
+}
+
+.pied {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--bordure);
+  font-size: 0.9rem;
+  color: var(--gris);
+}
+
+code {
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+  background: var(--bleu-clair);
+  border-radius: 4px;
+}

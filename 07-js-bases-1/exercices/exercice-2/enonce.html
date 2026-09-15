@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Vos premières fonctions</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 2</p>
+  <h1 class="titre-exo">Vos premières fonctions</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Écrire vos premières fonctions, et
+      comprendre la différence entre <strong>afficher</strong> un résultat et le
+      <strong>renvoyer</strong>.</p>
+      <p>
+        <strong>Prérequis :</strong> le projet 6 —
+        <code>console.log()</code> à plusieurs valeurs, <code>Number()</code>,
+        <code>const</code> — et l'exercice 1 de ce projet, pour les comparaisons.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-2/app.js</code>
+      </p>
+      <p>
+        Il contient déjà <strong>deux fonctions écrites pour vous</strong> :
+        <code>addition</code>, qui sert de modèle, et
+        <code>multiplierSansRendre</code>, qui contient un défaut volontaire.
+        <strong>Lisez-les avant de commencer.</strong>
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 10 étapes</h2>
+
+    <h3>Partie 1 — lire une fonction, en écrire une</h3>
+
+    <ol class="criteres">
+      <li>
+        Afficher le texte <code>5 + 3 =</code> puis le résultat de
+        <code>addition(5, 3)</code>
+      </li>
+      <li>
+        Écrire une fonction <code>soustraction(a, b)</code> qui
+        <strong>renvoie</strong> <code>a - b</code>, sur le modèle exact
+        d'<code>addition</code>
+      </li>
+      <li>
+        Afficher le texte <code>5 - 3 =</code> puis le résultat de
+        <code>soustraction(5, 3)</code>
+      </li>
+    </ol>
+
+    <h3>Partie 2 — le piège du <code>return</code> oublié</h3>
+
+    <ol class="criteres" start="4">
+      <li>
+        Afficher le texte <code>multiplierSansRendre(5, 3) =</code> puis le résultat
+        de <code>multiplierSansRendre(5, 3)</code> — <strong>et constater</strong> que
+        ce n'est pas 15
+      </li>
+      <li>
+        Écrire <code>multiplication(a, b)</code> qui, elle,
+        <strong>renvoie</strong> <code>a * b</code>
+      </li>
+      <li>
+        Afficher le texte <code>5 × 3 =</code> puis le résultat de
+        <code>multiplication(5, 3)</code>
+      </li>
+    </ol>
+
+    <div class="attention">
+      <p>
+        <strong>À l'étape 4, vous obtiendrez <code>undefined</code> — et c'est le
+        but.</strong> La fonction fait bien le calcul, mais ne le donne à personne.
+        Ne la corrigez pas : c'est l'étape 5 qui écrit la bonne version.
+      </p>
+    </div>
+
+    <h3>Partie 3 — une fonction vraiment utile</h3>
+
+    <ol class="criteres" start="7">
+      <li>
+        Écrire <code>prixTTC(prixHT)</code> — <strong>un seul paramètre</strong> —
+        qui renvoie le prix augmenté de 20 % (multiplier par <code>1.2</code>)
+      </li>
+      <li>
+        Afficher en <strong>trois instructions</strong> — une par prix, c'est la
+        seule étape qui en demande plusieurs :
+        <code>Abonnement :</code> puis <code>prixTTC(24)</code>,
+        <code>Retard :</code> puis <code>prixTTC(2)</code>,
+        <code>Perte :</code> puis <code>prixTTC(15)</code>
+      </li>
+      <li>
+        Ranger dans <code>totalDeuxAbos</code> le résultat de
+        <code>prixTTC(24)</code> <strong>multiplié par 2</strong>
+      </li>
+      <li>
+        Afficher le texte <code>Deux abonnements :</code>, puis
+        <code>totalDeuxAbos</code>, puis le texte <code>€</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Une fois les dix étapes faites, la console doit afficher exactement
+      <strong>huit lignes</strong> :
+    </p>
+
+<pre><code>5 + 3 = 8
+5 - 3 = 2
+multiplierSansRendre(5, 3) = undefined
+5 × 3 = 15
+Abonnement : 28.799999999999997
+Retard : 2.4
+Perte : 18
+Deux abonnements : 57.599999999999994 €</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Les décimales à rallonge sont normales</strong>, et vous les avez
+        déjà croisées au projet 6 : c'est le stockage binaire des nombres à virgule.
+        Remarquez qu'elles n'apparaissent <em>pas partout</em> —
+        <code>2 × 1.2</code> donne exactement <code>2.4</code>. Le défaut ne touche
+        que certains nombres.
+      </p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Vos deux fonctions</td>
+        <td>
+          <code>5 - 3 = 2</code> et <code>5 × 3 = 15</code> — donc vos
+          <code>return</code> sont bien là
+        </td>
+      </tr>
+      <tr>
+        <td>Le piège du <code>return</code></td>
+        <td>
+          La ligne 3 affiche <code>undefined</code>, <strong>sans aucune erreur
+          rouge</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>La réutilisation</td>
+        <td>
+          La dernière ligne affiche un nombre, et non <code>NaN</code> — preuve que
+          <code>prixTTC</code> <em>renvoie</em> au lieu d'afficher
+        </td>
+      </tr>
+      <tr>
+        <td>Une seule écriture du calcul</td>
+        <td>
+          Le <code>* 1.2</code> n'apparaît qu'<strong>une fois</strong> dans tout
+          votre fichier
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>app.js</code> : aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — afficher n'est pas renvoyer</strong></p>
+      <p>
+        Vos propres fonctions restent disponibles dans la console de la page de
+        travail : rien à retaper.
+      </p>
+      <ol>
+        <li>Sur la page de travail, ouvrez la console (<code>F12</code>).</li>
+        <li>
+          Tapez <code>multiplication(5, 3) * 10</code> → vous obtenez
+          <code>150</code>.
+        </li>
+        <li>
+          Tapez <code>multiplierSansRendre(5, 3) * 10</code> → vous obtenez
+          <code>NaN</code>.
+        </li>
+      </ol>
+      <p>
+        Les deux fonctions font <strong>exactement la même multiplication</strong>.
+        Mais la seconde ne <strong>renvoie</strong> rien : il n'y a rien à multiplier
+        par 10. <strong>Une fonction qui ne fait qu'afficher ne se réutilise nulle
+        part.</strong>
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les huit lignes s'affichent, sans erreur rouge</li>
+      <li>
+        Vous savez expliquer pourquoi <code>multiplierSansRendre</code> renvoie
+        <code>undefined</code>
+      </li>
+      <li>
+        Vous savez dire la différence entre <strong>un paramètre</strong> et
+        <strong>un argument</strong>
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>app.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>35 à 45 minutes.</strong> Les étapes 4 à 6 sont le cœur de
+      l'exercice : c'est là que se joue la compréhension de <code>return</code>.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

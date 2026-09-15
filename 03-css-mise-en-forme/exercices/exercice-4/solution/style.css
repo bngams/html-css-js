@@ -1,0 +1,141 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 4 — SOLUTION COMMENTÉE (le CSS)
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Les bases, fournies ──────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+}
+
+.conteneur {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+/* ÉTAPE 1 — La bannière.
+
+   Nommée « banniere » et non « bandeau-bleu » : on nomme le RÔLE,
+   pas l'apparence. Le jour où la charte graphique passe au vert,
+   le nom reste juste.
+
+   Notez aussi l'absence d'accent et de majuscule : « banniere ».  */
+
+.banniere {
+  background-color: #14457b;
+  color: #fff;
+  padding: 30px;
+  text-align: center;
+}
+
+
+/* ÉTAPE 2 — L'introduction.                                       */
+
+.intro {
+  font-size: 1.1rem;
+  color: #5a6570;
+}
+
+
+/* ÉTAPE 3 — La rangée.
+
+   Rappel de l'exercice 3 : display:flex se pose sur le PARENT, et
+   flex-wrap autorise le passage à la ligne sur écran étroit.      */
+
+.rangee {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+
+/* ÉTAPE 4 — Les formules.
+
+   Une seule règle habille les trois articles, parce qu'ils
+   partagent la même classe. Avec des id, il aurait fallu trois
+   règles identiques — d'où la préférence pour la classe dès qu'il
+   s'agit de style.                                                */
+
+.formule {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #d7dee8;
+  flex: 1 1 200px;
+  text-align: center;
+}
+
+
+/* ÉTAPE 5 — La formule conseillée.
+
+   L'article « Famille » porte DEUX classes. Il reçoit d'abord tout
+   le style de .formule, puis cette règle en redéfinit deux points.
+
+   Le double tiret dans « formule--conseillee » est une convention
+   d'écriture répandue pour signaler une variante. Ce n'est pas une
+   obligation du langage : le navigateur y voit un nom comme un
+   autre.                                                          */
+
+.formule--conseillee {
+  border: 2px solid #0b6bcb;
+  background-color: #e8f1fb;
+}
+
+
+/* ÉTAPE 6 — Le prix.
+
+   Cette classe existait déjà dans le HTML fourni : le premier
+   réflexe est toujours de regarder les accroches disponibles avant
+   d'en créer de nouvelles.                                        */
+
+.prix {
+  font-size: 2rem;
+  color: #14457b;
+  font-weight: bold;
+  margin: 0;
+}
+
+
+/* ÉTAPE 7 — Le bloc de contact.
+
+   Le DIÈSE vise un id. C'est le seul sélecteur d'id de cette
+   feuille, et c'est volontaire : on réserve l'id à ce qui doit
+   être unique et désigné — ici, une cible de lien interne.
+
+   Pour le style courant, la classe reste préférable.              */
+
+#contact {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CE QU'IL FAUT RETENIR
+
+   Le HTML et le CSS s'écrivent ENSEMBLE, en aller-retour :
+   si l'accroche n'existe pas, on la crée.
+
+   Nommer le RÔLE, pas l'apparence :
+       .alerte  ✅        .rouge  ❌
+
+   Sans accent, sans majuscule, mots séparés par un tiret.
+
+   class → pour le style, autant d'éléments qu'on veut
+   id    → pour ce qui est unique et désigné (lien interne, JS)
+
+   Et une boîte créée uniquement pour la mise en page reste un
+   div : lui donner une balise sémantique mentirait sur son rôle.
+   ═══════════════════════════════════════════════════════════════ */

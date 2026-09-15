@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Le registre des emprunts</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 12</a> · Cas pratique</p>
+  <h1 class="titre-exo">Le registre des emprunts</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Le registre des emprunts de la médiathèque :
+      un tableau alimenté par des données, un formulaire qui l'enrichit, et un
+      <strong>statut calculé</strong> pour chaque ligne.</p>
+      <p>
+        <strong>Prérequis :</strong> tout le parcours. Aucune notion nouvelle, sauf
+        <code>fetch</code> pour le bonus.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>🟥 Ce projet n'a pas de squelette.</strong>
+      </p>
+      <p>
+        Aucun fichier JavaScript ne vous est fourni, et <code>travail.html</code> ne
+        charge <em>aucun</em> script. C'est le dernier projet : vous créez votre
+        fichier vous-même, et vous le branchez.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p><strong>Comment démarrer</strong></p>
+      <ol>
+        <li>
+          Copiez <code>travail.html</code> dans un dossier à vous, sous le nom
+          <code>index.html</code>
+        </li>
+        <li>
+          Créez à côté un fichier <code>app.js</code> — le nom est libre, mais autant
+          garder celui du parcours
+        </li>
+        <li>
+          Ajoutez <code>&lt;script src="app.js"&gt;&lt;/script&gt;</code>
+          <strong>juste avant</strong> <code>&lt;/body&gt;</code> de votre copie
+        </li>
+        <li>Recopiez les données de départ ci-dessous en haut de votre fichier</li>
+        <li>
+          <strong>Vérifiez tout de suite que le branchement marche :</strong> écrivez
+          <code>console.log("branché");</code> comme seule ligne de
+          <code>app.js</code>, rechargez, et regardez la console. Le message
+          apparaît ? Vous pouvez commencer. Sinon, vérifiez le nom du fichier et sa
+          position, à côté de votre <code>index.html</code>
+        </li>
+      </ol>
+    </div>
+
+    <h2>📦 Les données de départ</h2>
+
+<pre><code>const emprunts = [
+  { livre: "Dune",                  lecteur: "Karim", jours: 21 },
+  { livre: "Fondation",             lecteur: "Léa",   jours: 5  },
+  { livre: "Les Fourmis",           lecteur: "Tomas", jours: 14 },
+  { livre: "Le Nom du vent",        lecteur: "Amina", jours: -3 },
+  { livre: "Chroniques martiennes", lecteur: "Léa",   jours: -12 }
+];</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>jours</code> est le nombre de jours <strong>restants</strong> avant le
+        retour. Un nombre <strong>négatif</strong> signifie que l'emprunt est en
+        retard.
+      </p>
+    </div>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <h3>Au chargement</h3>
+
+    <ol class="criteres">
+      <li>
+        Le tableau affiche <strong>une ligne par emprunt</strong>, dans l'ordre des
+        données, avec <strong>quatre cellules</strong> : livre, lecteur, jours
+        restants, statut
+      </li>
+      <li>
+        Chaque statut est un <code>&lt;span&gt;</code> portant la classe
+        <code>statut</code> <strong>et</strong> sa classe de couleur :
+        <code>statut--retard</code>, <code>statut--bientot</code> ou
+        <code>statut--ok</code>
+      </li>
+      <li>
+        Le statut est <strong>calculé</strong>, jamais écrit dans les données :
+        <code>jours &lt; 0</code> → <code>En retard</code> ·
+        <code>jours ≤ 7</code> → <code>Bientôt dû</code> · sinon
+        <code>En cours</code>
+      </li>
+      <li>
+        Le résumé sous le tableau affiche
+        <code>5 emprunt(s) · 2 en retard</code> — les deux nombres calculés
+      </li>
+    </ol>
+
+    <h3>Quand on ajoute un emprunt</h3>
+
+    <ol class="criteres" start="5">
+      <li>
+        <strong>La page ne se recharge pas</strong>, et la nouvelle ligne apparaît
+        en bas du tableau
+      </li>
+      <li>
+        L'emprunt est ajouté <strong>au tableau de données</strong>, pas seulement à
+        l'affichage — le résumé et les statuts s'actualisent en conséquence.
+        <strong>Pour le vérifier :</strong> après deux ajouts, le résumé doit annoncer
+        <code>7 emprunt(s)</code> et la console <code>→ 7 emprunt(s)</code>. S'il
+        reste bloqué sur <code>5</code>, votre ligne est dans la page mais pas dans
+        les données
+      </li>
+      <li>
+        Les <strong>trois champs sont vidés</strong> après un ajout réussi, et le
+        message affiche <code>« Livre » ajouté.</code> sans la classe
+        <code>erreur</code>
+      </li>
+      <li>
+        Le statut de la nouvelle ligne est calculé comme les autres — saisir
+        <code>3</code> doit donner <code>Bientôt dû</code>, <code>-4</code> doit
+        donner <code>En retard</code>
+      </li>
+    </ol>
+
+    <h3>Quand la saisie est incomplète</h3>
+
+    <ol class="criteres" start="9">
+      <li>
+        Si <strong>l'un des trois champs au moins</strong> est vide, rien n'est
+        ajouté : ni aux données, ni au tableau, et le résumé ne bouge pas
+      </li>
+      <li>
+        Le message affiche <code>Les trois champs sont obligatoires.</code> et porte
+        la classe <code>erreur</code>. Les champs déjà remplis
+        <strong>ne sont pas vidés</strong>
+      </li>
+      <li>
+        Un champ contenant <strong>seulement des espaces</strong> compte comme vide
+      </li>
+      <li>
+        Après un refus, un ajout correct <strong>enlève</strong> la classe
+        <code>erreur</code>
+      </li>
+    </ol>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres" start="13">
+      <li>
+        La console affiche, à chaque moment, la ligne attendue :
+        <ul>
+          <li>
+            <strong>après chaque redessin</strong> — <code>Tableau :</code> le nombre
+            de lignes, <code>ligne(s) ·</code> le nombre de retards,
+            <code>en retard</code>
+          </li>
+          <li>
+            <strong>à chaque ajout</strong> — <code>Ajouté :</code> le livre,
+            <code>→</code> le total, <code>emprunt(s)</code>
+          </li>
+          <li>
+            <strong>à chaque refus</strong> — <code>Refusé : un champ est vide</code>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Rechargez. <strong>Avant toute action</strong>, la console affiche exactement
+      cette ligne :
+    </p>
+
+<pre><code>Tableau : 5 ligne(s) · 2 en retard</code></pre>
+
+    <p>
+      Ajoutez ensuite <code>Solaris</code> / <code>Amina</code> / <code>3</code>,
+      puis envoyez avec les <strong>trois champs vides</strong>, puis ajoutez
+      <code>  Ubik  </code> / <code>  Tomas  </code> / <code>-4</code>
+      <strong>avec les espaces</strong>. La console doit afficher, à la suite :
+    </p>
+
+<pre><code>Tableau : 6 ligne(s) · 2 en retard
+Ajouté : Solaris → 6 emprunt(s)
+Refusé : un champ est vide
+Tableau : 7 ligne(s) · 3 en retard
+Ajouté : Ubik → 7 emprunt(s)</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La ligne <code>Tableau :</code> précède celle de l'ajout.</strong>
+        C'est normal : on redessine d'abord, on annonce ensuite. Si l'ordre est
+        inversé chez vous, ce n'est pas une erreur — seuls les critères comptent.
+      </p>
+    </div>
+
+    <p>Et le tableau doit ressembler à ceci :</p>
+
+    <table>
+      <tr><th>Livre</th><th>Jours</th><th>Statut attendu</th><th>Couleur</th></tr>
+      <tr><td>Dune</td><td>21</td><td>En cours</td><td>vert</td></tr>
+      <tr><td>Fondation</td><td>5</td><td>Bientôt dû</td><td>orange</td></tr>
+      <tr><td>Les Fourmis</td><td>14</td><td>En cours</td><td>vert</td></tr>
+      <tr><td>Le Nom du vent</td><td>-3</td><td>En retard</td><td>rouge</td></tr>
+      <tr><td>Chroniques martiennes</td><td>-12</td><td>En retard</td><td>rouge</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Testez les frontières</strong>, c'est là que les erreurs se cachent.
+        Ajoutez un emprunt avec <code>0</code> jour, puis un avec <code>7</code>,
+        puis un avec <code>8</code> :
+      </p>
+<pre><code>0 → Bientôt dû   (zéro n'est pas négatif)
+7 → Bientôt dû   (le 7 est inclus)
+8 → En cours</code></pre>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — ajouter au tableau sans toucher aux données</strong></p>
+      <p>Une fois l'exercice terminé, essayez volontairement ceci :</p>
+      <ol>
+        <li>
+          Dans votre gestionnaire de formulaire, remplacez le
+          <code>push</code> + <code>afficher()</code> par un appel direct à votre
+          fonction qui fabrique une ligne.
+        </li>
+        <li>
+          Enregistrez, rechargez, ajoutez un emprunt : il apparaît. Puis
+          <strong>ajoutez-en un second</strong>.
+        </li>
+        <li>
+          <strong>Provoquez ensuite un redessin</strong> : envoyez le formulaire
+          avec un champ vide ne suffit pas — remettez le <code>push</code> et
+          rechargez, ou appelez <code>afficher()</code> depuis la console.
+        </li>
+      </ol>
+      <p>
+        Les deux lignes s'ajoutent bien — mais regardez le <strong>résumé</strong> :
+        il reste bloqué sur <code>5 emprunt(s) · 2 en retard</code>, et la console
+        annonce <code>→ 5 emprunt(s)</code> à chaque fois. La page montre sept lignes,
+        les données n'en connaissent que cinq.
+      </p>
+      <p>
+        <strong>Au redessin, vos deux lignes disparaissent d'un coup :</strong> le
+        tableau est reconstruit depuis les données, qui ne les ont jamais vues.
+      </p>
+      <p>Remettez ensuite le <code>push</code>.</p>
+    </div>
+
+    <h2>🎁 Bonus — les données viennent d'un serveur</h2>
+
+    <div class="objectif">
+      <p>
+        <strong>Uniquement si le reste fonctionne.</strong> Chargez cinq lecteurs
+        depuis <code>https://dummyjson.com/users?limit=5</code> et
+        ajoutez-les au registre.
+      </p>
+      <p>
+        L'API rend des <em>utilisateurs</em>, pas des emprunts : à vous de traduire
+        <code>firstName</code> vers <code>lecteur</code>, et d'inventer un livre et un
+        nombre de jours. Le cours §7 montre la forme de <code>fetch</code>.
+      </p>
+      <p>
+        ⚠️ <strong>Le bonus exige un serveur local</strong> —
+        <code>python3 -m http.server 8000</code>, puis
+        <code>http://localhost:8000</code>. En double-clic, <code>fetch</code> est
+        refusé.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les cinq emprunts s'affichent avec le bon statut et la bonne couleur</li>
+      <li>Le formulaire ajoute une ligne sans recharger la page</li>
+      <li>Une saisie incomplète est refusée, en rouge, sans rien perdre</li>
+      <li>Le résumé est toujours juste</li>
+      <li>
+        Vous savez dire pourquoi on ajoute <strong>aux données</strong> avant de
+        redessiner
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>60 à 90 minutes</strong>, bonus compris. C'est le projet le plus long,
+      et le seul sans squelette. Procédez par étapes : l'affichage d'abord, le statut
+      ensuite, le formulaire en dernier. <strong>Vérifiez après chaque étape.</strong>
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

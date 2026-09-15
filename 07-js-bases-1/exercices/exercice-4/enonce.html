@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Le jeu de devinette</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 4</p>
+  <h1 class="titre-exo">Le jeu de devinette</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Écrire un vrai petit programme, en
+      assemblant tout ce que vous savez depuis le projet 6.</p>
+      <p>
+        🎓 <strong>Exercice de synthèse : aucune notion nouvelle.</strong> Si une
+        étape vous bloque, la réponse est dans un exercice précédent — le cours vous
+        dit lequel.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-4/app.js</code>
+      </p>
+      <p>
+        La page <code>travail.html</code> reste <strong>figée</strong> : n'y touchez
+        pas.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Ce jeu vous parle de deux façons.</strong> Une
+        <strong>boîte de dialogue</strong> pour le joueur, et la
+        <strong>console</strong> pour vous, le développeur.
+      </p>
+      <p>
+        Gardez les deux sous les yeux : le nombre secret est affiché dans la console
+        <em>volontairement</em>, sans quoi vous ne pourriez pas tester vos cas.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 10 étapes</h2>
+
+    <h3>Partie 1 — les réglages</h3>
+
+    <ol class="criteres">
+      <li>
+        Créer <code>MINIMUM</code> valant <code>1</code> et <code>MAXIMUM</code>
+        valant <code>10</code>, avec le mot-clé qui interdit le changement
+      </li>
+    </ol>
+
+    <h3>Partie 2 — tirer le nombre secret</h3>
+
+    <ol class="criteres" start="2">
+      <li>
+        Écrire <code>tirerSecret()</code> — <strong>sans paramètre</strong> — qui
+        <strong>renvoie</strong> un entier au hasard de <code>MINIMUM</code> à
+        <code>MAXIMUM</code>, dans le cas où <code>MINIMUM</code> vaut 1 : reprenez
+        la formule du projet 6 en remplaçant le <code>10</code> par
+        <code>MAXIMUM</code> et le <code>1</code> par <code>MINIMUM</code>
+      </li>
+      <li>
+        Ranger dans <code>secret</code> le résultat de <code>tirerSecret()</code>
+      </li>
+      <li>
+        Afficher dans la console le texte
+        <code>[triche] le secret est :</code> puis <code>secret</code>
+      </li>
+    </ol>
+
+    <h3>Partie 3 — demander et convertir</h3>
+
+    <ol class="criteres" start="5">
+      <li>
+        Ranger dans <code>saisie</code> la réponse à la question
+        <code>Devinez un nombre entre 1 et 10</code>
+      </li>
+      <li>
+        Ranger dans <code>proposition</code> la saisie <strong>convertie en
+        nombre</strong>
+      </li>
+      <li>
+        Afficher dans la console, en une seule instruction :
+        <code>saisie :</code>, puis <code>saisie</code>, puis
+        <code>→ proposition :</code>, puis <code>proposition</code>
+      </li>
+    </ol>
+
+    <div class="attention">
+      <p>
+        <strong>L'étape 6 est le point critique du jeu.</strong>
+        <code>prompt()</code> rend du <strong>texte</strong>, le secret est un
+        <strong>nombre</strong>. Sans conversion, la comparaison de l'étape 8 serait
+        fausse <em>à tous les coups</em> — un joueur qui trouve perdrait quand même,
+        sans la moindre erreur rouge.
+      </p>
+    </div>
+
+    <h3>Partie 4 — décider</h3>
+
+    <ol class="criteres" start="8">
+      <li>
+        Écrire <code>reponse(proposition)</code> qui <strong>renvoie</strong>, dans
+        cet ordre : <code>Ce n'est pas un nombre.</code> si ce n'en est pas un,
+        <code>Gagné !</code> si c'est le secret, <code>Trop petit.</code> si c'est
+        plus petit, <code>Trop grand.</code> sinon
+      </li>
+      <li>
+        Afficher le message dans une <strong>boîte d'alerte</strong>, en appelant
+        <code>reponse(proposition)</code>
+      </li>
+      <li>
+        Afficher dans la console, en une seule instruction :
+        <code>Proposition :</code>, <code>proposition</code>,
+        <code>· Secret :</code>, <code>secret</code>, <code>· Verdict :</code>,
+        <code>reponse(proposition)</code>
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>L'ordre des cas de l'étape 8 n'est pas libre.</strong> Le test
+        « pas un nombre » doit venir <strong>en premier</strong>. Placé plus bas, il
+        ne serait jamais atteint — c'est la leçon de l'exercice 3, appliquée.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Lisez d'abord le secret dans la console, puis rechargez et répondez
+      volontairement de chaque façon. Vous devez obtenir :
+    </p>
+
+    <table>
+      <tr>
+        <th>Vous répondez</th>
+        <th><code>proposition</code> vaut</th>
+        <th>La boîte affiche</th>
+      </tr>
+      <tr>
+        <td>le bon nombre</td>
+        <td>ce nombre</td>
+        <td><code>Gagné !</code></td>
+      </tr>
+      <tr>
+        <td>un nombre plus petit</td>
+        <td>ce nombre</td>
+        <td><code>Trop petit.</code></td>
+      </tr>
+      <tr>
+        <td>un nombre plus grand</td>
+        <td>ce nombre</td>
+        <td><code>Trop grand.</code></td>
+      </tr>
+      <tr>
+        <td><code>abc</code></td>
+        <td><code>NaN</code></td>
+        <td><code>Ce n'est pas un nombre.</code></td>
+      </tr>
+      <tr>
+        <td>rien du tout, puis OK</td>
+        <td><code>0</code></td>
+        <td><code>Trop petit.</code></td>
+      </tr>
+      <tr>
+        <td><strong>Annuler</strong></td>
+        <td><code>0</code></td>
+        <td><code>Trop petit.</code></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Les deux dernières lignes surprennent — et elles sont normales.</strong>
+        Une saisie vide et une annulation donnent toutes deux <code>0</code> une fois
+        converties. Votre jeu ne peut pas les distinguer d'une vraie proposition de
+        zéro.
+      </p>
+      <p>
+        <strong>Ce n'est pas un défaut de votre code</strong>, c'est une limite de
+        cette version du jeu. La solution l'explique, et le projet 8 donnera de quoi
+        la corriger.
+      </p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Le tirage fonctionne</td>
+        <td>
+          Rechargez dix fois : le secret change, et reste toujours entre 1 et 10
+        </td>
+      </tr>
+      <tr>
+        <td>La conversion</td>
+        <td>
+          L'étape 7 montre <code>saisie : "7"</code> (avec guillemets) et
+          <code>proposition : 7</code> (sans)
+        </td>
+      </tr>
+      <tr>
+        <td>Les quatre verdicts</td>
+        <td>Les quatre premiers cas du tableau ci-dessus se comportent bien</td>
+      </tr>
+      <tr>
+        <td>Une seule écriture du tirage</td>
+        <td>
+          <code>Math.random</code> n'apparaît qu'<strong>une fois</strong>, dans
+          <code>tirerSecret</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>app.js</code> : aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — pourquoi convertir change tout</strong></p>
+      <p>
+        Sur la page de travail, ouvrez la console et tapez ces deux lignes :
+      </p>
+      <ol>
+        <li><code>"10" &lt; "9"</code> → <code>false</code></li>
+        <li><code>Number("10") &lt; 9</code> → <code>true</code></li>
+      </ol>
+      <p>
+        Deux <strong>textes</strong> se comparent caractère par caractère, comme dans
+        un dictionnaire : le <code>"1"</code> de <code>"10"</code> vient avant
+        <code>"9"</code>, et JavaScript s'arrête là. Sans conversion, votre jeu dirait
+        « trop grand » pour un 10 face à un 9.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les quatre verdicts s'affichent correctement, sans erreur rouge</li>
+      <li>
+        Vous savez expliquer pourquoi <code>Number()</code> est indispensable à
+        l'étape 6
+      </li>
+      <li>
+        Vous savez pourquoi le test « pas un nombre » doit être le premier
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>app.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 55 minutes.</strong> C'est l'exercice le plus long du projet, mais
+      aussi le plus gratifiant : à la fin, vous aurez un programme qui
+      <em>joue</em>.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

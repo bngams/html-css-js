@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programme des sorties</title>
+</head>
+<body>
+
+  <h1>Programme des sorties</h1>
+
+  <p>Les quatre prochaines randonnées du club.</p>
+
+  <table>
+    <caption>Programme des sorties 2026</caption>
+
+    <thead>
+      <tr>
+        <th scope="col">Sortie</th>
+        <th scope="col">Distance</th>
+        <th scope="col">Difficulté</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th scope="row">Pic du Midi</th>
+        <td>14 km</td>
+        <td>Difficile</td>
+      </tr>
+      <tr>
+        <th scope="row">Boucle des trois lacs</th>
+        <td>12 km</td>
+        <td>Facile</td>
+      </tr>
+      <tr>
+        <th scope="row">Crêtes de Bassiès</th>
+        <td>18 km</td>
+        <td>Difficile</td>
+      </tr>
+      <tr>
+        <th scope="row">Cascade d'Ars</th>
+        <td>9 km</td>
+        <td>Moyenne</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EXERCICE 2 — SOLUTION COMMENTÉE
+
+       Les explications sont ici, APRÈS le contenu, et jamais en tête
+       de fichier : le doctype doit occuper la première ligne, et le
+       navigateur cesse de chercher la déclaration d'encodage au-delà
+       des 1024 premiers octets.
+
+       ── Ligne par ligne ────────────────────────────────────────────
+
+       caption
+         Le titre DU TABLEAU, lié à lui. Il se place juste après
+         l'ouverture de table, avant toute ligne. Un simple h2 placé
+         au-dessus n'aurait pas ce lien : c'est la même logique que
+         figcaption pour les images (projet 1).
+
+       thead / tbody
+         Séparent la ligne d'en-tête des lignes de données. Bénéfice
+         concret : à l'impression d'un long tableau, le navigateur
+         répète le thead en haut de chaque page.
+
+       th scope="col"  (x3)
+         Ces cellules nomment les COLONNES situées en dessous.
+
+       th scope="row"  (x4)
+         Le nom de chaque sortie n'est pas une donnée comme les
+         autres : il identifie sa ligne. D'où th plutôt que td, et
+         scope="row" plutôt que scope="col".
+
+       td  (x8)
+         Les vraies données : distances et difficultés.
+
+       ── POURQUOI scope ─────────────────────────────────────────────
+
+       scope ne change rien à l'écran. Il relie chaque cellule à ses
+       en-têtes, ce qui permet à un lecteur d'écran d'annoncer
+       « Pic du Midi, Distance : 14 km » au lieu de « 14 km » seul.
+       Sans lui, l'utilisateur doit mémoriser l'ordre des colonnes.
+
+       Sept scope au total : trois de colonne, quatre de ligne.
+
+       ── SUR LES BORDURES ───────────────────────────────────────────
+
+       Ce tableau s'affiche sans aucune bordure : le HTML décrit la
+       STRUCTURE, pas l'apparence. Les traits, les fonds alternés et
+       l'espacement viendront du CSS au projet 3.
+       ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

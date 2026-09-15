@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toulouse — fiche ville</title>
+</head>
+<body>
+
+  <h1>Toulouse</h1>
+
+  <p>
+    Toulouse est la <strong>quatrième ville de France</strong> par sa population.
+    On la surnomme <em>la Ville rose</em> à cause de la brique de ses façades.
+  </p>
+
+  <h2>À voir</h2>
+
+  <ul>
+    <li>La basilique Saint-Sernin</li>
+    <li>Le Capitole</li>
+    <li>La Cité de l'espace</li>
+  </ul>
+
+  <h2 id="adresses">Bonnes adresses</h2>
+
+  <ol>
+    <li>Le Bibent, place du Capitole</li>
+    <li>Chez Émile, place Saint-Georges</li>
+    <li>Le Genty Magre, rue Genty Magre</li>
+  </ol>
+
+  <p>
+    Office de tourisme<br>
+    Donjon du Capitole, 31000 Toulouse
+  </p>
+
+  <hr>
+
+  <p>
+    <a href="https://fr.wikipedia.org/wiki/Toulouse" target="_blank" rel="noopener">Toulouse sur Wikipédia</a>
+  </p>
+
+  <p>
+    <a href="#adresses">Aller aux bonnes adresses</a>
+  </p>
+
+  <p>
+    <a href="mailto:contact@exemple.fr">Nous écrire</a>
+  </p>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EXERCICE 2 — SOLUTION COMMENTÉE
+
+       Les explications sont ici, APRÈS le contenu, et jamais en tête
+       de fichier : le doctype doit occuper la première ligne, et le
+       navigateur cesse de chercher la déclaration d'encodage au-delà
+       des 1024 premiers octets.
+
+       ── Ligne par ligne ────────────────────────────────────────────
+
+       <h1>Toulouse</h1>
+         Un seul h1 par page : le titre du contenu.
+
+       <strong> et <em>
+         strong = important (gras), em = mise en relief (italique).
+         On les préfère à <b> et <i> parce qu'ils portent un SENS,
+         que les lecteurs d'écran restituent à voix haute.
+
+       <ul> ... </ul>
+         Liste à puces : l'ordre des monuments n'a pas d'importance.
+
+       <h2 id="adresses">
+         L'attribut id donne un nom UNIQUE à cet élément. C'est lui
+         qui rend possible le lien interne plus bas. Sans id sur la
+         cible, le lien #adresses ne mènerait nulle part.
+
+       <ol> ... </ol>
+         Liste numérotée : c'est un classement, donc l'ordre compte.
+         Les numéros 1. 2. 3. sont générés par le navigateur — on ne
+         les écrit jamais à la main. Insérez un élément au milieu :
+         tout se renumérote seul.
+
+       <br>
+         Un seul paragraphe, deux lignes. C'est le bon usage de <br> :
+         le retour à la ligne fait partie du texte (une adresse).
+         Pour séparer deux idées, on écrirait deux <p>.
+
+       <hr>
+         Une séparation entre le contenu et les liens. Comme <br>,
+         elle ne se ferme pas.
+
+       target="_blank" rel="noopener"
+         Ouvre dans un nouvel onglet. rel="noopener" est la sécurité
+         qui va toujours avec : elle empêche la page ouverte d'agir
+         sur la nôtre. Écrivez-les comme une paire.
+
+       href="#adresses"
+         Le dièse signifie « dans cette page », suivi du nom de l'id
+         visé. Deux gestes sont nécessaires : marquer la cible (id),
+         puis la viser (#).
+
+       href="mailto:..."
+         Ouvre le logiciel de messagerie du visiteur. Si aucun n'est
+         configuré sur le poste, le clic ne produit rien de visible.
+
+       ── Sur la rédaction des liens ─────────────────────────────────
+
+       Le texte cliquable dit où il mène : « Toulouse sur Wikipédia »
+       et non « cliquez ici ». Les lecteurs d'écran proposent souvent
+       la liste de tous les liens d'une page — dix « cliquez ici » y
+       seraient inutilisables.
+       ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

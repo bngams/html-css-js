@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Écrire du CSS</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 1</p>
+  <h1 class="titre-exo">Écrire du CSS</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> écrire vos premières
+      règles de style, choisir les éléments à habiller, et poser des couleurs et
+      des polices.</p>
+    </div>
+
+    <h2>1 · HTML dit quoi, CSS dit comment</h2>
+
+    <p>
+      Vos deux premiers projets décrivaient la <strong>structure</strong> : ceci est un
+      titre, ceci un paragraphe, ceci un tableau. Le navigateur appliquait un style par
+      défaut — du Times noir sur fond blanc — parce qu'il fallait bien afficher
+      quelque chose.
+    </p>
+
+    <p>
+      CSS (<em>Cascading Style Sheets</em>) prend le relais : il décrit
+      l'<strong>apparence</strong>. Même page, même contenu, mais vous décidez des
+      couleurs, des tailles, des espacements et de la disposition.
+    </p>
+
+    <h2>2 · Les trois façons de lier du CSS</h2>
+
+    <p>Elles existent toutes les trois, mais une seule est recommandée.</p>
+
+    <h3>a · Dans un fichier séparé <span class="badge-ok">✅ la bonne</span></h3>
+
+    <p>Une balise dans le <code>&lt;head&gt;</code> de la page HTML :</p>
+
+<pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+
+    <p>
+      Et tout le style vit dans <code>style.css</code>. C'est ce que vous ferez dans
+      tous les exercices de ce projet.
+    </p>
+
+    <div class="astuce">
+      <p>
+        Vous connaissez déjà cette balise : <code>&lt;link&gt;</code> est
+        auto-fermante, comme <code>&lt;img&gt;</code> et <code>&lt;meta&gt;</code>
+        (projet 1). Et <code>href</code> y désigne un chemin de fichier, exactement
+        comme pour un lien.
+      </p>
+      <p>
+        <strong>Pourquoi c'est la bonne méthode :</strong> un seul fichier de style
+        pour cent pages. Vous changez une couleur à un endroit, les cent pages
+        suivent.
+      </p>
+    </div>
+
+    <h3>b · Dans une balise <code>&lt;style&gt;</code> <span class="badge-mid">⚠️ dépannage ou contrainte technique</span></h3>
+
+<pre><code>&lt;head&gt;
+  &lt;style&gt;
+    h1 { color: blue; }
+  &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+
+    <p>
+      Le style ne vaut que pour cette page. Acceptable pour un essai rapide — et
+      parfois <strong>imposé</strong> :
+    </p>
+
+    <ul>
+      <li>
+        <strong>Les e-mails HTML</strong> — beaucoup de logiciels de messagerie
+        ignorent les fichiers CSS externes ; le style doit voyager avec le message.
+      </li>
+      <li>
+        <strong>Certains CMS et outils</strong> qui ne donnent accès qu'au contenu
+        d'une page, sans possibilité d'ajouter un fichier au serveur.
+      </li>
+      <li>
+        <strong>Une page générée d'un bloc</strong> — un export, un rapport, un
+        fichier unique à envoyer par mail : tout doit tenir dans le même fichier.
+      </li>
+    </ul>
+
+    <p>
+      Ce n'est donc pas une mauvaise pratique en soi : c'est une méthode dont le
+      domaine d'emploi est étroit. Hors de ces cas, préférez le fichier séparé.
+    </p>
+
+    <h3>c · Dans l'attribut <code>style</code> <span class="badge-no">❌ à éviter</span></h3>
+
+<pre><code>&lt;h1 style="color: blue;"&gt;Titre&lt;/h1&gt;</code></pre>
+
+    <div class="attention">
+      <p>
+        Le style ne vaut que pour <em>cet</em> élément. Avec vingt titres, vous écrivez
+        vingt fois la même chose — et vous les modifiez vingt fois. C'est aussi ce qui
+        rend une page impossible à maintenir. À connaître pour le reconnaître, pas pour
+        l'utiliser.
+      </p>
+    </div>
+
+    <h2>3 · La syntaxe d'une règle</h2>
+
+    <p>Une règle CSS a toujours la même forme :</p>
+
+<pre><code>h1 {
+  color: blue;
+  font-size: 32px;
+}</code></pre>
+
+    <table>
+      <tr>
+        <th>Partie</th>
+        <th>Nom</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>h1</code></td>
+        <td>le sélecteur</td>
+        <td><strong>Quels</strong> éléments sont visés</td>
+      </tr>
+      <tr>
+        <td><code>color</code></td>
+        <td>la propriété</td>
+        <td><strong>Quoi</strong> changer</td>
+      </tr>
+      <tr>
+        <td><code>blue</code></td>
+        <td>la valeur</td>
+        <td><strong>Comment</strong></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Deux signes à ne pas confondre :</strong> les deux-points
+        <code>:</code> séparent la propriété de sa valeur, le point-virgule
+        <code>;</code> termine la déclaration. Oublier le <code>;</code> casse
+        <strong>la déclaration suivante</strong>, pas celle où il manque — d'où des
+        erreurs déroutantes.
+      </p>
+    </div>
+
+    <h3>Les commentaires CSS</h3>
+
+    <p>
+      Ils ne s'écrivent pas comme en HTML. En CSS, c'est une barre oblique et une
+      étoile :
+    </p>
+
+<pre><code>/* Ceci est un commentaire CSS */</code></pre>
+
+    <h2>4 · Les sélecteurs de base</h2>
+
+    <table>
+      <tr>
+        <th>Sélecteur</th>
+        <th>Vise</th>
+        <th>Exemple</th>
+      </tr>
+      <tr>
+        <td><code>p</code></td>
+        <td><strong>Tous</strong> les éléments de ce type</td>
+        <td><code>p { … }</code></td>
+      </tr>
+      <tr>
+        <td><code>.intro</code></td>
+        <td>Tous les éléments portant <code>class="intro"</code></td>
+        <td><code>.intro { … }</code></td>
+      </tr>
+      <tr>
+        <td><code>#menu</code></td>
+        <td>L'élément portant <code>id="menu"</code></td>
+        <td><code>#menu { … }</code></td>
+      </tr>
+    </table>
+
+    <h3>Classe ou id ?</h3>
+
+    <p>
+      Vous connaissez déjà l'<code>id</code> : un nom <strong>unique</strong> dans la
+      page (projets 1 et 2). La <strong>classe</strong> est son opposé utile : le même
+      nom peut être posé sur autant d'éléments que vous voulez.
+    </p>
+
+<pre><code>&lt;p class="intro"&gt;Premier paragraphe&lt;/p&gt;
+&lt;p class="intro"&gt;Un autre, même style&lt;/p&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>En CSS, on utilise presque toujours des classes.</strong> Styler par
+        <code>id</code> ne peut toucher qu'un seul élément, ce qui est rarement ce
+        qu'on veut. Réservez l'<code>id</code> aux liens internes et, plus tard, au
+        JavaScript.
+      </p>
+    </div>
+
+    <h3>Viser plusieurs sélecteurs à la fois</h3>
+
+<pre><code>h1, h2, h3 {
+  color: navy;
+}</code></pre>
+
+    <p>La virgule signifie « et aussi ». La règle s'applique aux trois.</p>
+
+    <h2>5 · Les couleurs</h2>
+
+    <p>Trois écritures, du plus simple au plus précis :</p>
+
+    <table>
+      <tr>
+        <th>Écriture</th>
+        <th>Exemple</th>
+        <th>Quand</th>
+      </tr>
+      <tr>
+        <td>Le nom</td>
+        <td><code>red</code>, <code>navy</code>, <code>tomato</code></td>
+        <td>Essais rapides — environ 140 noms existent</td>
+      </tr>
+      <tr>
+        <td>Hexadécimal</td>
+        <td><code>#0b6bcb</code></td>
+        <td>La plus courante en production</td>
+      </tr>
+      <tr>
+        <td><code>rgb()</code></td>
+        <td><code>rgb(11, 107, 203)</code></td>
+        <td>Quand on manipule les canaux séparément</td>
+      </tr>
+    </table>
+
+    <p>Deux propriétés à distinguer :</p>
+
+<pre><code>p {
+  color: #333;              /* la couleur du TEXTE */
+  background-color: #eee;   /* la couleur du FOND */
+}</code></pre>
+
+    <h2>6 · Les polices</h2>
+
+<pre><code>body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi plusieurs noms séparés par des virgules ?</strong> C'est une
+        liste de repli. Le navigateur essaie Georgia ; s'il ne l'a pas, Times New
+        Roman ; sinon n'importe quelle police à empattements. Terminez toujours par une
+        famille générique : <code>serif</code>, <code>sans-serif</code> ou
+        <code>monospace</code>.
+      </p>
+      <p>
+        Les noms contenant un espace se mettent entre guillemets.
+      </p>
+    </div>
+
+    <p>Trois propriétés de texte utiles dès maintenant :</p>
+
+    <table>
+      <tr>
+        <th>Propriété</th>
+        <th>Effet</th>
+      </tr>
+      <tr>
+        <td><code>font-size</code></td>
+        <td>La taille — <code>18px</code></td>
+      </tr>
+      <tr>
+        <td><code>font-weight</code></td>
+        <td>La graisse — <code>bold</code> ou <code>normal</code></td>
+      </tr>
+      <tr>
+        <td><code>text-align</code></td>
+        <td>L'alignement — <code>left</code>, <code>center</code>, <code>right</code></td>
+      </tr>
+      <tr>
+        <td><code>text-decoration</code></td>
+        <td>Le soulignement — <code>none</code> le retire (utile sur les liens, que le
+            navigateur souligne par défaut)</td>
+      </tr>
+    </table>
+
+    <h2>7 · Quand deux règles se contredisent</h2>
+
+    <p>C'est le « C » de CSS : la <strong>cascade</strong>. Deux principes suffisent ici :</p>
+
+<pre><code>p { color: blue; }
+p { color: red; }     /* gagne : elle vient après */</code></pre>
+
+    <ul>
+      <li><strong>À égalité, la dernière écrite gagne.</strong></li>
+      <li>
+        <strong>Le sélecteur le plus précis gagne</strong>, quel que soit l'ordre :
+        une classe l'emporte sur une balise, un <code>id</code> l'emporte sur une
+        classe.
+      </li>
+    </ul>
+
+    <div class="astuce">
+      <p>
+        Cela explique la panne la plus courante du débutant : « ma règle ne fait
+        rien ». Souvent, une autre règle plus précise, écrite ailleurs, l'emporte.
+        Vous verrez dans la manip de l'énoncé comment le navigateur vous le montre.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Styling_basics/What_is_CSS"
+             target="_blank" rel="noopener">MDN — Qu'est-ce que CSS ?</a>
+        </td>
+        <td>Reprend ce chapitre depuis le début, avec des exemples modifiables.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_selectors"
+             target="_blank" rel="noopener">MDN — Les sélecteurs CSS</a>
+        </td>
+        <td>La liste complète, quand les trois sélecteurs de base ne suffiront plus.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_colors/Color_values"
+             target="_blank" rel="noopener">MDN — Les valeurs de couleur</a>
+        </td>
+        <td>Toutes les écritures de couleur, y compris la transparence.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

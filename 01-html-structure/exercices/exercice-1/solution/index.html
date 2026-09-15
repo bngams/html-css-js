@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Mon premier site</title>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EXERCICE 1 — SOLUTION COMMENTÉE
+       ═══════════════════════════════════════════════════════════════
+
+       Les explications sont ici, APRÈS le <head>, et non en haut du
+       fichier. Raison : le doctype doit occuper la toute première
+       ligne (c'est le critère n°1), et le navigateur cesse de chercher
+       la déclaration d'encodage au-delà des 1024 premiers octets. Un
+       gros bloc de commentaires en tête repousserait les deux et
+       rendrait la page invalide — c'est exactement ce que le
+       validateur du W3C signale.
+
+       ── Ligne par ligne ──────────────────────────────────────────
+
+       <!DOCTYPE html>
+         Toujours en première ligne, avant tout le reste. Indique au
+         navigateur d'interpréter la page en HTML5. Sans lui, il
+         bascule dans un vieux mode de compatibilité.
+
+       <html lang="fr">
+         La balise racine : elle contient tout. L'attribut lang sert
+         aux lecteurs d'écran (prononciation), aux moteurs de
+         recherche, et au navigateur (traduction, césure des mots).
+
+       <meta charset="UTF-8">
+         À déclarer le plus tôt possible dans le head. UTF-8 couvre
+         les accents français, les emojis et presque toutes les
+         langues. Sans cette ligne, « créé » s'affiche « crÃ©Ã© ».
+
+       <title>Mon premier site</title>
+         Le seul élément du head que le visiteur perçoit : onglet du
+         navigateur, favoris, résultats de recherche.
+
+         Remarquez qu'il est DIFFÉRENT du h1 ci-dessous : « Mon premier
+         site » ici, « Ma première page » dans la page. C'est volontaire
+         et c'est le point subtil de l'exercice : title et h1 ne
+         s'affichent pas au même endroit. Comparez l'onglet du
+         navigateur et le haut de la page pour le constater.
+       ═══════════════════════════════════════════════════════════════ -->
+  <!-- Un seul <h1> par page : c'est le titre principal du contenu.
+       Les niveaux suivants (h2, h3…) servent à structurer en sous-parties. -->
+  <h1>Ma première page</h1>
+
+  <!-- Un paragraphe de texte. Les accents s'affichent correctement
+       grâce au charset déclaré plus haut. -->
+  <p>
+    Bonjour ! J'apprends à créer des pages web.
+    Ceci est le tout premier fichier HTML que j'écris à la main.
+  </p>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Coup de cœur</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="banniere">
+    <h1>Le coup de cœur du mois</h1>
+  </header>
+
+  <div class="conteneur">
+
+    <article class="fiche">
+
+      <img src="../../../assets/livre.svg"
+           alt="Couverture stylisée d'un livre ouvert sur fond bleu"
+           width="1200" height="600">
+
+      <h2>La Horde du Contrevent</h2>
+      <p class="auteur">Alain Damasio — 2004</p>
+
+      <p class="resume">
+        Vingt-trois personnes remontent un monde balayé par les vents, depuis
+        l'extrême-aval jusqu'à l'origine des bourrasques. Un roman de souffle et
+        d'endurance, où chaque personnage porte sa propre voix.
+      </p>
+
+      <p class="resume">
+        Disponible au rayon science-fiction, deux exemplaires en rayon et un
+        exemplaire audio.
+      </p>
+
+    </article>
+
+    <aside class="encadre">
+      <h2>Le saviez-vous ?</h2>
+      <p>
+        Chaque personnage du roman possède son propre signe typographique en début
+        de paragraphe — vous saurez qui parle avant même de lire son nom.
+      </p>
+    </aside>
+
+  </div>
+
+  <footer class="pied-page">
+    <p>Médiathèque des Trois Rivières — 12 rue des Peupliers, 31000 Toulouse</p>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EXERCICE 1 — SOLUTION (le HTML est identique au fichier de
+       départ : le responsive est entièrement affaire de CSS)
+
+       Une seule différence, mécanique : le chemin de l'image compte
+       TROIS remontées (../../../assets/) au lieu de deux, parce que
+       ce fichier est rangé un niveau plus bas, dans solution/.
+
+       ── LA BALISE QUI REND TOUT POSSIBLE ───────────────────────────
+
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+       Elle est dans le head depuis le projet 1, sans qu'on vous ait
+       dit à quoi elle servait. Sans elle, un téléphone fait semblant
+       d'avoir un écran de 980px puis dézoome tout : le texte devient
+       minuscule et aucune media query ne se déclenche jamais.
+
+       C'est le prérequis absolu du responsive.
+
+       ── LES ATTRIBUTS width ET height DE L'IMAGE ───────────────────
+
+       width="1200" height="600" sur la balise img ne fixent PAS sa
+       taille d'affichage : le CSS (max-width: 100%) l'emporte. Ils
+       servent à autre chose — indiquer au navigateur les proportions
+       AVANT que l'image ne soit chargée, pour qu'il réserve la place
+       et que la page ne sursaute pas pendant le chargement.
+       ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

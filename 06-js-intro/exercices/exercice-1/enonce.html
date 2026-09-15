@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — La console du navigateur</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 1</p>
+  <h1 class="titre-exo">La console du navigateur</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="bac-a-sable.html">🖥️ Bac à sable</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Ouvrir la console, y exécuter vos premières
+      instructions, et apprendre à lire ce qu'elle répond.</p>
+      <p>
+        <strong>Niveau : débutant absolu en JavaScript.</strong>
+        <strong>Prérequis :</strong> aucun. Les projets 1 à 5 portaient sur HTML et
+        CSS ; ici tout recommence de zéro.
+      </p>
+    </div>
+
+    <h2>⚠️ Cet exercice n'a pas de fichier à modifier</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Tout se passe dans la console du navigateur.</strong> Vous tapez, vous
+        appuyez sur Entrée, vous lisez la réponse. Rien n'est enregistré, rien n'est à
+        ouvrir dans VSCode.
+      </p>
+      <p>
+        C'est la façon la plus rapide de découvrir un langage — et vous ne pouvez rien
+        casser : rechargez la page, tout disparaît.
+      </p>
+    </div>
+
+    <h2>🖥️ Ouvrir la console</h2>
+
+    <ol class="criteres">
+      <li>
+        Ouvrez l'onglet <a href="bac-a-sable.html">🖥️ Bac à sable</a> — une page
+        volontairement vide, faite pour ça.
+      </li>
+      <li>
+        <code>F12</code>, ou clic droit sur la page → <em>Inspecter</em>.
+      </li>
+      <li>
+        Cliquez sur l'onglet <strong>Console</strong>, puis dans la zone de saisie en
+        bas.
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Safari</strong> demande une activation préalable :
+        <em>Réglages → Avancés → Afficher le menu Développement</em>, puis
+        <code>Cmd+Alt+C</code>.
+      </p>
+    </div>
+
+    <h2>✅ Les instructions à exécuter</h2>
+
+    <p>
+      Tapez-les <strong>une par une</strong>, en appuyant sur Entrée après chacune, et
+      lisez la réponse avant de passer à la suivante.
+    </p>
+
+    <h3>Série 1 — la calculatrice</h3>
+
+    <table>
+      <tr>
+        <th>Tapez</th>
+        <th>Réponse attendue</th>
+      </tr>
+      <tr>
+        <td><code>2 + 3</code></td>
+        <td><code>5</code></td>
+      </tr>
+      <tr>
+        <td><code>7 * 8</code></td>
+        <td><code>56</code></td>
+      </tr>
+      <tr>
+        <td><code>10 / 4</code></td>
+        <td><code>2.5</code> — remarquez le <strong>point</strong> décimal</td>
+      </tr>
+      <tr>
+        <td><code>10 % 3</code></td>
+        <td><code>1</code> — le <em>reste</em> de la division</td>
+      </tr>
+      <tr>
+        <td><code>(5 + 3) * 2</code></td>
+        <td><code>16</code> — les parenthèses fonctionnent comme en maths</td>
+      </tr>
+    </table>
+
+    <h3>Série 2 — le texte</h3>
+
+    <table>
+      <tr>
+        <th>Tapez</th>
+        <th>Réponse attendue</th>
+      </tr>
+      <tr>
+        <td><code>"Bonjour"</code></td>
+        <td><code>'Bonjour'</code> — la console peut changer le type de guillemets</td>
+      </tr>
+      <tr>
+        <td><code>"Bon" + "jour"</code></td>
+        <td><code>'Bonjour'</code> — le <code>+</code> assemble les textes</td>
+      </tr>
+      <tr>
+        <td><code>"Il est " + 14 + " h"</code></td>
+        <td><code>'Il est 14 h'</code></td>
+      </tr>
+      <tr>
+        <td><code>"3" + 4</code></td>
+        <td>
+          <code>'34'</code> — <strong>surprenant ?</strong> Le premier est du texte,
+          donc JavaScript assemble au lieu d'additionner
+        </td>
+      </tr>
+    </table>
+
+    <h3>Série 3 — les erreurs, volontairement</h3>
+
+    <div class="astuce">
+      <p>
+        <strong>Ces trois instructions produisent des erreurs, et c'est le but.</strong>
+        Apprendre à lire un message d'erreur est la compétence la plus rentable de
+        toute la journée.
+      </p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Tapez</th>
+        <th>Ce que vous devez observer</th>
+      </tr>
+      <tr>
+        <td><code>Bonjour</code> <em>(sans guillemets)</em></td>
+        <td>
+          <code>Uncaught ReferenceError: Bonjour is not defined</code><br>
+          Le navigateur a cherché une <em>variable</em> nommée Bonjour
+        </td>
+      </tr>
+      <tr>
+        <td><code>3,5 + 1</code> <em>(avec une virgule)</em></td>
+        <td>
+          <code>6</code> — pas d'erreur, mais un résultat <strong>faux</strong>.
+          La virgule n'est pas un séparateur décimal en JavaScript
+        </td>
+      </tr>
+      <tr>
+        <td><code>"Bonjour</code> <em>(guillemet non fermé)</em></td>
+        <td>
+          Une erreur de syntaxe — le texte n'est jamais refermé
+        </td>
+      </tr>
+    </table>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Les calculs</td>
+        <td>Les cinq résultats de la série 1 correspondent</td>
+      </tr>
+      <tr>
+        <td>L'assemblage de texte</td>
+        <td><code>"3" + 4</code> donne <code>'34'</code> et non <code>7</code></td>
+      </tr>
+      <tr>
+        <td>Les messages d'erreur</td>
+        <td>
+          Vous savez dire, pour chacun, <strong>ce que le navigateur a essayé de
+          faire</strong> et pourquoi il n'a pas pu
+        </td>
+      </tr>
+      <tr>
+        <td>Le séparateur décimal</td>
+        <td>
+          Vous savez que <code>3,5</code> ne vaut pas <code>3.5</code> — et pourquoi
+          c'est un piège plus dangereux qu'une erreur
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — pourquoi la virgule est plus dangereuse qu'une erreur</strong></p>
+      <ol>
+        <li>Tapez <code>3,5 + 1</code>. Résultat : <code>6</code>.</li>
+        <li>Tapez maintenant <code>3.5 + 1</code>. Résultat : <code>4.5</code>.</li>
+      </ol>
+      <p>
+        Le premier ne produit <strong>aucune erreur</strong> — juste un résultat faux,
+        silencieusement. C'est pire qu'un message rouge : rien ne vous alerte.
+      </p>
+      <p>
+        <em>Pour les curieux :</em> la virgule est un opérateur valide en JavaScript,
+        qui évalue ce qu'il y a de chaque côté et ne garde que le <strong>dernier</strong>.
+        JavaScript lit donc « évalue <code>3</code>, puis évalue <code>5 + 1</code>, et
+        garde ce dernier » — d'où le <code>6</code>. Vous n'en aurez pas besoin, mais
+        cela explique le résultat.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Vous ouvrez la console sans hésiter, sur votre navigateur</li>
+      <li>Les douze instructions ont été exécutées et leurs réponses comprises</li>
+      <li>
+        Vous savez distinguer les trois réponses possibles : une valeur,
+        <code>undefined</code>, et une erreur en rouge
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>15 à 20 minutes.</strong> C'est l'exercice le plus court du parcours :
+      il n'y a rien à écrire, seulement à essayer.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="bac-a-sable.html">Ouvrir le bac à sable →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

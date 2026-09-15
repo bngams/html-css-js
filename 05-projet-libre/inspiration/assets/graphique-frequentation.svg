@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 640 340" width="640" height="340"
+     role="img" aria-labelledby="titre desc">
+
+  <title id="titre">Visites par trimestre en 2025</title>
+  <desc id="desc">Diagramme en barres : 8 400 visites au premier trimestre, 10 100 au deuxième, 9 700 au troisième et 14 600 au quatrième.</desc>
+
+  <!-- Les styles sont EMBARQUÉS dans le SVG : ce fichier est autonome.
+       Ouvrez-le seul, insérez-le dans un document, envoyez-le par mail —
+       il gardera son apparence. Un SVG qui dépend d'un CSS externe
+       s'afficherait en noir une fois sorti de sa page. -->
+  <style>
+    .fond       { fill: #ffffff; }
+    .cadre      { fill: none; stroke: #e0e6ee; stroke-width: 1; }
+    .titre      { fill: #253044; font: 600 17px system-ui, "Segoe UI", sans-serif; }
+    .soustitre  { fill: #6b7a91; font: 13px system-ui, "Segoe UI", sans-serif; }
+    .grille     { stroke: #e6ebf1; stroke-width: 1; }
+    .axe        { stroke: #c3ccd8; stroke-width: 2; }
+    .barre      { fill: #1d6fa5; }
+    .barre-forte{ fill: #14507a; }
+    .valeur     { fill: #253044; font: 600 15px system-ui, "Segoe UI", sans-serif; text-anchor: middle; }
+    .legende    { fill: #4a5b74; font: 14px system-ui, "Segoe UI", sans-serif; text-anchor: middle; }
+    .graduation { fill: #8494aa; font: 12px system-ui, "Segoe UI", sans-serif; text-anchor: end; }
+    .source     { fill: #8494aa; font: 11px system-ui, "Segoe UI", sans-serif; }
+  </style>
+
+  <rect class="fond" x="0" y="0" width="640" height="340"/>
+  <rect class="cadre" x="0.5" y="0.5" width="639" height="339"/>
+
+  <text class="titre" x="24" y="34">Fréquentation par trimestre</text>
+  <text class="soustitre" x="24" y="54">Médiathèque des Trois Rivières — 2025</text>
+
+  <!-- Graduations horizontales -->
+  <g>
+    <line class="grille" x1="90" y1="250" x2="616" y2="250"/>
+    <line class="grille" x1="90" y1="184" x2="616" y2="184"/>
+    <line class="grille" x1="90" y1="118" x2="616" y2="118"/>
+    <line class="grille" x1="90" y1="92"  x2="616" y2="92"/>
+    <text class="graduation" x="78" y="255">0</text>
+    <text class="graduation" x="78" y="189">5 000</text>
+    <text class="graduation" x="78" y="123">10 000</text>
+    <text class="graduation" x="78" y="97">15 000</text>
+  </g>
+
+  <!-- Axe des abscisses -->
+  <line class="axe" x1="90" y1="250" x2="616" y2="250"/>
+
+  <!-- Les quatre barres.
+       Échelle : 5 000 visites = 66 px de hauteur.
+       T1  8 400 → 111 px   ·  T2 10 100 → 133 px
+       T3  9 700 → 128 px   ·  T4 14 600 → 193 px -->
+  <g>
+    <rect class="barre"       x="120" y="139" width="86" height="111"/>
+    <rect class="barre"       x="252" y="117" width="86" height="133"/>
+    <rect class="barre"       x="384" y="122" width="86" height="128"/>
+    <rect class="barre-forte" x="516" y="57"  width="86" height="193"/>
+  </g>
+
+  <!-- Valeurs au-dessus des barres -->
+  <g>
+    <text class="valeur" x="163" y="131">8 400</text>
+    <text class="valeur" x="295" y="109">10 100</text>
+    <text class="valeur" x="427" y="114">9 700</text>
+    <text class="valeur" x="559" y="49">14 600</text>
+  </g>
+
+  <!-- Légendes sous l'axe -->
+  <g>
+    <text class="legende" x="163" y="272">T1</text>
+    <text class="legende" x="295" y="272">T2</text>
+    <text class="legende" x="427" y="272">T3</text>
+    <text class="legende" x="559" y="272">T4</text>
+  </g>
+
+  <text class="source" x="24" y="312">Le pic du 4ᵉ trimestre correspond à l'ouverture du studio multimédia, en octobre.</text>
+  <text class="source" x="24" y="328">Source : rapport d'activité 2025 — données d'exemple à usage pédagogique.</text>
+
+</svg>

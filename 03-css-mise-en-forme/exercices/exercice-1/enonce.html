@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Écrire du CSS</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 1</p>
+  <h1 class="titre-exo">Écrire du CSS</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Habiller la page d'une médiathèque : polices,
+      couleurs, alignements. Vos premières règles CSS.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> les projets 1
+        et 2. Vous savez lire une page HTML et reconnaître ses balises, ses classes et
+        ses id.
+      </p>
+    </div>
+
+    <h2>📄 Les fichiers — attention, ça change</h2>
+
+    <div class="attention">
+      <p>
+        <strong>À partir de ce projet, vous travaillez avec deux fichiers</strong> —
+        et ce n'est pas le même qu'avant que vous modifiez :
+      </p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>travail.html</code></td>
+        <td>🔒 <strong>Fourni et figé</strong> — la page à habiller. N'y touchez pas.
+            C'est elle que vous rechargez dans le navigateur</td>
+      </tr>
+      <tr>
+        <td><code>style.css</code></td>
+        <td>👉 <strong>LE FICHIER QUE VOUS MODIFIEZ</strong> — vos règles</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi cette séparation ?</strong> C'est le principe fondateur du
+        web : le HTML dit <em>ce que les choses sont</em>, le CSS dit <em>à quoi elles
+        ressemblent</em>. Un seul fichier de style peut habiller cent pages — changez
+        une couleur à un endroit, les cent pages suivent.
+      </p>
+      <p>
+        Vous rouvrirez le HTML à l'<strong>exercice 4</strong>, pour y poser vos
+        propres points d'accroche.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🔁 La boucle de travail</strong></p>
+      <ol>
+        <li>j'écris ma règle dans <code>style.css</code></li>
+        <li>j'<strong>enregistre</strong> — <code>Ctrl+S</code> / <code>Cmd+S</code></li>
+        <li>je recharge <strong><code>travail.html</code></strong> dans le navigateur — <code>Ctrl+R</code> / <code>Cmd+R</code></li>
+        <li>je regarde ce qui a changé</li>
+      </ol>
+      <p>
+        Le plus confortable : VSCode d'un côté avec les deux fichiers ouverts, le
+        navigateur de l'autre sur <code>travail.html</code>.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <p>Dans <code>style.css</code>, écrivez sept règles :</p>
+
+    <ol class="criteres">
+      <li>
+        <strong><code>body</code></strong> — police sans empattements avec au moins un
+        repli, taille 18px, texte <code>#333</code>, fond <code>#f7f7f5</code>
+      </li>
+      <li><strong><code>h1</code></strong> — couleur <code>#14457b</code></li>
+      <li><strong><code>h2</code></strong> — couleur <code>#0b6bcb</code>, texte centré</li>
+      <li>
+        <strong>la classe <code>intro</code></strong> — texte en gras, couleur
+        <code>#1c2024</code>
+      </li>
+      <li>
+        <strong>l'id <code>presentation</code></strong> — fond blanc <code>#fff</code>
+      </li>
+      <li>
+        <strong><code>a</code></strong> — sans soulignement, couleur <code>#0b6bcb</code>
+      </li>
+      <li>
+        <strong><code>footer</code></strong> — texte centré, taille 14px, couleur
+        <code>#6b7280</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>La police</td>
+        <td>Le texte n'est plus en Times : les lettres n'ont plus de petits
+            empattements aux extrémités</td>
+      </tr>
+      <tr>
+        <td>Les deux paragraphes <code>intro</code></td>
+        <td><strong>Les deux</strong> sont en gras — celui de « Bienvenue » et celui de
+            « Nos nouveautés ». Une classe vise tous les éléments qui la portent</td>
+      </tr>
+      <tr>
+        <td>Le bloc <code>presentation</code></td>
+        <td><strong>Seul</strong> le bloc « Bienvenue » a un fond blanc. Celui des
+            nouveautés garde le fond de la page : un id ne vise qu'un élément</td>
+      </tr>
+      <tr>
+        <td>Les liens</td>
+        <td>Le soulignement a disparu et ils sont bleus</td>
+      </tr>
+      <tr>
+        <td>Les titres <code>h2</code></td>
+        <td>« Bienvenue » et « Nos nouveautés » sont centrés</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — quand une règle « ne fait rien »</strong></p>
+      <p>
+        C'est la panne n°1 du débutant. Le navigateur sait vous dire pourquoi.
+      </p>
+      <ol>
+        <li>
+          Dans <code>style.css</code>, ajoutez volontairement une règle fautive :
+          <code>h3 { color: red; }</code> — or la page ne contient
+          <strong>aucun</strong> <code>h3</code>.
+        </li>
+        <li>Enregistrez, rechargez : rien ne se passe, évidemment.</li>
+        <li>
+          Clic droit sur le titre « Bienvenue » → <em>Inspecter</em>. Dans le panneau
+          des styles, vous voyez <strong>toutes les règles qui s'appliquent</strong> à
+          l'élément sélectionné — et votre <code>h3</code> n'y figure pas.
+        </li>
+        <li>
+          Cliquez maintenant sur un paragraphe <code>intro</code> : vous y verrez
+          votre règle <code>.intro</code> listée, avec le nom du fichier et le numéro
+          de ligne.
+        </li>
+      </ol>
+      <p>
+        <strong>Retenez ce panneau</strong> : quand une règle semble ignorée, il vous
+        dira si elle n'est pas lue du tout (sélecteur qui ne vise rien) ou si elle est
+        écrasée par une autre — elle apparaît alors <s>barrée</s>.
+      </p>
+      <p><strong>Supprimez la règle <code>h3</code></strong> avant de continuer.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>
+        Dans <code>style.css</code>, <code>Ctrl+F</code> sur <code>TODO</code> : aucun
+        résultat
+      </li>
+      <li>Les cinq points du tableau de vérification sont constatés à l'écran</li>
+      <li>
+        Déposez <code>style.css</code> sur le
+        <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload"
+           target="_blank" rel="noopener">validateur CSS du W3C</a> : aucune erreur.
+        Il repère notamment les points-virgules manquants
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>30 à 40 minutes.</strong> Les deux premières règles demandent un effort ;
+      les cinq suivantes s'enchaînent vite, elles suivent le même moule.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page à habiller →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

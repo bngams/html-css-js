@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Images et contenus embarqués</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 3</p>
+  <h1 class="titre-exo">Images et contenus embarqués</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> insérer dans une page ce
+      qu'on ne tape pas au clavier — des images, un dessin, une vidéo, une carte, un
+      document.</p>
+      <p>
+        Toutes ces balises ont un point commun : elles <em>pointent vers un fichier</em>.
+        La notion de <strong>chemin</strong> devient donc centrale — c'est par elle qu'on
+        commence.
+      </p>
+    </div>
+
+    <h2>1 · Les chemins : dire où se trouve un fichier</h2>
+
+    <p>
+      Jusqu'ici vos pages se suffisaient à elles-mêmes. Dès qu'on insère une image, il
+      faut indiquer <strong>où elle est rangée</strong> par rapport à la page qui
+      l'affiche.
+    </p>
+
+    <p>Imaginons ce rangement :</p>
+
+<pre><code>exercice-3/
+├── travail.html        ← votre page
+└── images/
+    └── photo.svg       ← l'image</code></pre>
+
+    <table>
+      <tr>
+        <th>Écriture</th>
+        <th>Sens</th>
+      </tr>
+      <tr>
+        <td><code>photo.svg</code></td>
+        <td>Dans le <strong>même dossier</strong> que la page</td>
+      </tr>
+      <tr>
+        <td><code>images/photo.svg</code></td>
+        <td><strong>Descendre</strong> dans le sous-dossier <code>images</code></td>
+      </tr>
+      <tr>
+        <td><code>../photo.svg</code></td>
+        <td><strong>Remonter</strong> d'un dossier (deux points)</td>
+      </tr>
+      <tr>
+        <td><code>../../assets/photo.svg</code></td>
+        <td>Remonter <strong>deux fois</strong>, puis descendre dans <code>assets</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <code>../</code> se lit « le dossier au-dessus ». On peut l'enchaîner autant de
+        fois qu'il le faut. C'est l'écriture que vous utiliserez dans cet exercice, car
+        les images sont rangées dans un dossier <code>assets/</code> commun à tout le
+        projet — pas à côté de votre page.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Un chemin faux ne déclenche aucun message d'erreur.</strong> L'image ne
+        s'affiche simplement pas. C'est la première chose à vérifier quand une image
+        reste invisible — bien avant de soupçonner le fichier lui-même.
+      </p>
+    </div>
+
+    <h2>2 · Les images — <code>&lt;img&gt;</code></h2>
+
+    <p>
+      Une balise auto-fermante (elle n'entoure rien), avec <strong>deux attributs
+      obligatoires</strong> :
+    </p>
+
+<pre><code>&lt;img src="../../assets/photo.svg" alt="Un paysage de collines vertes"&gt;</code></pre>
+
+    <table>
+      <tr>
+        <th>Attribut</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>src</code></td>
+        <td><em>source</em> : le chemin du fichier image</td>
+      </tr>
+      <tr>
+        <td><code>alt</code></td>
+        <td><em>alternative</em> : le texte qui remplace l'image</td>
+      </tr>
+    </table>
+
+    <h3>Pourquoi <code>alt</code> n'est pas optionnel</h3>
+
+    <p>Ce texte sert dans trois situations, et deux d'entre elles sont quotidiennes :</p>
+
+    <ul>
+      <li>l'image ne charge pas (chemin erroné, fichier absent, connexion coupée) — le texte s'affiche à la place ;</li>
+      <li>une personne aveugle visite la page — son lecteur d'écran lit ce texte à voix haute ;</li>
+      <li>un moteur de recherche indexe la page — il ne « voit » que ce texte.</li>
+    </ul>
+
+    <div class="astuce">
+      <p>
+        <strong>Comment l'écrire :</strong> décrivez ce que l'image <em>montre</em>, en
+        une courte phrase. Ne commencez pas par « image de » — le lecteur d'écran
+        annonce déjà qu'il s'agit d'une image.
+      </p>
+      <p>
+        ✅ <code>alt="Un paysage de collines vertes sous un soleil jaune"</code><br>
+        ❌ <code>alt="photo"</code> · ❌ <code>alt="image de paysage"</code> · ❌ <code>alt="IMG_4523.jpg"</code>
+      </p>
+    </div>
+
+    <h2>3 · Une image avec sa légende — <code>&lt;figure&gt;</code></h2>
+
+    <p>
+      Quand une image s'accompagne d'une légende <em>visible</em>, on relie les deux
+      explicitement :
+    </p>
+
+<pre><code>&lt;figure&gt;
+  &lt;img src="../../assets/photo.svg" alt="Un paysage de collines vertes"&gt;
+  &lt;figcaption&gt;Illustration d'exemple, dessinée en SVG.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong><code>alt</code> et <code>figcaption</code> ne font pas double emploi.</strong>
+        <code>alt</code> <em>décrit</em> l'image pour qui ne la voit pas ;
+        <code>figcaption</code> la <em>commente</em> pour tout le monde. Une légende qui
+        se contente de répéter l'alt n'apporte rien.
+      </p>
+    </div>
+
+    <h2>4 · Un dessin dans la page — <code>&lt;svg&gt;</code></h2>
+
+    <p>
+      Un SVG n'est pas une photo : c'est un dessin <strong>décrit par des formes</strong>
+      (cercles, rectangles, traits). Conséquence pratique : il reste net à n'importe
+      quelle taille, là où une photo agrandie devient floue.
+    </p>
+
+    <p>Il peut s'écrire directement dans le HTML, sans fichier séparé :</p>
+
+<pre><code>&lt;svg width="120" height="120" viewBox="0 0 120 120"
+     role="img" aria-label="Un cercle bleu"&gt;
+  &lt;circle cx="60" cy="60" r="50" fill="#0b6bcb" /&gt;
+&lt;/svg&gt;</code></pre>
+
+    <table>
+      <tr>
+        <th>Ce qu'on écrit</th>
+        <th>Ce que ça veut dire</th>
+      </tr>
+      <tr>
+        <td><code>cx</code> · <code>cy</code></td>
+        <td>La position du centre du cercle (x = horizontal, y = vertical)</td>
+      </tr>
+      <tr>
+        <td><code>r</code></td>
+        <td>Le rayon</td>
+      </tr>
+      <tr>
+        <td><code>fill</code></td>
+        <td>La couleur de remplissage</td>
+      </tr>
+      <tr>
+        <td><code>role</code> + <code>aria-label</code></td>
+        <td>Jouent ici le rôle de l'<code>alt</code> d'une image</td>
+      </tr>
+    </table>
+
+    <h2>5 · Une vidéo — <code>&lt;video&gt;</code></h2>
+
+<pre><code>&lt;video src="film.mp4" controls width="400"&gt;
+  Votre navigateur ne sait pas lire les vidéos.
+&lt;/video&gt;</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong><code>controls</code> s'écrit seul</strong>, sans <code>=</code> ni
+        valeur. C'est un <em>attribut booléen</em> : sa seule présence suffit. Sans lui,
+        aucun bouton lecture/pause n'apparaît et le visiteur ne peut rien faire.
+      </p>
+    </div>
+
+    <p>
+      Le texte placé <em>entre</em> <code>&lt;video&gt;</code> et
+      <code>&lt;/video&gt;</code> ne s'affiche que si le navigateur ne sait pas lire la
+      vidéo. C'est un filet de sécurité, pas une légende.
+    </p>
+
+    <h2>6 · Une page dans la page — <code>&lt;iframe&gt;</code></h2>
+
+    <p>
+      Une <em>iframe</em> affiche une <strong>autre page web</strong> à l'intérieur de
+      la vôtre. C'est ce qu'utilisent les cartes, les vidéos YouTube, les lecteurs de
+      musique embarqués.
+    </p>
+
+<pre><code>&lt;iframe src="https://exemple.fr/carte"
+        width="600" height="300"
+        title="Carte du centre-ville"&gt;&lt;/iframe&gt;</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong><code>width</code> et <code>height</code> s'écrivent en nombres
+        simples</strong>, sans unité : <code>width="600"</code> signifie 600 pixels.
+        Écrire <code>width="100%"</code> est une erreur que le validateur du W3C
+        signale — les pourcentages relèvent du CSS, que vous verrez au projet 3.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>L'attribut <code>title</code> est important ici</strong> — et ce n'est
+        pas le même que le <code>&lt;title&gt;</code> de la page. Sans lui, une personne
+        utilisant un lecteur d'écran entend seulement « cadre », sans savoir ce qu'il
+        contient.
+      </p>
+    </div>
+
+    <h2>7 · Un document — un simple lien</h2>
+
+    <p>
+      Un PDF ne demande aucune balise particulière : c'est un lien, comme ceux de
+      l'exercice 2. Le navigateur l'ouvre dans sa visionneuse intégrée.
+    </p>
+
+<pre><code>&lt;a href="../../assets/programme.pdf" target="_blank" rel="noopener"&gt;
+  Le programme (PDF)
+&lt;/a&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Signalez le format dans le texte du lien</strong> — « (PDF) ». Le
+        visiteur sait ainsi à quoi s'attendre avant de cliquer : un document qui
+        s'ouvre dans une visionneuse, pas une page web.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Structuring_content/HTML_images"
+             target="_blank" rel="noopener">MDN — Les images en HTML</a>
+        </td>
+        <td>Reprend <code>img</code>, <code>alt</code> et <code>figure</code>, avec des exercices.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Structuring_content/HTML_video_and_audio"
+             target="_blank" rel="noopener">MDN — Vidéo et audio</a>
+        </td>
+        <td>Va plus loin : les sous-titres, et les formats selon les navigateurs.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Reference/Elements/iframe"
+             target="_blank" rel="noopener">MDN — L'élément iframe</a>
+        </td>
+        <td>La référence complète, y compris les questions de sécurité.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

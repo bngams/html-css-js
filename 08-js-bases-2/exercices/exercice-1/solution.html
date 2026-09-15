@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Des listes et des boucles</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 1</p>
+  <h1 class="titre-exo">Des listes et des boucles</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous écrit vos deux boucles avant de venir ici ?</strong>
+      Une boucle se retient par les doigts, pas par la lecture. Si vous n'avez pas
+      essayé, retournez à la <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const fruits = ["Pomme", "Banane", "Cerise", "Mangue", "Poire"];
+
+console.log("Nombre de fruits :", fruits.length);
+console.log("3e fruit :", fruits[2]);
+console.log("Dernier :", fruits[fruits.length - 1]);
+console.log("Case 5 :", fruits[5]);
+
+for (let i = 0; i &lt; fruits.length; i++) {
+  console.log("→", i, fruits[i]);
+}
+
+for (const fruit of fruits) {
+  console.log("·", fruit);
+}
+
+fruits.push("Kiwi");
+
+console.log("Après ajout :", fruits.length);
+
+const listeTexte = fruits.join(" - ");
+
+console.log("Liste :", listeTexte);</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Huit instructions, seize lignes</h3>
+
+    <div class="astuce">
+      <p>
+        C'est <strong>la</strong> découverte de cet exercice. Vous avez écrit huit
+        <code>console.log</code>, la console en affiche seize — parce que deux
+        d'entre eux sont <em>dans</em> une boucle et s'exécutent cinq fois chacun.
+      </p>
+      <p>
+        <strong>Une boucle, c'est une instruction écrite une fois et exécutée
+        autant de fois qu'il le faut.</strong> Avec cinquante fruits, votre code
+        n'aurait pas une ligne de plus.
+      </p>
+    </div>
+
+    <h3>2 · Zéro, et <code>length - 1</code></h3>
+
+    <table>
+      <tr><th>Expression</th><th>Valeur</th></tr>
+      <tr><td><code>fruits[0]</code></td><td><code>"Pomme"</code> — la première case</td></tr>
+      <tr><td><code>fruits[2]</code></td><td><code>"Cerise"</code> — le <em>troisième</em> fruit</td></tr>
+      <tr><td><code>fruits.length</code></td><td><code>5</code></td></tr>
+      <tr><td><code>fruits[fruits.length - 1]</code></td><td><code>"Poire"</code> — la dernière</td></tr>
+      <tr><td><code>fruits[5]</code></td><td><code>undefined</code> — aucune erreur</td></tr>
+    </table>
+
+    <p>
+      Écrire <code>fruits[4]</code> à l'étape 3 aurait « marché »… jusqu'à l'étape 7.
+      Après le <code>push</code>, la dernière case devient la 5 —
+      <strong><code>length - 1</code> reste juste, un nombre en dur devient
+      faux</strong>.
+    </p>
+
+    <h3>3 · Le piège du <code>&lt;=</code></h3>
+
+    <div class="attention">
+      <p>
+        Avec <code>i &lt;= fruits.length</code>, la boucle fait
+        <strong>six tours</strong> au lieu de cinq, et la dernière ligne affiche :
+      </p>
+<pre><code>→ 5 undefined</code></pre>
+      <p>
+        Aucune erreur rouge. JavaScript répond « rien » pour une case absente et
+        continue. C'est le genre de défaut qui traverse une page entière sans être
+        vu — <strong>toujours <code>i &lt; length</code></strong>.
+      </p>
+      <p>
+        <code>for…of</code> n'a pas ce problème : sans index, pas de borne à rater.
+        C'est une raison de le préférer quand le numéro ne sert à rien.
+      </p>
+    </div>
+
+    <h3>4 · <code>const</code> protège la boîte, pas son contenu</h3>
+
+<pre><code>fruits.push("Kiwi");         ✅ autorisé
+fruits = ["Autre chose"];    ✋ TypeError: Assignment to constant variable.</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>const</code> interdit de <strong>remplacer</strong> le tableau, pas d'y
+        ajouter des cases. C'est pour cela qu'on déclare presque toujours un tableau
+        avec <code>const</code>, même quand on compte le modifier.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Une ligne <code>undefined</code> à la fin d'une liste</td>
+        <td>
+          <code>i &lt;= length</code> au lieu de <code>i &lt; length</code> : un tour
+          de trop
+        </td>
+      </tr>
+      <tr>
+        <td>Le « 3e fruit » affiche <code>Mangue</code></td>
+        <td>
+          Vous avez écrit <code>fruits[3]</code> : les index partent de zéro
+        </td>
+      </tr>
+      <tr>
+        <td>La boucle <code>for…of</code> affiche <code>0, 1, 2…</code></td>
+        <td>
+          Vous avez écrit <code>for…in</code>, qui donne les index (et en texte) —
+          voir le cours, §6
+        </td>
+      </tr>
+      <tr>
+        <td><code>TypeError: Assignment to constant variable.</code></td>
+        <td>
+          Vous avez écrit <code>fruits = …</code> au lieu de
+          <code>fruits.push(…)</code>
+        </td>
+      </tr>
+      <tr>
+        <td>La liste finale n'a pas de séparateurs</td>
+        <td>
+          <code>join()</code> sans argument colle avec des virgules —
+          il faut <code>join(" - ")</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>SyntaxError: Unexpected token ')'</code></td>
+        <td>
+          Il manque un point-virgule : un <code>for</code> a besoin de
+          <strong>trois</strong> parties, séparées par <strong>deux</strong>
+          points-virgules
+        </td>
+      </tr>
+      <tr>
+        <td>La boucle ne s'arrête jamais, l'onglet se fige</td>
+        <td>
+          Les trois parties sont là, mais la troisième est vide
+          (<code>i &lt; length;</code>) ou fait <em>reculer</em> le compteur
+          (<code>i--</code>) : il faut <code>i++</code>.
+          <strong>Fermez l'onglet</strong> (<code>Ctrl+W</code>) — pas le navigateur
+          entier — corrigez, rouvrez
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../exercice-2/">Exercice 2 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 1 — À VOUS DE JOUER
+
+   👉 C'EST CE FICHIER QUE VOUS MODIFIEZ.
+      La page travail.html, elle, est figée : n'y touchez pas.
+
+   ── LE GESTE, pour chaque TODO ───────────────────────────────
+
+   1. EFFACEZ la ligne du TODO en entier, marqueurs compris.
+   2. ÉCRIVEZ votre règle à la place.
+   3. Enregistrez (Ctrl+S / Cmd+S), puis rechargez travail.html
+      dans le navigateur (F5).
+
+   ── LES COMMENTAIRES EN CSS ──────────────────────────────────
+
+   Attention, ils ne s'écrivent PAS comme en HTML.
+   En CSS : une barre oblique et une étoile, comme ces lignes-ci.
+
+   ── AVANT DE TERMINER ────────────────────────────────────────
+
+   Cherchez « TODO » avec Ctrl+F : il ne doit rester aucun
+   résultat.
+
+   ↩ Besoin de relire ?
+      L'énoncé et les critères : enonce.html
+      Le cours et ses exemples : cours.html
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ÉTAPE 1 — La page entière.
+   Visez la balise qui contient tout ce qui est visible (notion 4),
+   et donnez-lui :
+     - une police sans empattements, avec au moins un repli
+       (notion 6 — pensez à terminer par une famille générique)
+     - une taille de texte de 18px
+     - une couleur de texte gris foncé : #333
+     - un fond très clair : #f7f7f5                              */
+
+/* TODO: écrire la règle pour body */
+
+
+/* ÉTAPE 2 — Le titre principal.
+   Visez la balise de titre de niveau 1 et donnez-lui la couleur
+   bleu marine de votre choix, par exemple #14457b.               */
+
+/* TODO: écrire la règle pour h1 */
+
+
+/* ÉTAPE 3 — Les deux sous-titres, en une seule règle.
+   Les titres de niveau 2 doivent être bleus (#0b6bcb) et
+   centrés (notion 6).
+
+   Astuce : pour viser plusieurs sélecteurs d'un coup, séparez-les
+   par une virgule (notion 4). Ici un seul suffit, mais gardez le
+   réflexe en tête.                                               */
+
+/* TODO: écrire la règle pour h2 */
+
+
+/* ÉTAPE 4 — Les paragraphes d'introduction.
+   Dans la page, DEUX paragraphes portent class="intro".
+   Quel type de sélecteur vise une classe ? (notion 4)
+
+   Donnez-leur :
+     - le texte en gras
+     - une couleur légèrement plus foncée : #1c2024              */
+
+/* TODO: écrire la règle pour la classe intro */
+
+
+/* ÉTAPE 5 — Le bloc de présentation.
+   UN SEUL élément de la page porte id="presentation".
+   Quel type de sélecteur vise un id ? (notion 4)
+
+   Donnez-lui un fond blanc (#fff).                              */
+
+/* TODO: écrire la règle pour l'id presentation */
+
+
+/* ÉTAPE 6 — Les liens du menu.
+   Visez la balise des liens et retirez leur soulignement avec :
+       text-decoration: none;
+   puis donnez-leur la couleur #0b6bcb.                          */
+
+/* TODO: écrire la règle pour les liens */
+
+
+/* ÉTAPE 7 — Le pied de page.
+   Visez la balise du pied de page et donnez-lui :
+     - un texte centré
+     - une taille plus petite : 14px
+     - une couleur grise : #6b7280                                */
+
+/* TODO: écrire la règle pour footer */

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Les tableaux de données</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 2</p>
+  <h1 class="titre-exo">Les tableaux de données</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Construire le tableau des sorties d'un club de
+      randonnée, structuré et accessible.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> le projet 1 et
+        l'exercice 1 de ce projet.
+      </p>
+    </div>
+
+    <h2>📄 Le fichier à modifier</h2>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-2/travail.html</code>
+      </p>
+      <p>
+        Le squelette de la page et les données à saisir vous sont fournis dans les
+        commentaires. Vous construisez le tableau de toutes pièces.
+      </p>
+    </div>
+
+    <h2>📊 Les données à présenter</h2>
+
+    <p>Quatre sorties, trois informations chacune :</p>
+
+    <table>
+      <tr>
+        <th scope="col">Sortie</th>
+        <th scope="col">Distance</th>
+        <th scope="col">Difficulté</th>
+      </tr>
+      <tr>
+        <th scope="row">Pic du Midi</th>
+        <td>14 km</td>
+        <td>Difficile</td>
+      </tr>
+      <tr>
+        <th scope="row">Boucle des trois lacs</th>
+        <td>12 km</td>
+        <td>Facile</td>
+      </tr>
+      <tr>
+        <th scope="row">Crêtes de Bassiès</th>
+        <td>18 km</td>
+        <td>Difficile</td>
+      </tr>
+      <tr>
+        <th scope="row">Cascade d'Ars</th>
+        <td>9 km</td>
+        <td>Moyenne</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        Le tableau ci-dessus montre la <strong>structure</strong> attendue — y compris
+        le fait que le nom de chaque sortie soit un <strong>en-tête de ligne</strong>,
+        pas une donnée ordinaire. Son <em>apparence</em>, elle, vient du CSS de cette
+        page : la vôtre sera différente, voir l'encadré plus bas.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <ol class="criteres">
+      <li>Un <code>&lt;caption&gt;</code> intitulé « Programme des sorties 2026 »</li>
+      <li>Une section <code>&lt;thead&gt;</code> contenant la ligne d'en-tête</li>
+      <li>Trois en-têtes de colonne en <code>&lt;th scope="col"&gt;</code> : Sortie, Distance, Difficulté</li>
+      <li>Une section <code>&lt;tbody&gt;</code> contenant les quatre sorties</li>
+      <li>Le nom de chaque sortie en <code>&lt;th scope="row"&gt;</code></li>
+      <li>La distance et la difficulté en <code>&lt;td&gt;</code></li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>La forme générale</td>
+        <td>Quatre lignes de données sous une ligne d'en-tête, soit 5 lignes en tout</td>
+      </tr>
+      <tr>
+        <td>Le titre</td>
+        <td>« Programme des sorties 2026 » au-dessus du tableau, centré par défaut</td>
+      </tr>
+      <tr>
+        <td>Les en-têtes</td>
+        <td>La ligne du haut <strong>et</strong> la première colonne s'affichent en gras</td>
+      </tr>
+      <tr>
+        <td>L'alignement</td>
+        <td>Chaque ligne a exactement 3 cellules — aucune colonne décalée</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Votre tableau n'aura ni bordure ni fond</strong>, et c'est normal : les
+        traits que vous voyez dans l'exemple ci-dessus viennent du CSS de cette page.
+        Le HTML seul produit un tableau nu.
+      </p>
+      <p>
+        <strong>Vos en-têtes seront aussi centrés</strong>, alors que l'exemple les
+        montre alignés à gauche : centré est l'alignement par défaut d'un
+        <code>&lt;th&gt;</code>, et c'est encore le CSS de cette page qui le change.
+        Vous styliserez tout cela au projet 3.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — à quoi sert <code>scope</code></strong></p>
+      <ol>
+        <li>Clic droit sur votre tableau → <em>Inspecter</em>.</li>
+        <li>Ouvrez l'onglet <strong>Accessibilité</strong>.</li>
+        <li>Sélectionnez une cellule de distance, par exemple « 14 km ».</li>
+      </ol>
+      <p>
+        Le navigateur affiche les en-têtes associés à cette cellule. Avec
+        <code>scope</code>, elle est reliée à « Pic du Midi » <em>et</em> à
+        « Distance » — c'est ce que restitue un lecteur d'écran. Retirez les
+        <code>scope</code>, rechargez, et regardez ce qui disparaît.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li><code>Ctrl+F</code> sur <code>&lt;!-</code> : aucun commentaire de consigne ne subsiste</li>
+      <li><code>Ctrl+F</code> sur <code>scope</code> : vous devez en compter <strong>sept</strong> — trois colonnes et quatre lignes</li>
+      <li>
+        Le <a href="https://validator.w3.org/nu/#file" target="_blank" rel="noopener">validateur
+        du W3C</a> ne signale aucune erreur
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>25 à 35 minutes.</strong> Un tableau est répétitif : l'essentiel se joue
+      sur les trois premières lignes, le reste suit le même moule.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Commencer l'exercice →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

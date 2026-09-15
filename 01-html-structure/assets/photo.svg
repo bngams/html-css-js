@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="Un paysage stylisé : des collines vertes sous un soleil jaune">
+  <title>Paysage stylisé</title>
+
+  <!-- Ciel -->
+  <rect width="640" height="400" fill="#bfe3f7"/>
+
+  <!-- Soleil -->
+  <circle cx="510" cy="90" r="46" fill="#f5c542"/>
+
+  <!-- Collines lointaines -->
+  <path d="M0 250 Q 120 175 240 250 T 480 250 T 700 250 L 700 400 L 0 400 Z" fill="#7fb77e"/>
+
+  <!-- Collines proches -->
+  <path d="M0 305 Q 160 230 320 305 T 640 305 L 640 400 L 0 400 Z" fill="#5b9c5a"/>
+
+  <!-- Chemin -->
+  <path d="M300 400 Q 320 340 350 305 L 395 305 Q 360 350 345 400 Z" fill="#e8d9b0"/>
+</svg>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Une page qui se construit seule</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 4</p>
+  <h1 class="titre-exo">Une page qui se construit seule</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez faire ici :</strong> assembler les trois exercices
+      précédents en un seul geste — vider, construire, relire.</p>
+      <p>
+        <strong>Aucune notion nouvelle.</strong> Ce cours ne vous apprend rien : il
+        remet en ordre ce que vous savez déjà, et montre dans quel <em>ordre</em>
+        l'écrire.
+      </p>
+    </div>
+
+    <h2>1 · Le schéma complet</h2>
+
+    <p>
+      Une page pilotée par des données suit presque toujours les mêmes quatre temps :
+    </p>
+
+<pre><code>1. VIDER      retirer ce qui était écrit à la main
+2. CONSTRUIRE fabriquer un élément par donnée
+3. RELIRE     interroger la page qu'on vient d'écrire
+4. RÉSUMER    afficher une synthèse</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est le squelette de presque toute application web.</strong> Un
+        catalogue, un panier, une liste de messages : même schéma, mêmes gestes. Ce
+        que vous écrivez aujourd'hui, vous le réécrirez toute votre vie de
+        développeur.
+      </p>
+    </div>
+
+    <h2>2 · Vider — l'étape qu'on oublie</h2>
+
+    <p>
+      Une page réelle contient souvent déjà quelque chose : un exemple laissé par
+      l'intégrateur, un message d'attente, d'anciennes lignes. Si vous ne faites pas
+      le ménage, votre contenu <strong>s'ajoute</strong> au lieu de remplacer.
+    </p>
+
+<pre><code>for (const ancien of liste.querySelectorAll("li")) {
+  ancien.remove();
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Bouclez sur <code>querySelectorAll</code>, jamais sur
+        <code>.children</code>.</strong> C'est la règle de l'exercice 3, section
+        3 bis : <code>.children</code> est une liste <em>vivante</em>, qui se
+        modifie pendant qu'on la parcourt. Elle sert à compter, pas à supprimer.
+      </p>
+    </div>
+
+    <h2>3 · Construire — un élément par donnée</h2>
+
+    <p>
+      Le geste de l'exercice 3, sans changement : fabriquer, remplir, insérer — le
+      tout <strong>dans</strong> la boucle.
+    </p>
+
+<pre><code>for (const emprunt of emprunts) {
+  const li = document.createElement("li");
+  li.classList.add("emprunt");
+
+  const titre = document.createElement("span");
+  titre.textContent = emprunt.titre;
+
+  li.append(titre);
+  liste.append(li);
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Une carte porte souvent plusieurs informations.</strong> Un
+        <code>&lt;span&gt;</code> par information, chacun avec sa classe : c'est le
+        CSS qui décidera ensuite de leur place. Votre code décrit
+        <em>ce que c'est</em>, pas <em>où ça va</em>.
+      </p>
+    </div>
+
+    <h2>4 · Compter pendant qu'on construit</h2>
+
+    <p>
+      L'accumulateur du projet 8 se glisse naturellement dans la boucle de
+      construction : une seule traversée suffit pour bâtir <em>et</em> compter.
+    </p>
+
+<pre><code>let enRetard = 0;
+
+for (const emprunt of emprunts) {
+  // … construction …
+
+  if (emprunt.jours &gt; 28) {
+    li.classList.add("retard");
+    enRetard = enRetard + 1;
+  }
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Poser la classe et incrémenter au même endroit</strong> garantit que
+        le compte et l'affichage ne peuvent pas diverger. Deux boucles séparées, et
+        un jour l'une des deux oublie un cas.
+      </p>
+    </div>
+
+    <h2>5 · Relire la page qu'on vient d'écrire</h2>
+
+    <p>
+      Une fois insérés, vos éléments sont des éléments comme les autres :
+      <code>querySelectorAll</code> les retrouve, <code>textContent</code> les lit.
+    </p>
+
+<pre><code>for (const ligne of liste.querySelectorAll(".emprunt__jours")) {
+  totalJours = totalJours + Number(ligne.textContent.split(" ")[0]);
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Le texte de la page n'est pas un nombre.</strong>
+        <code>"30 jours"</code> doit être découpé avant d'être converti — c'est le
+        <code>.split(" ")[0]</code> de l'exercice 2, section 6.
+      </p>
+<pre><code>Number("30 jours")                  → NaN   ⚠️
+Number("30 jours".split(" ")[0])    → 30    ✅</code></pre>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi relire la page plutôt que les données ?</strong> Ici, les
+        deux donnent le même total — c'est d'ailleurs une bonne vérification. Mais
+        quand la page aura été modifiée <em>après</em> sa construction (projet 10),
+        seule la page dira la vérité.
+      </p>
+    </div>
+
+    <h2>6 · Résumer</h2>
+
+    <p>
+      La synthèse n'est qu'un <code>textContent</code> et un
+      <code>classList</code> de plus — ceux de l'exercice 2 :
+    </p>
+
+<pre><code>bandeau.textContent = emprunts.length + " emprunts, dont " + enRetard + " en retard";
+
+if (enRetard &gt; 0) {
+  bandeau.classList.add("alerte");
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La classe porte l'apparence, le code porte la décision.</strong> Le
+        JavaScript dit « il y a des retards » ; le CSS décide que cela s'affiche en
+        rouge. C'est la règle de l'exercice 2, section 5 — et la raison pour laquelle
+        on évite <code>.style</code>.
+      </p>
+    </div>
+
+    <h2>7 · L'ordre compte</h2>
+
+    <table>
+      <tr><th>Si vous…</th><th>Alors…</th></tr>
+      <tr>
+        <td>construisez avant de vider</td>
+        <td>le ménage efface aussi vos propres lignes</td>
+      </tr>
+      <tr>
+        <td>affichez le compte <strong>dans</strong> la boucle</td>
+        <td>vous lisez un total intermédiaire, jamais le total final</td>
+      </tr>
+      <tr>
+        <td>relisez la page avant de l'avoir construite</td>
+        <td>vous obtenez <code>0</code>, sans erreur</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Aucun de ces trois cas ne produit d'erreur rouge.</strong> Le code
+        tourne, le résultat est faux. C'est pourquoi les affichages console de
+        l'énoncé sont placés à des moments précis : ils sont là pour
+        <em>détecter</em> ces inversions.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Document_Object_Model/Introduction"
+             target="_blank" rel="noopener">MDN — Introduction au DOM</a>
+        </td>
+        <td>Le récapitulatif, maintenant que vous en avez fait le tour.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/modifying-document"
+             target="_blank" rel="noopener">javascript.info — Modifier le document</a>
+        </td>
+        <td>Le chapitre complet, à relire après ce projet.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

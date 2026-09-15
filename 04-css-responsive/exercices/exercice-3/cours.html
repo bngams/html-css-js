@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Une page entièrement adaptative</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 3</p>
+  <h1 class="titre-exo">Une page entièrement adaptative</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> assembler tout ce que vous
+      savez sur une vraie page — et deux outils de plus qui évitent beaucoup de media
+      queries.</p>
+      <p>
+        C'est le dernier exercice du projet, et le plus proche d'un site réel.
+      </p>
+    </div>
+
+    <h2>1 · Ce que vous savez déjà</h2>
+
+    <p>Trois acquis, qui suffisent à l'essentiel :</p>
+
+    <table>
+      <tr>
+        <th>Outil</th>
+        <th>Rôle</th>
+        <th>Vu en</th>
+      </tr>
+      <tr>
+        <td><code>meta viewport</code> · <code>max-width</code> · unités relatives</td>
+        <td>Faire qu'une page <strong>rétrécisse</strong> proprement</td>
+        <td>Exercice 1</td>
+      </tr>
+      <tr>
+        <td><code>@media (min-width: …)</code></td>
+        <td><strong>Réorganiser</strong> à partir d'un certain seuil</td>
+        <td>Exercice 2</td>
+      </tr>
+      <tr>
+        <td><code>flex-wrap: wrap</code> · <code>flex: 1 1 …</code></td>
+        <td>Laisser les éléments <strong>passer à la ligne seuls</strong></td>
+        <td>Projet 3</td>
+      </tr>
+    </table>
+
+    <h2>2 · Une grille qui s'adapte sans media query</h2>
+
+    <p>
+      Vous l'avez croisé au projet 3 sans qu'on en explique la portée. Voici la
+      technique complète :
+    </p>
+
+<pre><code>.grille {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.carte {
+  flex: 1 1 300px;
+}</code></pre>
+
+    <p>
+      Le navigateur place autant de cartes de 300 px qu'il peut sur la ligne, puis
+      renvoie les autres dessous. Sur 1200 px il en met trois, sur 700 px deux, sur
+      360 px une seule — <strong>sans qu'aucun seuil ait été écrit</strong>.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est le contenu qui décide, pas vous.</strong> Une media query fixe un
+        seuil arbitraire ; <code>flex-basis</code> laisse le navigateur calculer. Le
+        second s'adapte aux tailles d'écran que vous n'aviez pas prévues.
+      </p>
+      <p>
+        Réservez les media queries à ce qui ne peut pas se résoudre ainsi : un menu à
+        transformer, un élément à déplacer, une typographie à changer d'échelle.
+      </p>
+    </div>
+
+    <h2>3 · Le piège de la valeur de base</h2>
+
+    <div class="attention">
+      <p>
+        <strong>La base n'est pas un minimum.</strong> Avec <code>flex: 1 1 300px</code>
+        et <code>flex-grow</code> à 1, une carte seule sur sa ligne s'étire sur
+        <em>toute</em> la largeur disponible.
+      </p>
+      <p>
+        Quatre cartes de base 300 px dans une ligne de 1000 px donnent donc
+        <strong>trois cartes puis une seule, étirée</strong> — un résultat
+        déséquilibré. Si vous voulez deux par deux, choisissez une base telle que trois
+        ne tiennent pas.
+      </p>
+    </div>
+
+    <p>Le calcul, à faire une fois :</p>
+
+<pre><code>largeur disponible ≥ n × base + (n − 1) × gap</code></pre>
+
+    <h3>Les trois nombres de <code>flex</code></h3>
+
+    <p>
+      Vous avez toujours écrit <code>flex: 1 1 300px</code> jusqu'ici. Les deux premiers
+      nombres ne sont pas décoratifs — ils décident du comportement :
+    </p>
+
+    <table>
+      <tr>
+        <th>Écriture</th>
+        <th>Se lit</th>
+        <th>Usage</th>
+      </tr>
+      <tr>
+        <td><code>flex: 1 1 300px</code></td>
+        <td>peut grandir · peut rétrécir · part de 300 px</td>
+        <td>Des cartes qui se partagent la place</td>
+      </tr>
+      <tr>
+        <td><code>flex: 1 1 auto</code></td>
+        <td>peut grandir · peut rétrécir · part de son contenu</td>
+        <td>Une colonne qui prend <strong>toute la place restante</strong></td>
+      </tr>
+      <tr>
+        <td><code>flex: 0 0 260px</code></td>
+        <td>ne grandit pas · ne rétrécit pas · fait 260 px</td>
+        <td>Une colonne de <strong>largeur fixe</strong></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Les deux dernières formes vont souvent par paire :</strong> une colonne
+        latérale figée à <code>0 0 260px</code> et un contenu principal en
+        <code>1 1 auto</code> qui absorbe le reste. Vous les emploierez ainsi à
+        l'étape 9.
+      </p>
+    </div>
+
+    <p>
+      Pour une ligne de 860 px avec un <code>gap</code> de 16 px : une base de 400 px
+      en laisse passer deux (816 px) mais pas trois (1232 px). Une base de 250 px en
+      laisse passer trois.
+    </p>
+
+    <h2>4 · Une typographie qui s'adapte — <code>clamp()</code></h2>
+
+    <p>
+      Faire grandir un titre par paliers demande une media query par palier.
+      <code>clamp()</code> fait le travail en une ligne :
+    </p>
+
+<pre><code>h1 {
+  font-size: clamp(1.6rem, 5vw, 3rem);
+         /*      mini    idéal   maxi  */
+}</code></pre>
+
+    <table>
+      <tr>
+        <th>Valeur</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>1.6rem</code></td>
+        <td>La taille <strong>minimale</strong> — jamais en dessous</td>
+      </tr>
+      <tr>
+        <td><code>5vw</code></td>
+        <td>La taille <strong>souhaitée</strong> — ici 5 % de la largeur de la fenêtre</td>
+      </tr>
+      <tr>
+        <td><code>3rem</code></td>
+        <td>La taille <strong>maximale</strong> — jamais au-dessus</td>
+      </tr>
+    </table>
+
+    <p>
+      Le titre grandit donc <em>continûment</em> avec la fenêtre, en restant lisible
+      sur téléphone et raisonnable sur grand écran. Aucun palier, aucun saut.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>N'utilisez jamais <code>vw</code> seul</strong> pour du texte :
+        <code>font-size: 5vw</code> donne 18 px sur un téléphone de 360 px — et 96 px
+        sur un écran de 1920. C'est la valeur minimale de <code>clamp()</code> qui rend
+        la technique utilisable.
+      </p>
+    </div>
+
+    <h2>5 · Une image qui s'adapte — <code>object-fit</code></h2>
+
+    <p>
+      Vous savez empêcher une image de déborder (exercice 1). Reste un cas : lui
+      imposer une <strong>hauteur fixe</strong> sans la déformer.
+    </p>
+
+<pre><code>.banniere img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}</code></pre>
+
+    <p>
+      <code>object-fit: cover</code> demande à l'image de <strong>remplir</strong> la
+      zone en gardant ses proportions, quitte à rogner les bords. Sans lui, l'image
+      serait écrasée pour entrer dans les 200 px.
+    </p>
+
+    <h2>6 · Deux propriétés de texte utiles ici</h2>
+
+    <table>
+      <tr>
+        <th>Propriété</th>
+        <th>Effet</th>
+      </tr>
+      <tr>
+        <td><code>text-transform: uppercase</code></td>
+        <td>Affiche le texte EN MAJUSCULES, <strong>sans modifier le HTML</strong> —
+            utile pour une date ou une étiquette</td>
+      </tr>
+      <tr>
+        <td><code>font-style: italic</code></td>
+        <td>Met le texte en italique (vu au projet 4, exercice 1)</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong><code>text-transform</code> ne change que l'affichage.</strong> Le texte
+        reste écrit normalement dans le HTML : il sera copié-collé en minuscules, et lu
+        tel quel par un lecteur d'écran. C'est justement ce qu'on veut — l'inverse de
+        taper les majuscules à la main.
+      </p>
+    </div>
+
+    <h2>7 · L'ordre de travail, récapitulé</h2>
+
+    <p>
+      La méthode, du moins coûteux au plus coûteux — et dans cet ordre :
+    </p>
+
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Étape</th>
+        <th>Outils</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Poser les fondations</td>
+        <td><code>meta viewport</code>, <code>max-width</code>, <code>rem</code>,
+            <code>img { max-width: 100% }</code></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Laisser le contenu se placer seul</td>
+        <td><code>flex-wrap</code>, <code>flex-basis</code>, <code>clamp()</code></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Réorganiser ce qui résiste</td>
+        <td><code>@media (min-width: …)</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Une page bien construite a deux ou trois media queries, pas dix.</strong>
+        Si vous en accumulez, c'est presque toujours le signe qu'une largeur fixe
+        traîne quelque part, ou qu'un <code>flex-basis</code> réglerait le cas.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/CSS/clamp"
+             target="_blank" rel="noopener">MDN — clamp()</a>
+        </td>
+        <td>La fonction en détail, avec d'autres usages que la typographie.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/CSS/object-fit"
+             target="_blank" rel="noopener">MDN — object-fit</a>
+        </td>
+        <td>Les cinq valeurs possibles, illustrées côte à côte.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/CSS_layout/Grids"
+             target="_blank" rel="noopener">MDN — CSS Grid</a>
+        </td>
+        <td>L'autre système de disposition, pour aller plus loin que Flexbox.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

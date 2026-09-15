@@ -1,0 +1,174 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 3 — À VOUS DE JOUER
+
+   👉 C'EST CE FICHIER QUE VOUS MODIFIEZ.
+      La page travail.html, elle, est figée : n'y touchez pas.
+
+   ⚠️ Pour tester : REDIMENSIONNEZ la fenêtre.
+
+   ── L'ORDRE DU FICHIER (mobile-first) ────────────────────────
+
+   1. les bases et le style du petit écran
+   2. PUIS les media queries, par largeur croissante
+
+   ── LA MÉTHODE DE CE PROJET ──────────────────────────────────
+
+   Avant d'écrire une media query, demandez-vous si flex-wrap ou
+   flex-basis ne suffiraient pas (notion 2). Une page bien faite
+   en compte deux ou trois, pas dix.
+
+   ── AVANT DE TERMINER ────────────────────────────────────────
+
+   Cherchez « TODO » avec Ctrl+F : plus aucun marqueur en dehors
+   de cet en-tête.
+
+   ↩ L'énoncé : enonce.html   ·   Le cours : cours.html
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── PARTIE 1 : les bases, déjà écrites pour vous ─────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.conteneur {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.evenement {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.lateral {
+  background-color: #e8f1fb;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.pied-page {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding: 1.5rem;
+}
+
+
+/* ── PARTIE 2 : le style de base (petits écrans) ──────────────── */
+
+
+/* ÉTAPE 1 — L'image de la bannière.
+   Visez l'image DANS la bannière (sélecteur descendant) et
+   donnez-lui une hauteur fixe de 180px sans la déformer
+   (notion 5) :
+     - width: 100%
+     - height: 180px
+     - la propriété qui remplit la zone en gardant les
+       proportions, quitte à rogner les bords                    */
+
+/* TODO: écrire la règle pour .banniere img */
+
+
+/* ÉTAPE 2 — Le bandeau de texte de la bannière.
+   Sur .banniere__texte : fond #14457b, 1rem d'espace intérieur,
+   texte centré.                                                  */
+
+/* TODO: écrire la règle pour .banniere__texte */
+
+
+/* ÉTAPE 3 — Le logo et le menu.
+   Sur .logo : blanc, gras, 1.1rem, aucune marge.
+
+   Sur .menu : liens côte à côte, passage à la ligne autorisé,
+   centrés, 1rem entre eux, et 0.5rem de marge au-dessus.
+
+   Sur .menu a : blancs, sans soulignement, taille 0.95rem.       */
+
+/* TODO: écrire les trois règles (.logo, .menu, .menu a) */
+
+
+/* ÉTAPE 4 — Le titre principal, en typographie fluide.
+   Plutôt qu'une taille fixe puis des media queries, utilisez la
+   fonction du cours (notion 4) avec :
+     - un minimum de 1.6rem
+     - une valeur souhaitée de 5vw
+     - un maximum de 2.8rem
+
+   Ajoutez aussi : margin-bottom: 0.5rem.                         */
+
+/* TODO: écrire la règle pour h1 */
+
+
+/* ÉTAPE 5 — Le chapô.
+   Sur .chapo : couleur #5a6570, taille 1.1rem, et aucune marge
+   du haut.                                                       */
+
+/* TODO: écrire la règle pour .chapo */
+
+
+/* ÉTAPE 6 — La grille d'événements, SANS media query.
+   C'est le cœur de l'exercice (notion 2).
+
+   Sur .grille : display flex, passage à la ligne autorisé,
+   1rem d'espace entre les éléments.
+
+   Sur .evenement : ajoutez  flex: 1 1 300px;
+   pour que les cartes se placent seules selon la place
+   disponible.
+
+   ⚠️ Ne mettez AUCUNE media query ici : c'est flex-basis qui
+      doit faire le travail.                                      */
+
+/* TODO: écrire les règles pour .grille et .evenement */
+
+
+/* ÉTAPE 7 — La date de chaque événement.
+   Sur .date : couleur #0b6bcb, gras, taille 0.85rem, majuscules
+   (notion 6), et aucune marge.                                   */
+
+/* TODO: écrire la règle pour .date */
+
+
+/* ÉTAPE 8 — L'encadré latéral, version téléphone.
+   Sur .lateral : 1rem de marge au-dessus.
+
+   Sur petit écran, il se place naturellement SOUS le contenu
+   principal : il n'y a rien d'autre à écrire.                    */
+
+/* TODO: écrire la règle pour .lateral */
+
+
+/* ── PARTIE 3 : les enrichissements ───────────────────────────── */
+
+
+/* ÉTAPE 9 — À partir de 900px : la colonne latérale.
+   Une media query à partir de 900px, contenant :
+
+     - .disposition : display flex, 1.5rem d'espace entre les
+       deux colonnes
+     - .principal : flex: 1 1 auto   (il prend la place restante)
+     - .lateral : flex: 0 0 260px    (largeur fixe, il ne grandit
+       ni ne rétrécit) et margin-top: 0
+
+   C'est le seul endroit du fichier où une media query est
+   nécessaire : une colonne latérale ne peut pas « rétrécir »
+   jusqu'à disparaître, il faut décider d'un seuil.               */
+
+/* TODO: écrire la media query à partir de 900px */

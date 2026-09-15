@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Texte, listes et liens</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 2</p>
+  <h1 class="titre-exo">Texte, listes et liens</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a> :
+      même une tentative ratée rend cette page bien plus utile.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>&lt;h1&gt;Toulouse&lt;/h1&gt;
+
+&lt;p&gt;
+  Toulouse est la &lt;strong&gt;quatrième ville de France&lt;/strong&gt; par sa population.
+  On la surnomme &lt;em&gt;la Ville rose&lt;/em&gt; à cause de la brique de ses façades.
+&lt;/p&gt;
+
+&lt;h2&gt;À voir&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;La basilique Saint-Sernin&lt;/li&gt;
+  &lt;li&gt;Le Capitole&lt;/li&gt;
+  &lt;li&gt;La Cité de l'espace&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="adresses"&gt;Bonnes adresses&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Le Bibent, place du Capitole&lt;/li&gt;
+  &lt;li&gt;Chez Émile, place Saint-Georges&lt;/li&gt;
+  &lt;li&gt;Le Genty Magre, rue Genty Magre&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+  Office de tourisme&lt;br&gt;
+  Donjon du Capitole, 31000 Toulouse
+&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;
+  &lt;a href="https://fr.wikipedia.org/wiki/Toulouse" target="_blank" rel="noopener"&gt;Toulouse sur Wikipédia&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;a href="#adresses"&gt;Aller aux bonnes adresses&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+  &lt;a href="mailto:contact@exemple.fr"&gt;Nous écrire&lt;/a&gt;
+&lt;/p&gt;</code></pre>
+    </details>
+
+    <p>
+      Le fichier complet et commenté est dans <code>solution/index.html</code> —
+      ouvrez-le dans VSCode pour lire les explications, ou
+      <a href="solution/">affichez-le dans le navigateur</a>.
+    </p>
+
+    <h2>Les deux points qui coincent</h2>
+
+    <h3>Le lien interne : deux gestes, pas un</h3>
+
+    <p>
+      C'est l'erreur la plus fréquente de cet exercice. Un lien interne suppose
+      <strong>une cible marquée</strong> et <strong>un lien qui la vise</strong> :
+    </p>
+
+<pre><code>&lt;h2 id="adresses"&gt;Bonnes adresses&lt;/h2&gt;   ← 1. on marque la cible
+
+&lt;a href="#adresses"&gt;Aller aux bonnes adresses&lt;/a&gt;   ← 2. on la vise</code></pre>
+
+    <p>
+      Si vous n'écrivez que le lien, le clic ne fait rien : le navigateur cherche un
+      élément nommé « adresses », ne le trouve pas, et reste où il est. Aucun message
+      d'erreur — d'où la difficulté à comprendre ce qui se passe.
+    </p>
+
+    <h3>Les numéros de la liste ordonnée</h3>
+
+    <p>
+      Si vous voyez « 1. 1. » puis « 2. 2. », c'est que vous avez tapé les numéros
+      dans les <code>&lt;li&gt;</code> en plus de ceux que le navigateur ajoute.
+      Retirez les vôtres.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>Le lien interne ne fait rien au clic</td>
+        <td>L'attribut <code>id</code> manque sur le <code>&lt;h2&gt;</code> visé, ou
+            son nom ne correspond pas exactement à celui écrit après le dièse
+            (attention aux majuscules et aux accents)</td>
+      </tr>
+      <tr>
+        <td>Le lien externe ouvre le site dans le même onglet</td>
+        <td><code>target="_blank"</code> manque, ou est écrit dans la balise fermante</td>
+      </tr>
+      <tr>
+        <td>La liste affiche « 1. 1. »</td>
+        <td>Les numéros ont été tapés à la main dans les <code>&lt;li&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Les puces ou numéros n'apparaissent pas</td>
+        <td>Le texte est écrit directement dans <code>&lt;ul&gt;</code> ou
+            <code>&lt;ol&gt;</code> au lieu d'être dans des <code>&lt;li&gt;</code></td>
+      </tr>
+      <tr>
+        <td>L'adresse s'affiche sur une seule ligne</td>
+        <td><code>&lt;br&gt;</code> manque — appuyer sur Entrée dans le code ne crée
+            pas de retour à la ligne à l'écran</td>
+      </tr>
+      <tr>
+        <td>Tout le texte à partir d'un endroit a disparu</td>
+        <td>Une balise n'est pas fermée, ou un commentaire a été laissé ouvert</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui fait gagner du temps :</strong> déposez votre fichier
+        sur le <a href="https://validator.w3.org/nu/#file" target="_blank" rel="noopener">validateur
+        du W3C</a>. Il liste les erreurs avec leur numéro de ligne — bien plus rapide
+        que de chercher à l'œil une balise non fermée.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à mon code</a>
+      <a class="bouton" href="../exercice-3/">Exercice 3 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

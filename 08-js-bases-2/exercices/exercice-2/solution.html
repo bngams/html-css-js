@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Boucler jusqu'à trouver</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 2</p>
+  <h1 class="titre-exo">Boucler jusqu'à trouver</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé d'annuler en cours de partie ?</strong>
+      C'est le test le plus instructif de l'exercice. Si vous ne l'avez pas fait,
+      retournez à la <a href="travail.html">page de travail</a> : c'est en voyant la
+      boîte revenir sans fin qu'on comprend pourquoi ce test existe.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>let compte = 3;
+
+while (compte &gt; 0) {
+  console.log("Décollage dans", compte);
+  compte--;
+}
+
+console.log("Décollage !");
+
+for (let i = 0; i &lt; 10; i++) {
+  if (i === 4) break;
+  console.log("stop:", i);
+}
+
+for (let i = 0; i &lt; 5; i++) {
+  if (i === 2) continue;
+  console.log("saut:", i);
+}
+
+const MAXIMUM = 10;
+const secret = Math.floor(Math.random() * MAXIMUM) + 1;
+
+console.log("[triche] le secret est :", secret);
+
+let trouve = false;
+let essais = 0;
+
+while (trouve === false) {
+  const saisie = prompt("Votre proposition ?");
+
+  if (saisie === null) {
+    break;
+  }
+
+  essais++;
+
+  const proposition = Number(saisie);
+
+  if (isNaN(proposition)) {
+    alert("Ce n'est pas un nombre.");
+  } else if (proposition === secret) {
+    trouve = true;
+  } else if (proposition &lt; secret) {
+    alert("Trop petit.");
+  } else {
+    alert("Trop grand.");
+  }
+}
+
+console.log("Partie terminée. Essais :", essais);
+
+if (trouve === true) {
+  alert("Gagné en " + essais + (essais &gt; 1 ? " essais" : " essai") + " !");
+} else {
+  alert("Partie abandonnée.");
+}</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Le témoin qui arrête la boucle</h3>
+
+    <p>
+      <code>trouve</code> vaut <code>false</code> au départ, donc la condition
+      <code>trouve === false</code> est vraie et la boucle tourne. Une seule ligne
+      change tout :
+    </p>
+
+<pre><code>trouve = true;     ← au tour suivant, la condition est fausse</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est la réponse à la question du cours</strong> — « qu'est-ce qui,
+        dans le bloc, va rendre la condition fausse ? » Si vous ne pouvez pas
+        désigner cette ligne du doigt, votre boucle est infinie.
+      </p>
+    </div>
+
+    <h3>2 · Tester l'annulation AVANT de convertir</h3>
+
+    <div class="attention">
+      <p>
+        <strong>L'ordre des six instructions n'est pas décoratif.</strong> Le test
+        <code>saisie === null</code> doit précéder <code>Number(saisie)</code> :
+      </p>
+<pre><code>prompt annulé  →  null
+Number(null)   →  0        ← l'abandon devient un nombre valide</code></pre>
+      <p>
+        Une fois converti, l'abandon est <strong>indiscernable</strong> d'une
+        proposition de zéro. Le programme dirait « trop petit », redemanderait, le
+        joueur annulerait à nouveau… <strong>sans issue</strong>. C'est la raison
+        pour laquelle le test porte sur <code>saisie</code>, le texte brut.
+      </p>
+    </div>
+
+    <p>
+      Au projet 7, ce même <code>Number(null)</code> ne causait qu'une réponse
+      bizarre. Dans une boucle, il enferme le joueur : <strong>le même défaut change
+      de gravité selon le contexte</strong>.
+    </p>
+
+    <h3>3 · Pourquoi « Essais : 0 » à l'abandon immédiat</h3>
+
+    <table>
+      <tr><th>Vous jouez</th><th>Essais comptés</th><th>Pourquoi</th></tr>
+      <tr><td>Annuler tout de suite</td><td><code>0</code></td><td>le <code>break</code> sort avant le <code>essais++</code></td></tr>
+      <tr><td>Deux essais puis Annuler</td><td><code>2</code></td><td>deux tours complets ont eu lieu</td></tr>
+      <tr><td><code>abc</code> puis le bon nombre</td><td><code>2</code></td><td>une saisie invalide reste un essai</td></tr>
+    </table>
+
+    <p>
+      Ces trois comportements découlent de la <strong>position</strong> du
+      <code>essais++</code> : après le test d'annulation, avant la conversion. Placé
+      ailleurs, le décompte changerait.
+    </p>
+
+    <h3>4 · <code>break</code>, <code>continue</code>, et le pluriel</h3>
+
+    <table>
+      <tr><th>Écriture</th><th>Effet</th><th>Résultat</th></tr>
+      <tr><td><code>break</code></td><td>quitte la boucle</td><td><code>0, 1, 2, 3</code></td></tr>
+      <tr><td><code>continue</code></td><td>saute au tour suivant</td><td><code>0, 1, 3, 4</code></td></tr>
+    </table>
+
+    <p>
+      Et pour l'accord, l'écriture en une ligne vue au cours :
+    </p>
+
+<pre><code>essais + (essais &gt; 1 ? " essais" : " essai")</code></pre>
+
+    <div class="astuce">
+      <p>
+        C'est un <code>if…else</code> compacté : <em>condition</em> <code>?</code>
+        <em>si vrai</em> <code>:</code> <em>si faux</em>. Vous la croiserez souvent ;
+        elle ne fait rien qu'un <code>if</code> ne saurait faire.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>L'onglet se fige au chargement</td>
+        <td>
+          Le compteur de l'étape 1 ne diminue pas — la condition reste vraie pour
+          toujours
+        </td>
+      </tr>
+      <tr>
+        <td>La boîte revient sans fin quand j'annule</td>
+        <td>
+          Le test <code>saisie === null</code> manque, ou il est placé
+          <strong>après</strong> la conversion
+        </td>
+      </tr>
+      <tr>
+        <td>Le jeu s'arrête après une seule question</td>
+        <td>
+          <code>trouve</code> est passé à <code>true</code> hors du bon cas, ou la
+          boucle est un <code>if</code> et non un <code>while</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Gagné en 1 essais !</code></td>
+        <td>L'accord du pluriel manque — voir le cours, §7</td>
+      </tr>
+      <tr>
+        <td>Le compte à rebours affiche <code>0</code></td>
+        <td>
+          La condition est <code>compte &gt;= 0</code> au lieu de
+          <code>compte &gt; 0</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Valider à vide donne <code>Trop petit.</code> et compte un essai
+        </td>
+        <td>
+          <strong>Ce n'est pas un défaut.</strong> Un champ vide rend
+          <code>""</code>, qui n'est pas <code>null</code> — le test d'annulation ne
+          s'applique pas — puis <code>Number("")</code> vaut <code>0</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Décollage !</code> s'affiche trois fois</td>
+        <td>
+          La ligne est <em>dans</em> la boucle — elle doit être après l'accolade
+          fermante
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Exercice 3 — à venir ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

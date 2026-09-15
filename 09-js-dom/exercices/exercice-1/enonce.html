@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Trouver dans la page</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 1</p>
+  <h1 class="titre-exo">Trouver dans la page</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Désigner des éléments de la page depuis
+      JavaScript, lire ce qu'ils contiennent, et mettre un compteur à jour.</p>
+      <p>
+        <strong>Prérequis :</strong> le projet 6 (<code>querySelector</code>,
+        <code>textContent</code>, la balise <code>&lt;script&gt;</code> en bas) et le
+        projet 8 (<code>for…of</code>).
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        ⚠️ <strong>Le format change à partir d'ici.</strong> Plus de marqueurs
+        <code>// TODO:</code> à remplacer un par un : votre fichier est
+        <strong>presque vide</strong>.
+      </p>
+      <p>
+        Ci-dessous, un <strong>objectif</strong> et des <strong>critères
+        d'acceptation</strong> — ce que votre code doit produire. <strong>Comment</strong>
+        y arriver vous appartient. C'est déroutant cinq minutes, et c'est ainsi qu'on
+        travaille vraiment.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-1/app.js</code>
+      </p>
+      <p>
+        La page <code>travail.html</code> est <strong>figée</strong>. Elle contient un
+        titre, un compteur et cinq livres — dont trois disponibles et deux empruntés.
+      </p>
+    </div>
+
+    <h2>🗺️ Ce que contient la page</h2>
+
+    <table>
+      <tr><th>Sélecteur</th><th>Désigne</th></tr>
+      <tr><td><code>#titre-page</code></td><td>le grand titre</td></tr>
+      <tr><td><code>#compteur</code></td><td>le paragraphe sous le titre</td></tr>
+      <tr><td><code>.livre</code></td><td>les cinq livres</td></tr>
+      <tr><td><code>.livre.disponible</code></td><td>ceux qui sont disponibles</td></tr>
+      <tr><td><code>.livre__titre</code></td><td>le titre, à l'intérieur d'un livre</td></tr>
+      <tr><td><code>.livre__auteur</code></td><td>l'auteur, à l'intérieur d'un livre</td></tr>
+    </table>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <p>
+      Votre code doit produire <strong>exactement</strong> ces effets. L'ordre des
+      lignes compte.
+    </p>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres">
+      <li>
+        Le <strong>texte du titre</strong> de la page, précédé de
+        <code>Titre :</code>
+      </li>
+      <li>
+        Le titre du <strong>premier livre seulement</strong>, précédé de
+        <code>Premier livre :</code> — en utilisant la méthode qui rend
+        <strong>un seul</strong> élément
+      </li>
+      <li>
+        Le <strong>nombre total</strong> de livres, précédé de
+        <code>Nombre de livres :</code>
+      </li>
+      <li>
+        Le nombre de livres <strong>disponibles</strong>, précédé de
+        <code>Disponibles :</code>
+      </li>
+      <li>
+        Le nombre de livres de classe <code>perdu</code> — qui n'existe pas dans la
+        page — précédé de <code>Perdus :</code>, <strong>suivi</strong> de
+        <code>· est-ce null ?</code> et du résultat de la comparaison à
+        <code>null</code>
+      </li>
+      <li>
+        <strong>Une ligne par livre</strong> : <code>·</code>, son titre,
+        <code>—</code>, son auteur
+      </li>
+    </ol>
+
+    <h3>Dans la page</h3>
+
+    <ol class="criteres" start="7">
+      <li>
+        Le paragraphe <code>#compteur</code> doit afficher
+        <code>5 livres au catalogue, dont 3 disponibles</code> — avec les nombres
+        <strong>calculés</strong>, jamais écrits à la main
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 5 est le plus instructif.</strong> Il vous fait constater
+        la différence entre les deux méthodes de recherche : l'une rend
+        <code>null</code> quand elle ne trouve rien, l'autre une liste
+        <strong>vide</strong>. Ce n'est pas la même chose, et cela change la façon de
+        s'en servir.
+      </p>
+      <p>
+        <strong>Pourquoi chercher ce qui n'existe pas ?</strong> Parce que cela arrive
+        tout le temps en vrai : un catalogue vide, un filtre sans résultat, une page
+        pas encore chargée. Votre code doit tenir sans planter — et c'est
+        <code>querySelectorAll</code> qui vous le garantit.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <div class="astuce">
+      <p>
+        <strong>Décompte :</strong> avec la solution proposée, <strong>six</strong>
+        affichages produisent <strong>dix</strong> lignes — le critère 6 est une
+        boucle sur cinq livres.
+      </p>
+      <p>
+        Si votre chemin diffère, votre décompte aussi : ce sont les
+        <strong>critères d'acceptation</strong> qui font foi, pas le nombre
+        d'instructions.
+      </p>
+    </div>
+
+    <p>La console doit afficher exactement ceci :</p>
+
+<pre><code>Titre : Catalogue de la médiathèque
+Premier livre : La Horde du Contrevent
+Nombre de livres : 5
+Disponibles : 3
+Perdus : 0 · est-ce null ? false
+· La Horde du Contrevent — Alain Damasio
+· Dune — Frank Herbert
+· Fondation — Isaac Asimov
+· Le Nom du vent — Patrick Rothfuss
+· Les Fourmis — Bernard Werber</code></pre>
+
+    <p>Et le paragraphe sous le titre doit afficher :</p>
+
+<pre><code>5 livres au catalogue, dont 3 disponibles</code></pre>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Le singulier</td>
+        <td>
+          Le critère 2 donne <strong>un seul</strong> titre, alors que cinq livres
+          portent la classe
+        </td>
+      </tr>
+      <tr>
+        <td>Le sélecteur combiné</td>
+        <td>
+          <code>Disponibles : 3</code> — deux classes sur le même élément, collées
+          sans espace
+        </td>
+      </tr>
+      <tr>
+        <td><strong>La recherche vide</strong></td>
+        <td>
+          <code>Perdus : 0</code> et <code>est-ce null ? false</code> — une liste
+          vide, <strong>pas</strong> <code>null</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le compteur</td>
+        <td>
+          Il change dans la page. Le HTML affichait
+          <code>— livres au catalogue</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Rien n'est écrit en dur</td>
+        <td>
+          Ni <code>5</code> ni <code>3</code> ne figurent en clair dans votre code :
+          ils viennent de <code>.length</code>
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — une NodeList n'est pas un tableau</strong></p>
+      <p>Dans la console de la page de travail, tapez :</p>
+      <ol>
+        <li><code>const l = document.querySelectorAll(".livre")</code></li>
+        <li><code>l.length</code> → <code>5</code>, comme un tableau</li>
+        <li><code>Array.isArray(l)</code> → <code>false</code> ⚠️</li>
+        <li><code>l.map</code> → <code>undefined</code> ⚠️ la méthode n'existe pas</li>
+        <li><code>Array.from(l).map(e =&gt; e.textContent)</code> → là, ça marche</li>
+      </ol>
+      <p>
+        Elle a un <code>.length</code>, des index, un <code>.forEach</code>, et
+        <code>for…of</code> la parcourt — mais ce n'est <strong>pas</strong> un
+        tableau. Retenez-le : la surprise vient toujours au mauvais moment.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les dix lignes s'affichent, dans l'ordre, sans erreur rouge</li>
+      <li>Le compteur de la page est à jour</li>
+      <li>
+        Vous savez dire ce que rend chaque méthode quand elle ne trouve
+        <strong>rien</strong>
+      </li>
+      <li>Aucun nombre n'est écrit en dur dans votre code</li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 55 minutes.</strong> C'est le premier exercice sans marqueurs à
+      remplacer, et le premier du jour 3 : accordez-vous cinq minutes pour relire le
+      cours avant d'écrire la première ligne.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

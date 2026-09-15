@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Poser ses propres accroches</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 4</p>
+  <h1 class="titre-exo">Poser ses propres accroches</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le HTML — les accroches ajoutées</h2>
+
+    <details>
+      <summary>Afficher le HTML complet</summary>
+
+<pre><code>&lt;header class="banniere"&gt;
+  &lt;h1&gt;Nous rejoindre&lt;/h1&gt;
+  &lt;p&gt;L'inscription est gratuite pour les habitants de la commune.&lt;/p&gt;
+&lt;/header&gt;
+
+&lt;div class="conteneur"&gt;
+
+  &lt;p class="intro"&gt;…&lt;/p&gt;
+
+  &lt;div class="rangee"&gt;
+
+    &lt;article class="formule"&gt;
+      &lt;h2&gt;Individuelle&lt;/h2&gt;
+      &lt;p class="prix"&gt;12 €&lt;/p&gt;
+      &lt;p&gt;Pour une personne, valable un an.&lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;article class="formule formule--conseillee"&gt;
+      &lt;h2&gt;Famille&lt;/h2&gt;
+      &lt;p class="prix"&gt;25 €&lt;/p&gt;
+      &lt;p&gt;Jusqu'à cinq personnes du même foyer.&lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;article class="formule"&gt;
+      &lt;h2&gt;Étudiante&lt;/h2&gt;
+      &lt;p class="prix"&gt;6 €&lt;/p&gt;
+      &lt;p&gt;Sur présentation d'une carte étudiante.&lt;/p&gt;
+    &lt;/article&gt;
+
+  &lt;/div&gt;
+
+  &lt;section id="contact"&gt;…&lt;/section&gt;
+
+&lt;/div&gt;</code></pre>
+    </details>
+
+    <h2>Le CSS</h2>
+
+    <details>
+      <summary>Afficher le CSS complet</summary>
+
+<pre><code>.banniere {
+  background-color: #14457b;
+  color: #fff;
+  padding: 30px;
+  text-align: center;
+}
+
+.intro {
+  font-size: 1.1rem;
+  color: #5a6570;
+}
+
+.rangee {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.formule {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #d7dee8;
+  flex: 1 1 200px;
+  text-align: center;
+}
+
+.formule--conseillee {
+  border: 2px solid #0b6bcb;
+  background-color: #e8f1fb;
+}
+
+.prix {
+  font-size: 2rem;
+  color: #14457b;
+  font-weight: bold;
+  margin: 0;
+}
+
+#contact {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 30px;
+}</code></pre>
+    </details>
+
+    <p>
+      Les deux fichiers commentés sont dans <code>solution/</code> — et la page
+      habillée est <a href="solution/">visible ici</a>.
+    </p>
+
+    <h2>Les quatre décisions de cet exercice</h2>
+
+    <h3>1 · Pourquoi <code>class</code> partout, sauf pour le contact</h3>
+
+    <p>
+      Six accroches sur sept sont des classes. Le bloc de contact est le seul
+      <code>id</code>, et pour une raison précise : il est <strong>unique</strong> et
+      destiné à servir de cible à un lien interne (<code>href="#contact"</code>, projet 1).
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>La règle pratique :</strong> <code>class</code> pour styler,
+        <code>id</code> pour désigner. Un <code>id</code> ne touche qu'un élément —
+        le jour où le même style doit resservir, tout est à refaire.
+      </p>
+    </div>
+
+    <h3>2 · Pourquoi <code>.formule</code> une fois pour trois articles</h3>
+
+    <p>
+      Les trois formules partagent la même classe, donc <strong>une seule règle</strong>
+      les habille toutes. Avec trois <code>id</code> différents, il aurait fallu écrire
+      trois fois le même bloc — et le modifier trois fois à chaque changement.
+    </p>
+
+    <h3>3 · Pourquoi le <code>&lt;div class="rangee"&gt;</code> reste un <code>&lt;div&gt;</code></h3>
+
+    <p>
+      Cette boîte n'existe que pour aligner les formules côte à côte. C'est un
+      groupement <strong>purement visuel</strong>, sans contenu propre ni titre.
+    </p>
+
+    <div class="attention">
+      <p>
+        Y mettre <code>&lt;section&gt;</code> annoncerait au lecteur d'écran une partie
+        thématique qui n'existe pas. C'est le principe vu au projet 2 : une balise
+        sémantique posée à tort est <em>pire</em> qu'un <code>&lt;div&gt;</code> neutre.
+      </p>
+    </div>
+
+    <h3>4 · Pourquoi <code>banniere</code> et non <code>bandeau-bleu</code></h3>
+
+    <p>
+      On nomme le <strong>rôle</strong>, pas l'apparence. Le jour où la charte
+      graphique passe au vert, <code>.bandeau-bleu { background: green; }</code>
+      devient absurde — et présent dans cinquante fichiers. <code>.banniere</code>
+      reste juste quelle que soit la couleur.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>Une règle ne s'applique pas, sans message d'erreur</td>
+        <td>Le nom diffère entre le HTML et le CSS — une faute de frappe, un accent,
+            une majuscule. <strong>C'est l'erreur n°1</strong></td>
+      </tr>
+      <tr>
+        <td>Rien ne change alors que le code semble juste</td>
+        <td>Un des deux fichiers n'est pas enregistré. Le point à côté du nom de
+            l'onglet VSCode le signale</td>
+      </tr>
+      <tr>
+        <td>La carte « Famille » ressemble aux autres</td>
+        <td>Les deux classes ne sont pas séparées par une <strong>espace</strong>, ou
+            la seconde manque</td>
+      </tr>
+      <tr>
+        <td>Le bloc contact n'a aucun style</td>
+        <td>Le CSS utilise un point (<code>.contact</code>) au lieu d'un dièse
+            (<code>#contact</code>)</td>
+      </tr>
+      <tr>
+        <td>Les formules restent empilées</td>
+        <td><code>display: flex</code> est sur <code>.formule</code> au lieu de
+            <code>.rangee</code> — la règle va sur le parent</td>
+      </tr>
+      <tr>
+        <td>Les prix ne changent pas</td>
+        <td>La classe <code>prix</code> existait déjà : inutile de la créer, il fallait
+            seulement écrire la règle</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui diagnostique en trois secondes :</strong> clic droit sur
+        l'élément récalcitrant → <em>Inspecter</em>. Si le panneau des styles est vide,
+        aucune règle ne le vise — le nom ne correspond pas. Si la règle apparaît
+        <s>barrée</s>, elle est écrasée par une autre.
+      </p>
+    </div>
+
+    <h2>🎉 Fin du projet 3</h2>
+
+    <p>
+      Vous savez désormais habiller une page : écrire des règles, maîtriser les
+      espacements, disposer des éléments côte à côte, et créer vos propres points
+      d'accroche quand le HTML n'en offre pas.
+    </p>
+
+    <p>
+      Le <strong>projet 4</strong> s'attaque à la question suivante : comment cette
+      page se comporte-t-elle sur un téléphone ?
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à ma page</a>
+      <a class="bouton" href="../../">Fin du projet 3 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

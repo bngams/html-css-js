@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Boucler jusqu'à trouver</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 2</p>
+  <h1 class="titre-exo">Boucler jusqu'à trouver</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> répéter tant qu'une
+      condition reste vraie — et tenir la promesse du projet 7 : faire
+      <strong>redemander</strong> le jeu de devinette.</p>
+    </div>
+
+    <h2>1 · Quand on ne sait pas combien de tours</h2>
+
+    <p>
+      La boucle <code>for</code> de l'exercice 1 savait d'avance combien de tours
+      faire : <em>autant qu'il y a de cases</em>. Mais un joueur qui devine peut
+      trouver au premier essai… ou au douzième.
+    </p>
+
+    <table>
+      <tr><th>Vous savez…</th><th>Utilisez</th></tr>
+      <tr><td>le nombre de tours à l'avance</td><td><code>for</code></td></tr>
+      <tr><td>seulement la condition d'arrêt</td><td><code>while</code></td></tr>
+    </table>
+
+    <h2>2 · <code>while</code> — « tant que »</h2>
+
+<pre><code>let i = 0;
+
+while (i &lt; 3) {
+  console.log(i);
+  i++;
+}</code></pre>
+
+    <p>
+      Ça se lit : <em>tant que <code>i</code> est plus petit que 3, répète le
+      bloc</em>. La condition est vérifiée <strong>avant chaque tour</strong> ;
+      dès qu'elle devient fausse, la boucle s'arrête.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Un <code>while</code> est un <code>for</code> démonté.</strong> Les
+        trois morceaux du <code>for</code> — départ, condition, pas — sont toujours
+        là, mais séparés : le départ <em>avant</em> la boucle, le pas
+        <em>dedans</em>. Rien de neuf, une autre disposition.
+      </p>
+    </div>
+
+    <h2>3 · ⚠️ Le danger réel : la boucle infinie</h2>
+
+    <div class="attention">
+      <p>
+        <strong>C'est le premier exercice où une erreur peut bloquer votre
+        navigateur.</strong> Oubliez le <code>i++</code> :
+      </p>
+<pre><code>let i = 0;
+
+while (i &lt; 3) {
+  console.log(i);     ← i ne change JAMAIS
+}</code></pre>
+      <p>
+        La condition reste vraie pour toujours. L'onglet se fige, ne répond plus, et
+        vous devrez le <strong>fermer de force</strong>.
+      </p>
+      <p>
+        <strong>Si cela vous arrive :</strong> fermez l'onglet
+        (<code>Ctrl+W</code>), corrigez le fichier, rouvrez la page. Vous ne cassez
+        rien de définitif — mais c'est désagréable, alors prenez le réflexe.
+      </p>
+    </div>
+
+    <h3>La question à se poser avant d'écrire un <code>while</code></h3>
+
+    <p>
+      <strong>« Qu'est-ce qui, dans le bloc, va finir par rendre la condition
+      fausse ? »</strong> Si vous ne savez pas répondre, votre boucle est infinie.
+    </p>
+
+    <h2>4 · Sortir avec <code>break</code></h2>
+
+    <p>
+      On peut aussi arrêter une boucle depuis l'intérieur, à tout moment :
+    </p>
+
+<pre><code>for (let x = 0; x &lt; 5; x++) {
+  if (x === 3) break;      ← on sort ici
+  console.log(x);
+}
+// affiche 0, 1, 2</code></pre>
+
+    <table>
+      <tr><th>Mot-clé</th><th>Effet</th></tr>
+      <tr><td><code>break</code></td><td><strong>quitte</strong> la boucle entièrement</td></tr>
+      <tr><td><code>continue</code></td><td><strong>saute</strong> au tour suivant</td></tr>
+    </table>
+
+<pre><code>for (let x = 0; x &lt; 5; x++) {
+  if (x === 2) continue;   ← on saute juste ce tour
+  console.log(x);
+}
+// affiche 0, 1, 3, 4</code></pre>
+
+    <h2>5 · Le jeu qui redemande</h2>
+
+    <p>
+      Voici enfin la boucle que le projet 7 vous devait :
+    </p>
+
+<pre><code>let trouve = false;
+
+while (trouve === false) {
+  const saisie = prompt("Votre proposition ?");
+  const proposition = Number(saisie);
+
+  if (proposition === secret) {
+    trouve = true;         ← c'est CE changement qui arrête la boucle
+  }
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        La variable <code>trouve</code> est le <strong>témoin</strong> : tant qu'elle
+        vaut <code>false</code>, on redemande. C'est elle qui répond à la question
+        « qu'est-ce qui va rendre la condition fausse ? ».
+      </p>
+    </div>
+
+    <h2>6 · ⚠️ Et si le joueur annule ?</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Le piège le plus sérieux de cet exercice.</strong> Vous savez depuis
+        le projet 7 qu'un <code>prompt</code> annulé rend <code>null</code>, et que
+        <code>Number(null)</code> vaut <code>0</code>.
+      </p>
+      <p>
+        Dans une boucle, cela devient grave : le joueur annule, le programme
+        comprend « il propose 0 », ce n'est pas le secret, donc
+        <strong>il redemande</strong>. Le joueur annule encore… et la boîte revient
+        indéfiniment. <strong>Il ne peut plus sortir de la page.</strong>
+      </p>
+      <p>
+        <strong>La parade : tester l'annulation AVANT de convertir.</strong>
+      </p>
+<pre><code>const saisie = prompt("Votre proposition ?");
+
+if (saisie === null) {
+  break;                   ← le joueur abandonne, on sort
+}
+
+const proposition = Number(saisie);</code></pre>
+      <p>
+        Le test doit porter sur <code>saisie</code>, pas sur
+        <code>proposition</code> : une fois convertie, l'annulation est devenue un
+        <code>0</code> indiscernable.
+      </p>
+    </div>
+
+    <h2>7 · Compter les essais</h2>
+
+<pre><code>let essais = 0;
+
+while (trouve === false) {
+  essais++;                ← un de plus à chaque tour
+  …
+}
+
+alert("Trouvé en " + essais + " essais !");</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le détail qui fait la différence :</strong> « Trouvé en 1 essais »
+        se remarque. Une condition règle le pluriel :
+      </p>
+<pre><code>essais + (essais &gt; 1 ? " essais" : " essai")</code></pre>
+      <p>
+        Cette écriture avec <code>?</code> et <code>:</code> est un
+        <code>if…else</code> en une ligne. Retenez-la telle quelle pour aujourd'hui.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Et <code>do…while</code> ? Vous la croiserez — voici ce qu'elle
+        change.</strong> Ce n'est pas au programme d'aujourd'hui : aucune étape ne la
+        demande. Mais mieux vaut la reconnaître avant de la rencontrer.
+      </p>
+      <p>
+        La condition y est vérifiée <strong>après</strong> le tour, donc le bloc
+        s'exécute toujours <strong>au moins une fois</strong> :
+      </p>
+<pre><code>let k = 99;
+
+do {
+  console.log("exécuté quand même");
+} while (k &lt; 3);
+// s'affiche UNE fois, alors que 99 < 3 est faux</code></pre>
+      <p>
+        Utile quand on doit d'abord <em>demander</em> pour pouvoir tester. Retenez
+        surtout <code>while</code>, qui couvre la plupart des besoins.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Loops"
+             target="_blank" rel="noopener">MDN — Les boucles</a>
+        </td>
+        <td>Toutes les formes, avec la section « sortir d'une boucle ».</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/while"
+             target="_blank" rel="noopener">MDN — <code>while</code></a>
+        </td>
+        <td>La référence, courte et précise.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/while-for"
+             target="_blank" rel="noopener">javascript.info — Boucles while et for</a>
+        </td>
+        <td>Le même chapitre en français, avec exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

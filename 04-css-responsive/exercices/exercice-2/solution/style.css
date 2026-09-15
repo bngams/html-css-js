@@ -1,0 +1,183 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 2 — SOLUTION COMMENTÉE
+
+   Remarquez l'organisation du fichier : d'abord TOUTES les règles
+   de base, puis TOUTES les media queries, par largeur croissante.
+   C'est l'ordre mobile-first, et il n'est pas décoratif — en CSS,
+   à spécificité égale, la dernière règle écrite gagne.
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── PARTIE 1 : les bases, fournies ───────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.conteneur {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.espace {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.pied-page {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding: 1.5rem;
+}
+
+
+/* ── PARTIE 2 : le style de base (petits écrans) ──────────────── */
+
+
+/* ÉTAPE 1 — La bannière, version téléphone.
+
+   Aucun display:flex ici, et c'est délibéré : sur un écran étroit,
+   le logo et le menu doivent rester l'un sous l'autre. C'est déjà
+   le comportement par défaut d'un élément de bloc — donc il n'y a
+   RIEN à écrire pour l'obtenir.
+
+   C'est tout l'esprit du mobile-first : le cas le plus simple
+   demande le moins de code.                                      */
+
+.banniere {
+  background-color: #14457b;
+  padding: 1rem;
+  text-align: center;
+}
+
+
+/* ÉTAPE 2 — Le logo.                                             */
+
+.logo {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+
+/* ÉTAPE 3 — Le menu, version téléphone.
+
+   flex-wrap est indispensable ici : quatre liens ne tiennent pas
+   sur une ligne de 360px. Sans lui, Flexbox les comprimerait
+   jusqu'à les rendre illisibles plutôt que de passer à la ligne.
+
+   justify-content: center les centre sous le logo.               */
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+
+/* ÉTAPE 4 — Les liens du menu.                                   */
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+/* ÉTAPE 5 — Le titre, version téléphone.
+
+   1.6rem ≈ 26px. Un h1 par défaut ferait 2rem (32px), ce qui est
+   déjà lourd sur 360px de large. On part petit, on agrandira.    */
+
+h1 {
+  font-size: 1.6rem;
+}
+
+
+/* ── PARTIE 3 : les enrichissements ───────────────────────────── */
+
+
+/* ÉTAPES 6 et 7 — À partir de 700px.
+
+   min-width: 700px se lit « la fenêtre fait AU MOINS 700px ».
+   C'est donc la règle des GRANDS écrans. Beaucoup de débutants
+   comprennent l'inverse.
+
+   Remarquez ce qui n'est PAS répété ici : le fond bleu de la
+   bannière, le fond blanc des espaces, leurs coins arrondis. Ces
+   propriétés sont définies dans la partie 2 et restent actives —
+   une media query n'annule rien, elle ajoute.
+
+   On n'y écrit donc que les DIFFÉRENCES.                         */
+
+@media (min-width: 700px) {
+
+  .banniere {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    text-align: left;
+  }
+
+  .grille {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .espace {
+    margin-bottom: 0;
+  }
+
+}
+
+
+/* ÉTAPE 8 — À partir de 1000px.
+
+   Cette media query vient APRÈS celle de 700px, et ce n'est pas
+   un détail : sur une fenêtre de 1200px, les DEUX s'appliquent.
+   À spécificité égale, la dernière écrite gagne — donc le titre
+   fait bien 2.4rem.
+
+   Écrite dans l'autre ordre, la règle de 700px (h1 à 1.6rem)
+   écraserait celle-ci, et le titre resterait petit sur grand
+   écran, sans qu'aucun message ne le signale.                    */
+
+@media (min-width: 1000px) {
+
+  h1 {
+    font-size: 2.4rem;
+  }
+
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CE QU'IL FAUT RETENIR
+
+   Mobile-first :
+     1. les règles de base, pensées pour le petit écran
+     2. puis les media queries, par largeur CROISSANTE
+
+   min-width: 700px  → « au moins 700px » = les grands écrans
+   max-width: 699px  → « au plus 699px »  = les petits écrans
+
+   Dans une media query, n'écrivez que ce qui CHANGE. Le reste
+   continue de s'appliquer.
+
+   Et le point de rupture se choisit en regardant QUAND la mise
+   en page devient laide — pas en visant un modèle de téléphone.
+   ═══════════════════════════════════════════════════════════════ */

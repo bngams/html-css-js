@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Des listes et des boucles</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 1</p>
+  <h1 class="titre-exo">Des listes et des boucles</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> ranger plusieurs valeurs
+      dans une seule boîte — un <strong>tableau</strong> — et les parcourir sans
+      écrire vingt fois la même ligne.</p>
+    </div>
+
+    <h2>1 · Le problème : une boîte par valeur</h2>
+
+    <p>
+      Pour cinq fruits, il vous faudrait aujourd'hui cinq boîtes, et cinq
+      <code>console.log</code> :
+    </p>
+
+<pre><code>const fruit1 = "Pomme";
+const fruit2 = "Banane";
+const fruit3 = "Cerise";
+…</code></pre>
+
+    <p>
+      Avec cinquante fruits, la méthode s'effondre. Un <strong>tableau</strong> range
+      toutes les valeurs dans <em>une seule</em> boîte.
+    </p>
+
+    <h2>2 · Créer un tableau</h2>
+
+<pre><code>const fruits = ["Pomme", "Banane", "Cerise", "Mangue", "Poire"];</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>[ ]</code></td><td>les crochets : « ceci est un tableau »</td></tr>
+      <tr><td>les virgules</td><td>séparent les valeurs</td></tr>
+      <tr><td><code>fruits</code></td><td>le nom de la boîte — au pluriel, par habitude</td></tr>
+    </table>
+
+    <h2>3 · Lire une case : l'index</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Les cases sont numérotées à partir de ZÉRO.</strong> C'est la source
+        d'erreur numéro un avec les tableaux :
+      </p>
+<pre><code>fruits[0]    → "Pomme"      ← la PREMIÈRE case
+fruits[1]    → "Banane"
+fruits[2]    → "Cerise"
+fruits[4]    → "Poire"      ← la DERNIÈRE
+fruits[5]    → undefined    ⚠️ il n'y a pas de case 5</code></pre>
+      <p>
+        Demander une case qui n'existe pas ne provoque <strong>aucune erreur</strong> :
+        on reçoit <code>undefined</code>, et le programme continue avec du vide.
+      </p>
+    </div>
+
+    <h2>4 · Compter : <code>.length</code></h2>
+
+<pre><code>fruits.length    → 5</code></pre>
+
+    <p>
+      <code>.length</code> donne le <strong>nombre de cases</strong>. Retenez la
+      conséquence, qui revient sans cesse :
+    </p>
+
+<pre><code>Cinq fruits  →  length vaut 5
+             →  les index vont de 0 à 4
+             →  le DERNIER index est length - 1</code></pre>
+
+<pre><code>fruits[fruits.length - 1]    → "Poire"</code></pre>
+
+    <h2>5 · Répéter : la boucle <code>for</code></h2>
+
+    <p>
+      Une boucle exécute le même bloc plusieurs fois, en faisant varier un compteur :
+    </p>
+
+<pre><code>for (let i = 0; i &lt; fruits.length; i++) {
+  console.log(fruits[i]);
+}</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>let i = 0</code></td><td><strong>départ</strong> : le compteur commence à 0</td></tr>
+      <tr><td><code>i &lt; fruits.length</code></td><td><strong>condition</strong> : on continue tant qu'elle est vraie</td></tr>
+      <tr><td><code>i++</code></td><td><strong>pas</strong> : ajoute 1 au compteur à chaque tour</td></tr>
+      <tr><td><code>{ … }</code></td><td>ce qu'on répète</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <code>i++</code> est un raccourci pour <code>i = i + 1</code> — l'écriture
+        que vous connaissez depuis le projet 6. Les deux sont identiques ;
+        <code>i++</code> est simplement l'habitude du métier dans une boucle.
+      </p>
+    </div>
+
+    <h3>Le piège du <code>&lt;=</code></h3>
+
+    <div class="attention">
+      <p>
+        Écrire <code>i &lt;= fruits.length</code> fait <strong>un tour de trop</strong> :
+      </p>
+<pre><code>i &lt; 5     → i vaut 0,1,2,3,4        ✅ cinq tours
+i &lt;= 5    → i vaut 0,1,2,3,4,5      ⚠️ six tours</code></pre>
+      <p>
+        Au dernier tour, <code>fruits[5]</code> vaut <code>undefined</code> — et
+        <strong>aucune erreur ne vous prévient</strong>. Vous verrez simplement un
+        <code>undefined</code> apparaître en fin de liste.
+      </p>
+      <p>
+        <strong>La règle : <code>i &lt; length</code>, avec un chevron simple.</strong>
+      </p>
+    </div>
+
+    <h2>6 · Plus simple : <code>for…of</code></h2>
+
+    <p>
+      Quand le compteur ne vous sert qu'à lire chaque case, <code>for…of</code> fait
+      le travail sans compteur du tout :
+    </p>
+
+<pre><code>for (const fruit of fruits) {
+  console.log(fruit);
+}</code></pre>
+
+    <p>
+      À chaque tour, <code>fruit</code> contient <strong>la valeur</strong> de la case
+      suivante. Plus d'index, donc plus de piège <code>&lt;=</code>.
+    </p>
+
+    <table>
+      <tr><th>Situation</th><th>Utilisez</th></tr>
+      <tr>
+        <td>Vous avez besoin du <strong>numéro</strong> de la case</td>
+        <td><code>for (let i = …)</code></td>
+      </tr>
+      <tr>
+        <td>Vous voulez seulement <strong>chaque valeur</strong></td>
+        <td><code>for…of</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Il existe aussi <code>for…in</code></strong> — n'en faites pas usage
+        sur un tableau. Il donne les <em>index</em>, et sous forme de
+        <strong>texte</strong> : <code>"0"</code>, <code>"1"</code>… ce qui rouvre
+        tous les pièges de conversion du projet 7. Il sert aux objets, vus à
+        l'exercice 3.
+      </p>
+    </div>
+
+    <h2>7 · Ajouter, assembler, trier</h2>
+
+    <table>
+      <tr><th>Instruction</th><th>Effet</th></tr>
+      <tr>
+        <td><code>fruits.push("Kiwi")</code></td>
+        <td>ajoute une case <strong>à la fin</strong></td>
+      </tr>
+      <tr>
+        <td><code>fruits.join(" - ")</code></td>
+        <td>assemble tout en un seul texte</td>
+      </tr>
+    </table>
+
+    <p>
+      Ce sont les deux que vous utiliserez dans cet exercice.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Et pour trier ? Vous croiserez <code>sort()</code> — voici son
+        piège.</strong> Ce n'est pas au programme d'aujourd'hui, mais mieux vaut le
+        savoir avant de le rencontrer.
+      </p>
+<pre><code>[10, 9, 2].sort()    → [10, 2, 9]     ⚠️ pas ce qu'on attend</code></pre>
+      <p>
+        <code>sort()</code> compare les valeurs <em>en tant que texte</em> : c'est le
+        piège de <code>"10" &lt; "9"</code> du projet 7, sous une autre forme. Pour
+        trier de vrais nombres, on lui donne une règle —
+        <code>[10, 9, 2].sort((a, b) =&gt; a - b)</code> rend bien
+        <code>[2, 9, 10]</code>.
+      </p>
+      <p>
+        <strong>Second piège, plus discret : <code>sort()</code> modifie le tableau
+        lui-même</strong>, il n'en rend pas une copie triée. Après
+        <code>fruits.sort()</code>, l'ordre d'origine est perdu.
+      </p>
+    </div>
+
+    <h2>8 · <code>push</code> modifie, même avec <code>const</code></h2>
+
+<pre><code>const fruits = ["Pomme"];
+fruits.push("Kiwi");        ✅ autorisé
+fruits = ["Autre chose"];   ✋ TypeError</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>const</code> interdit de <strong>remplacer la boîte</strong>, pas d'en
+        modifier le contenu. On peut donc ajouter des cases à un tableau déclaré en
+        <code>const</code> — c'est même l'usage normal.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Arrays"
+             target="_blank" rel="noopener">MDN — Les tableaux</a>
+        </td>
+        <td>Le chapitre complet, avec des exemples progressifs.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Loops"
+             target="_blank" rel="noopener">MDN — Les boucles</a>
+        </td>
+        <td>Toutes les formes de boucles, dont celles vues à l'exercice 2.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/array"
+             target="_blank" rel="noopener">javascript.info — Les tableaux</a>
+        </td>
+        <td>Le même chapitre en français, avec exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

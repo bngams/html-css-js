@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Changer ce qu'on a trouvé</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 2</p>
+  <h1 class="titre-exo">Changer ce qu'on a trouvé</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Modifier le texte et l'apparence d'éléments
+      trouvés dans la page, <strong>sans jamais écrire une couleur en
+      JavaScript</strong>.</p>
+      <p>
+        <strong>Prérequis :</strong> l'exercice 1 (<code>querySelector</code>,
+        <code>querySelectorAll</code>, <code>for…of</code>) et le projet 8
+        (tableaux, index, <code>Number()</code>).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-2/app.js</code>
+      </p>
+      <p>
+        Comme à l'exercice 1 : <strong>pas de marqueurs à remplacer</strong>, des
+        critères d'acceptation.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Cette fois, le résultat se voit sur la page.</strong> Les couleurs
+        doivent changer — mais <strong>aucune couleur ne doit figurer dans votre
+        code</strong>.
+      </p>
+      <p>
+        Trois classes existent déjà dans le CSS de la page, sans être posées sur
+        quoi que ce soit : <code>.ouvert</code> et <code>.ferme</code> pour le
+        bandeau, <code>.volumineux</code> pour un livre. Votre travail est de les
+        <em>poser</em>.
+      </p>
+    </div>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <h3>Sur la page</h3>
+
+    <ol class="criteres">
+      <li>
+        Le titre affiche <code>Tableau de bord — mise à jour</code>
+      </li>
+      <li>
+        Le bandeau affiche <code>Médiathèque ouverte</code> <strong>et</strong> porte
+        la classe <code>ouvert</code> — son fond devient vert
+      </li>
+      <li>
+        Les livres de <strong>plus de 700 pages</strong> portent la classe
+        <code>volumineux</code> — leur fond devient crème. Il y en a
+        <strong>trois</strong>
+      </li>
+      <li>
+        Le <strong>dernier</strong> livre n'est plus <code>emprunte</code> mais
+        <code>disponible</code> — sa barre latérale passe au vert. Désignez-le
+        <strong>sans écrire <code>4</code> en dur</strong>
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 3 est le plus dense de l'exercice.</strong> Il enchaîne,
+        pour chaque livre : descendre chercher <code>.livre__pages</code>, lire son
+        texte, en extraire le nombre (cours §6), comparer à 700, poser la classe — et
+        tenir un compte.
+      </p>
+      <p>
+        <strong>Écrivez-le geste par geste</strong>, en affichant le résultat
+        intermédiaire avec <code>console.log</code> à chaque étape. Ne cherchez pas à
+        tout écrire d'un trait : c'est le meilleur moyen de ne pas savoir où ça
+        coince.
+      </p>
+    </div>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres" start="5">
+      <li>
+        <code>Bandeau :</code> suivi des classes du bandeau
+      </li>
+      <li>
+        <code>Volumineux :</code> suivi du nombre de livres concernés,
+        <strong>compté par votre boucle</strong>
+      </li>
+      <li>
+        <code>Le premier est-il disponible ?</code> suivi de <code>true</code> ou
+        <code>false</code>, obtenu avec la méthode qui <em>teste</em> une classe
+      </li>
+      <li>
+        <code>Dernier :</code> suivi des classes du dernier livre, après
+        modification
+      </li>
+      <li>
+        <code>toggle 1 :</code> et <code>toggle 2 :</code> suivis des
+        <strong>valeurs rendues</strong> par deux <code>toggle</code> successifs de
+        la classe <code>ferme</code> sur le bandeau
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 9 est le plus subtil.</strong> <code>toggle</code> ne se
+        contente pas d'agir : il <em>rend</em> une valeur. Deux appels de suite
+        ramènent au point de départ — mais que valent les deux réponses ? C'est ce
+        qu'on vous demande d'afficher.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>La console doit afficher exactement ces cinq lignes :</p>
+
+<pre><code>Bandeau : ouvert
+Volumineux : 3
+Le premier est-il disponible ? true
+Dernier : livre disponible
+toggle 1 : true · toggle 2 : false</code></pre>
+
+    <p>Et la page doit avoir changé d'aspect :</p>
+
+    <table>
+      <tr><th>Élément</th><th>Avant</th><th>Après</th></tr>
+      <tr>
+        <td>Le titre</td>
+        <td><code>Tableau de bord</code></td>
+        <td><code>Tableau de bord — mise à jour</code></td>
+      </tr>
+      <tr>
+        <td>Le bandeau</td>
+        <td>gris, « état inconnu »</td>
+        <td><strong>vert</strong>, « Médiathèque ouverte »</td>
+      </tr>
+      <tr>
+        <td>Trois livres</td>
+        <td>fond blanc</td>
+        <td>fond <strong>crème</strong></td>
+      </tr>
+      <tr>
+        <td>Le dernier livre</td>
+        <td>barre rouge, estompé</td>
+        <td>barre <strong>verte</strong>, net</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Les trois livres volumineux sont :</strong> La Horde du Contrevent
+        (712), Dune (900) et Le Nom du vent (850). Si vous en obtenez un autre nombre,
+        c'est votre conversion de texte en nombre qu'il faut regarder — le cours §6
+        explique pourquoi <code>Number("712 pages")</code> ne suffit pas.
+      </p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td><strong>Aucune couleur dans votre fichier</strong></td>
+        <td>
+          Cherchez <code>style</code> dans <code>app.js</code> : il ne doit
+          <strong>pas</strong> y figurer. Tout passe par des classes
+        </td>
+      </tr>
+      <tr>
+        <td>Le dernier livre</td>
+        <td>
+          Désigné par un calcul sur la longueur, pas par l'index <code>4</code> écrit
+          à la main
+        </td>
+      </tr>
+      <tr>
+        <td>Le décompte</td>
+        <td>
+          <code>Volumineux : 3</code> — obtenu par la boucle, pas écrit en dur
+        </td>
+      </tr>
+      <tr>
+        <td>Les deux <code>toggle</code></td>
+        <td>
+          <code>true</code> puis <code>false</code> — et le bandeau revient à son
+          état d'avant
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — pourquoi on ne touche pas au style</strong></p>
+      <p>
+        <strong>La règle « pas de <code>style</code> » vaut pour votre fichier
+        <code>app.js</code>.</strong> Ici, on tape <strong>dans la console</strong>,
+        exprès, pour constater de ses yeux ce que produit l'interdit.
+      </p>
+      <p>
+        Une fois l'exercice terminé, tapez dans la console de la page de travail :
+      </p>
+      <ol>
+        <li>
+          <code>const b = document.querySelector("#bandeau")</code>
+        </li>
+        <li>
+          <code>b.style.backgroundColor = "black"</code> → le fond devient noir,
+          <strong>malgré la classe <code>ouvert</code></strong>
+        </li>
+        <li>
+          <code>b.className</code> → la classe est pourtant toujours là
+        </li>
+        <li>
+          <code>b.style.backgroundColor = ""</code> → le vert revient
+        </li>
+      </ol>
+      <p>
+        Un style écrit en ligne <strong>neutralise</strong> la classe sans la retirer.
+        Et pour revenir en arrière, il faut le vider explicitement — ce qu'on oublie.
+        <strong>C'est toute la raison de préférer <code>classList</code>.</strong>
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les cinq lignes s'affichent, sans erreur rouge</li>
+      <li>La page a changé d'aspect aux quatre endroits prévus</li>
+      <li>
+        Votre fichier <code>app.js</code> ne contient aucune couleur, aucun
+        <code>style</code>
+      </li>
+      <li>
+        Vous savez dire ce que rend <code>toggle</code>, et pourquoi c'est utile
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 55 minutes.</strong> Le critère 3 est le plus long : il faut
+      parcourir, lire un texte, le convertir, comparer, puis poser une classe.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

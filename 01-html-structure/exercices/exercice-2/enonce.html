@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Texte, listes et liens</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 2</p>
+  <h1 class="titre-exo">Texte, listes et liens</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Construire la fiche d'une ville : du texte
+      structuré en parties, deux listes, et les trois sortes de liens.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> l'exercice 1
+        (le squelette d'une page). Cette fois, le squelette vous est fourni — vous
+        remplissez le contenu.
+      </p>
+    </div>
+
+    <h2>📄 Le fichier à modifier</h2>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-2/travail.html</code>
+      </p>
+      <p>
+        Comme dans l'exercice 1, il contient les consignes en commentaires. Le
+        <code>&lt;head&gt;</code> est déjà écrit : vous travaillez uniquement dans le
+        <code>&lt;body&gt;</code>.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🔁 Rappel de la boucle de travail</strong></p>
+      <ol>
+        <li>j'efface la ligne du <code>TODO</code> et j'écris ma balise à la place</li>
+        <li>j'enregistre — <code>Ctrl+S</code> / <code>Cmd+S</code></li>
+        <li>je recharge le navigateur — <code>Ctrl+R</code> / <code>Cmd+R</code></li>
+        <li>je regarde ce qui a changé</li>
+      </ol>
+      <p>
+        Comme à l'exercice 1, la page s'affiche <strong>vide</strong> au départ : le
+        fichier ne contient encore que des commentaires. Votre fiche se remplira à
+        mesure que vous écrirez les balises, en commençant par le titre de la ville.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <p>Votre page doit contenir :</p>
+
+    <ol class="criteres">
+      <li>Un <code>&lt;h1&gt;</code> avec le nom d'une ville (celle que vous voulez)</li>
+      <li>
+        Un paragraphe de présentation contenant <strong>au moins un mot en
+        <code>&lt;strong&gt;</code></strong> et <strong>un mot en
+        <code>&lt;em&gt;</code></strong>
+      </li>
+      <li>
+        Deux sous-titres <code>&lt;h2&gt;</code> : « À voir » et « Bonnes adresses »
+      </li>
+      <li>Sous « À voir » : une liste <strong>à puces</strong> de 3 monuments</li>
+      <li>Sous « Bonnes adresses » : une liste <strong>numérotée</strong> de 3 restaurants</li>
+      <li>
+        Une adresse postale sur deux lignes, séparées par un <code>&lt;br&gt;</code>
+      </li>
+      <li>
+        Une séparation <code>&lt;hr&gt;</code> entre le contenu et les liens
+      </li>
+      <li>
+        <strong>Trois liens :</strong>
+        <ul>
+          <li>un lien <strong>externe</strong> vers un site, qui s'ouvre dans un nouvel onglet</li>
+          <li>un lien <strong>interne</strong> qui saute au <code>&lt;h2&gt;</code> « Bonnes adresses »</li>
+          <li>un lien <strong>e-mail</strong></li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="attention">
+      <p>
+        <strong>Le lien interne demande deux gestes,</strong> pas un : donner un
+        <code>id</code> au titre visé, <em>puis</em> écrire le lien qui le vise avec un
+        dièse. Si vous n'écrivez que le lien, le clic ne fera rien — c'est le piège
+        classique. Revoyez la notion 4b du <a href="cours.html">cours</a>.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>Les listes</td>
+        <td>
+          Des puces rondes pour la première, des numéros <em>1. 2. 3.</em> pour la
+          seconde — sans que vous ayez tapé les numéros
+        </td>
+      </tr>
+      <tr>
+        <td>La mise en valeur</td>
+        <td>Un mot en gras, un mot en italique, dans votre paragraphe</td>
+      </tr>
+      <tr>
+        <td>Le lien externe</td>
+        <td>Un clic ouvre le site dans un <strong>nouvel onglet</strong> — l'onglet de votre page reste ouvert</td>
+      </tr>
+      <tr>
+        <td>Le lien interne</td>
+        <td>
+          Un clic fait sauter la page jusqu'au titre « Bonnes adresses », et l'adresse
+          dans la barre du navigateur se termine par <code>#</code> suivi de votre
+          <code>id</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le lien e-mail</td>
+        <td>
+          Un clic propose d'ouvrir votre logiciel de messagerie. <em>S'il n'y en a pas
+          de configuré sur le poste, il ne se passera rien de visible — c'est normal,
+          ce n'est pas une erreur de votre part.</em>
+        </td>
+      </tr>
+      <tr>
+        <td>L'adresse postale</td>
+        <td>Deux lignes, à l'intérieur d'un seul paragraphe</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>🧪 Manip — à quoi sert vraiment <code>&lt;ol&gt;</code></strong>
+      </p>
+      <ol>
+        <li>Dans votre liste numérotée, <strong>insérez un nouveau <code>&lt;li&gt;</code> entre le premier et le deuxième</strong>.</li>
+        <li>Enregistrez, rechargez.</li>
+      </ol>
+      <p>
+        Les numéros se recalculent tout seuls : votre nouvel élément devient le 2,
+        l'ancien 2 devient le 3. C'est précisément ce qu'on perd si on tape les
+        numéros à la main.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <p>
+      Certains critères ne se voient pas à l'œil — le <code>rel="noopener"</code> du
+      lien externe, l'unicité de votre <code>id</code>, et les commentaires de consigne
+      qu'il reste à supprimer. Le navigateur répare beaucoup de choses en silence.
+      Pour en avoir le cœur net :
+    </p>
+
+    <ul>
+      <li>
+        Dans <code>travail.html</code>, cherchez <code>&lt;!-</code> avec
+        <code>Ctrl+F</code> : il ne doit rester <strong>aucun</strong> commentaire de
+        consigne.
+      </li>
+      <li>
+        Toujours avec <code>Ctrl+F</code>, cherchez <code>target="_blank"</code> et
+        vérifiez que <code>rel="noopener"</code> figure sur la
+        <strong>même balise</strong>. Le validateur ne le signalera pas : ce n'est pas
+        une erreur HTML, seulement une imprudence.
+      </li>
+      <li>
+        Déposez votre fichier sur le
+        <a href="https://validator.w3.org/nu/#file" target="_blank" rel="noopener">validateur
+        du W3C</a> : il doit annoncer <em>« Document checking completed. No errors or
+        warnings to show. »</em>
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>30 à 40 minutes.</strong> Le lien interne est la partie qui demande le
+      plus de réflexion — gardez-la pour la fin si vous bloquez.
+    </p>
+
+    <div class="astuce">
+      <p>💡 <strong>Bloqué ?</strong> Le <a href="cours.html">cours</a> a un exemple
+      pour chacune des cinq notions. La <a href="solution.html">solution</a> est là
+      aussi — cherchez d'abord.</p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Commencer l'exercice →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

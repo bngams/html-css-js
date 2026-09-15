@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Le système d'onglets</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 11</a> · Cas pratique</p>
+  <h1 class="titre-exo">Le système d'onglets</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé la manip « n'éteindre que les panneaux » ?</strong>
+      C'est elle qui montre qu'un composant peut afficher juste et mentir sur son
+      état. Si ce n'est pas fait, retournez à la
+      <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <p>
+      Une solution possible. <strong>Seuls les critères comptent</strong> : une autre
+      écriture qui les remplit tous est tout aussi juste.
+    </p>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>/* 1 · Les deux collections */
+
+const onglets  = document.querySelectorAll(".tab");
+const panneaux = document.querySelectorAll(".tab-content");
+
+console.log("Onglets :", onglets.length, "· Panneaux :", panneaux.length);
+
+/* 2 · La fonction qui active un onglet */
+
+function activer(onglet) {
+
+  // a · tout éteindre — les onglets ET les panneaux
+  for (const autre of onglets) {
+    autre.classList.remove("tab-active");
+  }
+  for (const panneau of panneaux) {
+    panneau.classList.remove("active");
+  }
+
+  // b · allumer l'onglet cliqué
+  onglet.classList.add("tab-active");
+
+  // c · retrouver SON panneau, par l'attribut data-content-id
+  const identifiant = onglet.getAttribute("data-content-id");
+  const panneau = document.querySelector("#" + identifiant);
+
+  // d · l'allumer, s'il existe
+  if (panneau) {
+    panneau.classList.add("active");
+  }
+
+  console.log("Onglet :", onglet.textContent, "→ panneau :", identifiant);
+}
+
+/* 3 · Un écouteur par onglet */
+
+for (const onglet of onglets) {
+  onglet.addEventListener("click", function () {
+    activer(onglet);
+  });
+}
+
+/* 4 · Au chargement : le premier onglet est ouvert */
+
+activer(onglets[0]);</code></pre>
+    </details>
+
+    <h2>Les cinq choses à retenir</h2>
+
+    <h3>1 · Éteindre tout, sans se demander quoi</h3>
+
+<pre><code>for (const autre of onglets)  { autre.classList.remove("tab-active"); }
+for (const panneau of panneaux) { panneau.classList.remove("active"); }</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Retirer une classe absente ne coûte rien et ne lève aucune
+        erreur.</strong> C'est ce qui permet d'éteindre aveuglément : pas besoin de
+        savoir ce qui était allumé, donc pas de mémoire à maintenir.
+      </p>
+      <p>
+        L'alternative — se souvenir de l'onglet précédent dans une variable —
+        marcherait aussi, mais créerait une deuxième vérité à garder d'accord avec la
+        page. La même raison qu'au projet 10, exercice 1, pour préférer
+        <code>contains</code> à un booléen maison.
+      </p>
+    </div>
+
+    <h3>2 · Deux boucles, deux collections</h3>
+
+    <table>
+      <tr><th>Collection</th><th>Classe retirée</th><th>Si on l'oublie</th></tr>
+      <tr>
+        <td><code>onglets</code></td><td><code>tab-active</code></td>
+        <td>plusieurs onglets soulignés — l'état affiché est faux</td>
+      </tr>
+      <tr>
+        <td><code>panneaux</code></td><td><code>active</code></td>
+        <td>plusieurs panneaux empilés — le contenu est faux</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        Les deux oublis sont <strong>indépendants</strong> et ne produisent pas le
+        même symptôme. C'est ce que montre la manip de l'énoncé.
+      </p>
+    </div>
+
+    <h3>3 · Du texte vers un élément</h3>
+
+<pre><code>onglet.getAttribute("data-content-id")   → "content2"        du TEXTE
+"#" + "content2"                         → "#content2"       un SÉLECTEUR
+document.querySelector("#content2")      → l'élément         un ÉLÉMENT</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Le dièse n'est pas décoratif.</strong> Sans lui,
+        <code>querySelector("content2")</code> cherche une balise
+        <code>&lt;content2&gt;</code>, qui n'existe pas : le résultat est
+        <code>null</code>, et le <code>if</code> empêche l'erreur — mais rien ne
+        s'affiche.
+      </p>
+    </div>
+
+    <h3>4 · Une fonction, deux appelants</h3>
+
+<pre><code>activer(onglets[0]);        ← au chargement, une fois
+
+onglet.addEventListener("click", function () {
+  activer(onglet);          ← à chaque clic
+});</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est le geste du projet 10, exercice 2</strong>, appliqué à un
+        composant. L'ouverture initiale n'est pas un cas particulier : c'est une
+        activation comme les autres, d'où la ligne
+        <code>Onglet : Catalogue → panneau : content1</code> qui apparaît
+        <em>avant</em> tout clic.
+      </p>
+    </div>
+
+    <h3>5 · Le JS décide de l'état, le CSS de l'apparence</h3>
+
+    <p>
+      Inspectez la page en cliquant : seules les classes bougent.
+      <strong>Aucun attribut <code>style</code> n'est jamais écrit.</strong>
+    </p>
+
+<pre><code>&lt;button class="tab tab-active"&gt;        ← après clic
+&lt;div id="content2" class="tab-content active"&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi <code>classList</code> plutôt que
+        <code>.style</code> ?</strong> Parce qu'un style en ligne
+        <strong>écrase</strong> le CSS et ne peut plus être corrigé par lui : votre
+        JavaScript imposerait une apparence que la feuille de style ne pourrait plus
+        reprendre. C'est la règle du projet 9, exercice 2, section 5.
+      </p>
+      <p>
+        <em>(Un détail, pour les curieux : <code>.style</code> est même marginalement
+        plus rapide, le navigateur n'ayant pas à réévaluer quelles règles
+        s'appliquent. Ça ne change rien à la conclusion.)</em>
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Au chargement, la zone de contenu est vide</td>
+        <td>
+          L'appel <code>activer(onglets[0])</code> manque : le composant démarre sans
+          onglet ouvert (cours §7)
+        </td>
+      </tr>
+      <tr>
+        <td>Les panneaux s'empilent, plusieurs visibles</td>
+        <td>
+          La boucle qui retire <code>active</code> manque
+        </td>
+      </tr>
+      <tr>
+        <td>Le contenu est bon, mais plusieurs onglets restent bleus</td>
+        <td>
+          La boucle qui retire <code>tab-active</code> manque
+        </td>
+      </tr>
+      <tr>
+        <td>Rien ne s'affiche au clic</td>
+        <td>
+          Le <code>"#"</code> manque devant l'identifiant :
+          <code>querySelector</code> rend <code>null</code>. Avec un
+          <code>if (panneau)</code>, l'échec est <strong>silencieux</strong> ; sans
+          lui, vous verrez
+          <code>TypeError: … (reading 'classList')</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le même panneau s'affiche pour tous les onglets</td>
+        <td>
+          L'identifiant est lu une seule fois, hors de la fonction, au lieu d'être
+          relu pour l'onglet cliqué
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>TypeError: Cannot read properties of undefined (reading
+          'classList')</code>
+        </td>
+        <td>
+          <code>onglets[0]</code> sur une collection vide : le sélecteur
+          <code>.tab</code> est mal orthographié. La console affiche d'abord
+          <code>Onglets : 0</code> — le compte est votre premier indice
+        </td>
+      </tr>
+    </table>
+
+    <h2>Projet 11 terminé</h2>
+
+    <div class="objectif">
+      <p>
+        Vous venez d'écrire un <strong>composant complet</strong>, et sans aucune
+        librairie : une vingtaine de lignes, aucune dépendance, et un comportement
+        que l'on retrouve dans toutes les interfaces.
+      </p>
+      <p>
+        <strong>Il reste un dernier projet.</strong> Le projet 12 pousse la
+        médiathèque plus loin : un vrai tableau d'emprunts, un formulaire qui
+        l'alimente, et — en bonus — des données venues d'un serveur.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Projet 11 terminé ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

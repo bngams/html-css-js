@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Le système d'onglets</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 11</a> · Cas pratique</p>
+  <h1 class="titre-exo">Le système d'onglets</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez faire ici :</strong> écrire votre premier
+      <em>composant</em> — un morceau d'interface qui fonctionne tout seul.</p>
+      <p>
+        <strong>Une seule notion nouvelle :</strong> lire un attribut
+        <code>data-</code>. Tout le reste vient des projets 9 et 10.
+      </p>
+    </div>
+
+    <h2>1 · Ce qu'est un système d'onglets</h2>
+
+    <p>
+      Plusieurs vues occupent <strong>le même espace</strong>. Une seule est visible
+      à la fois, et une barre de boutons permet de choisir laquelle.
+    </p>
+
+<pre><code>┌──────────┬──────────┬──────────┐
+│Catalogue │ Emprunts │ Retards  │   ← les onglets
+└══════════┴──────────┴──────────┘
+│                                │
+│   le panneau de l'onglet actif │   ← un seul visible
+│                                │
+└────────────────────────────────┘</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le mot-clé, c'est l'exclusivité.</strong> À tout instant : un seul
+        panneau visible, un seul onglet souligné. Tout le code découle de cette
+        règle.
+      </p>
+    </div>
+
+    <h2>2 · Le HTML dit déjà qui va avec qui</h2>
+
+    <p>
+      Chaque bouton porte un attribut qui <strong>désigne son panneau</strong> :
+    </p>
+
+<pre><code>&lt;button class="tab" data-content-id="content2"&gt;Emprunts&lt;/button&gt;
+
+&lt;div id="content2" class="tab-content"&gt; … &lt;/div&gt;
+          ↑ le même texte des deux côtés</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Un attribut qui commence par <code>data-</code> est un attribut
+        libre.</strong> Le navigateur ne lui donne aucun sens : il est là pour
+        <em>vous</em>, pour transporter une information de votre HTML vers votre
+        JavaScript.
+      </p>
+      <p>
+        On aurait pu deviner le lien par la position (1er bouton → 1er panneau). Mais
+        le jour où l'ordre change dans le HTML, tout casse en silence. L'attribut,
+        lui, dit les choses explicitement.
+      </p>
+    </div>
+
+    <h2>3 · Le CSS est déjà écrit — et c'est lui qui décide</h2>
+
+    <p>
+      Deux classes existent dans la page de travail. Votre code n'a qu'à les poser :
+    </p>
+
+    <table>
+      <tr><th>Classe</th><th>Sur quoi</th><th>Ce que le CSS en fait</th></tr>
+      <tr>
+        <td><code>tab-active</code></td><td>un bouton</td>
+        <td>fond blanc, texte bleu, soulignement</td>
+      </tr>
+      <tr>
+        <td><code>active</code></td><td>un panneau</td>
+        <td><code>display: block</code> — il devient visible</td>
+      </tr>
+    </table>
+
+<pre><code>.tab-content          { display: none; }    ← caché par défaut
+.tab-content.active   { display: block; }   ← visible si la classe est là</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>N'écrivez jamais <code>.style.display</code> dans ce projet.</strong>
+        C'est la règle du projet 9, exercice 2 — et voici pourquoi, concrètement.
+      </p>
+<pre><code>panneau.classList.add("active")   → &lt;div class="tab-content active"&gt;
+panneau.style.display = "block"   → &lt;div class="tab-content" style="display: block;"&gt;</code></pre>
+      <p>
+        Les deux affichent le panneau. Mais le second <strong>écrit dans la
+        page</strong> une décision d'apparence qui appartenait au CSS.
+      </p>
+    </div>
+
+    <h2>4 · <code>getAttribute</code> — lire l'attribut</h2>
+
+<pre><code>const identifiant = onglet.getAttribute("data-content-id");
+→ "content2"                                    ← du TEXTE
+
+const panneau = document.querySelector("#" + identifiant);
+→ l'élément &lt;div id="content2"&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Deux gestes enchaînés :</strong> on lit un texte dans le bouton, puis
+        on s'en sert pour fabriquer un sélecteur. Le <code>"#"</code> est celui du
+        projet 9, exercice 1 — un identifiant se cherche avec un dièse.
+      </p>
+    </div>
+
+    <h2>5 · Éteindre tout, rallumer un</h2>
+
+    <p>
+      C'est l'algorithme complet, et il tient en trois temps :
+    </p>
+
+<pre><code>1. retirer "tab-active" de TOUS les onglets
+2. retirer "active"     de TOUS les panneaux
+3. poser les deux classes sur le SEUL couple choisi</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Pourquoi tout éteindre d'abord ?</strong> Parce qu'on ne sait pas ce
+        qui était allumé avant. Éteindre uniquement « le précédent » demanderait de
+        s'en souvenir — une deuxième vérité à maintenir, qui finira par diverger de
+        la page.
+      </p>
+      <p>
+        Tout éteindre coûte trois tours de boucle et ne peut pas se tromper.
+      </p>
+    </div>
+
+    <h2>6 · Un écouteur par onglet</h2>
+
+<pre><code>for (const onglet of onglets) {
+  onglet.addEventListener("click", function () {
+    activer(onglet);
+  });
+}</code></pre>
+
+    <p>
+      La boucle du projet 9 et l'écouteur du projet 10, assemblés. Chaque bouton
+      reçoit sa propre écoute, et chacune sait <strong>quel</strong> onglet elle
+      concerne.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>On appelle <code>activer(onglet)</code>, pas
+        <code>activer</code>.</strong> Ce n'est pas une contradiction avec le projet
+        10 : ici la fonction anonyme est la fonction confiée, et
+        <em>elle</em> appelle <code>activer</code> avec le bon argument, au moment du
+        clic.
+      </p>
+    </div>
+
+    <h2>7 · L'état de départ</h2>
+
+    <p>
+      Au chargement, tous les panneaux sont cachés par le CSS : la zone de contenu
+      est <strong>vide</strong>. Un composant qui s'ouvre sur du vide est un
+      composant cassé.
+    </p>
+
+<pre><code>activer(onglets[0]);   ← la dernière ligne du fichier</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La même fonction sert au clic et au démarrage.</strong> C'est le
+        geste du projet 10, exercice 2 : une fonction, deux appelants. Rien à
+        dupliquer.
+      </p>
+      <p>
+        <code>onglets[0]</code> — le premier de la collection, par son index. Une
+        <code>NodeList</code> s'indexe comme un tableau (projet 9, exercice 1).
+      </p>
+    </div>
+
+    <h2>8 · ⚠️ Deux pièges de ce composant</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Oublier d'éteindre les onglets.</strong> Si vous ne retirez que la
+        classe des <em>panneaux</em>, l'affichage sera correct mais
+        <strong>plusieurs onglets resteront soulignés</strong> — le composant ment
+        sur son propre état.
+      </p>
+      <p>
+        <strong>Chercher le panneau sans le dièse.</strong>
+        <code>querySelector("content2")</code> cherche une <em>balise</em> nommée
+        « content2 », qui n'existe pas : vous obtenez <code>null</code>.
+      </p>
+      <p>
+        Ce qui suit dépend de votre code : si vous avez écrit un
+        <code>if (panneau)</code>, rien ne s'affiche <strong>en silence</strong> ;
+        sinon vous verrez
+        <code>TypeError: Cannot read properties of null (reading 'classList')</code>.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Howto/Solve_HTML_problems/Use_data_attributes"
+             target="_blank" rel="noopener">MDN — les attributs <code>data-*</code></a>
+        </td>
+        <td>Courte, et montre aussi la forme <code>dataset</code>.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Element/getAttribute"
+             target="_blank" rel="noopener">MDN — <code>getAttribute()</code></a>
+        </td>
+        <td>La référence.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour au projet</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

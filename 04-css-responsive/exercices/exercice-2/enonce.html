@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Les media queries</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 2</p>
+  <h1 class="titre-exo">Les media queries</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Faire qu'une même page se réorganise à deux
+      moments précis : à 700 px, puis à 1000 px.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> l'exercice 1
+        de ce projet, et Flexbox (projet 3, exercice 3).
+      </p>
+    </div>
+
+    <h2>📄 Les fichiers</h2>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>travail.html</code></td>
+        <td>🔒 Fourni et figé</td>
+      </tr>
+      <tr>
+        <td><code>style.css</code></td>
+        <td>👉 <strong>LE FICHIER QUE VOUS MODIFIEZ</strong> — organisé en trois
+            parties, dans l'ordre mobile-first</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>L'ordre du fichier fait partie de l'exercice.</strong> Les règles de
+        base d'abord, les media queries ensuite, par largeur croissante. En CSS, à
+        spécificité égale, <strong>la dernière règle écrite gagne</strong> : une media
+        query placée trop haut serait écrasée par les règles qui la suivent.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <h3>Partie 2 — le style de base (petits écrans)</h3>
+
+    <ol class="criteres">
+      <li>
+        <strong><code>.banniere</code></strong> — fond <code>#14457b</code>,
+        <code>padding: 1rem</code>, texte centré. <strong>Sans</strong>
+        <code>display: flex</code>
+      </li>
+      <li>
+        <strong><code>.logo</code></strong> — blanc, gras, <code>1.3rem</code>, sans
+        marge
+      </li>
+      <li>
+        <strong><code>.menu</code></strong> — liens côte à côte, <strong>passage à la
+        ligne autorisé</strong>, centrés, <code>gap: 1rem</code>
+      </li>
+      <li><strong><code>.menu a</code></strong> — blancs, sans soulignement</li>
+      <li><strong><code>h1</code></strong> — <code>font-size: 1.6rem</code></li>
+    </ol>
+
+    <h3>Partie 3 — les enrichissements</h3>
+
+    <ol class="criteres" start="6">
+      <li>
+        <strong><code>@media (min-width: 700px)</code></strong> contenant
+        <code>.banniere</code> : côte à côte, <code>space-between</code>, centré
+        verticalement, <code>padding: 1rem 2rem</code>,
+        <code>text-align: left</code>
+      </li>
+      <li>
+        <strong>Dans la même media query</strong> : <code>.grille</code> en flex avec
+        <code>gap: 1rem</code>, et <code>.espace</code> avec
+        <code>margin-bottom: 0</code>
+      </li>
+      <li>
+        <strong><code>@media (min-width: 1000px)</code></strong>, écrite
+        <strong>après</strong> la précédente, contenant <code>h1</code> à
+        <code>2.4rem</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Cette page a <strong>trois états</strong>. Testez-les en faisant varier la
+      largeur — au mode appareil mobile, la largeur s'affiche en haut de la page.
+    </p>
+
+    <table>
+      <tr>
+        <th>Largeur</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td><strong>360 px</strong><br><em>(téléphone)</em></td>
+        <td>
+          Le logo <strong>au-dessus</strong> du menu, tous deux centrés · les quatre
+          liens sur une ou deux lignes · les <strong>trois espaces empilés</strong>,
+          chacun sur toute la largeur · titre de taille modeste
+        </td>
+      </tr>
+      <tr>
+        <td><strong>800 px</strong><br><em>(tablette)</em></td>
+        <td>
+          Le logo <strong>à gauche</strong>, le menu <strong>à droite</strong>, sur la
+          même ligne · les <strong>trois espaces côte à côte</strong> · le titre
+          n'a pas changé de taille
+        </td>
+      </tr>
+      <tr>
+        <td><strong>1200 px</strong><br><em>(ordinateur)</em></td>
+        <td>
+          Idem qu'à 800 px, mais le <strong>titre est nettement plus grand</strong>
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le moment exact des bascules :</strong> à 700 px pour la bannière et la
+        grille, à 1000 px pour le titre. Passez lentement de 690 à 710 px pour voir le
+        premier basculement se produire.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — le sens de <code>min-width</code></strong></p>
+      <ol>
+        <li>
+          Dans votre media query de l'étape 6, remplacez
+          <code>min-width</code> par <code>max-width</code>. Enregistrez, rechargez.
+        </li>
+        <li>Testez à 360 px, puis à 1200 px.</li>
+      </ol>
+      <p>
+        <strong>Tout est inversé :</strong> la bannière s'étale sur le téléphone et
+        s'empile sur l'ordinateur. <code>min-width: 700px</code> signifie « la fenêtre
+        fait <em>au moins</em> 700 px » — donc les <strong>grands</strong> écrans.
+        C'est le contresens le plus fréquent.
+      </p>
+      <p><strong>Remettez <code>min-width</code></strong> avant de continuer.</p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — pourquoi l'ordre compte</strong></p>
+      <ol>
+        <li>
+          Déplacez la media query de l'étape 8 (celle de 1000 px) <strong>avant</strong>
+          celle de 700 px. Enregistrez, rechargez.
+        </li>
+        <li>Regardez le titre à 1200 px.</li>
+      </ol>
+      <p>
+        Il reste <strong>petit</strong>. À 1200 px les deux media queries s'appliquent,
+        et comme aucune n'est plus spécifique que l'autre, c'est la <em>dernière
+        écrite</em> qui gagne — ici celle de 700 px, qui laisse <code>h1</code> à
+        1.6rem. Aucun message d'erreur, juste une règle qui semble ignorée.
+      </p>
+      <p><strong>Remettez-les dans l'ordre croissant.</strong></p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les <strong>trois états</strong> du tableau sont constatés</li>
+      <li>
+        Dans <code>style.css</code>, <code>Ctrl+F</code> sur <code>TODO</code> : plus
+        aucun marqueur <em>en dehors de l'en-tête du fichier</em>
+      </li>
+      <li>
+        <code>Ctrl+F</code> sur <code>@media</code> : exactement <strong>deux</strong>
+        résultats, le 700 px avant le 1000 px
+      </li>
+      <li>
+        Le <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload"
+        target="_blank" rel="noopener">validateur CSS du W3C</a> ne signale aucune
+        erreur — il repère notamment une accolade manquante
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>35 à 45 minutes.</strong> Les étapes 1 à 5 vont vite ; l'essentiel du
+      temps se passe à tester les bascules, et c'est le plus instructif.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

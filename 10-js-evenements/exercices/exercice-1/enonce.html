@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Le premier clic</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le premier clic</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Faire fonctionner deux boutons inertes : l'un
+      allume et éteint une lampe, l'autre remet tout à zéro.</p>
+      <p>
+        <strong>Prérequis :</strong> le projet 9 en entier. Une seule notion
+        nouvelle : <code>addEventListener</code> (cours §2 et §3).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-1/app.js</code>
+      </p>
+      <p>
+        Il est <strong>vide</strong>. La page contient une lampe, deux paragraphes et
+        deux boutons — tous déjà en place, aucun ne réagit.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>La classe <code>allumee</code> est déjà écrite dans le CSS.</strong>
+      </p>
+      <p>
+        N'écrivez <em>aucune</em> couleur en JavaScript : posez la classe, retirez-la,
+        et le style suit. C'est la règle du projet 9, exercice 2, section 5.
+      </p>
+    </div>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <h3>Le bouton « Allumer / Éteindre »</h3>
+
+    <ol class="criteres">
+      <li>
+        Au <strong>premier clic</strong>, la lampe devient jaune : elle porte la
+        classe <code>allumee</code>
+      </li>
+      <li>
+        Au <strong>clic suivant</strong>, elle redevient grise — la classe est
+        retirée. Et ainsi de suite, indéfiniment
+      </li>
+      <li>
+        Le paragraphe d'état affiche <code>La lampe est allumée</code> ou
+        <code>La lampe est éteinte</code>, <strong>en accord avec la couleur</strong>
+      </li>
+      <li>
+        Le compteur affiche le nombre de clics sur ce bouton <strong>depuis la
+        dernière remise à zéro</strong>, suivi de <code>clic(s)</code> — il
+        <strong>continue de monter</strong> même quand on éteint
+      </li>
+    </ol>
+
+    <h3>Le bouton « Remise à zéro »</h3>
+
+    <ol class="criteres" start="5">
+      <li>
+        Il éteint la lampe <strong>même si elle était allumée</strong>, et remet
+        l'état et le compteur à leur valeur de départ
+      </li>
+      <li>
+        Après une remise à zéro, le bouton principal fonctionne
+        <strong>toujours</strong> : le clic suivant affiche <code>1 clic(s)</code>
+      </li>
+    </ol>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres" start="7">
+      <li>
+        <strong>Au chargement</strong>, deux lignes : <code>Écouteur posé sur :</code>
+        suivi du <strong>texte du bouton</strong>, puis <code>État initial :</code>
+        suivi du texte du paragraphe d'état
+      </li>
+      <li>
+        <strong>À chaque clic</strong> sur le bouton principal :
+        <code>Clic n°</code>, le numéro du clic, <code>· allumée ?</code> puis
+        <code>true</code> ou <code>false</code>
+      </li>
+      <li>
+        <strong>À chaque remise à zéro</strong> : <code>Remise à zéro</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Rechargez la page. <strong>Avant tout clic</strong>, la console affiche
+      exactement ces deux lignes :
+    </p>
+
+<pre><code>Écouteur posé sur : Allumer / Éteindre
+État initial : La lampe est éteinte</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Ces deux lignes sont un test en soi.</strong> Si une ligne
+        <code>Clic n°</code> apparaît avant que vous ayez cliqué — ou si la lampe est
+        déjà jaune, ou si la deuxième ligne dit <code>allumée</code> — vous avez
+        écrit <code>basculer()</code> au lieu de <code>basculer</code> (cours §3).
+      </p>
+    </div>
+
+    <p>
+      Cliquez ensuite <strong>trois fois</strong> sur « Allumer / Éteindre », puis
+      une fois sur « Remise à zéro ». La console doit afficher, à la suite :
+    </p>
+
+<pre><code>Clic n° 1 · allumée ? true
+Clic n° 2 · allumée ? false
+Clic n° 3 · allumée ? true
+Remise à zéro</code></pre>
+
+    <p>Et la page doit se comporter ainsi :</p>
+
+    <table>
+      <tr><th>Après…</th><th>La lampe</th><th>L'état</th><th>Le compteur</th></tr>
+      <tr>
+        <td>le chargement</td><td>grise</td>
+        <td>La lampe est éteinte</td><td>0 clic(s)</td>
+      </tr>
+      <tr>
+        <td>1 clic</td><td><strong>jaune</strong></td>
+        <td>La lampe est allumée</td><td>1 clic(s)</td>
+      </tr>
+      <tr>
+        <td>2 clics</td><td>grise</td>
+        <td>La lampe est éteinte</td><td>2 clic(s)</td>
+      </tr>
+      <tr>
+        <td>3 clics</td><td><strong>jaune</strong></td>
+        <td>La lampe est allumée</td><td>3 clic(s)</td>
+      </tr>
+      <tr>
+        <td>la remise à zéro</td><td>grise</td>
+        <td>La lampe est éteinte</td><td>0 clic(s)</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 6 se teste en une fois :</strong> après la remise à zéro,
+        recliquez. Si la console affiche <code>Clic n° 1</code> et le compteur
+        <code>1 clic(s)</code>, c'est bon. Si elle affiche <code>Clic n° 4</code>,
+        votre remise à zéro a oublié le compteur.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — les parenthèses de trop</strong></p>
+      <p>Une fois l'exercice terminé, essayez volontairement ceci :</p>
+      <ol>
+        <li>
+          Ajoutez des parenthèses au nom de la fonction dans
+          <code>addEventListener</code> : <code>basculer()</code>.
+        </li>
+        <li>Enregistrez, rechargez — <strong>sans cliquer</strong>.</li>
+      </ol>
+      <p>
+        La lampe s'allume <strong>toute seule</strong>, le compteur affiche déjà
+        <code>1 clic(s)</code>, et le bouton « Allumer / Éteindre » ne répond plus.
+        Aucune erreur rouge. Regardez surtout la console :
+      </p>
+<pre><code>Clic n° 1 · allumée ? true            ← la ligne de trop, EN PREMIER
+Écouteur posé sur : Allumer / Éteindre
+État initial : La lampe est allumée   ← « allumée » : la fonction est déjà passée</code></pre>
+      <p>
+        La ligne du clic arrive <strong>avant</strong> les deux autres : la fonction a
+        été appelée à la ligne du <code>addEventListener</code>, donc avant les
+        <code>console.log</code>. Vous venez d'appeler la fonction au lieu de la
+        confier. (« Remise à zéro » marche encore : son écouteur, lui, est
+        correctement posé.)
+      </p>
+      <p>Retirez ensuite les parenthèses.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>La lampe s'allume et s'éteint autant de fois qu'on veut</li>
+      <li>L'état écrit correspond toujours à la couleur</li>
+      <li>La remise à zéro éteint la lampe et remet le compteur à 0</li>
+      <li>Aucune couleur n'est écrite dans votre JavaScript</li>
+      <li>
+        Vous savez dire pourquoi on écrit <code>basculer</code> et non
+        <code>basculer()</code>
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>40 à 50 minutes.</strong> Le code est court — une quinzaine de lignes.
+      Le temps passe à comprendre <em>quand</em> il s'exécute, pas à l'écrire.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

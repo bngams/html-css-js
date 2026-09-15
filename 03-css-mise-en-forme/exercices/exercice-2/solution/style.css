@@ -1,0 +1,142 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 2 — SOLUTION COMMENTÉE
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ÉTAPE 1 — La règle qui change tout.
+
+   L'astérisque est le SÉLECTEUR UNIVERSEL : il vise tous les
+   éléments de la page, sans exception.
+
+   border-box demande que width désigne la boîte ENTIÈRE, bordures
+   et paddings compris. Sans cette règle, le conteneur ci-dessous
+   mesurerait 840px au lieu de 800 (20px de padding de chaque côté
+   qui s'ajoutent).
+
+   Cette règle ouvre la quasi-totalité des feuilles de style
+   professionnelles. Prenez l'habitude de la poser en premier.   */
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* ÉTAPE 2 — La page.
+
+   margin: 0 sur body supprime la marge d'environ 8px que le
+   navigateur ajoute par défaut autour de la page. Sans elle, une
+   bande grise subsiste sur les bords et aucun élément ne peut
+   toucher le bord de l'écran.                                    */
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+}
+
+
+/* ÉTAPE 3 — Centrer le conteneur.
+
+   La recette du centrage horizontal, à connaître par cœur :
+       une largeur limitée  +  margin: 0 auto
+
+   auto sur la gauche et la droite demande au navigateur de
+   répartir l'espace restant équitablement.
+
+   max-width plutôt que width : le bloc ne dépassera pas 800px sur
+   un grand écran, mais pourra rétrécir sur un petit. C'est déjà
+   un réflexe de responsive (projet 4).                           */
+
+.conteneur {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+/* ÉTAPE 4 — Les cartes.
+
+   Le cœur de l'exercice : padding et margin font des choses
+   différentes.
+
+   padding: 20px      → l'espace INTÉRIEUR. Le fond blanc s'étend
+                        dessous : le texte ne colle plus au bord.
+
+   margin-bottom: 20px → l'espace EXTÉRIEUR. Le gris de la page
+                        apparaît dessous : les cartes se séparent.
+
+   Le test pour trancher : le fond de l'élément s'étend-il dans
+   cet espace ? Oui = padding. Non = margin.
+
+   Et la bordure exige ses TROIS informations — épaisseur, style,
+   couleur. Sans « solid », rien ne s'affiche : le style vaut
+   none par défaut.                                               */
+
+.carte {
+  background-color: #fff;
+  border: 1px solid #d7dee8;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* ÉTAPE 5 — La carte mise en avant.
+
+   Cet élément porte DEUX classes : carte et carte--mise-en-avant.
+   Il reçoit donc les deux règles, et celle-ci ne redéfinit que ce
+   qui diffère — le fond et la bordure gauche. Tout le reste
+   (padding, marge, bordure des autres côtés) vient de .carte.
+
+   C'est une manière très courante de travailler : une classe de
+   base, puis une classe de variante qui ne change que le
+   nécessaire.
+
+   border-left ne vise qu'un seul côté et écrase, pour ce côté, la
+   bordure définie plus haut.                                     */
+
+.carte--mise-en-avant {
+  background-color: #e8f1fb;
+  border-left: 5px solid #0b6bcb;
+}
+
+
+/* ÉTAPE 6 — Le titre principal.
+
+   Les navigateurs donnent une marge par défaut aux titres. Celle
+   du haut crée ici un vide disgracieux sous le bord du conteneur :
+   on la supprime et on garde un espace mesuré en dessous.        */
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+
+/* ÉTAPE 7 — Le pied de page.
+
+   border-top trace un filet de séparation, et le padding du haut
+   éloigne le texte de ce filet. Sans ce padding, le texte
+   collerait au trait.                                            */
+
+footer {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #d7dee8;
+  padding-top: 20px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CE QU'IL FAUT RETENIR
+
+   padding = dedans  (le fond de l'élément s'y étend)
+   margin  = dehors  (le fond du parent apparaît)
+
+   border  = trois informations obligatoires : 1px solid #d7dee8
+
+   box-sizing: border-box  → width désigne la boîte entière.
+                             À poser en tête de toute feuille.
+
+   margin: 0 auto + max-width  → centrage horizontal d'un bloc.
+   ═══════════════════════════════════════════════════════════════ */

@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 1 — SOLUTION COMMENTÉE
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ÉTAPE 1 — La page entière.
+
+   body contient tout ce qui est visible. Une règle posée ici
+   descend sur tous les éléments de la page : c'est l'HÉRITAGE.
+   Inutile donc de répéter la police sur chaque paragraphe.
+
+   font-family est une LISTE DE REPLI : le navigateur essaie
+   system-ui (la police de l'interface du système), puis Segoe UI,
+   puis n'importe quelle police sans empattements. On termine
+   toujours par une famille générique — ici sans-serif — pour
+   garantir un résultat même si rien d'autre n'est disponible.
+
+   Les noms contenant un espace se mettent entre guillemets.       */
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  font-size: 18px;
+  color: #333;
+  background-color: #f7f7f5;
+}
+
+
+/* ÉTAPE 2 — Le titre principal.
+   Un simple sélecteur de balise : il vise TOUS les h1 de la page.
+   Ici il n'y en a qu'un, puisqu'une page n'a qu'un seul h1.      */
+
+h1 {
+  color: #14457b;
+}
+
+
+/* ÉTAPE 3 — Les sous-titres.
+   La page contient deux h2 : « Bienvenue » et « Nos nouveautés ».
+   Un sélecteur de balise les vise tous les deux d'un coup — pas
+   besoin de les traiter séparément.                              */
+
+h2 {
+  color: #0b6bcb;
+  text-align: center;
+}
+
+
+/* ÉTAPE 4 — Les paragraphes d'introduction.
+
+   Le POINT devant le nom signifie « la classe ». Cette règle vise
+   les DEUX paragraphes qui portent class="intro", où qu'ils se
+   trouvent dans la page.
+
+   C'est tout l'intérêt de la classe par rapport à l'id : elle se
+   pose sur autant d'éléments qu'on veut.                         */
+
+.intro {
+  font-weight: bold;
+  color: #1c2024;
+}
+
+
+/* ÉTAPE 5 — Le bloc de présentation.
+
+   Le DIÈSE signifie « l'id ». Un id est unique dans la page, donc
+   cette règle ne touche qu'un seul élément : la section
+   « Bienvenue ». Celle des nouveautés garde le fond de la page.
+
+   En pratique, on style rarement par id : une classe est presque
+   toujours préférable, car réutilisable. L'id reste utile pour les
+   liens internes (projet 1) et pour le JavaScript (jour 3).      */
+
+#presentation {
+  background-color: #fff;
+}
+
+
+/* ÉTAPE 6 — Les liens.
+
+   text-decoration: none retire le soulignement que le navigateur
+   applique par défaut.
+
+   ⚠️ Une remarque d'accessibilité : retirer le soulignement ôte
+   un repère visuel important. Dans un vrai site, on le remplace
+   par autre chose — une couleur franchement distincte, ou un
+   soulignement qui réapparaît au survol. Ne vous contentez jamais
+   de la seule couleur pour signaler un lien.                     */
+
+a {
+  text-decoration: none;
+  color: #0b6bcb;
+}
+
+
+/* ÉTAPE 7 — Le pied de page.
+   text-align se transmet aux éléments contenus : le paragraphe à
+   l'intérieur du footer est centré sans qu'on ait à le viser.    */
+
+footer {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CE QU'IL FAUT RETENIR
+
+   Trois sélecteurs, trois portées :
+
+       h1          → tous les éléments de ce type
+       .intro      → tous ceux qui portent cette classe
+       #presentation → l'unique élément qui porte cet id
+
+   Et l'héritage : ce qu'on pose sur body descend partout, ce qui
+   évite d'innombrables répétitions.
+   ═══════════════════════════════════════════════════════════════ */

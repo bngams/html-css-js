@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Le système d'onglets</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 11</a> · Cas pratique</p>
+  <h1 class="titre-exo">Le système d'onglets</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Faire fonctionner le tableau de bord de la
+      médiathèque : trois onglets, trois vues, <strong>une seule visible à la
+      fois</strong>.</p>
+      <p>
+        <strong>Prérequis :</strong> les projets 9 et 10 en entier. Une seule notion
+        nouvelle : <code>getAttribute</code> (cours §4).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-1/app.js</code>
+      </p>
+      <p>
+        Il est <strong>vide</strong>. La page contient trois boutons et trois
+        panneaux, tous en place, et un CSS complet.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Au chargement, la zone de contenu est vide.</strong>
+      </p>
+      <p>
+        C'est normal : le CSS cache tous les panneaux
+        (<code>.tab-content { display: none }</code>). C'est à votre code d'en ouvrir
+        un — voir le critère 5.
+      </p>
+    </div>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <h3>Le comportement</h3>
+
+    <ol class="criteres">
+      <li>
+        Un clic sur un onglet affiche <strong>son</strong> panneau — celui dont
+        l'<code>id</code> correspond à l'attribut <code>data-content-id</code> du
+        bouton
+      </li>
+      <li>
+        <strong>Un seul panneau est visible à la fois.</strong> Les deux autres sont
+        cachés, quel que soit l'ordre des clics
+      </li>
+      <li>
+        <strong>Un seul onglet est souligné à la fois</strong> : celui qui vient
+        d'être cliqué porte la classe <code>tab-active</code>, les autres ne l'ont
+        plus
+      </li>
+      <li>
+        On peut cliquer <strong>autant de fois qu'on veut</strong>, dans n'importe
+        quel ordre, y compris deux fois de suite sur le même onglet — l'affichage
+        reste cohérent
+      </li>
+      <li>
+        <strong>Au chargement, sans aucun clic</strong>, le premier onglet
+        (<code>Catalogue</code>) est déjà souligné et son panneau déjà visible
+      </li>
+    </ol>
+
+    <h3>La manière</h3>
+
+    <ol class="criteres" start="6">
+      <li>
+        Votre code ne contient <strong>ni couleur, ni <code>display</code>, ni
+        <code>.style</code></strong> : uniquement des classes posées et retirées
+      </li>
+      <li>
+        Le lien entre un onglet et son panneau passe par l'attribut
+        <code>data-content-id</code> — <strong>pas</strong> par la position dans la
+        page
+      </li>
+    </ol>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres" start="8">
+      <li>
+        <strong>Au chargement</strong> : <code>Onglets :</code> suivi du nombre
+        d'onglets, <code>· Panneaux :</code> suivi du nombre de panneaux
+      </li>
+      <li>
+        <strong>À chaque activation</strong> — clic <em>et</em> ouverture initiale :
+        <code>Onglet :</code>, le texte du bouton, <code>→ panneau :</code>, puis
+        l'identifiant du panneau affiché
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Rechargez. <strong>Avant tout clic</strong>, la console affiche exactement ces
+      deux lignes :
+    </p>
+
+<pre><code>Onglets : 3 · Panneaux : 3
+Onglet : Catalogue → panneau : content1</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La deuxième ligne est le test du critère 5.</strong> Si elle
+        n'apparaît pas, votre composant démarre sur du vide : il manque l'appel
+        d'ouverture (cours §7).
+      </p>
+    </div>
+
+    <p>
+      Cliquez ensuite sur <code>Retards</code>, puis sur <code>Emprunts</code>. La
+      console ajoute :
+    </p>
+
+<pre><code>Onglet : Retards → panneau : content3
+Onglet : Emprunts → panneau : content2</code></pre>
+
+    <p>Et la page doit se comporter ainsi :</p>
+
+    <table>
+      <tr><th>État</th><th>Onglet souligné</th><th>Panneau visible</th></tr>
+      <tr>
+        <td>au chargement</td><td>Catalogue</td><td>Le catalogue — 5 livres</td>
+      </tr>
+      <tr>
+        <td>clic sur Retards</td><td>Retards <em>seul</em></td>
+        <td>Les retards — 2 lignes en rouge</td>
+      </tr>
+      <tr>
+        <td>clic sur Emprunts</td><td>Emprunts <em>seul</em></td>
+        <td>Les emprunts — 3 lignes</td>
+      </tr>
+      <tr>
+        <td>re-clic sur Emprunts</td><td>Emprunts</td>
+        <td>inchangé — pas de clignotement, pas de doublon</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr><th>Ce que vous vérifiez</th><th>Ce que vous devez constater</th></tr>
+      <tr>
+        <td><strong>Aucun <code>style</code> dans la page</strong></td>
+        <td>
+          Inspectez un panneau en cliquant : seule la classe <code>active</code>
+          apparaît et disparaît. Aucun attribut <code>style</code> n'est jamais écrit
+        </td>
+      </tr>
+      <tr>
+        <td>Un seul souligné</td>
+        <td>
+          Comptez les onglets bleus après trois clics : il doit toujours y en avoir
+          <strong>exactement un</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>Aucune couleur dans votre code</td>
+        <td>
+          Cherchez <code>#</code>, <code>display</code> et <code>style</code> dans
+          <code>app.js</code> : le seul <code>#</code> admis est celui du sélecteur
+          <code>"#" + identifiant</code>
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — n'éteindre que les panneaux</strong></p>
+      <p>Une fois l'exercice terminé, essayez volontairement ceci :</p>
+      <ol>
+        <li>
+          Mettez en commentaire la boucle qui retire <code>tab-active</code> des
+          onglets — en gardant celle des panneaux.
+        </li>
+        <li>Enregistrez, rechargez, cliquez sur les trois onglets à la suite.</li>
+      </ol>
+      <p>
+        Le contenu affiché reste <strong>correct</strong>, mais les
+        <strong>trois onglets finissent soulignés</strong> en même temps. Aucune
+        erreur rouge. Le composant affiche une chose et en prétend une autre.
+      </p>
+      <p>Remettez ensuite la boucle.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les trois onglets basculent, dans n'importe quel ordre</li>
+      <li>Un seul panneau visible, un seul onglet souligné, toujours</li>
+      <li>Le catalogue est ouvert dès le chargement</li>
+      <li>Votre <code>app.js</code> ne contient ni couleur ni <code>display</code></li>
+      <li>
+        Vous savez dire pourquoi on éteint <strong>tout</strong> avant de rallumer
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 60 minutes.</strong> Le code fait une vingtaine de lignes. Écrivez
+      d'abord l'activation d'un seul onglet <em>en dur</em>, vérifiez qu'elle
+      fonctionne, puis entourez-la d'une boucle et d'un écouteur.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

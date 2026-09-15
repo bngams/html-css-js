@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Les tableaux de données</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 2</p>
+  <h1 class="titre-exo">Les tableaux de données</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Programme des sorties 2026&lt;/caption&gt;
+
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Sortie&lt;/th&gt;
+      &lt;th scope="col"&gt;Distance&lt;/th&gt;
+      &lt;th scope="col"&gt;Difficulté&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Pic du Midi&lt;/th&gt;
+      &lt;td&gt;14 km&lt;/td&gt;
+      &lt;td&gt;Difficile&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Boucle des trois lacs&lt;/th&gt;
+      &lt;td&gt;12 km&lt;/td&gt;
+      &lt;td&gt;Facile&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Crêtes de Bassiès&lt;/th&gt;
+      &lt;td&gt;18 km&lt;/td&gt;
+      &lt;td&gt;Difficile&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Cascade d'Ars&lt;/th&gt;
+      &lt;td&gt;9 km&lt;/td&gt;
+      &lt;td&gt;Moyenne&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+    </details>
+
+    <h2>Le point qui se discute : <code>&lt;th&gt;</code> ou <code>&lt;td&gt;</code> pour le nom ?</h2>
+
+    <p>
+      La tentation est d'écrire les quatre noms de sorties en <code>&lt;td&gt;</code> :
+      après tout, ce sont bien des données. Mais posez la question autrement :
+      <strong>si on vous lit « 14 km » sans rien d'autre, que manque-t-il ?</strong>
+      Il manque <em>de quelle sortie</em> il s'agit.
+    </p>
+
+    <p>
+      Le nom de la sortie <strong>identifie sa ligne</strong> — c'est la définition
+      d'un en-tête. D'où <code>&lt;th scope="row"&gt;</code>.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Le test :</strong> une cellule est un en-tête si elle sert à
+        <em>désigner</em> les autres cellules plutôt qu'à porter une information
+        propre. La colonne de gauche d'un tableau en est très souvent un.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>Une colonne est décalée sur une ligne</td>
+        <td>Cette ligne n'a pas le même nombre de cellules que les autres —
+            comptez-en trois par <code>&lt;tr&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Le titre s'affiche à l'intérieur du tableau, dans une cellule</td>
+        <td>Le <code>&lt;caption&gt;</code> a été placé après une ligne. Sa place est
+            juste après <code>&lt;table&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Rien n'est en gras</td>
+        <td>Toutes les cellules sont en <code>&lt;td&gt;</code> : aucune n'a été
+            déclarée comme en-tête</td>
+      </tr>
+      <tr>
+        <td>Le tableau n'a aucune bordure</td>
+        <td><strong>C'est normal.</strong> Le HTML décrit la structure, le CSS
+            l'apparence — projet 3</td>
+      </tr>
+      <tr>
+        <td>Le validateur signale « Element tbody not allowed here »</td>
+        <td>Le <code>&lt;tbody&gt;</code> est en dehors du <code>&lt;table&gt;</code>,
+            ou le <code>&lt;thead&gt;</code> n'a pas été fermé</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui fait gagner du temps :</strong> écrivez une ligne
+        complète et correcte, vérifiez-la dans le navigateur, puis copiez-collez-la
+        pour les suivantes en ne changeant que les valeurs. Un tableau est répétitif —
+        autant ne pas répéter les erreurs.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à mon code</a>
+      <a class="bouton" href="../exercice-3/">Exercice 3 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

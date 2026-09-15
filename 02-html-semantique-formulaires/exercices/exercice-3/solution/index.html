@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription à une sortie</title>
+</head>
+<body>
+
+  <h1>Inscription à une sortie</h1>
+
+  <p>Remplissez ce formulaire pour vous inscrire à l'une de nos randonnées.</p>
+
+  <form>
+
+    <p>
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" name="nom" required>
+    </p>
+
+    <p>
+      <label for="courriel">E-mail</label>
+      <input type="email" id="courriel" name="courriel" required>
+    </p>
+
+    <p>
+      <label for="naissance">Date de naissance</label>
+      <input type="date" id="naissance" name="naissance">
+    </p>
+
+    <p>
+      <label for="sortie">Sortie souhaitée</label>
+      <select id="sortie" name="sortie">
+        <option value="pic-du-midi">Pic du Midi</option>
+        <option value="trois-lacs">Boucle des trois lacs</option>
+        <option value="bassies">Crêtes de Bassiès</option>
+        <option value="cascade-ars">Cascade d'Ars</option>
+      </select>
+    </p>
+
+    <fieldset>
+      <legend>Formule souhaitée</legend>
+
+      <input type="radio" id="demi-journee" name="formule" value="demi-journee">
+      <label for="demi-journee">Demi-journée</label>
+
+      <input type="radio" id="journee" name="formule" value="journee">
+      <label for="journee">Journée entière</label>
+    </fieldset>
+
+    <p>
+      <input type="checkbox" id="newsletter" name="newsletter">
+      <label for="newsletter">Je souhaite recevoir la newsletter</label>
+    </p>
+
+    <p>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5"></textarea>
+    </p>
+
+    <p>
+      <button type="submit">M'inscrire</button>
+    </p>
+
+  </form>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EXERCICE 3 — SOLUTION COMMENTÉE
+
+       Les explications sont ici, APRÈS le contenu, et jamais en tête
+       de fichier : le doctype doit occuper la première ligne, et le
+       navigateur cesse de chercher la déclaration d'encodage au-delà
+       des 1024 premiers octets.
+
+       ── LA PAIRE for / id ──────────────────────────────────────────
+
+       C'est le mécanisme central de ce chapitre. Le for du label
+       reprend EXACTEMENT l'id du champ. Vérifiez-les deux à deux :
+
+           for="nom"          →  id="nom"
+           for="courriel"     →  id="courriel"
+           for="naissance"    →  id="naissance"
+           for="sortie"       →  id="sortie"
+           for="demi-journee" →  id="demi-journee"
+           for="journee"      →  id="journee"
+           for="newsletter"   →  id="newsletter"
+           for="message"      →  id="message"
+
+       Une coquille casse le lien SANS aucun message d'erreur. Le
+       seul symptôme : cliquer sur l'étiquette ne fait plus rien.
+
+       ── Ligne par ligne ────────────────────────────────────────────
+
+       type="email"
+         Le navigateur vérifie la présence d'un @ et, sur téléphone,
+         affiche un clavier adapté. Gratuit par rapport à type="text".
+
+       type="date"
+         Affiche un sélecteur de date fourni par le navigateur. Son
+         apparence varie d'un navigateur à l'autre : c'est normal.
+
+       select / option
+         L'attribut value est ce qui serait envoyé au serveur ; le
+         texte entre les balises est ce que voit l'utilisateur. On
+         raccourcit souvent le value (trois-lacs) par rapport au
+         libellé affiché (Boucle des trois lacs).
+
+       fieldset / legend
+         Regroupent les deux boutons radio sous un intitulé commun.
+         La legend se place en PREMIER dans le fieldset.
+
+       radio : même name, id différents
+         Le name partagé (formule) est ce qui rend les deux boutons
+         exclusifs : cocher l'un décoche l'autre. Les id, eux, sont
+         distincts, puisque chaque label doit viser son bouton.
+         C'est la seule situation où name et id ne se ressemblent pas.
+
+       checkbox
+         Une case indépendante : elle n'a pas besoin de partager son
+         name avec qui que ce soit.
+
+       textarea ... /textarea
+         Les deux balises sont COLLÉES l'une à l'autre. Un espace ou
+         un retour à la ligne entre elles apparaîtrait comme du texte
+         déjà saisi dans le champ.
+
+       required
+         Attribut booléen : il s'écrit seul, comme controls sur une
+         vidéo (projet 1). Le navigateur bloque l'envoi et affiche
+         son propre message — mais ce n'est PAS une sécurité : toute
+         donnée reçue doit être revérifiée côté serveur.
+
+       ── POURQUOI CE FORMULAIRE N'ENVOIE RIEN ───────────────────────
+
+       Il n'a ni action ni method : traiter les données demande un
+       serveur ou du JavaScript. L'objectif ici était de CONSTRUIRE
+       le formulaire ; l'envoi se verra au jour 3.
+       ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

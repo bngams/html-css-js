@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Images et contenus embarqués</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 3</p>
+  <h1 class="titre-exo">Images et contenus embarqués</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Construire une page qui rassemble les six
+      sortes de contenus qu'on n'écrit pas au clavier : une image, une image légendée,
+      un dessin, une vidéo, une carte et un document.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> les exercices
+        1 et 2. Vous savez écrire un squelette, des titres et des liens — on ajoute
+        maintenant les médias.
+      </p>
+    </div>
+
+    <h2>📄 Le fichier à modifier</h2>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-3/travail.html</code>
+      </p>
+      <p>
+        Le squelette et les sous-titres de section sont déjà écrits : vous remplissez
+        chaque section avec le média demandé.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Deux sections ont besoin d'Internet</strong> — la vidéo et la carte
+        viennent de sites extérieurs. Sans connexion, vous verrez un cadre vide ou un
+        lecteur qui ne démarre pas : <strong>ce n'est pas une erreur de votre
+        part</strong>, et les quatre autres sections fonctionnent hors ligne.
+      </p>
+    </div>
+
+    <h2>🗂️ Les fichiers fournis</h2>
+
+    <p>Deux fichiers vous attendent dans le dossier <code>assets/</code> du projet :</p>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Chemin depuis <code>travail.html</code></th>
+      </tr>
+      <tr>
+        <td>Une image</td>
+        <td><code>../../assets/photo.svg</code></td>
+      </tr>
+      <tr>
+        <td>Un document PDF</td>
+        <td><code>../../assets/programme.pdf</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        Les deux <code>../</code> remontent de <code>exercice-3/</code> vers
+        <code>exercices/</code>, puis vers la racine du projet — où se trouve
+        <code>assets/</code>. Revoyez la notion 1 du <a href="cours.html">cours</a>
+        si le chemin vous semble mystérieux : c'est la notion clé de cet exercice.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <ol class="criteres">
+      <li>
+        Une <strong>image</strong> affichée depuis <code>assets/photo.svg</code>, avec
+        un texte alternatif qui décrit ce qu'elle montre
+      </li>
+      <li>
+        La même image dans une <strong><code>&lt;figure&gt;</code></strong>, accompagnée
+        d'une <code>&lt;figcaption&gt;</code> visible
+      </li>
+      <li>
+        Un <strong>SVG écrit directement dans la page</strong> (un cercle suffit)
+      </li>
+      <li>
+        Une <strong>vidéo</strong> avec ses boutons de lecture
+      </li>
+      <li>
+        Une <strong>carte</strong> affichée dans une <code>&lt;iframe&gt;</code>, avec
+        un <code>title</code> qui décrit son contenu
+      </li>
+      <li>
+        Un <strong>lien vers le PDF</strong>, qui s'ouvre dans un nouvel onglet et
+        signale le format dans son texte
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>L'image</td>
+        <td>Un paysage stylisé — collines vertes, soleil jaune. <em>Si vous voyez du texte à la place, le chemin est faux</em></td>
+      </tr>
+      <tr>
+        <td>La légende</td>
+        <td>Votre texte de légende sous la seconde image</td>
+      </tr>
+      <tr>
+        <td>Le SVG</td>
+        <td>Un cercle plein, aux bords parfaitement nets</td>
+      </tr>
+      <tr>
+        <td>La vidéo <em>(Internet requis)</em></td>
+        <td>Un lecteur avec un bouton ▶, la durée, et le volume</td>
+      </tr>
+      <tr>
+        <td>La carte <em>(Internet requis)</em></td>
+        <td>Une carte du centre de Toulouse, que vous pouvez déplacer à la souris</td>
+      </tr>
+      <tr>
+        <td>Le lien PDF</td>
+        <td>Un clic ouvre le document dans un <strong>nouvel onglet</strong></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — à quoi sert vraiment <code>alt</code></strong></p>
+      <ol>
+        <li>Dans votre première image, <strong>cassez volontairement le chemin</strong> :
+            remplacez <code>photo.svg</code> par <code>photoo.svg</code>.</li>
+        <li>Enregistrez, rechargez.</li>
+      </ol>
+      <p>
+        L'image disparaît et <strong>votre texte alternatif s'affiche à sa place</strong>.
+        C'est exactement ce que voit une personne dont la connexion a échoué — et, sous
+        une autre forme, ce qu'entend une personne aveugle. Un <code>alt</code> vide ou
+        approximatif se paie ici.
+      </p>
+      <p><strong>Remettez le bon chemin</strong> avant de continuer.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>
+        Dans <code>travail.html</code>, cherchez <code>&lt;!-</code> avec
+        <code>Ctrl+F</code> : aucun commentaire de consigne ne doit subsister.
+      </li>
+      <li>
+        Cherchez <code>target="_blank"</code> et vérifiez que
+        <code>rel="noopener"</code> est sur la même balise.
+      </li>
+      <li>
+        Déposez votre fichier sur le
+        <a href="https://validator.w3.org/nu/#file" target="_blank" rel="noopener">validateur
+        du W3C</a>. Il signale notamment une <code>&lt;img&gt;</code> sans
+        <code>alt</code> — l'oubli le plus fréquent de cet exercice.
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>30 à 40 minutes.</strong> Les chemins de fichiers sont la partie qui
+      résiste le plus : c'est normal, et c'est la compétence la plus réutilisable des
+      trois exercices.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Commencer l'exercice →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

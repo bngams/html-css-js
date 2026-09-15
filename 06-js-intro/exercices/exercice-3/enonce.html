@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Des variables et des calculs</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 3</p>
+  <h1 class="titre-exo">Des variables et des calculs</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Choisir entre <code>let</code> et
+      <code>const</code>, savoir de quel type est une valeur, et faire des calculs
+      fiables avec <code>Math</code>.</p>
+      <p>
+        <strong>Prérequis :</strong> l'exercice 2 — les boîtes de dialogue et
+        <code>console.log()</code>.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-3/script.js</code>
+      </p>
+      <p>
+        La page <code>travail.html</code> est <strong>fournie et figée</strong> :
+        n'y touchez pas.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>⚠️ Changement par rapport à l'exercice 2 : aucune boîte de
+        dialogue.</strong> Tout s'affiche <strong>dans la console</strong>.
+      </p>
+      <p>
+        Si vous ne l'ouvrez pas (<code>F12</code>), vous croirez que rien ne
+        fonctionne. La page, elle, restera vide du début à la fin — c'est normal.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 16 étapes</h2>
+
+    <p>
+      Chaque étape correspond à un marqueur <code>TODO</code> dans
+      <code>script.js</code>. Traitez-les <strong>dans l'ordre</strong>.
+    </p>
+
+    <h3>Partie 1 — <code>const</code> ou <code>let</code> ?</h3>
+
+    <ol class="criteres">
+      <li>
+        Créer <code>NOM_MEDIATHEQUE</code> contenant
+        <code>Médiathèque des Trois Rivières</code>, avec le mot-clé qui
+        <strong>interdit</strong> le changement
+      </li>
+      <li>
+        Créer <code>PRIX_ABONNEMENT</code> contenant <code>24</code>, même mot-clé
+      </li>
+      <li>
+        Créer <code>nombreEmprunts</code> démarrant à <code>0</code>, avec le mot-clé
+        qui <strong>autorise</strong> le changement
+      </li>
+      <li>
+        Donner la valeur <code>3</code> à <code>nombreEmprunts</code>, sans réécrire
+        le mot-clé
+      </li>
+      <li>
+        Ajouter <code>1</code> au compteur en vous servant de sa valeur actuelle →
+        doit valoir <code>4</code>
+      </li>
+      <li>
+        Afficher dans la console le texte <code>Emprunts :</code> puis
+        <code>nombreEmprunts</code>
+      </li>
+    </ol>
+
+    <h3>Partie 2 — les types</h3>
+
+    <ol class="criteres" start="7">
+      <li>
+        Afficher, en une seule instruction, le <strong>type</strong> de
+        <code>NOM_MEDIATHEQUE</code>, <code>PRIX_ABONNEMENT</code> et
+        <code>nombreEmprunts</code> → vous devez obtenir
+        <code>string number number</code>
+      </li>
+    </ol>
+
+    <h3>Partie 3 — des calculs avec <code>Math</code></h3>
+
+    <ol class="criteres" start="8">
+      <li>
+        Ranger dans <code>moyennePages</code> la moyenne de <code>312</code>,
+        <code>247</code> et <code>190</code>
+      </li>
+      <li>
+        Afficher le texte <code>Moyenne brute :</code> puis
+        <code>moyennePages</code>
+      </li>
+      <li>
+        Ranger dans <code>moyenneArrondie</code> cette moyenne arrondie à l'entier
+        le plus proche
+      </li>
+      <li>
+        Afficher le texte <code>Moyenne arrondie :</code> puis
+        <code>moyenneArrondie</code>
+      </li>
+      <li>
+        Afficher le texte <code>Le plus long :</code> puis le plus grand des trois
+        nombres, <strong>obtenu avec <code>Math</code></strong> et non à la main
+      </li>
+      <li>
+        Ranger dans <code>prixTTC</code> le prix de l'abonnement augmenté de
+        <strong>20 %</strong> (multiplier par <code>1.2</code>)
+      </li>
+      <li>
+        Afficher le texte <code>Prix TTC :</code>, puis <code>prixTTC</code> formaté
+        à <strong>deux décimales</strong>, puis le texte <code>€</code>
+      </li>
+      <li>
+        Ranger dans <code>gagnant</code> un entier au hasard <strong>entre 1 et
+        6</strong>, avec la formule du cours
+      </li>
+      <li>
+        Afficher le texte <code>Lecteur tiré au sort :</code> puis
+        <code>gagnant</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Une fois les seize étapes faites, la console doit afficher
+      <strong>sept lignes</strong> :
+    </p>
+
+<pre><code>Emprunts : 4
+string number number
+Moyenne brute : 249.66666666666666
+Moyenne arrondie : 250
+Le plus long : 312
+Prix TTC : 28.80 €
+Lecteur tiré au sort : 3        ← un nombre entre 1 et 6</code></pre>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Le compteur</td>
+        <td><code>Emprunts : 4</code> — et non <code>3</code> ni <code>01</code></td>
+      </tr>
+      <tr>
+        <td>Les types</td>
+        <td>
+          Exactement <code>string number number</code>, dans cet ordre
+        </td>
+      </tr>
+      <tr>
+        <td>L'arrondi</td>
+        <td>
+          La moyenne brute est décimale, l'arrondie vaut <code>250</code> :
+          l'arrondi <strong>change</strong> la valeur
+        </td>
+      </tr>
+      <tr>
+        <td>Le prix</td>
+        <td>
+          <code>28.80 €</code> avec deux décimales — et non
+          <code>28.799999999999997</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le tirage</td>
+        <td>
+          Rechargez dix fois : le nombre change, et reste
+          <strong>toujours entre 1 et 6</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>script.js</code> : aucun
+          résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — à quoi sert vraiment <code>const</code></strong></p>
+      <ol>
+        <li>Terminez les seize étapes et rechargez.</li>
+        <li>
+          Dans la console, tapez <code>PRIX_ABONNEMENT = 30</code> puis Entrée.
+        </li>
+        <li>
+          Tapez maintenant <code>nombreEmprunts = 30</code> puis Entrée.
+        </li>
+      </ol>
+      <p>
+        Le premier déclenche
+        <code>TypeError: Assignment to constant variable.</code> Le second passe
+        sans rien dire. <strong>C'est toute la différence</strong> : le mot-clé que
+        vous choisissez décide si le navigateur vous protège ou vous laisse faire.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les sept lignes s'affichent, sans erreur rouge</li>
+      <li>
+        Vous savez dire, pour chaque variable, <strong>pourquoi</strong> elle est en
+        <code>const</code> ou en <code>let</code>
+      </li>
+      <li>
+        Vous savez que <code>.toFixed()</code> sert à <strong>afficher</strong>, pas
+        à calculer
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>script.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 55 minutes.</strong> C'est l'exercice le plus long du projet :
+      seize étapes, mais chacune tient en une ligne.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

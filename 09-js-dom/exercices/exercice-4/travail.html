@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Les emprunts</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #253044;
+      background-color: #f6f8fb;
+    }
+    .page { max-width: 680px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #1d6fa5; margin-top: 0; }
+    h2 { font-size: 1.15rem; color: #14507a; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .fichier-nom {
+      display: inline-block;
+      background-color: #14507a;
+      color: #fff;
+      padding: 0.2em 0.6em;
+      border-radius: 5px;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 0.95em;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+
+    /* ─── Le bandeau que votre code va remplir ────────────────── */
+
+    #bilan {
+      background-color: #eef3f8;
+      border-radius: 8px;
+      padding: 0.8rem 1.1rem;
+      font-weight: 600;
+      color: #5a6570;
+      margin-bottom: 1.2rem;
+      min-height: 1.6em;
+    }
+    #bilan.alerte {
+      background-color: #fdecea;
+      color: #a3261c;
+    }
+
+    /* ─── La liste que votre code va reconstruire ─────────────── */
+
+    #emprunts {
+      list-style: none;
+      padding: 0;
+      min-height: 3rem;
+    }
+    /* Ces classes existent : c'est votre code qui les posera */
+    .emprunt {
+      background-color: #fff;
+      border: 1px solid #dde3e9;
+      border-left: 5px solid #c3ccd8;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .emprunt.retard { border-left-color: #d9534f; background-color: #fdf6f5; }
+    .emprunt__titre { font-weight: 600; flex: 1; }
+    .emprunt__lecteur { color: #1d6fa5; font-size: 0.92rem; white-space: nowrap; }
+    .emprunt__jours { color: #5a6570; font-size: 0.92rem; white-space: nowrap; }
+
+    .perime { opacity: 0.55; font-style: italic; }
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     🔒 NE TOUCHEZ PAS À CE FICHIER.
+
+     Cette page est FOURNIE et FIGÉE.
+
+     👉 LE FICHIER QUE VOUS MODIFIEZ EST : app.js
+
+     ⚠️ REGARDEZ BIEN : la liste #emprunts contient DÉJÀ trois
+        lignes, écrites à la main et PÉRIMÉES. Votre code doit
+        d'abord faire le ménage, puis tout reconstruire à partir
+        des données.
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="page">
+
+    <h1>Les emprunts en cours</h1>
+
+    <p id="bilan"></p>
+
+    <ul id="emprunts">
+      <li class="emprunt perime">Ancienne ligne — écrite à la main</li>
+      <li class="emprunt perime">Ancienne ligne — écrite à la main</li>
+      <li class="emprunt perime">Ancienne ligne — écrite à la main</li>
+    </ul>
+
+    <div class="encadre">
+      <p>
+        <strong>Le fichier que vous modifiez :</strong>
+        <span class="fichier-nom">app.js</span>
+      </p>
+      <p>
+        Il contient déjà le <strong>tableau de données</strong> — six emprunts, chacun
+        avec un titre, un lecteur et un nombre de jours. Vous n'avez pas à l'écrire.
+      </p>
+      <p>
+        <strong>Les trois lignes grises ci-dessus sont fausses.</strong> Elles sont
+        écrites en dur dans le HTML et ne correspondent à rien. Votre code commence
+        par les retirer.
+      </p>
+    </div>
+
+    <h2>Avant de commencer</h2>
+
+    <ol>
+      <li>Ouvrez la console : <kbd>F12</kbd> → onglet <strong>Console</strong></li>
+      <li>Ouvrez <code>app.js</code> dans VSCode</li>
+      <li>Enregistrez avec <kbd>Ctrl+S</kbd>, puis rechargez avec <kbd>F5</kbd></li>
+    </ol>
+
+    <p>
+      <strong>Cet exercice ne présente aucune notion nouvelle.</strong> Tout ce dont
+      vous avez besoin a été vu aux exercices 1, 2 et 3 — et dans les projets 6 à 8.
+    </p>
+
+    <p>
+      <a class="retour" href="enonce.html">← Revenir à l'énoncé</a>
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

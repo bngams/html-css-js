@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Décrire une chose : les objets</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 3</p>
+  <h1 class="titre-exo">Décrire une chose : les objets</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous regardé les deux types de la partie 5 ?</strong>
+      <code>string</code> puis <code>object</code> : c'est la découverte de cet
+      exercice. Si vous ne l'avez pas vue, retournez à la
+      <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const livre = {
+  titre: "La Horde du Contrevent",
+  auteur: "Damasio",
+  pages: 712
+};
+
+console.log("Titre :", livre.titre);
+console.log("Auteur :", livre["auteur"]);
+console.log("Éditeur :", livre.editeur);
+
+livre.editeur = "La Volte";
+
+console.log("Après ajout :", livre.editeur);
+
+for (const cle in livre) {
+  console.log("·", cle, "=", livre[cle]);
+}
+
+const catalogue = [
+  { titre: "Dune", pages: 900 },
+  { titre: "La Horde", pages: 712 },
+  { titre: "Fondation", pages: 420 }
+];
+
+console.log("1er du catalogue :", catalogue[0].titre);
+
+for (const livreDuCatalogue of catalogue) {
+  console.log("→", livreDuCatalogue.titre);
+}
+
+let totalPages = 0;
+
+for (const livreDuCatalogue of catalogue) {
+  totalPages = totalPages + livreDuCatalogue.pages;
+}
+
+console.log("Total des pages :", totalPages);
+
+const livreTexte = JSON.stringify(livre);
+
+console.log("JSON :", livreTexte, "· type :", typeof livreTexte);
+
+const livreRetrouve = JSON.parse(livreTexte);
+
+console.log("Retrouvé :", livreRetrouve.titre, "· type :", typeof livreRetrouve);</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Crochets ou point : ce n'est pas au hasard</h3>
+
+    <table>
+      <tr><th>Écriture</th><th>Quand</th></tr>
+      <tr>
+        <td><code>livre.titre</code></td>
+        <td>vous connaissez le nom de la clé en écrivant le code</td>
+      </tr>
+      <tr>
+        <td><code>livre[cle]</code></td>
+        <td>le nom est <strong>dans une variable</strong> — cas du <code>for…in</code></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>L'erreur classique de l'étape 7 :</strong> écrire
+        <code>livre.cle</code>. JavaScript cherche alors une propriété littéralement
+        appelée <code>cle</code>, ne la trouve pas, et affiche
+        <code>undefined</code> quatre fois de suite —
+        <strong>sans erreur rouge</strong>.
+      </p>
+    </div>
+
+    <h3>2 · Quatre propriétés, pas trois</h3>
+
+    <p>
+      Votre objet est créé avec trois clés, mais le parcours en affiche
+      <strong>quatre</strong> : <code>editeur</code> a été ajoutée à l'étape 5.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <code>const</code> n'a rien empêché. Comme pour les tableaux, il interdit de
+        <strong>remplacer</strong> l'objet, pas d'en modifier le contenu. Un objet
+        déclaré en <code>const</code> reste parfaitement modifiable.
+      </p>
+    </div>
+
+    <h3>3 · <code>stringify</code> rend du TEXTE</h3>
+
+    <div class="attention">
+      <p>
+        C'est le cœur de la partie 5, et la source de confusion la plus fréquente :
+      </p>
+<pre><code>typeof livreTexte      → "string"     ⚠️ du texte
+typeof livreRetrouve   → "object"     ✅ un objet
+
+livreTexte.titre       → undefined    (une chaîne n'a pas de .titre)
+livreRetrouve.titre    → "La Horde…"  ✅</code></pre>
+      <p>
+        Le texte JSON <em>ressemble</em> à l'objet — mêmes mots, mêmes valeurs — mais
+        ce n'est qu'une suite de caractères. <strong>L'apparence n'est pas le
+        type</strong>, exactement comme <code>"25"</code> et <code>25</code> au
+        projet 6.
+      </p>
+    </div>
+
+    <p>
+      Remarquez aussi les <strong>guillemets doubles</strong> autour des clés dans le
+      JSON, alors que votre objet n'en avait pas. C'est la règle de JSON, plus
+      stricte que celle de JavaScript.
+    </p>
+
+    <h3>4 · Le tableau d'objets : rien de neuf, tout de nouveau</h3>
+
+    <p>
+      La partie 4 ne demande aucune notion inédite — un <code>for…of</code> de
+      l'exercice 1, un accès par point de la partie 1 — mais c'est la structure la
+      plus courante du web :
+    </p>
+
+<pre><code>catalogue[0].titre     un index, puis une clé</code></pre>
+
+    <div class="astuce">
+      <p>
+        C'est sous cette forme exacte que les données arrivent d'un serveur. Au
+        <strong>projet 12</strong>, vous recevrez un tableau d'objets et en ferez un
+        tableau HTML. Vous saurez déjà le parcourir.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Le parcours affiche <code>undefined</code> quatre fois</td>
+        <td>
+          Vous avez écrit <code>livre.cle</code> au lieu de <code>livre[cle]</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>SyntaxError: Invalid shorthand property initializer</code></td>
+        <td>
+          Un <code>=</code> au lieu d'un <code>:</code> entre la clé et sa valeur
+        </td>
+      </tr>
+      <tr>
+        <td><code>TypeError: Cannot read properties of undefined</code></td>
+        <td>
+          Vous entrez dans une clé qui n'existe pas. Remontez d'un cran : c'est le
+          niveau au-dessus qui manque
+        </td>
+      </tr>
+      <tr>
+        <td>L'étape 13 affiche <code>object</code> au lieu de <code>string</code></td>
+        <td>
+          Vous affichez le type de <code>livre</code>, pas celui de
+          <code>livreTexte</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Total des pages : 0</code></td>
+        <td>
+          L'addition est écrite <strong>hors</strong> de la boucle : le total n'est
+          jamais alimenté
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>Total des pages :
+          0[object Object][object Object][object Object]</code>
+        </td>
+        <td>
+          Il manque le <code>.pages</code> : vous ajoutez le <strong>livre
+          entier</strong>. <code>0 + objet</code> colle du texte au lieu
+          d'additionner, et le total devient une <strong>chaîne</strong> qui
+          s'allonge à chaque tour — c'est le <code>+</code> du projet 6, encore lui
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Exercice 4 — à venir ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

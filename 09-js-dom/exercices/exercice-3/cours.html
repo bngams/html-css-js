@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Créer et insérer</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 3</p>
+  <h1 class="titre-exo">Créer et insérer</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> fabriquer des éléments
+      qui n'existaient pas dans le HTML, et les placer dans la page.</p>
+    </div>
+
+    <h2>1 · Du contenu qui n'est pas écrit à la main</h2>
+
+    <p>
+      Jusqu'ici, les éléments étaient <em>déjà là</em> : vous les trouviez, vous les
+      modifiiez. Mais un catalogue de trois cents livres ne s'écrit pas à la main
+      dans le HTML — il arrive sous forme de <strong>données</strong>, et c'est le
+      code qui construit la page.
+    </p>
+
+    <p>
+      Vous savez déjà décrire ces données. C'est le tableau d'objets du projet 8 :
+    </p>
+
+<pre><code>const catalogue = [
+  { titre: "Dune", pages: 900 },
+  { titre: "La Horde", pages: 712 }
+];</code></pre>
+
+    <p>Il ne manque que le geste pour les transformer en éléments.</p>
+
+    <h2>2 · <code>createElement</code> — fabriquer</h2>
+
+<pre><code>const li = document.createElement("li");</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>L'élément existe, mais il n'est nulle part.</strong> Il est fabriqué
+        en mémoire, pas dans la page :
+      </p>
+<pre><code>li.tagName           → "LI"        ✅ c'est bien un élément
+li.textContent       → ""          vide au départ
+li.parentElement     → null        ⚠️ il n'a pas de parent
+document.body.contains(li)  → false  ⚠️ invisible</code></pre>
+      <p>
+        <strong>Rien ne s'affiche tant qu'on ne l'a pas inséré.</strong> C'est la
+        cause numéro un du « mon code tourne mais je ne vois rien » sur ce chapitre.
+      </p>
+    </div>
+
+    <p>On le remplit comme n'importe quel élément trouvé :</p>
+
+<pre><code>li.textContent = "Dune";
+li.classList.add("livre");</code></pre>
+
+    <div class="astuce">
+      <p>
+        Rien de neuf : <code>.textContent</code> et <code>.classList</code> sont ceux
+        de l'exercice 2. Un élément fabriqué se manipule exactement comme un élément
+        trouvé.
+      </p>
+    </div>
+
+    <h2>3 · <code>append</code> — insérer</h2>
+
+<pre><code>document.querySelector("#liste").append(li);</code></pre>
+
+    <table>
+      <tr><th>Instruction</th><th>Place l'élément</th></tr>
+      <tr><td><code>parent.append(el)</code></td><td><strong>en dernier</strong> dans le parent</td></tr>
+      <tr><td><code>parent.prepend(el)</code></td><td><strong>en premier</strong></td></tr>
+      <tr><td><code>el.remove()</code></td><td>le retire de la page</td></tr>
+    </table>
+
+<pre><code>Avant :  &lt;ul&gt; Un · Deux &lt;/ul&gt;
+
+liste.append(trois)   → Un · Deux · Trois
+liste.prepend(zero)   → Zéro · Un · Deux · Trois</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>append</code> accepte <strong>plusieurs éléments à la fois</strong> :
+        <code>parent.append(a, b, c)</code>. Il accepte même du texte brut —
+        <code>parent.append("bonjour")</code> — mais celui-ci n'est alors pas un
+        élément : on ne peut ni lui donner de classe, ni le retrouver avec
+        <code>querySelector</code>.
+      </p>
+    </div>
+
+    <h2>3 bis · Compter ce qu'il y a dans un parent</h2>
+
+    <p>
+      Une fois des éléments insérés, on veut souvent savoir combien il y en a. Un
+      parent sait le dire, sans qu'on ait à écrire de sélecteur :
+    </p>
+
+<pre><code>liste.children          → ses éléments enfants
+liste.children.length   → combien il y en a</code></pre>
+
+    <p>
+      La différence avec <code>querySelectorAll</code> de l'exercice 1 tient en un
+      mot : <strong>directs</strong>.
+    </p>
+
+<pre><code>&lt;ul id="liste"&gt;
+  &lt;li&gt;A &lt;span&gt;dedans&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;B&lt;/li&gt;
+&lt;/ul&gt;
+
+liste.children.length              → 2   les deux &lt;li&gt;, rien d'autre
+liste.querySelectorAll("*").length → 3   les &lt;li&gt; ET le &lt;span&gt; dedans</code></pre>
+
+    <p>
+      <code>querySelectorAll</code> descend <strong>à tous les niveaux</strong> ;
+      <code>.children</code> s'arrête au <strong>premier</strong>. Pour compter les
+      lignes d'une liste, c'est exactement ce qu'il faut.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Ne supprimez jamais en bouclant sur <code>.children</code>.</strong>
+        Cette liste est <em>vivante</em> : elle se met à jour pendant que vous la
+        parcourez, et la boucle en saute la moitié.
+      </p>
+<pre><code>boucle sur querySelectorAll("li") + remove()  → 5 tours, il reste 0   ✅
+boucle sur children              + remove()  → 3 tours, il reste 2   ❌</code></pre>
+      <p>
+        C'est pourquoi le ménage de la section 7 s'écrit avec
+        <code>querySelectorAll</code>. <code>.children</code> sert à
+        <strong>compter</strong>, pas à supprimer.
+      </p>
+    </div>
+
+    <h2>4 · ⚠️ Insérer un élément déjà placé le DÉPLACE</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Le piège le plus surprenant de ce chapitre.</strong>
+        <code>append</code> ne fait pas de copie : si l'élément est déjà quelque part
+        dans la page, il est <strong>retiré de son ancien emplacement</strong>.
+      </p>
+<pre><code>Liste A :  Zéro · Un · Deux
+autreEndroit.append(zero);
+
+Liste A :  Un · Deux          ⚠️ Zéro a DISPARU de la liste A
+autreEndroit :  Zéro          il a été déplacé, pas dupliqué</code></pre>
+      <p>
+        Un élément n'existe qu'à <strong>un seul endroit</strong> à la fois. Pour en
+        avoir deux, il faut en <em>fabriquer</em> deux — c'est justement ce que fait
+        une boucle.
+      </p>
+    </div>
+
+    <h2>5 · Construire un élément qui en contient d'autres</h2>
+
+    <p>
+      Une ligne de catalogue n'est pas un simple texte : c'est un
+      <code>&lt;li&gt;</code> qui contient un titre et un nombre de pages. On
+      assemble, puis on insère le tout :
+    </p>
+
+<pre><code>const li = document.createElement("li");
+li.classList.add("livre");
+
+const titre = document.createElement("span");
+titre.textContent = "Dune";
+li.append(titre);
+
+liste.append(li);</code></pre>
+
+    <p>Ce qui produit, dans la page :</p>
+
+<pre><code>&lt;li class="livre"&gt;&lt;span&gt;Dune&lt;/span&gt;&lt;/li&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>L'ordre a une logique :</strong> on fabrique de l'intérieur vers
+        l'extérieur, et on n'insère dans la page qu'à la fin. Tant que
+        <code>li</code> n'est pas inséré, on peut le remplir tranquillement — rien ne
+        s'affiche encore.
+      </p>
+    </div>
+
+    <h2>6 · La boucle qui construit</h2>
+
+    <p>
+      Assemblez ce que vous savez : un tableau d'objets du projet 8, une boucle
+      <code>for…of</code>, et le geste ci-dessus.
+    </p>
+
+<pre><code>for (const livre of catalogue) {
+  const li = document.createElement("li");
+  li.textContent = livre.titre;
+  liste.append(li);
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Le <code>createElement</code> doit être DANS la boucle.</strong>
+        Placé avant, il ne fabrique qu'un seul élément — et comme
+        <code>append</code> déplace au lieu de copier, vous obtiendrez
+        <strong>une seule ligne</strong>, portant le dernier titre.
+      </p>
+      <p>
+        C'est la conséquence directe de la section 4. Un tour de boucle, un élément
+        neuf.
+      </p>
+    </div>
+
+    <h2>7 · Vider avant de reconstruire</h2>
+
+    <p>
+      Si la page contient déjà des éléments et que vous voulez les remplacer, il faut
+      d'abord faire le ménage :
+    </p>
+
+<pre><code>for (const ancien of liste.querySelectorAll("li")) {
+  ancien.remove();
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        Sans cela, vos nouvelles lignes <strong>s'ajoutent</strong> aux anciennes —
+        <code>append</code> ne remplace rien, il complète.
+      </p>
+    </div>
+
+    <h2>8 · Et <code>innerHTML</code> ?</h2>
+
+    <div class="attention">
+      <p>
+        Vous verrez souvent, ailleurs, une liste construite par assemblage de
+        texte :
+      </p>
+<pre><code>liste.innerHTML += "&lt;li&gt;" + livre.titre + "&lt;/li&gt;";</code></pre>
+      <p>
+        <strong>Ce n'est pas au programme de ce cours</strong>, et ce n'est pas un
+        oubli. Cette écriture recolle toute la page à chaque tour, perd ce qu'on
+        avait déjà posé, et — si le titre vient d'un visiteur — laisse insérer du
+        code dans votre page.
+      </p>
+      <p>
+        <strong><code>createElement</code> n'a aucun de ces défauts.</strong> C'est un
+        peu plus long à écrire, et c'est ce qu'on écrit.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Document/createElement"
+             target="_blank" rel="noopener">MDN — <code>createElement()</code></a>
+        </td>
+        <td>La référence, courte et précise.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Element/append"
+             target="_blank" rel="noopener">MDN — <code>append()</code></a>
+        </td>
+        <td>Et ses variantes : <code>prepend</code>, <code>before</code>, <code>after</code>.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/modifying-document"
+             target="_blank" rel="noopener">javascript.info — Modifier le document</a>
+        </td>
+        <td>Le chapitre complet, avec la comparaison des méthodes d'insertion.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

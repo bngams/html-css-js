@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Enregistrer un emprunt</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #253044;
+      background-color: #f6f8fb;
+    }
+    .page { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #1d6fa5; margin-top: 0; }
+    h2 { font-size: 1.15rem; color: #14507a; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .fichier-nom {
+      display: inline-block;
+      background-color: #14507a;
+      color: #fff;
+      padding: 0.2em 0.6em;
+      border-radius: 5px;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 0.95em;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+
+    /* ─── Le formulaire ───────────────────────────────────────── */
+
+    #ajout {
+      background-color: #fff;
+      border: 1px solid #dde3e9;
+      border-radius: 10px;
+      padding: 1.3rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+    #ajout input {
+      font: inherit;
+      flex: 1 1 12rem;
+      padding: 0.6em 0.9em;
+      border: 2px solid #c3ccd8;
+      border-radius: 7px;
+    }
+    #ajout input:focus { outline: none; border-color: #1d6fa5; }
+    #ajout button {
+      font: inherit;
+      font-weight: 600;
+      padding: 0.6em 1.4em;
+      border: none;
+      border-radius: 7px;
+      background-color: #1d6fa5;
+      color: #fff;
+      cursor: pointer;
+    }
+    #ajout button:hover { background-color: #14507a; }
+
+    #message {
+      margin: 0 0 1.2rem;
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: #1a7a4c;
+      min-height: 1.5em;
+    }
+    /* Posée par votre code quand la saisie est refusée */
+    #message.erreur { color: #a3261c; }
+
+    #compteur {
+      margin: 0 0 0.6rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #5a6570;
+    }
+
+    /* ─── La liste ────────────────────────────────────────────── */
+
+    #liste {
+      list-style: none;
+      padding: 0;
+      min-height: 3rem;
+    }
+    /* Ces classes existent : c'est votre code qui les posera */
+    .emprunt {
+      background-color: #fff;
+      border: 1px solid #dde3e9;
+      border-left: 5px solid #c3ccd8;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .emprunt__titre { font-weight: 600; }
+    .emprunt__lecteur { color: #1d6fa5; font-size: 0.92rem; white-space: nowrap; }
+
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     🔒 NE TOUCHEZ PAS À CE FICHIER.
+
+     Cette page est FOURNIE et FIGÉE.
+
+     👉 LE FICHIER QUE VOUS MODIFIEZ EST : app.js
+
+     ⚠️ ESSAYEZ D'ABORD LE FORMULAIRE TEL QUEL :
+        tapez quelque chose, appuyez sur Entrée.
+        La page se RECHARGE et tout est perdu. C'est le
+        comportement par défaut du navigateur — votre code
+        devra l'en empêcher.
+     ═══════════════════════════════════════════════════════════════ -->
+
+  <div class="page">
+
+    <h1>Enregistrer un emprunt</h1>
+
+    <form id="ajout">
+      <input id="titre"   type="text" placeholder="Titre du livre">
+      <input id="lecteur" type="text" placeholder="Prénom du lecteur">
+      <button type="submit">Ajouter</button>
+    </form>
+
+    <p id="message"></p>
+
+    <p id="compteur"></p>
+
+    <ul id="liste"></ul>
+
+    <div class="encadre">
+      <p>
+        <strong>Le fichier que vous modifiez :</strong>
+        <span class="fichier-nom">app.js</span>
+      </p>
+      <p>
+        Il contient déjà le <strong>tableau de données</strong> — trois emprunts. Mais
+        contrairement aux exercices précédents, ce tableau va
+        <strong>grandir</strong> : chaque envoi du formulaire y ajoute une ligne.
+      </p>
+      <p>
+        <strong>Essayez le formulaire maintenant, avant d'écrire une seule ligne.</strong>
+        Tapez un titre, appuyez sur <kbd>Entrée</kbd> : la page se recharge, le champ
+        se vide, rien n'est enregistré. Vous venez de voir le problème que cet
+        exercice résout.
+      </p>
+    </div>
+
+    <h2>Avant de commencer</h2>
+
+    <ol>
+      <li>Ouvrez la console : <kbd>F12</kbd> → onglet <strong>Console</strong></li>
+      <li>Ouvrez <code>app.js</code> dans VSCode</li>
+      <li>Enregistrez avec <kbd>Ctrl+S</kbd>, puis rechargez avec <kbd>F5</kbd></li>
+    </ol>
+
+    <p>
+      <strong>Attention :</strong> quand la page se recharge, la console se vide aussi.
+      Si vos messages disparaissent à l'envoi du formulaire, c'est justement le signe
+      que le rechargement n'a pas été empêché.
+    </p>
+
+    <p>
+      <a class="retour" href="enonce.html">← Revenir à l'énoncé</a>
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

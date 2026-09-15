@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Rapport d'activité 2025</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="entete">
+    <div class="conteneur">
+      <p class="surtitre">Rapport annuel</p>
+      <h1>L'activité en 2025</h1>
+      <nav class="menu">
+        <a href="#frequentation">Fréquentation</a>
+        <a href="#prets">Prêts</a>
+        <a href="#document">Le rapport</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="conteneur">
+
+    <p class="chapo">
+      Une année de hausse continue : 42 800 visites, 61 200 prêts et 340 nouveaux
+      inscrits. Le détail complet est dans le rapport téléchargeable en bas de page.
+    </p>
+
+    <section id="frequentation" class="section">
+      <h2>Fréquentation mensuelle</h2>
+
+      <figure class="graphique">
+
+        <!-- Un graphique en SVG écrit directement dans la page.
+             Contrairement à une image, il reste net à toute taille
+             et son texte est sélectionnable. -->
+        <svg viewBox="0 0 640 300" role="img"
+             aria-labelledby="titre-graphique desc-graphique">
+          <title id="titre-graphique">Visites par trimestre en 2025</title>
+          <desc id="desc-graphique">
+            Diagramme en barres : 8 400 visites au premier trimestre,
+            10 100 au deuxième, 9 700 au troisième et 14 600 au quatrième.
+          </desc>
+
+          <!-- Axe horizontal -->
+          <line x1="60" y1="250" x2="620" y2="250" stroke="#c3ccd8" stroke-width="2"/>
+
+          <!-- Graduations -->
+          <g class="graduation">
+            <line x1="60" y1="180" x2="620" y2="180" stroke="#e6ebf1"/>
+            <line x1="60" y1="110" x2="620" y2="110" stroke="#e6ebf1"/>
+            <line x1="60" y1="40"  x2="620" y2="40"  stroke="#e6ebf1"/>
+            <text x="48" y="185" text-anchor="end">5 000</text>
+            <text x="48" y="115" text-anchor="end">10 000</text>
+            <text x="48" y="45"  text-anchor="end">15 000</text>
+          </g>
+
+          <!-- Les quatre barres -->
+          <g class="barres">
+            <rect x="100" y="132" width="90" height="118"/>
+            <rect x="240" y="108" width="90" height="142"/>
+            <rect x="380" y="114" width="90" height="136"/>
+            <rect x="520" y="46"  width="90" height="204"/>
+          </g>
+
+          <!-- Valeurs et légendes -->
+          <g class="valeurs">
+            <text x="145" y="124">8 400</text>
+            <text x="285" y="100">10 100</text>
+            <text x="425" y="106">9 700</text>
+            <text x="565" y="38">14 600</text>
+          </g>
+          <g class="legendes">
+            <text x="145" y="272">T1</text>
+            <text x="285" y="272">T2</text>
+            <text x="425" y="272">T3</text>
+            <text x="565" y="272">T4</text>
+          </g>
+        </svg>
+
+        <figcaption>
+          Le pic du quatrième trimestre correspond à l'ouverture du studio
+          multimédia, en octobre.
+          &nbsp;·&nbsp;
+          <a href="../assets/graphique-frequentation.svg" target="_blank" rel="noopener">
+            Télécharger ce graphique (SVG)
+          </a>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="prets" class="section">
+      <h2>Prêts par collection</h2>
+
+      <table class="donnees">
+        <caption>Répartition des 61 200 prêts de l'année</caption>
+        <thead>
+          <tr>
+            <th scope="col">Collection</th>
+            <th scope="col">Prêts</th>
+            <th scope="col">Évolution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Romans</th>
+            <td>24 700</td>
+            <td class="hausse">+ 6 %</td>
+          </tr>
+          <tr>
+            <th scope="row">Jeunesse</th>
+            <td>18 300</td>
+            <td class="hausse">+ 11 %</td>
+          </tr>
+          <tr>
+            <th scope="row">Bandes dessinées</th>
+            <td>11 900</td>
+            <td class="hausse">+ 4 %</td>
+          </tr>
+          <tr>
+            <th scope="row">Documentaires</th>
+            <td>4 200</td>
+            <td class="baisse">− 3 %</td>
+          </tr>
+          <tr>
+            <th scope="row">Musique et vidéo</th>
+            <td>2 100</td>
+            <td class="baisse">− 9 %</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ul class="faits">
+        <li><strong>Jeunesse</strong> — la plus forte hausse, portée par l'heure du conte</li>
+        <li><strong>Documentaires</strong> — érosion continue depuis trois ans</li>
+        <li><strong>Musique et vidéo</strong> — concurrencée par les plateformes</li>
+      </ul>
+    </section>
+
+    <section id="document" class="section">
+      <h2>Le rapport complet</h2>
+
+      <p>
+        Le document détaillé (28 pages) reprend ces chiffres commune par commune,
+        avec les comparaisons départementales.
+      </p>
+
+      <p>
+        <a class="bouton-doc"
+           href="../assets/rapport-2025.pdf"
+           target="_blank" rel="noopener">
+          Télécharger le rapport 2025 (PDF)
+        </a>
+      </p>
+
+      <p class="note">
+        Les données sources proviennent de
+        <a href="https://www.data.gouv.fr/" target="_blank" rel="noopener">data.gouv.fr</a>
+        et sont mises à jour chaque trimestre.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="pied">
+    <div class="conteneur">
+      <p>Médiathèque des Trois Rivières — rapport publié en janvier 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>

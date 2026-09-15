@@ -1,0 +1,118 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 1 — À VOUS DE JOUER
+
+   👉 C'EST CE FICHIER QUE VOUS MODIFIEZ.
+      La page travail.html, elle, est figée : n'y touchez pas.
+
+   ⚠️ NOUVEAUTÉ : pour tester, REDIMENSIONNEZ la fenêtre.
+      Un simple rechargement ne montre rien du responsive.
+
+   ── LE GESTE, pour chaque TODO ───────────────────────────────
+
+   1. EFFACEZ la ligne du marqueur en entier.
+   2. ÉCRIVEZ votre règle à la place.
+   3. Enregistrez, rechargez, puis FAITES VARIER LA LARGEUR.
+
+   ── AVANT DE TERMINER ────────────────────────────────────────
+
+   Cherchez « TODO » avec Ctrl+F : aucun résultat ne doit rester.
+
+   ↩ L'énoncé : enonce.html   ·   Le cours : cours.html
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Le point de départ, volontairement MAL FICHU ─────────────────
+
+   Les trois règles ci-dessous sont écrites en unités FIXES. Elles
+   fonctionnent sur un grand écran et cassent tout sur un téléphone.
+
+   Ouvrez la page et réduisez la fenêtre à 400px : vous verrez une
+   barre de défilement horizontale apparaître, et l'image déborder.
+
+   Votre travail : corriger ces trois règles, puis en ajouter
+   quatre autres.                                                  */
+
+.conteneur {
+  width: 900px;          /* ← FIXE : déborde sous 900px */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.fiche {
+  width: 600px;          /* ← FIXE : déborde sous 600px */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.encadre {
+  width: 600px;          /* ← FIXE lui aussi */
+  background-color: #e8f1fb;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+
+/* ── À vous ───────────────────────────────────────────────────── */
+
+
+/* ÉTAPE 1 — La règle universelle.
+   Comme au projet 3 : box-sizing sur tous les éléments, pour que
+   les paddings soient compris dans les largeurs.                 */
+
+/* TODO: écrire la règle universelle */
+
+
+/* ÉTAPE 2 — Les images.
+   LA règle qui empêche tout débordement (notion 5).
+   Deux déclarations, qui vont toujours ensemble.                 */
+
+/* TODO: écrire la règle pour img */
+
+
+/* ÉTAPE 3 — Corriger le conteneur.
+   Modifiez la règle .conteneur écrite plus haut : remplacez sa
+   largeur fixe par une largeur MAXIMALE (notion 4), et passez son
+   padding en unité relative (1rem au lieu de 20px).              */
+
+/* TODO: corriger la largeur du conteneur ci-dessus */
+
+
+/* ÉTAPE 4 — Corriger la fiche et l'encadré.
+   Même correction sur les deux règles écrites plus haut :
+   une largeur maximale au lieu d'une largeur fixe, et les
+   paddings en rem.                                                */
+
+/* TODO: corriger les largeurs de .fiche et .encadre ci-dessus */
+
+
+/* ÉTAPE 5 — La page.
+   Sur body : police sans empattements avec repli, couleur #333,
+   fond #eef1f5, aucune marge, et une taille de texte de 1rem.
+   Ajoutez aussi line-height: 1.6 pour aérer la lecture.          */
+
+/* TODO: écrire la règle pour body */
+
+
+/* ÉTAPE 6 — La bannière.
+   Sur .banniere : fond #14457b, texte blanc, texte centré,
+   et 1.5rem d'espace intérieur (pas de pixels).                  */
+
+/* TODO: écrire la règle pour la classe banniere */
+
+
+/* ÉTAPE 7 — Les textes de la fiche.
+   Sur .auteur : couleur #5a6570, taille 0.9rem, style italique
+   (font-style: italic), et aucune marge du haut.
+
+   Sur .resume : taille 1.05rem.                                   */
+
+/* TODO: écrire les règles pour .auteur et .resume */
+
+
+/* ÉTAPE 8 — Le pied de page.
+   Sur .pied-page : texte centré, taille 0.875rem, couleur #6b7280,
+   et 1.5rem d'espace intérieur.                                   */
+
+/* TODO: écrire la règle pour la classe pied-page */

@@ -1,0 +1,246 @@
+/* ═══════════════════════════════════════════════════════════════
+   PORTFOLIO — exemple d'inspiration
+
+   Parti pris : sobriété. Palette neutre, beaucoup d'espace blanc,
+   une seule couleur d'accent. Le contenu prime sur l'ornement.
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Les fondations (projet 4) ────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.7;
+  color: #2b2b28;
+  background-color: #faf8f4;
+}
+
+.conteneur {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+
+/* ── En-tête ──────────────────────────────────────────────────── */
+
+.entete {
+  border-bottom: 1px solid #e2ded5;
+  padding: 1.25rem 0;
+}
+
+.entete__inner {
+  text-align: center;
+}
+
+.marque {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.menu a {
+  color: #6b6559;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.menu a:hover,
+.menu a:focus {
+  color: #9a6a3a;
+}
+
+
+/* ── Accroche ─────────────────────────────────────────────────── */
+
+.hero {
+  padding: 3rem 0 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  margin: 0 0 0.75rem;
+  font-weight: normal;
+}
+
+.hero__texte {
+  max-width: 34rem;
+  margin: 0 auto;
+  color: #6b6559;
+  font-size: 1.1rem;
+}
+
+
+/* ── Blocs de contenu ─────────────────────────────────────────── */
+
+.bloc {
+  padding-top: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  border-bottom: 1px solid #e2ded5;
+  padding-bottom: 0.4rem;
+}
+
+
+/* ── Parcours ─────────────────────────────────────────────────── */
+
+.parcours {
+  list-style: none;
+  padding: 0;
+}
+
+.parcours li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted #e2ded5;
+}
+
+.parcours strong {
+  color: #9a6a3a;
+  margin-right: 0.5rem;
+}
+
+
+/* ── Grille de projets ────────────────────────────────────────── */
+
+.grille {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.projet {
+  flex: 1 1 320px;
+  background-color: #fff;
+  border: 1px solid #e2ded5;
+  padding: 1.25rem;
+}
+
+.projet h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #9a6a3a;
+}
+
+
+/* ── Liens et pied de page ────────────────────────────────────── */
+
+.lien-fort {
+  color: #9a6a3a;
+  font-weight: bold;
+}
+
+.pied {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e2ded5;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #8a8478;
+}
+
+
+/* ── L'unique media query ─────────────────────────────────────── */
+
+@media (min-width: 700px) {
+
+  .entete__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  .marque {
+    margin-bottom: 0;
+  }
+
+}
+
+
+/* ── Formulaire de contact ────────────────────────────────────── */
+
+.formulaire {
+  max-width: 460px;
+  margin-top: 1.5rem;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.champ label {
+  font-size: 0.9rem;
+  color: #6b6559;
+}
+
+.champ input,
+.champ textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #d8d2c6;
+  background-color: #fff;
+}
+
+.bouton-envoi {
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: #9a6a3a;
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.4rem;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.bouton-envoi:hover,
+.bouton-envoi:focus {
+  background-color: #7d552e;
+}
+
+
+/* ── Illustration ─────────────────────────────────────────────── */
+
+.illustration {
+  margin: 0 0 1rem;
+}
+
+.illustration img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.illustration figcaption {
+  padding-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #8a8478;
+  font-style: italic;
+}

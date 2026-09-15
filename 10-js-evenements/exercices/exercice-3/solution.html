@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Un formulaire qui ne recharge pas</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 3</p>
+  <h1 class="titre-exo">Un formulaire qui ne recharge pas</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé la manip sans <code>preventDefault</code> ?</strong>
+      C'est elle qui montre que votre code s'exécute bien — et que le rechargement
+      efface tout juste après. Si ce n'est pas fait, retournez à la
+      <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <p>
+      Une solution possible. <strong>Seuls les critères comptent</strong> : une autre
+      écriture qui les remplit tous est tout aussi juste.
+    </p>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const emprunts = [
+  { titre: "Dune",              lecteur: "Karim" },
+  { titre: "Fondation",         lecteur: "Léa" },
+  { titre: "Les Fourmis",       lecteur: "Tomas" }
+];
+
+/* 1 · Les éléments de la page */
+
+const form     = document.querySelector("#ajout");
+const champT   = document.querySelector("#titre");
+const champL   = document.querySelector("#lecteur");
+const liste    = document.querySelector("#liste");
+const compteur = document.querySelector("#compteur");
+const message  = document.querySelector("#message");
+
+/* 2 · La fonction qui reconstruit la liste */
+
+function afficher() {
+
+  for (const ancien of liste.querySelectorAll("li")) {
+    ancien.remove();
+  }
+
+  for (const emprunt of emprunts) {
+
+    const li = document.createElement("li");
+    li.classList.add("emprunt");
+
+    const titre = document.createElement("span");
+    titre.classList.add("emprunt__titre");
+    titre.textContent = emprunt.titre;
+
+    const lecteur = document.createElement("span");
+    lecteur.classList.add("emprunt__lecteur");
+    lecteur.textContent = emprunt.lecteur;
+
+    li.append(titre, lecteur);
+    liste.append(li);
+  }
+
+  compteur.textContent = emprunts.length + " emprunt(s)";
+}
+
+/* 3 · Au chargement */
+
+afficher();
+
+console.log("Au départ :", emprunts.length, "emprunt(s)");
+
+/* 4 · À l'envoi du formulaire */
+
+form.addEventListener("submit", function (evenement) {
+
+  evenement.preventDefault();
+
+  const titre   = champT.value.trim();
+  const lecteur = champL.value.trim();
+
+  if (titre === "" || lecteur === "") {
+    message.textContent = "Remplissez les deux champs.";
+    message.classList.add("erreur");
+
+    console.log("Refusé : un champ est vide");
+    return;
+  }
+
+  emprunts.push({ titre: titre, lecteur: lecteur });
+
+  afficher();
+
+  message.textContent = "« " + titre + " » ajouté.";
+  message.classList.remove("erreur");
+
+  champT.value = "";
+  champL.value = "";
+
+  console.log("Ajouté :", titre, "→", emprunts.length, "emprunt(s)");
+});</code></pre>
+    </details>
+
+    <h2>Les cinq choses à retenir</h2>
+
+    <h3>1 · L'écouteur sur le <code>&lt;form&gt;</code></h3>
+
+<pre><code>form.addEventListener("submit", …)     ✅
+bouton.addEventListener("click", …)    ⚠️ rate la touche Entrée</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 8 est là pour ça.</strong> Un écouteur <code>click</code>
+        sur le bouton semble marcher — jusqu'à ce qu'un utilisateur valide au clavier,
+        ce que font la plupart des gens dans un formulaire court.
+      </p>
+    </div>
+
+    <h3>2 · <code>preventDefault</code> en première ligne</h3>
+
+    <p>
+      C'est la <strong>première instruction</strong> de la fonction, avant toute
+      lecture de champ. Sans elle, le reste s'exécute quand même, puis disparaît :
+    </p>
+
+<pre><code>avec preventDefault  →  la liste s'allonge, l'URL ne bouge pas     ✅
+sans preventDefault  →  la page recharge, retour à 3 emprunts      ❌
+                        l'URL se termine par un ?
+                        la console est vidée</code></pre>
+
+    <h3>3 · Nettoyer avant de vérifier</h3>
+
+<pre><code>const titre = champT.value.trim();     ← on nettoie une fois
+if (titre === "") { … }                ← on vérifie le nettoyé
+emprunts.push({ titre: titre, … });    ← on stocke le nettoyé</code></pre>
+
+    <table>
+      <tr><th>Saisie</th><th>Sans <code>trim</code></th><th>Avec <code>trim</code></th></tr>
+      <tr><td><code>"Le Horla"</code></td><td>accepté</td><td>accepté</td></tr>
+      <tr><td><code>"  Le Horla  "</code></td><td>accepté, espaces stockés</td><td>accepté, stocké propre</td></tr>
+      <tr><td><code>"   "</code></td><td><strong>accepté à tort</strong></td><td>refusé ✅</td></tr>
+      <tr><td><code>""</code></td><td>refusé</td><td>refusé</td></tr>
+    </table>
+
+    <h3>4 · Refuser, c'est aussi s'arrêter</h3>
+
+<pre><code>if (titre === "" || lecteur === "") {
+  message.textContent = "Remplissez les deux champs.";
+  message.classList.add("erreur");
+  console.log("Refusé : un champ est vide");
+  return;                                  ← indispensable
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Sans le <code>return</code></strong>, le code poursuit : un emprunt aux
+        champs vides est ajouté, et le message d'erreur est aussitôt remplacé par le
+        message de succès. Le refus ne refuse rien.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Les champs ne sont pas vidés en cas de refus</strong> — c'est le
+        critère 10. Effacer ce que l'utilisateur vient de taper au moment où on lui
+        dit que c'est incomplet serait la pire des réponses.
+      </p>
+    </div>
+
+    <h3>5 · Une classe qu'on pose <em>et</em> qu'on retire</h3>
+
+<pre><code>message.classList.add("erreur");      ← au refus
+message.classList.remove("erreur");   ← au succès</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le même piège qu'à l'exercice 2</strong> avec la classe
+        <code>vide</code> : une classe ajoutée sans jamais être retirée fige
+        l'apparence. Le message resterait rouge pour toujours après le premier refus.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>La page clignote, la liste revient à 3, l'URL se remplit</td>
+        <td>
+          <code>preventDefault()</code> manque, ou l'écouteur n'est pas sur le
+          <code>&lt;form&gt;</code> (cours §3)
+        </td>
+      </tr>
+      <tr>
+        <td>Le clic marche, la touche <kbd>Entrée</kbd> recharge la page</td>
+        <td>
+          L'écouteur est posé sur le bouton en <code>"click"</code> au lieu du
+          formulaire en <code>"submit"</code> (cours §2)
+        </td>
+      </tr>
+      <tr>
+        <td>Un emprunt vide est ajouté après le message d'erreur</td>
+        <td>
+          Le <code>return</code> manque dans le <code>if</code> (cours §7)
+        </td>
+      </tr>
+      <tr>
+        <td>Trois espaces sont acceptés comme un titre</td>
+        <td>
+          <code>.trim()</code> manque : <code>"   "</code> n'est pas
+          <code>""</code> (cours §6)
+        </td>
+      </tr>
+      <tr>
+        <td>Le message reste rouge après un ajout réussi</td>
+        <td>
+          La classe <code>erreur</code> est ajoutée, jamais retirée
+        </td>
+      </tr>
+      <tr>
+        <td>Les emprunts s'ajoutent en double à chaque envoi</td>
+        <td>
+          La liste n'est pas vidée avant d'être reconstruite (projet 9, exercice 4)
+        </td>
+      </tr>
+    </table>
+
+    <h2>Projet 10 terminé</h2>
+
+    <div class="objectif">
+      <p>
+        Vous savez maintenant faire réagir une page à <strong>trois gestes</strong> :
+        le clic, la frappe, l'envoi d'un formulaire. Dans les trois cas, le schéma est
+        le même — écouter, lire, agir, reconstruire.
+      </p>
+      <p>
+        <strong>Ce qui reste :</strong> assembler tout cela en vrais composants. Le
+        projet 11 construit un système d'onglets, le projet 12 un tableau dynamique
+        alimenté par des données extérieures.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Projet 10 terminé ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

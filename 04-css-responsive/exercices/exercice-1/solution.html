@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Le viewport et les unités</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le viewport et les unités</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.conteneur {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.fiche {
+  max-width: 600px;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.encadre {
+  max-width: 600px;
+  background-color: #e8f1fb;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.banniere {
+  background-color: #14457b;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.auteur {
+  color: #5a6570;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 0;
+}
+
+.resume {
+  font-size: 1.05rem;
+}
+
+.pied-page {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding: 1.5rem;
+}</code></pre>
+    </details>
+
+    <p>
+      Le fichier commenté ligne par ligne est dans
+      <code>solution/style.css</code> — et la page réparée est
+      <a href="solution/">visible ici</a>. Redimensionnez-la pour la voir travailler.
+    </p>
+
+    <h2>Le point central : <code>width</code> contre <code>max-width</code></h2>
+
+    <p>
+      Les trois règles fautives avaient toutes le même défaut, et la correction est
+      toujours la même :
+    </p>
+
+    <table>
+      <tr>
+        <th>Écriture</th>
+        <th>Ce que le navigateur comprend</th>
+      </tr>
+      <tr>
+        <td><code>width: 900px</code></td>
+        <td>« Fais <strong>exactement</strong> 900 px » — même sur un écran de 360 px,
+            d'où le débordement</td>
+      </tr>
+      <tr>
+        <td><code>max-width: 900px</code></td>
+        <td>« Ne dépasse <strong>pas</strong> 900 px, mais rétrécis autant qu'il
+            faut »</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>La règle pratique :</strong> en responsive, <code>width</code> avec une
+        valeur fixe est presque toujours une erreur. Réservez-le aux éléments dont la
+        taille ne doit vraiment jamais changer — une icône, par exemple.
+      </p>
+    </div>
+
+    <h2>Trois points que la solution pousse plus loin</h2>
+
+    <h3>1 · Pourquoi aucune media query n'a été nécessaire</h3>
+
+    <p>
+      C'est le message de cet exercice : une page correctement construite s'adapte
+      <strong>déjà</strong>, sans point de rupture. Les media queries de l'exercice 2
+      ne serviront qu'à <em>réorganiser</em> ce qui ne peut pas se contenter de
+      rétrécir — un menu horizontal, une grille de colonnes.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>L'erreur classique du débutant</strong> consiste à faire l'inverse :
+        garder des largeurs fixes, puis empiler des media queries pour rattraper les
+        dégâts à chaque taille d'écran. On se retrouve avec dix points de rupture et
+        une page qui casse dès qu'un téléphone a une largeur inhabituelle.
+      </p>
+    </div>
+
+    <h3>2 · <code>line-height</code> s'écrit sans unité</h3>
+
+<pre><code>line-height: 1.6;      ✅ 1,6 fois la taille du texte
+line-height: 1.6rem;   ⚠️ valeur figée</code></pre>
+
+    <p>
+      Sans unité, la valeur est un <em>multiplicateur</em> : chaque texte calcule son
+      interlignage d'après sa propre taille. Avec une unité, un titre de 2rem hériterait
+      d'un interlignage prévu pour du texte courant, et ses lignes se chevaucheraient.
+    </p>
+
+    <h3>3 · Les attributs <code>width</code> et <code>height</code> de l'image</h3>
+
+    <p>
+      Vous avez peut-être remarqué <code>width="1200" height="600"</code> sur la balise
+      <code>&lt;img&gt;</code>. Ils ne fixent pas la taille d'affichage — le CSS
+      l'emporte.
+    </p>
+
+    <p>
+      Leur rôle : indiquer les <strong>proportions</strong> au navigateur
+      <em>avant</em> que l'image ne soit chargée, pour qu'il réserve la place. Sans
+      eux, la page sursaute au moment où l'image arrive. C'est une bonne pratique à
+      conserver.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>La barre de défilement horizontale persiste</td>
+        <td>Une largeur fixe subsiste quelque part. Cherchez <code>width:</code> suivi
+            d'une valeur en pixels</td>
+      </tr>
+      <tr>
+        <td>L'image déborde toujours</td>
+        <td>La règle <code>img</code> manque, ou vise une classe qui n'existe pas —
+            elle doit viser la balise</td>
+      </tr>
+      <tr>
+        <td>L'image est écrasée, déformée</td>
+        <td><code>height: auto</code> manque : la hauteur d'origine est conservée
+            pendant que la largeur rétrécit</td>
+      </tr>
+      <tr>
+        <td>Les blocs restent étroits sur grand écran</td>
+        <td><code>max-width</code> a été remplacé par <code>width: 100%</code> sans
+            limite haute — le texte devient alors trop long à lire</td>
+      </tr>
+      <tr>
+        <td>Rien ne bouge quand je redimensionne</td>
+        <td>Vous rechargez <code>style.css</code> au lieu de
+            <code>travail.html</code>, ou le fichier n'est pas enregistré</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui trouve le coupable :</strong> à la largeur où la barre
+        horizontale apparaît, ouvrez l'inspecteur et survolez les éléments un à un dans
+        le panneau HTML. Celui qui dépasse du cadre de l'écran se surligne au-delà du
+        bord — vous le repérez en quelques secondes.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à ma page</a>
+      <a class="bouton" href="../exercice-2/">Exercice 2 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

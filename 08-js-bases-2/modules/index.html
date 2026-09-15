@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démonstration — Quand un projet grossit</title>
+  <link rel="stylesheet" href="../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../">Projet 8</a> · Démonstration</p>
+  <h1 class="titre-exo">📦 Quand un projet grossit</h1>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>
+        <strong>📖 Ceci n'est pas un exercice.</strong> Il n'y a rien à écrire, rien
+        à rendre — une <strong>dizaine de minutes de lecture</strong>, pour
+        reconnaître des lignes que vous croiserez bientôt.
+      </p>
+      <p>
+        L'objectif n'est pas de savoir les écrire aujourd'hui, mais de ne pas être
+        perdu le jour où vous ouvrirez un projet existant.
+      </p>
+    </div>
+
+    <h2>1 · Le fil qui se termine ici</h2>
+
+    <p>
+      Depuis le projet 6, une question revient à chaque étape :
+      <strong>comment charge-t-on du JavaScript ?</strong> Chaque réponse était
+      motivée par une gêne réelle.
+    </p>
+
+    <table>
+      <tr><th>Projet</th><th>Comment</th><th>La gêne qui fait avancer</th></tr>
+      <tr>
+        <td><strong>P6</strong></td>
+        <td>la console du navigateur</td>
+        <td>« rien n'est conservé »</td>
+      </tr>
+      <tr>
+        <td><strong>P6</strong></td>
+        <td><code>&lt;script&gt;</code> dans la page</td>
+        <td>« ça marche, mais ça pollue le HTML »</td>
+      </tr>
+      <tr>
+        <td><strong>P7</strong></td>
+        <td>un fichier <code>app.js</code> séparé</td>
+        <td>« mieux — mais tout est dans un seul gros fichier »</td>
+      </tr>
+      <tr>
+        <td><strong>P8</strong></td>
+        <td>plusieurs fichiers, avec <code>import</code></td>
+        <td>c'est ce que nous regardons maintenant</td>
+      </tr>
+    </table>
+
+    <h2>2 · Le problème du fichier unique</h2>
+
+    <p>
+      Votre <code>app.js</code> de l'exercice 4 fait une cinquantaine de lignes.
+      Imaginez-en deux mille : la classe <code>Rectangle</code>, le catalogue, les
+      calculs, l'affichage, tout mélangé. Retrouver quelque chose devient pénible, et
+      deux personnes ne peuvent plus y travailler en même temps.
+    </p>
+
+    <p>
+      La solution est la même qu'en CSS ou en HTML : <strong>découper</strong>. Un
+      fichier par sujet.
+    </p>
+
+    <h2>3 · À quoi ça ressemble</h2>
+
+    <p>Trois fichiers, au lieu d'un :</p>
+
+<pre><code>projet/
+├── index.html
+├── rectangle.js     ← la classe, et rien d'autre
+├── catalogue.js     ← les données
+└── app.js           ← le programme, qui utilise les deux</code></pre>
+
+    <h3>Le fichier qui <em>offre</em> quelque chose</h3>
+
+<pre><code><strong>rectangle.js</strong>
+
+export class Rectangle {
+  constructor(largeur, hauteur) {
+    this.largeur = largeur;
+    this.hauteur = hauteur;
+  }
+
+  calculAire() {
+    return this.largeur * this.hauteur;
+  }
+}</code></pre>
+
+    <p>
+      C'est votre classe de l'exercice 4, <strong>à un mot près</strong> :
+      <code>export</code> devant. Il signifie « ceci est disponible pour les autres
+      fichiers ».
+    </p>
+
+    <h3>Le fichier qui <em>demande</em></h3>
+
+<pre><code><strong>app.js</strong>
+
+import { Rectangle } from "./rectangle.js";
+
+const r = new Rectangle(10, 5);
+console.log(r.calculAire());     → 50</code></pre>
+
+    <p>
+      <code>import</code> va chercher ce qu'un autre fichier a exporté. Le reste du
+      code ne change pas d'un caractère.
+    </p>
+
+    <h3>Et dans le HTML</h3>
+
+<pre><code>&lt;script type="module" src="app.js"&gt;&lt;/script&gt;</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong><code>type="module"</code> est indispensable.</strong> Sans lui, le
+        navigateur refuse les <code>import</code> :
+      </p>
+<pre><code>SyntaxError: Cannot use import statement outside a module</code></pre>
+      <p>
+        C'est la seule ligne à changer dans le HTML — et <code>app.js</code> est le
+        seul fichier à déclarer : les autres sont chargés automatiquement, parce
+        qu'il les importe.
+      </p>
+    </div>
+
+    <h2>4 · Ce qu'il faut en retenir aujourd'hui</h2>
+
+    <table>
+      <tr><th>Vous voyez…</th><th>Cela veut dire</th></tr>
+      <tr>
+        <td><code>export</code> devant une classe ou une fonction</td>
+        <td>« ce fichier la met à disposition »</td>
+      </tr>
+      <tr>
+        <td><code>import { X } from "./y.js"</code></td>
+        <td>« ce fichier a besoin de X, qui vient de y.js »</td>
+      </tr>
+      <tr>
+        <td><code>&lt;script type="module"&gt;</code></td>
+        <td>« ce projet est découpé en plusieurs fichiers »</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Rien de plus pour aujourd'hui.</strong> Savoir les
+        <em>reconnaître</em> vous évitera d'être perdu devant un projet existant.
+        Savoir les <em>écrire</em> ne vous servira que le jour où vos fichiers
+        deviendront trop gros — et ce jour-là, vous aurez la documentation.
+      </p>
+    </div>
+
+    <h2>5 · ⚠️ Une limite à connaître</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Les modules ne fonctionnent pas en double-clic.</strong> Ouvrir un
+        fichier directement depuis l'explorateur donne une adresse en
+        <code>file://</code>, et le navigateur bloque les <code>import</code> pour
+        des raisons de sécurité :
+      </p>
+<pre><code>CORS policy: Cross origin requests are only supported for
+protocol schemes: http, https…</code></pre>
+      <p>
+        Il faut un <strong>petit serveur local</strong> — l'extension
+        <em>Live Preview</em> de VSCode en lance un toute seule.
+      </p>
+      <p>
+        <strong>C'est précisément pourquoi les projets 1 à 8 s'en passent :</strong>
+        tout ce que vous avez écrit jusqu'ici fonctionne au double-clic. Cette
+        contrainte n'apparaîtra qu'au projet 12.
+      </p>
+    </div>
+
+    <h2>6 · Et après ?</h2>
+
+    <p>
+      Découper son code mène naturellement à une autre question : <em>et si
+      quelqu'un avait déjà écrit ce dont j'ai besoin ?</em> C'est ce que sont les
+      <strong>bibliothèques</strong> — et la façon de les installer s'appelle
+      <strong>npm</strong>.
+    </p>
+
+    <p>
+      Vous verrez tout cela en <strong>fin de journée 3</strong>, en démonstration
+      également : jQuery comparé au JavaScript natif, puis <code>npm</code> et le
+      dossier <code>node_modules</code>.
+    </p>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Modules"
+             target="_blank" rel="noopener">MDN — Les modules JavaScript</a>
+        </td>
+        <td>Le guide complet, pour le jour où vous en aurez besoin.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/modules-intro"
+             target="_blank" rel="noopener">javascript.info — Les modules</a>
+        </td>
+        <td>Une introduction progressive, en français.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../">← Retour au projet 8</a>
+      <a class="bouton" href="../../">Tous les projets</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

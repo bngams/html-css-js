@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Un formulaire qui ne recharge pas</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 3</p>
+  <h1 class="titre-exo">Un formulaire qui ne recharge pas</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Un formulaire qui ajoute un emprunt à la liste
+      <strong>sans recharger la page</strong>, et qui refuse les saisies vides.</p>
+      <p>
+        <strong>Prérequis :</strong> les exercices 1 et 2 de ce projet, et le projet 9
+        (créer, insérer, vider).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-3/app.js</code>
+      </p>
+      <p>
+        Le <strong>tableau de données</strong> — trois emprunts — vous est fourni.
+        Contrairement aux exercices précédents, il va <strong>grandir</strong>.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Essayez le formulaire AVANT d'écrire une ligne.</strong>
+      </p>
+      <p>
+        Tapez un titre, appuyez sur <kbd>Entrée</kbd> : la page se recharge, l'URL se
+        termine par un <code>?</code>, et rien n'est enregistré. C'est le
+        comportement par défaut que votre code doit couper (cours §1 et §3).
+      </p>
+    </div>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <h3>Au chargement</h3>
+
+    <ol class="criteres">
+      <li>
+        Les <strong>trois emprunts</strong> du tableau sont affichés. Chaque ligne
+        porte la classe <code>emprunt</code> et contient <strong>deux
+        éléments</strong> : le titre (<code>emprunt__titre</code>) et le lecteur
+        (<code>emprunt__lecteur</code>)
+      </li>
+      <li>
+        Le compteur affiche <code>3 emprunt(s)</code>
+      </li>
+    </ol>
+
+    <h3>Quand on envoie le formulaire</h3>
+
+    <ol class="criteres" start="3">
+      <li>
+        <strong>La page ne se recharge pas.</strong> L'URL reste inchangée et la
+        console garde ses messages
+      </li>
+      <li>
+        L'emprunt est <strong>ajouté au tableau</strong> et la liste est reconstruite :
+        une ligne de plus, dans l'ordre d'ajout
+      </li>
+      <li>
+        Le compteur suit : <code>N emprunt(s)</code>
+      </li>
+      <li>
+        Les <strong>deux champs sont vidés</strong> après un ajout réussi
+      </li>
+      <li>
+        Le message affiche <code>« Titre » ajouté.</code> — avec les guillemets
+        français — et <strong>ne porte pas</strong> la classe <code>erreur</code>
+      </li>
+      <li>
+        L'envoi fonctionne aussi bien au <strong>clic sur le bouton</strong> qu'avec
+        la touche <kbd>Entrée</kbd> depuis un champ
+      </li>
+    </ol>
+
+    <h3>Quand la saisie est incomplète</h3>
+
+    <ol class="criteres" start="9">
+      <li>
+        Si <strong>l'un des deux champs au moins</strong> est vide, rien n'est
+        ajouté : ni au tableau, ni à la liste, et le compteur ne bouge pas
+      </li>
+      <li>
+        Le message affiche <code>Remplissez les deux champs.</code> et porte la classe
+        <code>erreur</code> — il devient rouge. Les champs <strong>ne sont pas
+        vidés</strong> : ce qui a déjà été saisi reste à l'écran
+      </li>
+      <li>
+        Un champ contenant <strong>seulement des espaces</strong> compte comme vide
+        (cours §6)
+      </li>
+      <li>
+        Après un refus, un envoi correct <strong>enlève</strong> la classe
+        <code>erreur</code> : le message redevient vert
+      </li>
+    </ol>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres" start="13">
+      <li>
+        La console affiche, à chaque moment, la ligne attendue :
+        <ul>
+          <li>
+            <strong>au chargement</strong> — <code>Au départ :</code> suivi du nombre
+            d'emprunts, puis du mot <code>emprunt(s)</code>
+          </li>
+          <li>
+            <strong>à chaque ajout</strong> — <code>Ajouté :</code>, le titre,
+            <code>→</code>, le nouveau total, puis <code>emprunt(s)</code>
+          </li>
+          <li>
+            <strong>à chaque refus</strong> — <code>Refusé : un champ est vide</code>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Rechargez. <strong>Avant toute action</strong>, la console affiche exactement
+      cette ligne :
+    </p>
+
+<pre><code>Au départ : 3 emprunt(s)</code></pre>
+
+    <p>
+      Faites ensuite, dans cet ordre : ajoutez <code>Dune Messie</code> /
+      <code>Amina</code>, puis envoyez avec les <strong>deux champs vides</strong>,
+      puis ajoutez <code>  Le Horla  </code> / <code>  Tomas  </code>
+      <strong>avec les espaces</strong>. La console doit afficher :
+    </p>
+
+<pre><code>Ajouté : Dune Messie → 4 emprunt(s)
+Refusé : un champ est vide
+Ajouté : Le Horla → 5 emprunt(s)</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La troisième ligne est le test du <code>trim</code>.</strong> Si elle
+        affiche <code>Ajouté :   Le Horla  </code> avec les espaces, ou si la carte
+        créée est décalée dans la page, le nettoyage n'a pas eu lieu.
+      </p>
+    </div>
+
+    <p>Et la page doit se comporter ainsi :</p>
+
+    <table>
+      <tr><th>Action</th><th>Lignes</th><th>Message</th><th>Champs</th></tr>
+      <tr>
+        <td>au chargement</td><td>3</td>
+        <td><em>vide</em></td><td>vides</td>
+      </tr>
+      <tr>
+        <td>ajout valide</td><td>4</td>
+        <td><code>« Dune Messie » ajouté.</code> — vert</td><td><strong>vidés</strong></td>
+      </tr>
+      <tr>
+        <td>deux champs vides</td><td>4 <em>(inchangé)</em></td>
+        <td><code>Remplissez les deux champs.</code> — <strong>rouge</strong></td>
+        <td>vides</td>
+      </tr>
+      <tr>
+        <td><code>  Le Horla  </code></td><td>5</td>
+        <td><code>« Le Horla » ajouté.</code> — vert</td><td>vidés</td>
+      </tr>
+      <tr>
+        <td>titre seul, lecteur vide</td><td>5 <em>(inchangé)</em></td>
+        <td><code>Remplissez les deux champs.</code> — <strong>rouge</strong></td>
+        <td><strong>le titre reste affiché</strong></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 12 se teste en deux envois.</strong> Provoquez un refus
+        (message rouge), puis faites un ajout correct : le message doit redevenir
+        <strong>vert</strong>. S'il reste rouge, la classe <code>erreur</code> est
+        ajoutée mais jamais retirée (cours §7).
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — sans <code>preventDefault</code></strong></p>
+      <p>Une fois l'exercice terminé, essayez volontairement ceci :</p>
+      <ol>
+        <li>
+          Mettez en commentaire la ligne
+          <code>evenement.preventDefault();</code>.
+        </li>
+        <li>Enregistrez, rechargez, remplissez les deux champs, envoyez.</li>
+      </ol>
+      <p>
+        La page <strong>se recharge</strong> : la liste revient à trois emprunts,
+        l'URL se termine par un <code>?</code>, et la console est vidée — vos
+        messages ont disparu. Aucune erreur rouge.
+      </p>
+      <p>
+        Votre code s'est pourtant bien exécuté : il a ajouté l'emprunt, puis le
+        rechargement a tout effacé. Remettez ensuite la ligne.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>La page ne clignote jamais à l'envoi</li>
+      <li>Les emprunts s'accumulent, dans l'ordre d'ajout</li>
+      <li>Un champ vide — ou plein d'espaces — est refusé, en rouge</li>
+      <li>Le message redevient vert après un ajout correct</li>
+      <li>
+        Vous savez dire pourquoi l'écouteur se pose sur le
+        <code>&lt;form&gt;</code> et non sur le bouton
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>50 à 60 minutes.</strong> Le cycle complet du cours §5 compte sept
+      étapes. Faites d'abord l'affichage des trois emprunts au chargement, puis
+      l'ajout, et la vérification des champs en dernier.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

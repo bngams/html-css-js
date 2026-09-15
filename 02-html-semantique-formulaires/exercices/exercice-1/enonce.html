@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Les balises sémantiques</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 1</p>
+  <h1 class="titre-exo">Les balises sémantiques</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Transformer une page faite de
+      <code>&lt;div&gt;</code> anonymes en une page dont chaque zone est nommée.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> le projet 1.
+        Vous savez écrire une page valide, des titres, des listes et des liens.
+      </p>
+    </div>
+
+    <h2>📄 Le fichier à modifier</h2>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-1/travail.html</code>
+      </p>
+      <p>
+        Cette fois, <strong>la page est déjà écrite et s'affiche</strong> : c'est le
+        blog d'un club de randonnée, entièrement construit en <code>&lt;div&gt;</code>.
+        Votre travail consiste à remplacer chaque <code>&lt;div&gt;</code> par la
+        balise qui dit ce que la zone <em>est</em>.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>L'apparence ne changera pas.</strong> C'est normal et c'est tout
+        l'enjeu : ces balises ne modifient pas le rendu, elles ajoutent du sens.
+        Vous le vérifierez autrement — voir la manip plus bas.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <p>Dans la page terminée :</p>
+
+    <ol class="criteres">
+      <li>La bannière du site est dans un <code>&lt;header&gt;</code></li>
+      <li>Le menu est dans un <code>&lt;nav&gt;</code></li>
+      <li>Le contenu principal est dans un <code>&lt;main&gt;</code> — il n'y en a qu'un</li>
+      <li>Chacun des deux billets est dans un <code>&lt;article&gt;</code></li>
+      <li>L'encadré « Le saviez-vous ? » est dans un <code>&lt;aside&gt;</code></li>
+      <li>Le pied de page est dans un <code>&lt;footer&gt;</code></li>
+      <li>
+        <strong>Un <code>&lt;div&gt;</code> est conservé</strong> — celui qui ne sert
+        qu'à grouper visuellement les deux billets
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>À vous de répondre :</strong> pourquoi ce dernier
+        <code>&lt;div&gt;</code> ne doit-il <em>pas</em> devenir un
+        <code>&lt;section&gt;</code> ? La réponse est dans la notion 4 du
+        <a href="cours.html">cours</a> — et c'est la question la plus utile de
+        l'exercice.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>L'apparence</td>
+        <td><strong>Rigoureusement identique</strong> à avant. Si quelque chose bouge,
+            une balise n'est pas fermée</td>
+      </tr>
+      <tr>
+        <td>Le texte</td>
+        <td>Tout le contenu est toujours là, dans le même ordre</td>
+      </tr>
+      <tr>
+        <td>Le validateur</td>
+        <td>Aucune erreur — il signale notamment un <code>&lt;main&gt;</code> en double</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — rendre l'invisible visible</strong></p>
+      <p>
+        Les balises sémantiques ne changent rien à l'écran. Pour <em>voir</em> leur
+        effet, on regarde l'<strong>arborescence des régions</strong> que le navigateur
+        construit à partir de votre code.
+      </p>
+      <ol>
+        <li>
+          Ouvrez <code>travail.html</code> <strong>avant</strong> vos modifications,
+          clic droit sur la page → <em>Inspecter</em>.
+        </li>
+        <li>
+          Ouvrez l'onglet <strong>Accessibilité</strong> (Firefox) ou
+          <strong>Accessibility</strong> (Chrome, dans le panneau de droite).
+        </li>
+        <li>
+          Regardez la liste : les huit <code>&lt;div&gt;</code> n'y produisent
+          <strong>aucune région</strong>.
+        </li>
+        <li>
+          Faites l'exercice, rechargez, et regardez à nouveau.
+        </li>
+      </ol>
+      <p>
+        Apparaissent alors <em>banner</em>, <em>navigation</em>, <em>main</em>,
+        <em>article</em> (deux fois), <em>complementary</em> et
+        <em>contentinfo</em> — un plan de votre page qui n'existait pas avant.
+        C'est exactement ce qu'« entend » une personne utilisant un lecteur
+        d'écran, et ce qui lui permet de sauter directement au contenu.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Une autre application, que vous ne verrez pas ici :</strong> le
+        <em>mode lecture</em> de Firefox, Safari ou Edge s'appuie lui aussi sur
+        <code>&lt;main&gt;</code> et <code>&lt;article&gt;</code> pour ne garder que
+        l'essentiel d'une page. Inutile de l'essayer sur celle-ci :
+        <strong>elle est bien trop courte pour le déclencher</strong> — ces
+        navigateurs exigent plusieurs paragraphes de belle longueur. Vous le
+        constaterez sur un vrai article de presse.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>
+        Dans <code>travail.html</code>, cherchez <code>&lt;!-</code> avec
+        <code>Ctrl+F</code> : aucun commentaire de consigne ne doit subsister.
+      </li>
+      <li>
+        Cherchez <code>&lt;div</code> : il doit en rester <strong>exactement un</strong>.
+      </li>
+      <li>
+        Déposez le fichier sur le
+        <a href="https://validator.w3.org/nu/#file" target="_blank" rel="noopener">validateur
+        du W3C</a> : aucune erreur.
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>25 à 35 minutes.</strong> Le choix entre <code>&lt;article&gt;</code> et
+      <code>&lt;section&gt;</code> est la seule vraie difficulté — relisez la notion 3
+      si vous hésitez.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Commencer l'exercice →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 1 — SOLUTION COMMENTÉE
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ÉTAPE 1 — La règle universelle.
+
+   Comme au projet 3 : les paddings sont désormais compris DANS les
+   largeurs déclarées. Sans elle, .conteneur ferait 900px + 2rem de
+   padding, soit un débordement garanti sur écran étroit.          */
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* ÉTAPE 2 — Les images : LA règle du responsive.
+
+   max-width: 100%  → l'image ne dépasse jamais son conteneur
+   height: auto     → la hauteur suit, les proportions sont gardées
+
+   Les deux vont TOUJOURS ensemble. Sans height:auto, une image
+   réduite en largeur garderait sa hauteur d'origine et se
+   retrouverait écrasée.
+
+   À elle seule, cette règle supprime la majeure partie des
+   débordements d'une page mal adaptée. L'image de cette page fait
+   1200px de large : sans elle, elle imposerait 1200px à toute la
+   mise en page, sur n'importe quel écran.                         */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ÉTAPE 3 — Le conteneur, corrigé.
+
+   width: 900px   →  max-width: 900px
+
+   La différence est toute la différence :
+     width     = « fais exactement 900px », même sur un écran de 360
+     max-width = « ne dépasse pas 900px, mais rétrécis librement »
+
+   Et le padding passe en rem : il suivra le réglage de taille de
+   police de l'utilisateur, au lieu de rester figé.                */
+
+.conteneur {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+
+/* ÉTAPE 4 — La fiche et l'encadré, corrigés.
+
+   Même correction. Sur un téléphone de 360px, ces blocs occupent
+   désormais toute la largeur disponible ; sur un grand écran, ils
+   se limitent à 600px pour rester lisibles — une ligne de texte
+   trop longue fatigue l'œil.                                      */
+
+.fiche {
+  max-width: 600px;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.encadre {
+  max-width: 600px;
+  background-color: #e8f1fb;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+
+/* ÉTAPE 5 — La page.
+
+   font-size: 1rem sur body pose la taille de référence, et
+   line-height: 1.6 aère la lecture — un interlignage serré est
+   l'une des premières causes d'inconfort sur petit écran.
+
+   line-height s'écrit SANS unité : 1.6 signifie « 1,6 fois la
+   taille de police de l'élément ». Avec une unité, la valeur se
+   figerait et ne suivrait plus les textes de tailles différentes. */
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+
+/* ÉTAPE 6 — La bannière.                                          */
+
+.banniere {
+  background-color: #14457b;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+
+/* ÉTAPE 7 — Les textes de la fiche.
+
+   0.9rem = 14.4px, 1.05rem = 16.8px. On raisonne en proportions
+   de la taille de base, jamais en valeurs absolues : si
+   l'utilisateur agrandit sa police, tout suit ensemble.           */
+
+.auteur {
+  color: #5a6570;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 0;
+}
+
+.resume {
+  font-size: 1.05rem;
+}
+
+
+/* ÉTAPE 8 — Le pied de page.                                      */
+
+.pied-page {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding: 1.5rem;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CE QU'IL FAUT RETENIR
+
+   Aucune media query dans ce fichier — et pourtant la page
+   s'adapte de 360px à 1440px.
+
+   Les trois fondations :
+     1. la balise meta viewport dans le HTML (déjà présente)
+     2. max-width au lieu de width
+     3. img { max-width: 100%; height: auto; }
+
+   Plus les unités relatives (rem) partout où c'est possible.
+
+   Les media queries de l'exercice 2 ne serviront qu'à RÉORGANISER
+   ce qui ne peut pas se contenter de rétrécir : un menu
+   horizontal, une grille de colonnes.
+   ═══════════════════════════════════════════════════════════════ */

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Les formulaires</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 3</p>
+  <h1 class="titre-exo">Les formulaires</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>&lt;form&gt;
+
+  &lt;p&gt;
+    &lt;label for="nom"&gt;Nom&lt;/label&gt;
+    &lt;input type="text" id="nom" name="nom" required&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;label for="courriel"&gt;E-mail&lt;/label&gt;
+    &lt;input type="email" id="courriel" name="courriel" required&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;label for="naissance"&gt;Date de naissance&lt;/label&gt;
+    &lt;input type="date" id="naissance" name="naissance"&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;label for="sortie"&gt;Sortie souhaitée&lt;/label&gt;
+    &lt;select id="sortie" name="sortie"&gt;
+      &lt;option value="pic-du-midi"&gt;Pic du Midi&lt;/option&gt;
+      &lt;option value="trois-lacs"&gt;Boucle des trois lacs&lt;/option&gt;
+      &lt;option value="bassies"&gt;Crêtes de Bassiès&lt;/option&gt;
+      &lt;option value="cascade-ars"&gt;Cascade d'Ars&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/p&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;Formule souhaitée&lt;/legend&gt;
+
+    &lt;input type="radio" id="demi-journee" name="formule" value="demi-journee"&gt;
+    &lt;label for="demi-journee"&gt;Demi-journée&lt;/label&gt;
+
+    &lt;input type="radio" id="journee" name="formule" value="journee"&gt;
+    &lt;label for="journee"&gt;Journée entière&lt;/label&gt;
+  &lt;/fieldset&gt;
+
+  &lt;p&gt;
+    &lt;input type="checkbox" id="newsletter" name="newsletter"&gt;
+    &lt;label for="newsletter"&gt;Je souhaite recevoir la newsletter&lt;/label&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;label for="message"&gt;Message&lt;/label&gt;
+    &lt;textarea id="message" name="message" rows="5"&gt;&lt;/textarea&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;button type="submit"&gt;M'inscrire&lt;/button&gt;
+  &lt;/p&gt;
+
+&lt;/form&gt;</code></pre>
+    </details>
+
+    <h2>Les deux points qui coincent</h2>
+
+    <h3>Les boutons radio : même <code>name</code>, <code>id</code> différents</h3>
+
+    <p>
+      C'est contre-intuitif et c'est le cœur de l'étape 4. Les deux boutons partagent
+      <code>name="formule"</code> : <strong>c'est ce partage qui les rend
+      exclusifs</strong>. Le navigateur comprend « ces deux boutons répondent à la même
+      question », donc cocher l'un décoche l'autre.
+    </p>
+
+    <p>
+      Mais chacun garde son <code>id</code> propre, puisque son étiquette doit le viser
+      individuellement. C'est la seule situation du cours où <code>name</code> et
+      <code>id</code> ne se ressemblent pas.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Si vos deux boutons restent cochables ensemble</strong>, leurs
+        <code>name</code> diffèrent. Si cliquer sur une étiquette ne coche rien, c'est
+        le <code>for</code> qui ne correspond pas à l'<code>id</code>.
+      </p>
+    </div>
+
+    <h3>La zone de texte doit être vide</h3>
+
+<pre><code>&lt;textarea id="message" name="message" rows="5"&gt;&lt;/textarea&gt;   ✅ vide
+
+&lt;textarea id="message" name="message" rows="5"&gt;
+&lt;/textarea&gt;                                                   ❌ contient un retour à la ligne</code></pre>
+
+    <p>
+      Contrairement à toutes les balises vues jusqu'ici, l'indentation compte ici :
+      tout ce qui se trouve entre les deux balises est du texte pré-saisi.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>Cliquer sur une étiquette ne fait rien</td>
+        <td>Le <code>for</code> du label et l'<code>id</code> du champ ne
+            correspondent pas — souvent une coquille, une majuscule ou un accent</td>
+      </tr>
+      <tr>
+        <td>Les deux boutons radio peuvent être cochés en même temps</td>
+        <td>Leurs <code>name</code> sont différents. Ils doivent partager le même</td>
+      </tr>
+      <tr>
+        <td>La zone de texte contient déjà du texte ou un espace</td>
+        <td>Les balises <code>&lt;textarea&gt;</code> et <code>&lt;/textarea&gt;</code>
+            ne sont pas collées</td>
+      </tr>
+      <tr>
+        <td>Le bouton ne déclenche aucune vérification</td>
+        <td>Il n'est pas <code>type="submit"</code>, ou il est en dehors du
+            <code>&lt;form&gt;</code></td>
+      </tr>
+      <tr>
+        <td>La page se recharge et le formulaire se vide</td>
+        <td><strong>C'est normal.</strong> Sans <code>action</code>, le navigateur
+            recharge la page. L'envoi réel se verra au jour 3</td>
+      </tr>
+      <tr>
+        <td>Le validateur signale « The for attribute of the label element must refer to a form control »</td>
+        <td>Un <code>for</code> vise un <code>id</code> qui n'existe pas dans la page</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui attrape l'erreur n°1 :</strong> après chaque champ
+        écrit, cliquez immédiatement sur son étiquette dans le navigateur. Deux
+        secondes de vérification qui évitent de chercher la coquille parmi huit champs
+        à la fin.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à mon code</a>
+      <a class="bouton" href="../../">Fin du projet 2 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Si… sinon</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 1</p>
+  <h1 class="titre-exo">Si… sinon</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> faire prendre une
+      décision à votre code — et éviter le piège de comparaison qui rend une
+      condition fausse pour toujours.</p>
+    </div>
+
+    <h2>1 · Jusqu'ici, tout s'exécutait pareil</h2>
+
+    <p>
+      Au projet 6, vos instructions se déroulaient de haut en bas, dans le même
+      ordre, à chaque fois. Une <strong>condition</strong> permet d'exécuter un bloc
+      <em>seulement si</em> quelque chose est vrai.
+    </p>
+
+<pre><code>if (age &gt;= 18) {
+  console.log("Majeur");
+}</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>if</code></td><td>« si »</td></tr>
+      <tr><td><code>(age &gt;= 18)</code></td><td>la <strong>question</strong>, entre parenthèses</td></tr>
+      <tr><td><code>{ … }</code></td><td>ce qu'on fait <strong>si c'est vrai</strong></td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pas de point-virgule après l'accolade fermante.</strong> On écrit
+        <code>}</code> et on passe à la ligne. Le point-virgule termine une
+        <em>instruction</em> ; un bloc n'en est pas une.
+      </p>
+    </div>
+
+    <h2>2 · <code>else</code> — et sinon ?</h2>
+
+<pre><code>if (age &gt;= 18) {
+  console.log("Majeur");
+} else {
+  console.log("Mineur");
+}</code></pre>
+
+    <p>
+      <code>else</code> se traduit par « sinon ». Un seul des deux blocs s'exécute,
+      <strong>jamais les deux</strong>.
+    </p>
+
+    <h2>3 · Poser la question : les comparaisons</h2>
+
+    <p>
+      Entre les parenthèses, on écrit une comparaison. Elle produit
+      <code>true</code> ou <code>false</code> — le type <strong>booléen</strong> vu
+      au projet 6.
+    </p>
+
+    <table>
+      <tr><th>Opérateur</th><th>Question posée</th><th>Exemple vrai</th></tr>
+      <tr><td><code>&gt;</code></td><td>plus grand que</td><td><code>5 &gt; 3</code></td></tr>
+      <tr><td><code>&lt;</code></td><td>plus petit que</td><td><code>3 &lt; 5</code></td></tr>
+      <tr><td><code>&gt;=</code></td><td>plus grand ou égal</td><td><code>5 &gt;= 5</code></td></tr>
+      <tr><td><code>&lt;=</code></td><td>plus petit ou égal</td><td><code>3 &lt;= 5</code></td></tr>
+      <tr><td><code>===</code></td><td><strong>égal</strong></td><td><code>5 === 5</code></td></tr>
+      <tr><td><code>!==</code></td><td><strong>différent</strong></td><td><code>5 !== 3</code></td></tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Trois signes égal pour comparer, un seul pour ranger.</strong> C'est
+        la confusion la plus fréquente du débutant :
+      </p>
+<pre><code>age = 18     ← RANGE 18 dans age (projet 6)
+age === 18   ← DEMANDE si age vaut 18</code></pre>
+      <p>
+        Écrire <code>if (age = 18)</code> ne pose aucune question : cela
+        <em>modifie</em> <code>age</code>, puis la condition prend la valeur de ce
+        qu'on vient de ranger — ici <code>18</code>, que JavaScript considère comme
+        vraie. Le bloc s'exécute donc, <strong>mais pas parce qu'on a comparé quoi
+        que ce soit</strong>. Aucune erreur rouge ne vous prévient.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Une valeur seule peut aussi être jugée vraie ou fausse.</strong> Hors
+        de toute comparaison, JavaScript considère comme <em>fausses</em> la valeur
+        <code>0</code> et le texte vide <code>""</code> — et comme <em>vraies</em>
+        presque toutes les autres, y compris le texte <code>"0"</code>.
+      </p>
+      <p>
+        C'est ce qui explique le comportement ci-dessus, et vous le vérifierez au
+        bonus de l'exercice.
+      </p>
+    </div>
+
+    <h2>4 · Le piège central : <code>==</code> contre <code>===</code></h2>
+
+    <p>
+      Il existe aussi <code>==</code> à deux signes. La différence est mince à
+      lire, énorme à l'usage :
+    </p>
+
+    <table>
+      <tr><th>Opérateur</th><th>Ce qu'il fait</th></tr>
+      <tr>
+        <td><code>===</code> <em>(strict)</em></td>
+        <td>compare la valeur <strong>et le type</strong></td>
+      </tr>
+      <tr>
+        <td><code>==</code> <em>(lâche)</em></td>
+        <td>convertit d'abord, puis compare — il <strong>ferme les yeux</strong> sur le type</td>
+      </tr>
+    </table>
+
+<pre><code>"5" === 5     → false     texte ≠ nombre
+"5"  ==  5    → true      le texte a été converti</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La règle à retenir : utilisez toujours <code>===</code>.</strong>
+        Comparer sans regarder le type produit des surprises difficiles à traquer.
+        Les professionnels écrivent <code>===</code> par défaut, et
+        <code>!==</code> pour « différent ».
+      </p>
+    </div>
+
+    <h2>5 · Pourquoi cela vous concerne <em>maintenant</em></h2>
+
+    <div class="attention">
+      <p>
+        Vous savez depuis le projet 6 que <strong><code>prompt()</code> renvoie
+        toujours du texte</strong>. Une condition sur une saisie tombe donc droit
+        dans le piège :
+      </p>
+<pre><code>let saisie = prompt("Votre âge ?");   // "25", du TEXTE
+
+saisie === 25          → false    ⚠️ JAMAIS vrai
+Number(saisie) === 25  → true     ✅</code></pre>
+      <p>
+        <strong>Convertissez d'abord, comparez ensuite.</strong> Une condition qui ne
+        se déclenche jamais, sans erreur rouge, vient presque toujours de là.
+      </p>
+    </div>
+
+    <h2>6 · Comparer du texte : attention à l'ordre</h2>
+
+    <p>
+      On peut comparer deux textes, mais le classement se fait
+      <strong>caractère par caractère</strong>, comme dans un dictionnaire — pas par
+      la valeur numérique :
+    </p>
+
+<pre><code>"abc" &lt; "abd"   → true    ordre alphabétique
+"10"  &lt; "9"     → true    ⚠️ "1" vient avant "9"
+ 10   &lt;  9      → false   ✅ vrais nombres</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>"10" &lt; "9"</code> est vrai, et c'est logique pour un dictionnaire :
+        <em>« 1 » vient avant « 9 »</em>, on ne va pas plus loin. Encore une raison
+        de convertir avant de comparer.
+      </p>
+    </div>
+
+    <h2>7 · Le bloc, et l'indentation</h2>
+
+    <p>
+      Tout ce qui est entre <code>{</code> et <code>}</code> forme un
+      <strong>bloc</strong>. On le décale de deux espaces vers la droite — ce qu'on
+      appelle l'<strong>indentation</strong> :
+    </p>
+
+<pre><code>if (age &gt;= 18) {
+  console.log("Majeur");
+  console.log("Bienvenue");
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>L'indentation ne change rien pour le navigateur</strong> — mais tout
+        pour vous. Un code mal décalé rend les erreurs d'accolades presque
+        introuvables. VSCode le fait pour vous : <code>Maj+Alt+F</code> reformate le
+        fichier entier.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Conditionals"
+             target="_blank" rel="noopener">MDN — Prendre des décisions</a>
+        </td>
+        <td>Le chapitre complet, avec des exemples progressifs.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Strict_equality"
+             target="_blank" rel="noopener">MDN — L'égalité stricte <code>===</code></a>
+        </td>
+        <td>La référence sur la différence avec <code>==</code>.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/ifelse"
+             target="_blank" rel="noopener">javascript.info — Les conditions</a>
+        </td>
+        <td>Le même chapitre en français, avec exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

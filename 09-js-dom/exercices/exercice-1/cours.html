@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Trouver dans la page</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 1</p>
+  <h1 class="titre-exo">Trouver dans la page</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> désigner un élément de
+      la page depuis JavaScript — un seul, ou plusieurs — et comprendre ce que vous
+      recevez en retour.</p>
+    </div>
+
+    <h2>1 · Le DOM, ou la page vue par JavaScript</h2>
+
+    <p>
+      Quand le navigateur lit votre HTML, il n'en garde pas le texte : il en
+      construit une <strong>représentation en mémoire</strong>, faite d'objets
+      imbriqués. C'est le <strong>DOM</strong> — <em>Document Object Model</em>.
+    </p>
+
+    <table>
+      <tr><th>Dans le fichier</th><th>Dans le DOM</th></tr>
+      <tr><td><code>&lt;h1&gt;Bonjour&lt;/h1&gt;</code></td><td>un objet, avec des propriétés</td></tr>
+      <tr><td>du texte</td><td><strong>des objets</strong> que le code peut lire et modifier</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Vous en avez déjà vu un morceau</strong> au projet 6 :
+        <code>document.querySelector("h1")</code>. <code>document</code> est le point
+        d'entrée — la page entière. Tout part de là.
+      </p>
+    </div>
+
+    <h2>2 · <code>querySelector</code> — le premier qui correspond</h2>
+
+<pre><code>document.querySelector("h1")        → l'élément &lt;h1&gt;
+document.querySelector(".item")     → le PREMIER élément de classe item
+document.querySelector("#total")    → l'élément d'identifiant total</code></pre>
+
+    <p>
+      Les sélecteurs sont <strong>exactement ceux du CSS</strong>. Le projet 3 vous a
+      donné les trois de base — la balise, la classe, l'identifiant. En voici deux
+      autres, dont vous aurez besoin ici :
+    </p>
+
+    <table>
+      <tr><th>Sélecteur</th><th>Désigne</th></tr>
+      <tr>
+        <td><code>.livre</code></td>
+        <td>tous les éléments de classe <code>livre</code></td>
+      </tr>
+      <tr>
+        <td><code>.livre.disponible</code><br><em>collés, sans espace</em></td>
+        <td>ceux qui ont <strong>les deux classes à la fois</strong></td>
+      </tr>
+      <tr>
+        <td><code>.livre .titre</code><br><em>séparés par un espace</em></td>
+        <td>un <code>.titre</code> situé <strong>à l'intérieur</strong> d'un
+          <code>.livre</code></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>L'espace change tout.</strong> <code>.livre.disponible</code> cherche
+        un seul élément portant les deux classes ; <code>.livre .disponible</code>
+        cherche un élément <em>contenu dans</em> un autre. Une espace de trop, et la
+        recherche ne trouve plus rien — sans erreur.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>« query<em>Selector</em> », au singulier : il rend UN seul
+        élément</strong> — le premier trouvé dans l'ordre du document, même si dix
+        autres correspondent.
+      </p>
+      <p>
+        Et s'il ne trouve rien, il rend <code>null</code> — sans erreur. Vous
+        connaissez la suite depuis le projet 6 : écrire <em>dans</em> ce
+        <code>null</code> déclenche un <code>TypeError</code>.
+      </p>
+    </div>
+
+    <h2>3 · <code>querySelectorAll</code> — tous ceux qui correspondent</h2>
+
+<pre><code>document.querySelectorAll(".item")    → les TROIS éléments
+</code></pre>
+
+    <table>
+      <tr><th></th><th><code>querySelector</code></th><th><code>querySelectorAll</code></th></tr>
+      <tr>
+        <td>Rend</td>
+        <td>un élément</td>
+        <td>une <strong>NodeList</strong></td>
+      </tr>
+      <tr>
+        <td>Si rien ne correspond</td>
+        <td><code>null</code></td>
+        <td>une liste <strong>vide</strong> (<code>length</code> vaut 0)</td>
+      </tr>
+      <tr>
+        <td>On l'utilise pour</td>
+        <td>agir sur un seul</td>
+        <td>agir sur chacun</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>La différence du cas « rien trouvé » compte.</strong> Avec
+        <code>querySelectorAll</code>, pas de <code>null</code> : on reçoit une liste
+        vide, qu'on peut parcourir sans risque — la boucle ne fait simplement aucun
+        tour.
+      </p>
+    </div>
+
+    <h2>4 · ⚠️ Une NodeList n'est pas un tableau</h2>
+
+    <div class="attention">
+      <p>
+        Elle y ressemble beaucoup — elle a un <code>.length</code>, des index, et se
+        parcourt avec <code>for…of</code>. Mais :
+      </p>
+<pre><code>Array.isArray(liste)    → false      ⚠️
+liste.map(…)            → undefined  ⚠️ la méthode n'existe pas
+liste.filter(…)         → undefined  ⚠️
+liste.forEach(…)        → ✅ celle-ci existe</code></pre>
+      <p>
+        Si vous avez besoin des outils d'un vrai tableau, on convertit :
+      </p>
+<pre><code>Array.from(liste)       → un vrai tableau</code></pre>
+    </div>
+
+    <p>
+      Pour cet exercice, <code>for…of</code> suffit — celui du projet 8,
+      inchangé :
+    </p>
+
+<pre><code>for (const item of document.querySelectorAll(".item")) {
+  console.log(item.textContent);
+}</code></pre>
+
+    <h2>5 · Lire ce qu'on a trouvé</h2>
+
+    <table>
+      <tr><th>Propriété</th><th>Donne</th></tr>
+      <tr><td><code>.textContent</code></td><td>le texte, <strong>sans les balises</strong></td></tr>
+      <tr><td><code>.innerHTML</code></td><td>le contenu <strong>avec</strong> les balises</td></tr>
+      <tr><td><code>.tagName</code></td><td>le nom de la balise, en majuscules</td></tr>
+      <tr><td><code>.className</code></td><td>ses classes, en un seul texte</td></tr>
+      <tr><td><code>.id</code></td><td>son identifiant</td></tr>
+    </table>
+
+    <p>Sur <code>&lt;p id="cible"&gt;Texte &lt;strong&gt;gras&lt;/strong&gt; ici&lt;/p&gt;</code> :</p>
+
+<pre><code>.textContent    → "Texte gras ici"
+.innerHTML      → "Texte &lt;strong&gt;gras&lt;/strong&gt; ici"</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>.textContent</code> vous donne ce que <strong>lit</strong> le visiteur ;
+        <code>.innerHTML</code> ce qu'a <strong>écrit</strong> le développeur.
+      </p>
+      <p>
+        <strong>Ce n'est pas au programme d'aujourd'hui</strong> — aucun critère ne
+        demande <code>innerHTML</code>, <code>.tagName</code> ni
+        <code>.className</code>. Retenez <code>.textContent</code> ; l'exercice 2
+        reviendra sur le choix entre les deux.
+      </p>
+    </div>
+
+    <h2>6 · Ce qu'une librairie remplace</h2>
+
+    <p>
+      Vous entendrez parler de <strong>jQuery</strong>, une librairie très répandue.
+      Voici la même action, dans les deux écritures :
+    </p>
+
+    <table>
+      <tr><th>Avec jQuery</th><th>En JavaScript natif</th></tr>
+      <tr>
+        <td><code>$(".logo")</code></td>
+        <td><code>document.querySelectorAll(".logo")</code></td>
+      </tr>
+      <tr>
+        <td><code>$("#total")</code></td>
+        <td><code>document.querySelector("#total")</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est plus court — et c'est tout.</strong> jQuery ne fait rien que le
+        navigateur ne sache faire : il abrège. À l'époque où les navigateurs se
+        comportaient différemment, il rendait de grands services ; aujourd'hui, le
+        natif suffit dans la plupart des cas.
+      </p>
+      <p>
+        <strong>Apprendre le geste avant le raccourci</strong> vous permettra de lire
+        les deux. Nous reverrons jQuery en fin de journée, quand vous saurez ce qu'il
+        remplace.
+      </p>
+      <p>
+        <strong>Une nuance, si vous lisez du jQuery :</strong> il rend
+        <em>toujours</em> une collection, même pour un identifiant.
+        <code>$("#total")</code> contient un élément ; pour l'élément lui-même, on
+        écrit <code>$("#total")[0]</code>. C'est ce qui explique qu'un
+        <code>$("#total").textContent</code> ne donne rien.
+      </p>
+    </div>
+
+    <h2>7 · Rappel : où placer le script</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Tout ceci ne fonctionne que si votre script est en bas du
+        <code>&lt;body&gt;</code></strong> — la leçon du projet 6, exercice 4. Placé
+        dans le <code>&lt;head&gt;</code>, il s'exécute avant que les éléments
+        existent, et <code>querySelector</code> rend <code>null</code>.
+      </p>
+      <p>
+        Dans tous les exercices de ce projet, la balise est déjà au bon endroit.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/DOM_scripting"
+             target="_blank" rel="noopener">MDN — Manipuler les documents</a>
+        </td>
+        <td>Le chapitre d'introduction au DOM, avec des exemples.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Document/querySelectorAll"
+             target="_blank" rel="noopener">MDN — <code>querySelectorAll()</code></a>
+        </td>
+        <td>La référence, dont la nature exacte d'une NodeList.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/searching-elements-dom"
+             target="_blank" rel="noopener">javascript.info — Chercher dans le DOM</a>
+        </td>
+        <td>Toutes les méthodes de recherche, comparées.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

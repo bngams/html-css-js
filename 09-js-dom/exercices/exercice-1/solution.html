@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Trouver dans la page</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 1</p>
+  <h1 class="titre-exo">Trouver dans la page</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Votre code ne ressemble pas au mien ? C'est normal — et voulu.</strong>
+      Avec ce format, seuls les <em>critères d'acceptation</em> comptent. Si vos dix
+      lignes sortent et que le compteur est juste, vous avez réussi, quelle que soit
+      votre façon d'y arriver.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const titre = document.querySelector("#titre-page");
+console.log("Titre :", titre.textContent);
+
+const premier = document.querySelector(".livre");
+console.log("Premier livre :", premier.querySelector(".livre__titre").textContent);
+
+const livres = document.querySelectorAll(".livre");
+console.log("Nombre de livres :", livres.length);
+
+const disponibles = document.querySelectorAll(".livre.disponible");
+console.log("Disponibles :", disponibles.length);
+
+const perdus = document.querySelectorAll(".livre.perdu");
+console.log("Perdus :", perdus.length, "· est-ce null ?", perdus === null);
+
+for (const livre of livres) {
+  const titreLivre = livre.querySelector(".livre__titre").textContent;
+  const auteur = livre.querySelector(".livre__auteur").textContent;
+  console.log("·", titreLivre, "—", auteur);
+}
+
+document.querySelector("#compteur").textContent =
+  livres.length + " livres au catalogue, dont " + disponibles.length + " disponibles";</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Singulier, pluriel — et ce qu'ils rendent quand ils échouent</h3>
+
+    <table>
+      <tr><th></th><th><code>querySelector</code></th><th><code>querySelectorAll</code></th></tr>
+      <tr>
+        <td>Trouve</td>
+        <td>le <strong>premier</strong> qui correspond</td>
+        <td><strong>tous</strong> ceux qui correspondent</td>
+      </tr>
+      <tr>
+        <td>Rend</td>
+        <td>un élément</td>
+        <td>une NodeList</td>
+      </tr>
+      <tr>
+        <td>Si rien</td>
+        <td><code>null</code> ⚠️</td>
+        <td>liste vide, <code>length</code> 0</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Cette dernière ligne est le critère 5, et elle compte.</strong> Avec
+        <code>querySelector</code>, une recherche infructueuse donne
+        <code>null</code> — et vous savez depuis le projet 6 qu'écrire dedans
+        déclenche un <code>TypeError</code>.
+      </p>
+      <p>
+        Avec <code>querySelectorAll</code>, jamais de <code>null</code> : une liste
+        vide. On peut la parcourir sans précaution — la boucle ne fait simplement
+        aucun tour. <strong>C'est plus sûr, et c'est pourquoi on la préfère souvent</strong>,
+        même pour un seul élément attendu.
+      </p>
+    </div>
+
+    <h3>2 · Chercher <em>dans</em> un élément</h3>
+
+<pre><code>document.querySelector(".livre__titre")    ← le premier de TOUTE la page
+livre.querySelector(".livre__titre")       ← celui de CE livre</code></pre>
+
+    <p>
+      <code>querySelector</code> ne s'appelle pas que sur <code>document</code> :
+      appelé sur un élément, il ne cherche qu'à l'intérieur. C'est ce qui permet à la
+      boucle de lire le bon titre à chaque tour.
+    </p>
+
+    <div class="astuce">
+      <p>
+        Sans cela, les cinq tours afficheraient cinq fois
+        <em>La Horde du Contrevent</em> — le premier titre de la page.
+      </p>
+    </div>
+
+    <h3>3 · Six instructions, dix lignes</h3>
+
+    <p>
+      Vous connaissez ce décompte depuis le projet 8 : la boucle du critère 6 produit
+      <strong>cinq</strong> lignes à elle seule. Une instruction écrite, cinq
+      exécutions.
+    </p>
+
+    <h3>4 · Une seule ligne modifie la page</h3>
+
+    <div class="astuce">
+      <p>
+        Tout le corrigé <em>lit</em> — sauf la dernière ligne, qui <em>écrit</em> :
+      </p>
+<pre><code>document.querySelector("#compteur").textContent = …</code></pre>
+      <p>
+        C'est le geste du projet 6, exercice 4. L'exercice 2 explorera les
+        <strong>trois</strong> façons de modifier un élément, et laquelle choisir.
+      </p>
+    </div>
+
+    <p>
+      Remarquez que les nombres viennent de <code>.length</code>, jamais écrits en
+      dur. Ajoutez un livre au HTML : le compteur suit tout seul.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td><code>TypeError: Cannot read properties of null</code></td>
+        <td>
+          Un sélecteur ne correspond à rien — vérifiez le dièse, le point, et
+          l'orthographe exacte
+        </td>
+      </tr>
+      <tr>
+        <td>Les cinq lignes affichent le même titre</td>
+        <td>
+          Vous appelez <code>document.querySelector</code> dans la boucle au lieu de
+          <code>livre.querySelector</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Nombre de livres : undefined</code></td>
+        <td>
+          <code>querySelector</code> au lieu de <code>querySelectorAll</code> : un
+          élément seul n'a pas de <code>.length</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Disponibles : 0</code></td>
+        <td>
+          Un espace dans le sélecteur : <code>.livre .disponible</code> cherche un
+          élément <em>contenu dans</em> un livre — il n'y en a aucun.
+          <code>.livre.disponible</code>, collés, désigne le même élément portant les
+          deux classes
+        </td>
+      </tr>
+      <tr>
+        <td>La console affiche <code>[object NodeList]</code></td>
+        <td>
+          Vous affichez la liste au lieu de son <code>.length</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le compteur ne change pas</td>
+        <td>
+          Vous avez lu <code>.textContent</code> au lieu de lui affecter une valeur —
+          il faut un <code>=</code>
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Exercice 2 — à venir ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

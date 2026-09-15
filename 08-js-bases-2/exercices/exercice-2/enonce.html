@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Boucler jusqu'à trouver</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 2</p>
+  <h1 class="titre-exo">Boucler jusqu'à trouver</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Répéter tant qu'une condition reste vraie,
+      et <strong>tenir la promesse du projet 7</strong> : le jeu de devinette va
+      enfin redemander.</p>
+      <p>
+        <strong>Prérequis :</strong> l'exercice 1 (les boucles <code>for</code>) et
+        le projet 7 (<code>if</code> / <code>else if</code>, <code>Number()</code>,
+        <code>isNaN</code>).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-2/app.js</code>
+      </p>
+      <p>
+        Le tirage du nombre secret vous est <strong>donné</strong>, ainsi que la
+        ligne qui l'affiche dans la console pour vos tests.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        ⚠️⚠️ <strong>Cet exercice peut figer votre onglet — et c'est
+        réparable.</strong>
+      </p>
+      <p>
+        Une boucle mal écrite tourne sans fin. Si la page ne répond plus :
+        <strong>fermez l'onglet</strong> (<code>Ctrl+W</code> ou
+        <code>Cmd+W</code>), corrigez <code>app.js</code>, rouvrez la page.
+        <strong>Rien n'est cassé définitivement</strong>, et cela arrive à tout le
+        monde.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 8 étapes</h2>
+
+    <h3>Partie 1 — la mécanique du <code>while</code></h3>
+
+    <ol class="criteres">
+      <li>
+        Avec une boucle <code>while</code>, afficher <code>Décollage dans</code> puis
+        <code>3</code>, <code>2</code>, <code>1</code> — une ligne par tour
+      </li>
+      <li>
+        <strong>Après</strong> la boucle, afficher <code>Décollage !</code>
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>La question à se poser avant d'écrire un <code>while</code> :</strong>
+        « qu'est-ce qui, dans le bloc, va finir par rendre la condition fausse ? »
+        Ici, c'est la ligne qui fait <em>diminuer</em> le compteur. Sans elle, la
+        boucle est infinie.
+      </p>
+    </div>
+
+    <h3>Partie 2 — <code>break</code> et <code>continue</code></h3>
+
+    <ol class="criteres" start="3">
+      <li>
+        Boucle <code>for</code> de 0 à 9 affichant <code>stop:</code> puis le nombre,
+        mais qui <strong>sort</strong> dès que le nombre vaut 4 → quatre lignes
+      </li>
+      <li>
+        Boucle <code>for</code> de 0 à 4 affichant <code>saut:</code> puis le nombre,
+        mais qui <strong>saute</strong> le tour où il vaut 2 → quatre lignes
+      </li>
+    </ol>
+
+    <h3>Partie 3 — le jeu qui redemande</h3>
+
+    <ol class="criteres" start="5">
+      <li>
+        Créer <code>trouve</code> (valant <code>false</code>) et <code>essais</code>
+        (valant <code>0</code>), avec le mot-clé qui autorise le changement
+      </li>
+      <li>
+        Écrire la boucle <code>while</code> du jeu : demander, <strong>tester
+        l'annulation</strong>, compter l'essai, convertir, puis comparer selon les
+        quatre cas
+      </li>
+      <li>
+        Après la boucle, afficher <code>Partie terminée. Essais :</code> puis
+        <code>essais</code>
+      </li>
+      <li>
+        Si <code>trouve</code> vaut <code>true</code>, féliciter avec le nombre
+        d'essais <strong>bien accordé</strong> ; sinon annoncer
+        <code>Partie abandonnée.</code>
+      </li>
+    </ol>
+
+    <div class="attention">
+      <p>
+        <strong>L'étape 6 contient le point critique de l'exercice :</strong> le test
+        <code>saisie === null</code> doit venir <strong>avant</strong> la conversion.
+      </p>
+      <p>
+        Vous savez depuis le projet 7 que <code>Number(null)</code> vaut
+        <code>0</code>. Dans une boucle, cela devient piégeant : le joueur annule, le
+        programme croit qu'il propose 0, ce n'est pas le secret, donc il
+        <strong>redemande</strong>. Et ainsi de suite, sans issue.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>Les parties 1 et 2 doivent produire exactement ces douze lignes :</p>
+
+<pre><code>Décollage dans 3
+Décollage dans 2
+Décollage dans 1
+Décollage !
+stop: 0
+stop: 1
+stop: 2
+stop: 3
+saut: 0
+saut: 1
+saut: 3
+saut: 4</code></pre>
+
+    <p>Puis, selon votre façon de jouer :</p>
+
+    <table>
+      <tr>
+        <th>Vous jouez…</th>
+        <th>Les boîtes affichent</th>
+        <th>La console finit par</th>
+      </tr>
+      <tr>
+        <td>le bon nombre du premier coup</td>
+        <td><code>Gagné en 1 essai !</code> — au <strong>singulier</strong></td>
+        <td><code>Essais : 1</code></td>
+      </tr>
+      <tr>
+        <td>trop petit, trop grand, puis juste</td>
+        <td>
+          <code>Trop petit.</code>, <code>Trop grand.</code>,
+          <code>Gagné en 3 essais !</code>
+        </td>
+        <td><code>Essais : 3</code></td>
+      </tr>
+      <tr>
+        <td><code>abc</code> puis le bon nombre</td>
+        <td>
+          <code>Ce n'est pas un nombre.</code>, <code>Gagné en 2 essais !</code>
+        </td>
+        <td><code>Essais : 2</code></td>
+      </tr>
+      <tr>
+        <td>Annuler tout de suite</td>
+        <td><code>Partie abandonnée.</code></td>
+        <td><code>Essais : 0</code></td>
+      </tr>
+      <tr>
+        <td><strong>Valider sans rien taper</strong></td>
+        <td><code>Trop petit.</code> — et le jeu redemande</td>
+        <td>un essai <strong>est</strong> compté</td>
+      </tr>
+      <tr>
+        <td>deux essais puis Annuler</td>
+        <td>…puis <code>Partie abandonnée.</code></td>
+        <td><code>Essais : 2</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi « Essais : 0 » quand on annule tout de suite ?</strong>
+        Parce que le test d'annulation vient <em>avant</em> le comptage : on n'a pas
+        proposé de nombre, donc on n'a pas consommé d'essai. C'est voulu — et c'est
+        la preuve que votre test est au bon endroit.
+      </p>
+      <p>
+        <strong>Et pourquoi valider à vide compte-t-il un essai, lui ?</strong> Parce
+        qu'un champ vide rend <code>""</code>, qui n'est <strong>pas</strong>
+        <code>null</code> : le test d'annulation ne s'applique pas. Puis
+        <code>Number("")</code> vaut <code>0</code>, et le jeu répond « trop petit ».
+      </p>
+      <p>
+        <strong>Ce n'est pas un défaut de votre test</strong> — c'est la seconde
+        surprise du projet 7, que vous retrouvez ici. La traiter aussi ne demanderait
+        qu'un <code>if</code> de plus ; ce n'est pas l'objet de cet exercice.
+      </p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Le compte à rebours</td>
+        <td>Trois lignes, puis <code>Décollage !</code> une seule fois</td>
+      </tr>
+      <tr>
+        <td><code>break</code> et <code>continue</code></td>
+        <td>Quatre lignes chacun — mais pas les mêmes nombres</td>
+      </tr>
+      <tr>
+        <td>Le jeu redemande</td>
+        <td>
+          Une mauvaise réponse relance la question, au lieu de terminer la partie
+        </td>
+      </tr>
+      <tr>
+        <td><strong>L'annulation</strong></td>
+        <td>
+          Cliquer sur Annuler <strong>arrête</strong> le jeu — si la boîte revient,
+          votre test <code>null</code> manque ou arrive trop tard
+        </td>
+      </tr>
+      <tr>
+        <td>L'accord du pluriel</td>
+        <td><code>1 essai</code> et non <code>1 essais</code></td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>app.js</code> : aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — voir une boucle infinie, volontairement</strong></p>
+      <ol>
+        <li>Terminez d'abord les huit étapes, et enregistrez.</li>
+        <li>
+          Retirez la ligne qui fait <em>diminuer</em> le compteur de l'étape 1,
+          rechargez.
+        </li>
+        <li>
+          L'onglet se fige. <strong>Fermez-le</strong> (<code>Ctrl+W</code>),
+          remettez la ligne, rouvrez.
+        </li>
+      </ol>
+      <p>
+        Vous venez de provoquer, puis de réparer, la panne la plus courante des
+        boucles. <strong>Savoir la reconnaître vaut mieux que de l'éviter par
+        chance.</strong>
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les douze lignes des parties 1 et 2 s'affichent correctement</li>
+      <li>Le jeu redemande tant que vous n'avez pas trouvé</li>
+      <li>Annuler arrête proprement la partie</li>
+      <li>
+        Vous savez répondre à : « qu'est-ce qui va rendre ma condition fausse ? »
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>app.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 55 minutes.</strong> L'étape 6 est la plus longue du projet :
+      six instructions à enchaîner dans le bon ordre.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

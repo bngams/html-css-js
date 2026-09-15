@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Le compteur</title>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ⚠️ NOUVEAUTÉ : DANS CET EXERCICE, VOUS MODIFIEZ DEUX FICHIERS.
+
+       Celui-ci (travail.html) ET script.js.
+
+       C'est le premier exercice du projet où la page n'est PAS figée.
+
+       👉 TODO: 1 se trouve plus bas, tout en bas du body.
+          Les autres TODO sont dans script.js.
+       ═══════════════════════════════════════════════════════════ -->
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #253044;
+      background-color: #f6f8fb;
+    }
+    .page { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.7rem; color: #1d6fa5; margin-top: 0; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .compteur {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #14507a;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .message { text-align: center; font-size: 1.05rem; }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     🔎 ÉTAPE 1 — LE BOGUE À OBSERVER
+
+     La balise script est placée ICI, dans le head, VOLONTAIREMENT.
+     C'est une erreur — celle que le cours explique en section 2.
+
+     Ouvrez cette page avec la console (F12) : vous verrez une erreur
+     rouge. Lisez-la avant de corriger quoi que ce soit.
+
+     Vous déplacerez cette balise à l'étape 1, après avoir lu l'erreur.
+     ═══════════════════════════════════════════════════════════════ -->
+  <script src="script.js"></script>
+
+</head>
+<body>
+
+  <div class="page">
+
+    <h1>Médiathèque des Trois Rivières</h1>
+
+    <div class="encadre">
+      <p>
+        <strong>Compteur d'emprunts du jour.</strong> Le nombre ci-dessous et le
+        message qui le suit sont écrits par <code>script.js</code> — pas par cette
+        page.
+      </p>
+      <p>
+        Tant que le script est mal placé, ils gardent leur valeur de départ.
+      </p>
+    </div>
+
+    <p class="compteur" id="compteur">—</p>
+    <p class="message" id="message">En attente du script…</p>
+
+    <h2>Comment tester</h2>
+
+    <ol>
+      <li>Ouvrez la console : <kbd>F12</kbd> → onglet <strong>Console</strong></li>
+      <li>Rechargez : une erreur rouge doit apparaître</li>
+      <li>Lisez-la, puis corrigez selon l'énoncé</li>
+    </ol>
+
+    <p>
+      <a class="retour" href="enonce.html">← Revenir à l'énoncé</a>
+    </p>
+
+  </div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     👉 TODO: 1 — DÉPLACEZ ICI LA BALISE SCRIPT
+
+     Une fois le bogue constaté (étape 1 de l'énoncé) :
+
+       1. COUPEZ la ligne  <script src="script.js"></script>
+          qui se trouve dans le head, plus haut.
+       2. COLLEZ-LA juste en dessous de cette consigne,
+          avant la fermeture du body.
+       3. Enregistrez (Ctrl+S) et rechargez (F5).
+
+     L'erreur rouge doit disparaître.
+     ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 2 — À VOUS DE JOUER
+
+   👉 C'EST CE FICHIER QUE VOUS MODIFIEZ.
+      La page travail.html, elle, est figée : n'y touchez pas.
+
+   ── LE GESTE, pour chaque TODO ───────────────────────────────
+
+   1. EFFACEZ la ligne du marqueur en entier.
+   2. ÉCRIVEZ votre règle à la place.
+   3. Enregistrez, puis rechargez travail.html (F5).
+
+   ── AVANT DE TERMINER ────────────────────────────────────────
+
+   Cherchez « TODO » avec Ctrl+F : il ne doit rester aucun
+   résultat.
+
+   ↩ L'énoncé : enonce.html   ·   Le cours : cours.html
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ÉTAPE 1 — La règle qui change tout.
+   Posez box-sizing: border-box sur TOUS les éléments, pour que
+   les largeurs incluent bordures et paddings (notion 5).
+
+   Quel sélecteur vise absolument tous les éléments ?             */
+
+/* TODO: écrire la règle universelle */
+
+
+/* ÉTAPE 2 — La page.
+   Sur body : police sans empattements avec repli, couleur #333,
+   fond #eef1f5, et surtout margin: 0 pour supprimer la marge
+   que le navigateur ajoute par défaut autour de la page.        */
+
+/* TODO: écrire la règle pour body */
+
+
+/* ÉTAPE 3 — Centrer le conteneur.
+   L'élément qui porte class="conteneur" doit :
+     - ne pas dépasser 800px de large
+     - être centré horizontalement (notion 6)
+     - avoir 20px d'espace intérieur sur ses quatre côtés        */
+
+/* TODO: écrire la règle pour la classe conteneur */
+
+
+/* ÉTAPE 4 — Les cartes.
+   Trois éléments portent class="carte". Donnez-leur :
+     - un fond blanc
+     - une bordure d'1px, en trait plein, de couleur #d7dee8
+       (attention : le STYLE est obligatoire, notion 4)
+     - 20px d'espace INTÉRIEUR (le fond doit s'étendre dessous)
+     - 20px d'espace EXTÉRIEUR sous chaque carte uniquement
+       (pensez à margin-bottom)
+
+   Si vous hésitez entre intérieur et extérieur, appliquez le
+   test de la notion 2.                                          */
+
+/* TODO: écrire la règle pour la classe carte */
+
+
+/* ÉTAPE 5 — La carte mise en avant.
+   Un seul élément porte À LA FOIS carte et carte--mise-en-avant.
+   Visez la seconde classe et donnez-lui :
+     - un fond #e8f1fb
+     - une bordure gauche épaisse de 5px, trait plein, #0b6bcb
+       (propriété : border-left)                                  */
+
+/* TODO: écrire la règle pour la classe carte--mise-en-avant */
+
+
+/* ÉTAPE 6 — Le titre principal.
+   Sur h1 : supprimez la marge du haut (margin-top: 0) et laissez
+   10px sous lui.                                                 */
+
+/* TODO: écrire la règle pour h1 */
+
+
+/* ÉTAPE 7 — Le pied de page.
+   Sur footer : texte centré, 30px d'espace au-dessus, une bordure
+   supérieure d'1px en trait plein #d7dee8 (border-top), et 20px
+   d'espace intérieur en haut.                                    */
+
+/* TODO: écrire la règle pour footer */

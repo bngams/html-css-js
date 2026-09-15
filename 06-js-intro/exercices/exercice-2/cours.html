@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Parler à l'utilisateur</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 2</p>
+  <h1 class="titre-exo">Parler à l'utilisateur</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> les quatre façons de
+      communiquer avec le visiteur — trois boîtes de dialogue et la console — et
+      surtout <strong>ce que chacune vous renvoie</strong>.</p>
+    </div>
+
+    <h2>1 · Quatre outils, deux usages</h2>
+
+    <p>
+      À l'exercice 1, vous tapiez dans la console et elle vous répondait. Ici,
+      c'est <strong>votre code</strong> qui parle, et parfois qui écoute.
+    </p>
+
+    <table>
+      <tr>
+        <th>Instruction</th>
+        <th>Ce qu'elle fait</th>
+        <th>Pour qui</th>
+      </tr>
+      <tr>
+        <td><code>alert()</code></td>
+        <td>Affiche un message dans une boîte, avec un bouton OK</td>
+        <td>le visiteur</td>
+      </tr>
+      <tr>
+        <td><code>confirm()</code></td>
+        <td>Pose une question, avec OK et Annuler</td>
+        <td>le visiteur</td>
+      </tr>
+      <tr>
+        <td><code>prompt()</code></td>
+        <td>Pose une question avec un champ de saisie</td>
+        <td>le visiteur</td>
+      </tr>
+      <tr>
+        <td><code>console.log()</code></td>
+        <td>Écrit dans la console — invisible sur la page</td>
+        <td><strong>vous</strong>, le développeur</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>La distinction est importante.</strong> Les trois premières
+        <em>interrompent</em> le visiteur : la page se fige tant qu'il n'a pas
+        cliqué. <code>console.log()</code>, lui, ne dérange personne — il sert à
+        vous, pour savoir ce que fait votre code.
+      </p>
+    </div>
+
+    <h2>2 · <code>alert()</code> — afficher un message</h2>
+
+<pre><code>alert("Bonjour !");</code></pre>
+
+    <p>
+      Une boîte s'ouvre, le visiteur lit, il clique sur OK, et le programme
+      continue. C'est tout.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong><code>alert()</code> ne renvoie rien</strong> — sa valeur de retour
+        est <code>undefined</code>. Si vous tapez <code>alert("Salut")</code> dans la
+        console, vous verrez la boîte, puis <code>undefined</code> s'affichera après
+        votre clic. <strong>Ce n'est pas une erreur</strong>, c'est la réponse normale
+        d'une instruction qui agit sans rien retourner — exactement ce que vous avez
+        vu à l'exercice 1.
+      </p>
+    </div>
+
+    <h2>3 · <code>confirm()</code> — poser une question fermée</h2>
+
+<pre><code>confirm("Voulez-vous continuer ?");</code></pre>
+
+    <p>
+      Deux boutons, donc <strong>deux réponses possibles</strong>, et cette fois la
+      valeur de retour est utile :
+    </p>
+
+    <table>
+      <tr>
+        <th>Le visiteur clique</th>
+        <th><code>confirm()</code> renvoie</th>
+      </tr>
+      <tr>
+        <td>OK</td>
+        <td><code>true</code></td>
+      </tr>
+      <tr>
+        <td>Annuler (ou Échap)</td>
+        <td><code>false</code></td>
+      </tr>
+    </table>
+
+    <p>
+      <code>true</code> et <code>false</code> sont les deux seules valeurs d'un
+      nouveau type : le <strong>booléen</strong>. Vous en ferez un usage constant
+      à partir du projet 7, quand vous écrirez des conditions.
+    </p>
+
+    <h2>4 · <code>prompt()</code> — demander une saisie</h2>
+
+<pre><code>prompt("Comment vous appelez-vous ?");</code></pre>
+
+    <p>
+      Une boîte avec un champ de texte. On peut proposer une valeur par défaut en
+      deuxième argument :
+    </p>
+
+<pre><code>prompt("Votre ville ?", "Toulouse");</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Le piège central de cet exercice.</strong> <code>prompt()</code>
+        renvoie <strong>toujours du texte</strong> — même si le visiteur tape des
+        chiffres.
+      </p>
+      <p>
+        Si on saisit <code>25</code>, ce que vous recevez n'est pas le nombre
+        <code>25</code> mais la chaîne <code>"25"</code>. Et vous savez déjà, depuis
+        l'exercice 1, ce que fait le <code>+</code> avec du texte :
+      </p>
+<pre><code>"25" + 1          → "251"     (assemblage, pas addition)
+Number("25") + 1  → 26        (conversion, puis addition)</code></pre>
+      <p>
+        <code>Number()</code> convertit un texte en nombre. C'est la réponse au
+        problème, et vous l'utiliserez dans cet exercice.
+      </p>
+    </div>
+
+    <h3>Et si le visiteur annule ?</h3>
+
+    <p>
+      <code>prompt()</code> renvoie alors <code>null</code> — un mot qui signifie
+      « <em>rien du tout</em> », et qui n'est <strong>pas</strong> la même chose
+      qu'un texte vide :
+    </p>
+
+    <table>
+      <tr>
+        <th>Le visiteur</th>
+        <th><code>prompt()</code> renvoie</th>
+        <th>Type</th>
+      </tr>
+      <tr>
+        <td>tape <code>25</code> puis OK</td>
+        <td><code>"25"</code></td>
+        <td>texte</td>
+      </tr>
+      <tr>
+        <td>clique OK sans rien taper</td>
+        <td><code>""</code> (texte vide)</td>
+        <td>texte</td>
+      </tr>
+      <tr>
+        <td>clique Annuler</td>
+        <td><code>null</code></td>
+        <td>« rien »</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>À retenir simplement pour aujourd'hui :</strong> annuler ne donne pas
+        un texte vide. Vous apprendrez à traiter ce cas au projet 7, avec les
+        conditions. Ici, il suffit de savoir que cela existe.
+      </p>
+    </div>
+
+    <h2>5 · <code>console.log()</code> — votre outil de travail</h2>
+
+<pre><code>console.log("Le script a bien démarré");
+console.log("Âge saisi :", 25);</code></pre>
+
+    <p>
+      Rien ne s'affiche sur la page : le message va dans la console, celle que vous
+      avez ouverte à l'exercice 1. On peut lui passer
+      <strong>plusieurs valeurs séparées par des virgules</strong> — elles
+      s'affichent côte à côte.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est l'instruction que vous écrirez le plus souvent de toute votre
+        vie de développeur.</strong> Quand un programme ne fait pas ce que vous
+        attendez, la première question est toujours la même : « qu'est-ce qu'il
+        contient, à cet endroit précis ? » — et <code>console.log()</code> répond.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Ne laissez pas vos <code>console.log()</code> dans un site livré.</strong>
+        Ils ne dérangent pas le visiteur, mais ils encombrent la console et peuvent
+        révéler des informations internes. On les retire avant la mise en ligne.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Un mot que vous allez voir : <code>let</code>.</strong> Il crée une
+        « boîte » nommée, pour garder une valeur et la réutiliser plus loin :
+      </p>
+<pre><code>let prenom = prompt("Comment vous appelez-vous ?");</code></pre>
+      <p>
+        Dans cet exercice, les boîtes sont <strong>déjà créées pour vous</strong> :
+        vous n'avez qu'à compléter ce qui suit le signe <code>=</code>. L'exercice 3
+        y reviendra en détail.
+      </p>
+    </div>
+
+    <h2>6 · Où écrire ce code ? Le fichier <code>.js</code></h2>
+
+    <p>
+      Jusqu'ici vous tapiez dans la console, et tout disparaissait au rechargement.
+      Pour conserver votre code, il faut l'écrire dans un fichier — d'extension
+      <code>.js</code> — et le charger depuis la page :
+    </p>
+
+<pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+
+    <p>
+      Cette ligne est <strong>déjà écrite</strong> dans la page de l'exercice : vous
+      n'avez qu'à remplir <code>script.js</code>. L'exercice 4 reviendra en détail
+      sur cette balise, et surtout sur <em>où</em> la placer.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>La balise <code>&lt;script&gt;</code> a besoin de sa balise fermante</strong>,
+        même avec un <code>src</code>. Écrire <code>&lt;script src="…" /&gt;</code> ne
+        fonctionne pas : c'est l'une des exceptions aux balises auto-fermantes vues au
+        projet 1.
+      </p>
+    </div>
+
+    <h3>Deux détails d'écriture</h3>
+
+    <table>
+      <tr>
+        <th>Détail</th>
+        <th>Ce qu'il faut savoir</th>
+      </tr>
+      <tr>
+        <td>Le point-virgule <code>;</code></td>
+        <td>
+          Termine une instruction. JavaScript sait souvent s'en passer, mais
+          <strong>prenez l'habitude de le mettre</strong> : cela évite des surprises.
+        </td>
+      </tr>
+      <tr>
+        <td>Les commentaires</td>
+        <td>
+          <code>// sur une ligne</code> et <code>/* sur plusieurs */</code>.
+          Ce ne sont <strong>pas</strong> ceux du HTML : dans un fichier
+          <code>.js</code>, <code>&lt;!-- … --&gt;</code> ne fonctionne pas.
+        </td>
+      </tr>
+    </table>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Window/prompt"
+             target="_blank" rel="noopener">MDN — <code>window.prompt()</code></a>
+        </td>
+        <td>La référence officielle, avec la valeur renvoyée à l'annulation.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Console/log"
+             target="_blank" rel="noopener">MDN — <code>console.log()</code></a>
+        </td>
+        <td>Toutes ses variantes, dont l'affichage de plusieurs valeurs.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/alert-prompt-confirm"
+             target="_blank" rel="noopener">javascript.info — Interaction : alert, prompt, confirm</a>
+        </td>
+        <td>Le même chapitre, en français, avec des exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

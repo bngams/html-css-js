@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="Cyclistes sur une route de campagne">
+  <title>Sortie du club</title>
+  <rect width="1200" height="420" fill="#cfe9e3"/>
+  <circle cx="1030" cy="90" r="46" fill="#f5a623"/>
+  <path d="M0 250 Q 180 170 360 235 T 720 225 T 1200 250 L1200 420 L0 420 Z" fill="#8fc3a8"/>
+  <path d="M0 300 Q 300 260 600 300 T 1200 310 L1200 420 L0 420 Z" fill="#0f7b6c"/>
+  <g stroke="#f7f4e9" stroke-width="7" stroke-dasharray="46 34" stroke-linecap="round">
+    <path d="M40 372 L1160 352" fill="none"/>
+  </g>
+  <g transform="translate(330 250)">
+    <circle cx="0" cy="70" r="40" fill="none" stroke="#1f2933" stroke-width="8"/>
+    <circle cx="112" cy="70" r="40" fill="none" stroke="#1f2933" stroke-width="8"/>
+    <path d="M0 70 L46 22 L112 70 M46 22 L70 70" fill="none" stroke="#1f2933" stroke-width="8"/>
+    <circle cx="56" cy="-10" r="20" fill="#f5a623"/>
+    <path d="M40 12 L60 -4 L84 20" fill="none" stroke="#a8574e" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(700 262)" opacity="0.85">
+    <circle cx="0" cy="62" r="34" fill="none" stroke="#1f2933" stroke-width="7"/>
+    <circle cx="96" cy="62" r="34" fill="none" stroke="#1f2933" stroke-width="7"/>
+    <path d="M0 62 L40 20 L96 62 M40 20 L60 62" fill="none" stroke="#1f2933" stroke-width="7"/>
+    <circle cx="48" cy="-8" r="17" fill="#5f7183"/>
+  </g>
+</svg>

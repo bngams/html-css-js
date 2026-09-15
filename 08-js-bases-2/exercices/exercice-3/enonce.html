@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Décrire une chose : les objets</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 3</p>
+  <h1 class="titre-exo">Décrire une chose : les objets</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Décrire une chose avec un objet, parcourir
+      ses propriétés, et découvrir <strong>JSON</strong>, la notation de toutes les
+      données du web.</p>
+      <p>
+        <strong>Prérequis :</strong> les exercices 1 et 2 (tableaux,
+        <code>for…of</code>, boucles) et le projet 7 (<code>const</code>,
+        <code>typeof</code>).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-3/app.js</code>
+      </p>
+      <p>
+        Le <strong>catalogue</strong> — un tableau de trois livres — vous est fourni.
+        La fiche du premier objet, c'est vous qui l'écrivez.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 15 étapes</h2>
+
+    <p>
+      Elles sont courtes : la plupart tiennent en une ligne. C'est le nombre de
+      notions qui monte, pas la difficulté de chacune.
+    </p>
+
+    <h3>Partie 1 — créer et lire un objet</h3>
+
+    <ol class="criteres">
+      <li>
+        Créer un objet <code>livre</code> avec trois clés :
+        <code>titre</code> (<code>La Horde du Contrevent</code>),
+        <code>auteur</code> (<code>Damasio</code>), <code>pages</code>
+        (<code>712</code>)
+      </li>
+      <li>
+        Afficher <code>Titre :</code> puis le titre, avec l'écriture
+        <strong>à point</strong>
+      </li>
+      <li>
+        Afficher <code>Auteur :</code> puis l'auteur, avec l'écriture
+        <strong>à crochets</strong>
+      </li>
+      <li>
+        Afficher <code>Éditeur :</code> puis <code>livre.editeur</code> — une clé qui
+        n'existe pas encore
+      </li>
+    </ol>
+
+    <h3>Partie 2 — modifier l'objet</h3>
+
+    <ol class="criteres" start="5">
+      <li>Ajouter à <code>livre</code> une clé <code>editeur</code> valant
+        <code>La Volte</code></li>
+      <li>Afficher <code>Après ajout :</code> puis <code>livre.editeur</code></li>
+    </ol>
+
+    <h3>Partie 3 — parcourir</h3>
+
+    <ol class="criteres" start="7">
+      <li>
+        Avec <code>for…in</code>, afficher une ligne par propriété : <code>·</code>,
+        la clé, <code>=</code>, la valeur — en lisant la valeur
+        <strong>avec des crochets</strong>
+      </li>
+    </ol>
+
+    <h3>Partie 4 — un tableau d'objets</h3>
+
+    <ol class="criteres" start="8">
+      <li>Afficher <code>1er du catalogue :</code> puis le titre du premier livre</li>
+      <li>
+        Avec <code>for…of</code>, afficher une ligne par livre : <code>→</code> puis
+        son titre
+      </li>
+      <li>
+        Calculer dans <code>totalPages</code> la somme des pages,
+        <strong>avec une boucle</strong> — pas à la main
+      </li>
+      <li>Afficher <code>Total des pages :</code> puis <code>totalPages</code></li>
+    </ol>
+
+    <h3>Partie 5 — JSON</h3>
+
+    <ol class="criteres" start="12">
+      <li>Ranger dans <code>livreTexte</code> l'objet transformé en texte JSON</li>
+      <li>
+        Afficher, en une instruction : <code>JSON :</code>, <code>livreTexte</code>,
+        <code>· type :</code>, puis <strong>le type</strong> de
+        <code>livreTexte</code>
+      </li>
+      <li>Ranger dans <code>livreRetrouve</code> ce texte redevenu objet</li>
+      <li>
+        Afficher <code>Retrouvé :</code>, le titre de <code>livreRetrouve</code>,
+        <code>· type :</code>, puis son type
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <div class="astuce">
+      <p>
+        <strong>⚠️ Attention au décompte, à nouveau.</strong> Vous écrirez
+        <strong>dix</strong> <code>console.log</code> — la console affichera
+        <strong>quinze lignes</strong>. Les étapes 7 et 9 sont des boucles.
+      </p>
+      <p>
+        Le parcours de l'objet donne <strong>quatre</strong> lignes, et non trois :
+        vous avez ajouté la clé <code>editeur</code> à l'étape 5.
+      </p>
+    </div>
+
+    <p>La console doit afficher exactement ceci :</p>
+
+<pre><code>Titre : La Horde du Contrevent
+Auteur : Damasio
+Éditeur : undefined
+Après ajout : La Volte
+· titre = La Horde du Contrevent
+· auteur = Damasio
+· pages = 712
+· editeur = La Volte
+1er du catalogue : Dune
+→ Dune
+→ La Horde
+→ Fondation
+Total des pages : 2032
+JSON : {"titre":"La Horde du Contrevent","auteur":"Damasio","pages":712,"editeur":"La Volte"} · type : string
+Retrouvé : La Horde du Contrevent · type : object</code></pre>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>La clé absente</td>
+        <td>
+          <code>Éditeur : undefined</code> — <strong>aucune erreur rouge</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>Le parcours</td>
+        <td>
+          <strong>Quatre</strong> lignes, avec de vraies valeurs — si vous lisez
+          <code>undefined</code> partout, vous avez écrit <code>livre.cle</code> au
+          lieu de <code>livre[cle]</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le total</td>
+        <td>
+          <code>2032</code> — obtenu par une boucle, pas par une addition écrite à la
+          main
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Les deux types</strong></td>
+        <td>
+          <code>string</code> à l'étape 13, <code>object</code> à l'étape 15 —
+          c'est tout l'objet de la partie 5
+        </td>
+      </tr>
+      <tr>
+        <td>Les guillemets du JSON</td>
+        <td>
+          Les clés y sont entre <strong>guillemets doubles</strong>, alors que votre
+          objet n'en avait pas
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>app.js</code> : aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — le piège à deux étages</strong></p>
+      <p>Dans la console de la page de travail, tapez ces deux lignes :</p>
+      <ol>
+        <li><code>livre.horaires</code> → <code>undefined</code>, sans erreur</li>
+        <li>
+          <code>livre.horaires.lundi</code> →
+          <code>TypeError: Cannot read properties of undefined</code>
+        </li>
+      </ol>
+      <p>
+        <strong>Chercher une clé absente est permis ; aller chercher dedans ne l'est
+        pas.</strong> C'est le mécanisme exact du projet 7, quand
+        <code>querySelector</code> ne trouvait rien. Quand ce message apparaît,
+        remontez d'un cran : c'est le niveau <em>au-dessus</em> qui manque.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — la preuve que le JSON est du texte</strong></p>
+      <p>Une fois l'étape 12 faite, tapez dans la console :</p>
+      <ol>
+        <li><code>livreTexte.titre</code> → <code>undefined</code></li>
+        <li><code>livreRetrouve.titre</code> → le vrai titre</li>
+      </ol>
+      <p>
+        Le premier <strong>contient</strong> les caractères « titre », mais c'est une
+        <em>chaîne</em> : elle n'a pas de propriété de ce nom. Le second est
+        redevenu un objet. <strong>Voilà toute la différence</strong>, en deux lignes.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les quinze lignes s'affichent, dans l'ordre, sans erreur rouge</li>
+      <li>
+        Vous savez quand utiliser les crochets plutôt que le point
+      </li>
+      <li>
+        Vous savez que <code>JSON.stringify</code> rend du <strong>texte</strong>,
+        pas un objet
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>app.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 55 minutes.</strong> Quinze étapes, mais courtes. La partie 5 est
+      la plus conceptuelle : prenez le temps de regarder les deux types.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

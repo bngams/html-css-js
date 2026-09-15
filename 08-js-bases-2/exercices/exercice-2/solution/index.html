@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Le nombre mystère, deuxième chance</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #253044;
+      background-color: #f6f8fb;
+    }
+    .page { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #1d6fa5; margin-top: 0; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+    ol li { margin-bottom: 0.4rem; }
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <h1>Le nombre mystère — deuxième chance</h1>
+
+    <div class="encadre">
+      <p>
+        <strong>Ceci est le corrigé en fonctionnement.</strong> Ouvrez la console
+        (<kbd>F12</kbd>) <strong>avant</strong> de recharger : le nombre secret y est
+        affiché.
+      </p>
+      <p>
+        Le jeu vous redemandera tant que vous n'aurez pas trouvé — c'est tout
+        l'objet de cet exercice.
+      </p>
+    </div>
+
+    <h2>Ce qui se passe au chargement</h2>
+
+    <ol>
+      <li>Le compte à rebours s'affiche dans la console, puis <code>Décollage !</code></li>
+      <li>Les démonstrations de <code>break</code> et <code>continue</code> suivent</li>
+      <li>Le secret est annoncé <code>[triche]</code></li>
+      <li>La partie commence : une boîte, autant de fois qu'il le faudra</li>
+    </ol>
+
+    <div class="encadre">
+      <p>
+        <strong>Essayez d'annuler</strong> en cours de partie : le jeu s'arrête
+        proprement et affiche <em>Partie abandonnée</em>.
+      </p>
+      <p>
+        C'est le test <code>saisie === null</code> qui le permet. Sans lui, annuler
+        relancerait la question <strong>indéfiniment</strong> — vous ne pourriez plus
+        quitter la page.
+      </p>
+    </div>
+
+    <p>
+      <a class="retour" href="../solution.html">← Revenir aux explications</a>
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

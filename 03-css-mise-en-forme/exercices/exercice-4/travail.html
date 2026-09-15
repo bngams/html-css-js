@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Nous rejoindre</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚠️ ATTENTION — CET EXERCICE EST DIFFÉRENT DES TROIS AUTRES.
+
+     Ici, vous modifiez LES DEUX FICHIERS :
+
+        👉 CE FICHIER (travail.html) — pour y AJOUTER des class
+           et un id, là où les TODO vous l'indiquent.
+
+        👉 style.css — pour écrire les règles qui les visent.
+
+     C'est ainsi qu'on travaille réellement : le HTML n'offre pas
+     toujours la prise dont on a besoin, alors on la crée.
+
+     ── LE GESTE ─────────────────────────────────────────────────
+
+     1. Ici : ajoutez l'attribut demandé sur la balise indiquée,
+        puis effacez la ligne du TODO.
+     2. Dans style.css : écrivez la règle correspondante.
+     3. Enregistrez LES DEUX FICHIERS (Ctrl+S dans chacun),
+        puis rechargez cette page (F5).
+
+     ⚠️ Oublier d'enregistrer l'un des deux est l'erreur n°1 de
+        cet exercice : votre règle ne visera rien, sans message
+        d'erreur. Dans VSCode, un point à côté du nom de l'onglet
+        signale un fichier non enregistré.
+
+     ── AVANT DE TERMINER ────────────────────────────────────────
+
+     Cherchez « TODO » avec Ctrl+F dans LES DEUX fichiers : aucun
+     résultat ne doit subsister.
+
+     ↩ L'énoncé : enonce.html   ·   Le cours : cours.html
+     ═══════════════════════════════════════════════════════════════ -->
+
+
+  <!-- ÉTAPE 1 — La bannière.
+       Ajoutez à cette balise header une classe nommée « banniere ».
+       Rappel de la syntaxe :  <header class="...">              -->
+
+  <!-- TODO: ajouter class="banniere" à la balise header -->
+  <header>
+    <h1>Nous rejoindre</h1>
+    <p>L'inscription est gratuite pour les habitants de la commune.</p>
+  </header>
+
+
+  <div class="conteneur">
+
+    <!-- ÉTAPE 2 — Le paragraphe d'introduction.
+         Ajoutez-lui une classe « intro ».                        -->
+
+    <!-- TODO: ajouter class="intro" à ce paragraphe -->
+    <p>
+      Trois formules d'adhésion, sans engagement de durée. Le prêt est illimité
+      dans les trois cas.
+    </p>
+
+
+    <!-- ÉTAPE 3 — La rangée des formules.
+         Ce div existe pour aligner les trois formules côte à côte :
+         c'est un groupement PUREMENT VISUEL, donc div est bien le
+         bon choix (notion 5).
+
+         Ajoutez-lui une classe « rangee ».                       -->
+
+    <!-- TODO: ajouter class="rangee" à ce div -->
+    <div>
+
+      <!-- ÉTAPE 4 — Les trois formules.
+           Ajoutez la classe « formule » à CHACUN des trois articles
+           ci-dessous.                                             -->
+
+      <!-- TODO: ajouter class="formule" à cet article -->
+      <article>
+        <h2>Individuelle</h2>
+        <p class="prix">12 €</p>
+        <p>Pour une personne, valable un an.</p>
+      </article>
+
+      <!-- ÉTAPE 5 — La formule conseillée.
+           Sur le deuxième article (« Famille ») SEULEMENT, ajoutez
+           EN PLUS la classe « formule--conseillee » — deux classes
+           séparées par une espace (notion 2).                     -->
+
+      <!-- TODO: ajouter les DEUX classes à cet article -->
+      <article>
+        <h2>Famille</h2>
+        <p class="prix">25 €</p>
+        <p>Jusqu'à cinq personnes du même foyer.</p>
+      </article>
+
+      <!-- TODO: ajouter class="formule" à cet article -->
+      <article>
+        <h2>Étudiante</h2>
+        <p class="prix">6 €</p>
+        <p>Sur présentation d'une carte étudiante.</p>
+      </article>
+
+    </div>
+
+
+    <!-- ÉTAPE 6 — Le prix : RIEN À FAIRE ICI.
+         Les trois paragraphes de prix portent déjà class="prix" :
+         l'accroche existe, vous n'avez qu'à écrire sa règle dans
+         style.css. Le premier réflexe est toujours de regarder ce
+         qui est déjà là avant d'ajouter.                          -->
+
+
+    <!-- ÉTAPE 7 — Le bloc de contact.
+         Celui-ci est UNIQUE dans la page et servira de cible à un
+         lien interne. C'est donc un id, pas une classe (notion 4).
+
+         Ajoutez-lui  id="contact".                               -->
+
+    <!-- TODO: ajouter id="contact" à cette section -->
+    <section>
+      <h2>Une question ?</h2>
+      <p>Écrivez-nous à contact@exemple.fr ou passez nous voir aux horaires
+         d'ouverture.</p>
+    </section>
+
+  </div>
+
+</body>
+</html>

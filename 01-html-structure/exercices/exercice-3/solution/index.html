@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie de contenus</title>
+</head>
+<body>
+
+  <h1>Galerie de contenus</h1>
+
+
+  <h2>Une image</h2>
+
+  <img src="../../../assets/photo.svg"
+       alt="Un paysage stylisé : des collines vertes sous un soleil jaune"
+       width="400">
+
+
+  <h2>Une image légendée</h2>
+
+  <figure>
+    <img src="../../../assets/photo.svg"
+         alt="Un paysage stylisé : des collines vertes sous un soleil jaune"
+         width="400">
+    <figcaption>
+      Illustration d'exemple, dessinée en SVG.
+    </figcaption>
+  </figure>
+
+
+  <h2>Un dessin SVG</h2>
+
+  <svg width="120" height="120" viewBox="0 0 120 120"
+       role="img" aria-label="Un cercle bleu">
+    <circle cx="60" cy="60" r="50" fill="#0b6bcb" />
+  </svg>
+
+
+  <h2>Une vidéo</h2>
+
+  <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+         controls
+         width="400">
+    Votre navigateur ne sait pas lire les vidéos.
+  </video>
+
+
+  <h2>Une carte</h2>
+
+  <iframe
+    src="https://www.openstreetmap.org/export/embed.html?bbox=1.42,43.59,1.46,43.61"
+    width="600"
+    height="300"
+    title="Carte du centre de Toulouse"></iframe>
+
+
+  <h2>Un document</h2>
+
+  <p>
+    <a href="../../../assets/programme.pdf" target="_blank" rel="noopener">
+      Le programme de la formation (PDF)
+    </a>
+  </p>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EXERCICE 3 — SOLUTION COMMENTÉE
+
+       Les explications sont ici, APRÈS le contenu, et jamais en tête
+       de fichier : le doctype doit occuper la première ligne, et le
+       navigateur cesse de chercher la déclaration d'encodage au-delà
+       des 1024 premiers octets.
+
+       ── LES CHEMINS ────────────────────────────────────────────────
+
+       Ce fichier est dans exercice-3/solution/, soit UN NIVEAU PLUS
+       BAS que travail.html. Les chemins comptent donc TROIS remontées
+       (../../../assets/) là où votre travail.html en compte deux
+       (../../assets/). Même dossier visé, profondeur différente.
+
+       C'est la source d'erreur numéro un de cet exercice : un chemin
+       juste ailleurs n'est pas un chemin juste ici.
+
+       ── Ligne par ligne ────────────────────────────────────────────
+
+       img src= ... alt= ...
+         alt n'est pas optionnel. Il sert quand l'image ne charge pas,
+         il est lu à voix haute par les lecteurs d'écran, et c'est la
+         seule chose qu'un moteur de recherche « voit » de l'image.
+         On décrit ce que l'image MONTRE, sans commencer par
+         « image de » : le lecteur d'écran l'annonce déjà.
+
+       figure / figcaption
+         figure regroupe un contenu et sa légende en une seule unité :
+         le navigateur sait alors que ce texte décrit cette image
+         précise, ce qu'un simple paragraphe en dessous ne dirait pas.
+         alt DÉCRIT (pour qui ne voit pas), figcaption COMMENTE (pour
+         tout le monde) : ils ne font pas double emploi.
+
+       svg / circle
+         Le dessin est écrit dans la page, sans fichier séparé et donc
+         sans téléchargement supplémentaire. Décrit par des formes, il
+         reste net à n'importe quelle taille — contrairement à une
+         photo agrandie. role + aria-label y jouent le rôle de alt.
+
+       video ... controls
+         controls est un attribut booléen : sa seule présence suffit,
+         on n'écrit pas controls="true". Sans lui, aucun bouton
+         n'apparaît. Le texte entre les deux balises ne s'affiche que
+         si le navigateur ne sait pas lire la vidéo.
+
+       iframe ... title=
+         Une iframe affiche une page entière dans un cadre. L'attribut
+         title (à ne pas confondre avec le title de la page) décrit ce
+         cadre : sans lui, un lecteur d'écran annonce « cadre » sans
+         dire ce qu'il contient.
+
+       a href= ... .pdf
+         Aucune balise spéciale pour un PDF : c'est une ressource
+         comme une autre. Signaler le format dans le texte du lien
+         est une politesse : le visiteur sait à quoi s'attendre.
+
+       ── CE QUI DEMANDE INTERNET ────────────────────────────────────
+
+       La vidéo et la carte viennent de sites extérieurs. Hors ligne,
+       le lecteur reste noir et le cadre de la carte reste vide : ce
+       n'est pas une erreur de code. Les quatre autres sections
+       fonctionnent sans connexion.
+       ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

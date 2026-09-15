@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Texte, listes et liens</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 2</p>
+  <h1 class="titre-exo">Texte, listes et liens</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> structurer un texte avec
+      des titres, mettre des mots en valeur, faire des listes, et créer des liens —
+      les trois sortes de liens que vous rencontrerez tous les jours sur le web.</p>
+      <p>
+        Vous savez déjà écrire une page valide (exercice 1). On la remplit maintenant.
+      </p>
+    </div>
+
+    <h2>1 · Les niveaux de titre</h2>
+
+    <p>
+      Vous connaissez <code>&lt;h1&gt;</code>. Il en existe six, de
+      <code>&lt;h1&gt;</code> à <code>&lt;h6&gt;</code>, qui servent à découper un
+      document en parties et sous-parties — exactement comme les titres et sous-titres
+      d'un document texte.
+    </p>
+
+<pre><code>&lt;h1&gt;Toulouse&lt;/h1&gt;
+  &lt;h2&gt;À voir&lt;/h2&gt;
+  &lt;h2&gt;Bonnes adresses&lt;/h2&gt;
+    &lt;h3&gt;Restaurants&lt;/h3&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Ne sautez pas de niveau</strong> — après un <code>&lt;h1&gt;</code>
+        vient un <code>&lt;h2&gt;</code>, pas un <code>&lt;h3&gt;</code>. Les lecteurs
+        d'écran s'en servent pour naviguer : sauter un niveau, c'est comme arracher
+        une page de la table des matières.
+      </p>
+      <p>
+        Et on ne choisit pas un niveau pour sa taille à l'écran : ça, c'est le travail
+        du CSS (projet 3). On le choisit pour le <em>sens</em>.
+      </p>
+    </div>
+
+    <h2>2 · Mettre des mots en valeur</h2>
+
+    <p>Deux balises pour insister sur un mot au milieu d'une phrase :</p>
+
+    <table>
+      <tr>
+        <th>Balise</th>
+        <th>Sens</th>
+        <th>Rendu par défaut</th>
+      </tr>
+      <tr>
+        <td><code>&lt;strong&gt;</code></td>
+        <td>Ce mot est <strong>important</strong></td>
+        <td>gras</td>
+      </tr>
+      <tr>
+        <td><code>&lt;em&gt;</code></td>
+        <td>Ce mot est <em>accentué</em> (emphase)</td>
+        <td>italique</td>
+      </tr>
+    </table>
+
+<pre><code>&lt;p&gt;Toulouse est la &lt;strong&gt;quatrième ville de France&lt;/strong&gt;.
+   On la surnomme &lt;em&gt;la Ville rose&lt;/em&gt;.&lt;/p&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        Il existe aussi <code>&lt;b&gt;</code> et <code>&lt;i&gt;</code>, qui donnent
+        le même rendu visuel. La différence : <code>&lt;strong&gt;</code> et
+        <code>&lt;em&gt;</code> portent un <strong>sens</strong>, que les lecteurs
+        d'écran restituent en changeant d'intonation. <code>&lt;b&gt;</code> et
+        <code>&lt;i&gt;</code> ne font que colorier. Préférez les premiers.
+      </p>
+    </div>
+
+    <h2>3 · Les listes</h2>
+
+    <p>Deux sortes, et le choix se fait sur une seule question : <em>l'ordre compte-t-il ?</em></p>
+
+    <h3>Liste à puces — <code>&lt;ul&gt;</code></h3>
+
+    <p>Quand l'ordre n'a pas d'importance. <em>u</em> pour <em>unordered</em>, non ordonnée.</p>
+
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;La basilique Saint-Sernin&lt;/li&gt;
+  &lt;li&gt;Le Capitole&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+    <h3>Liste numérotée — <code>&lt;ol&gt;</code></h3>
+
+    <p>Quand l'ordre compte : un classement, des étapes. <em>o</em> pour <em>ordered</em>.</p>
+
+<pre><code>&lt;ol&gt;
+  &lt;li&gt;Faire chauffer l'eau&lt;/li&gt;
+  &lt;li&gt;Verser le thé&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>N'écrivez jamais les numéros vous-même.</strong> Le navigateur les
+        ajoute tout seul. Si vous tapez « 1. » dans un <code>&lt;li&gt;</code>, vous
+        obtiendrez « 1. 1. ». Et si vous insérez un élément au milieu, la
+        renumérotation est automatique — c'est tout l'intérêt.
+      </p>
+    </div>
+
+    <p>
+      Dans les deux cas, chaque élément est un <code>&lt;li&gt;</code>
+      (<em>list item</em>). Une liste ne contient que des <code>&lt;li&gt;</code>,
+      jamais du texte nu.
+    </p>
+
+    <h2>4 · Les liens</h2>
+
+    <p>
+      C'est <em>la</em> balise du web : celle qui relie les pages entre elles. Elle
+      s'écrit <code>&lt;a&gt;</code> (pour <em>anchor</em>, ancre) et possède un
+      attribut <code>href</code> qui dit <strong>où l'on va</strong>.
+    </p>
+
+<pre><code>&lt;a href="où-on-va"&gt;le texte sur lequel on clique&lt;/a&gt;</code></pre>
+
+    <p>Trois destinations possibles, trois écritures différentes.</p>
+
+    <h3>a · Vers un autre site</h3>
+
+    <p>L'adresse complète, avec <code>https://</code> :</p>
+
+<pre><code>&lt;a href="https://fr.wikipedia.org/wiki/Toulouse"&gt;Toulouse sur Wikipédia&lt;/a&gt;</code></pre>
+
+    <p>
+      Pour que le lien s'ouvre dans un <strong>nouvel onglet</strong>, on ajoute
+      l'attribut <code>target="_blank"</code> :
+    </p>
+
+<pre><code>&lt;a href="https://exemple.fr" target="_blank" rel="noopener"&gt;Exemple&lt;/a&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>rel="noopener"</code> accompagne toujours <code>target="_blank"</code> :
+        c'est une sécurité qui empêche la page ouverte d'agir sur la vôtre. Prenez
+        l'habitude de les écrire ensemble, comme une paire.
+      </p>
+    </div>
+
+    <h3>b · Vers un endroit de la même page</h3>
+
+    <p>
+      Pour sauter à un endroit précis, il faut deux choses : <strong>marquer la
+      cible</strong>, puis <strong>viser cette marque</strong>.
+    </p>
+
+    <p>
+      On marque avec l'attribut <code>id</code>, qui donne un nom unique à un élément.
+      N'importe quelle balise peut en recevoir un :
+    </p>
+
+<pre><code>&lt;h2 id="adresses"&gt;Bonnes adresses&lt;/h2&gt;</code></pre>
+
+    <p>On vise ensuite ce nom avec un dièse devant :</p>
+
+<pre><code>&lt;a href="#adresses"&gt;Aller aux bonnes adresses&lt;/a&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Un <code>id</code> est unique dans la page</strong> — deux éléments ne
+        peuvent pas porter le même. C'est ce qui permet de le viser sans ambiguïté.
+        Vous retrouverez les <code>id</code> en CSS (projet 3) et surtout en
+        JavaScript (jour 3), où ils servent à désigner un élément précis.
+      </p>
+    </div>
+
+    <h3>c · Vers une adresse e-mail</h3>
+
+    <p>
+      La destination commence par <code>mailto:</code> suivi de l'adresse. Le clic
+      ouvre le logiciel de messagerie du visiteur :
+    </p>
+
+<pre><code>&lt;a href="mailto:contact@exemple.fr"&gt;Nous écrire&lt;/a&gt;</code></pre>
+
+    <h2>5 · Deux balises qui ne se ferment pas</h2>
+
+    <p>
+      Vous avez vu le principe dans l'exercice 1 avec <code>&lt;br&gt;</code>. En
+      voici l'usage réel, plus une cousine :
+    </p>
+
+    <table>
+      <tr>
+        <th>Balise</th>
+        <th>Effet</th>
+      </tr>
+      <tr>
+        <td><code>&lt;br&gt;</code></td>
+        <td>Force un retour à la ligne <em>à l'intérieur</em> d'un paragraphe</td>
+      </tr>
+      <tr>
+        <td><code>&lt;hr&gt;</code></td>
+        <td>Trace une séparation entre deux parties du contenu</td>
+      </tr>
+    </table>
+
+<pre><code>&lt;p&gt;12 rue des Fleurs&lt;br&gt;31000 Toulouse&lt;/p&gt;
+
+&lt;hr&gt;</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong><code>&lt;br&gt;</code> n'est pas un moyen d'espacer le texte.</strong>
+        Pour séparer deux idées, on écrit deux <code>&lt;p&gt;</code>. Le
+        <code>&lt;br&gt;</code> est réservé aux cas où le retour à la ligne fait partie
+        du texte lui-même : une adresse postale, un vers de poésie.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Structuring_content/Headings_and_paragraphs"
+             target="_blank" rel="noopener">MDN — Titres et paragraphes</a>
+        </td>
+        <td>Reprend les niveaux de titre et la mise en valeur du texte, avec des exercices.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Structuring_content/Lists"
+             target="_blank" rel="noopener">MDN — Les listes</a>
+        </td>
+        <td>Va plus loin : listes imbriquées, et la troisième sorte de liste (les définitions).</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Structuring_content/Creating_links"
+             target="_blank" rel="noopener">MDN — Créer des liens</a>
+        </td>
+        <td>Le guide complet des liens, y compris les bonnes pratiques de rédaction.</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Une règle de rédaction qui vaut pour tous vos liens :</strong> le texte
+        cliquable doit dire où il mène, même lu isolément. « Cliquez ici » ne dit rien
+        — et les lecteurs d'écran proposent souvent une liste de tous les liens d'une
+        page, où dix « cliquez ici » sont inutilisables. Préférez
+        « Toulouse sur Wikipédia ».
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Vos premières fonctions</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 2</p>
+  <h1 class="titre-exo">Vos premières fonctions</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> regrouper des
+      instructions dans un bloc nommé, qu'on rappelle autant de fois qu'on veut —
+      et récupérer son résultat.</p>
+    </div>
+
+    <h2>1 · Le problème que résout une fonction</h2>
+
+    <p>
+      Imaginez trois calculs de TVA à faire dans votre programme. Sans fonction, vous
+      écrivez trois fois la même chose :
+    </p>
+
+<pre><code>const prixA = 24 * 1.2;
+const prixB = 39 * 1.2;
+const prixC = 12 * 1.2;</code></pre>
+
+    <p>
+      Si le taux change, vous devez modifier <strong>trois lignes</strong> — et si
+      vous en oubliez une, rien ne vous prévient. Une fonction règle ce problème :
+      on écrit le calcul <strong>une fois</strong>, on lui donne un nom, et on
+      l'appelle.
+    </p>
+
+    <h2>2 · Déclarer une fonction</h2>
+
+<pre><code>function addition(a, b) {
+  return a + b;
+}</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>function</code></td><td>« je déclare une fonction »</td></tr>
+      <tr><td><code>addition</code></td><td>son <strong>nom</strong>, choisi par vous</td></tr>
+      <tr><td><code>(a, b)</code></td><td>ses <strong>paramètres</strong> — les valeurs qu'elle attend</td></tr>
+      <tr><td><code>{ … }</code></td><td>son <strong>corps</strong> : ce qu'elle fait</td></tr>
+      <tr><td><code>return</code></td><td>ce qu'elle <strong>renvoie</strong> à celui qui l'appelle</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Déclarer ne fait rien.</strong> Écrire une fonction, c'est écrire une
+        recette : tant que personne ne l'exécute, il ne se passe rien. Vous pouvez
+        recharger la page cent fois, la fonction seule n'affichera jamais rien.
+      </p>
+    </div>
+
+    <h2>3 · Appeler une fonction</h2>
+
+<pre><code>addition(5, 3)     → 8</code></pre>
+
+    <p>
+      Les parenthèses sont ce qui <strong>déclenche</strong> l'exécution. Les valeurs
+      qu'on met dedans s'appellent les <strong>arguments</strong> : elles viennent se
+      ranger dans les paramètres, dans l'ordre.
+    </p>
+
+    <table>
+      <tr><th>À la déclaration</th><th>À l'appel</th></tr>
+      <tr><td><code>function addition(a, b)</code></td><td><code>addition(5, 3)</code></td></tr>
+      <tr><td><code>a</code> est un <strong>paramètre</strong></td><td><code>5</code> est un <strong>argument</strong></td></tr>
+      <tr><td>un nom d'emplacement</td><td>la valeur qui s'y range</td></tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Sans parenthèses, rien ne s'exécute.</strong> Écrire
+        <code>addition</code> seul ne fait pas le calcul : cela désigne la fonction
+        elle-même. La console répond alors par son code source, ce qui déroute
+        souvent. <code>typeof addition</code> répond d'ailleurs
+        <code>"function"</code>.
+      </p>
+    </div>
+
+    <h2>4 · <code>return</code> — la valeur qui ressort</h2>
+
+    <p>
+      <code>return</code> met fin à la fonction et renvoie une valeur. On peut la
+      ranger dans une boîte, l'afficher, ou la réutiliser dans un calcul :
+    </p>
+
+<pre><code>const total = addition(5, 3);        // total vaut 8
+console.log(addition(10, 2));        // affiche 12
+const double = addition(4, 4) * 2;   // 16</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Une fonction sans <code>return</code> renvoie
+        <code>undefined</code>.</strong> C'est l'erreur la plus fréquente du débutant :
+      </p>
+<pre><code>function rate(a, b) {
+  a + b;          ← calculé… puis jeté
+}
+rate(5, 3)        → undefined</code></pre>
+      <p>
+        Le calcul a bien eu lieu, mais son résultat n'a été donné à personne.
+        <strong>Sans <code>return</code>, la valeur est perdue.</strong>
+      </p>
+    </div>
+
+    <h3>Après <code>return</code>, plus rien</h3>
+
+<pre><code>function exemple() {
+  return "premier";
+  console.log("jamais affiché");   ← ligne morte
+}</code></pre>
+
+    <p>
+      <code>return</code> <strong>sort</strong> de la fonction immédiatement. Tout ce
+      qui suit dans le même bloc est ignoré.
+    </p>
+
+    <h2>5 · Afficher n'est pas renvoyer</h2>
+
+    <div class="attention">
+      <p>
+        <strong>La confusion à éviter absolument.</strong> Comparez :
+      </p>
+<pre><code>function versConsole(a, b) {
+  console.log(a + b);      ← AFFICHE, ne renvoie rien
+}
+
+function versAppelant(a, b) {
+  return a + b;            ← RENVOIE, n'affiche rien
+}</code></pre>
+      <p>
+        La première parle à l'écran. La seconde donne sa valeur au programme, qui en
+        fait ce qu'il veut. <strong>Seule la seconde est réutilisable</strong> dans un
+        calcul :
+      </p>
+<pre><code>versConsole(2, 2) * 10     → NaN        rien à multiplier
+versAppelant(2, 2) * 10    → 40         ✅</code></pre>
+    </div>
+
+    <h2>6 · Quand les arguments ne correspondent pas</h2>
+
+    <p>
+      JavaScript est très permissif — et c'est une source de bogues silencieux :
+    </p>
+
+    <table>
+      <tr><th>Appel</th><th>Résultat</th><th>Pourquoi</th></tr>
+      <tr>
+        <td><code>addition(5, 3)</code></td>
+        <td><code>8</code></td>
+        <td>le cas normal</td>
+      </tr>
+      <tr>
+        <td><code>addition(5)</code></td>
+        <td><code>NaN</code></td>
+        <td><code>b</code> n'a rien reçu : il vaut <code>undefined</code></td>
+      </tr>
+      <tr>
+        <td><code>addition(5, 3, 99)</code></td>
+        <td><code>8</code></td>
+        <td>l'argument en trop est <strong>ignoré</strong>, sans erreur</td>
+      </tr>
+      <tr>
+        <td><code>addition("5", 3)</code></td>
+        <td><code>"53"</code></td>
+        <td>⚠️ le <code>+</code> assemble au lieu d'additionner</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>La dernière ligne doit vous rappeler quelque chose.</strong> C'est le
+        piège du projet 6 : un texte qui entre dans un calcul le transforme en
+        assemblage. Une fonction ne vous en protège pas — <strong>convertissez avant
+        d'appeler</strong>.
+      </p>
+    </div>
+
+    <h2>7 · Ce qui vit dans la fonction y reste</h2>
+
+<pre><code>function calcul() {
+  const interne = 42;
+  return interne;
+}
+
+calcul()    → 42
+interne     → ReferenceError: interne is not defined</code></pre>
+
+    <p>
+      Une boîte créée <em>dans</em> une fonction n'existe pas à l'extérieur. C'est
+      une protection : deux fonctions peuvent utiliser le même nom de variable sans
+      se gêner.
+    </p>
+
+    <h2>8 · Bien nommer une fonction</h2>
+
+    <table>
+      <tr><th>Règle</th><th>Exemple</th></tr>
+      <tr><td>Un <strong>verbe</strong> : elle fait quelque chose</td><td><code>calculerTVA</code>, pas <code>tva</code></td></tr>
+      <tr><td>Les mêmes règles que les variables</td><td>pas d'accent, pas d'espace</td></tr>
+      <tr><td>Majuscule à partir du 2ᵉ mot</td><td><code>prixTTC</code> <em>(camelCase)</em></td></tr>
+      <tr><td>Une fonction = <strong>une</strong> tâche</td><td>si le nom contient « et », coupez en deux</td></tr>
+    </table>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Functions"
+             target="_blank" rel="noopener">MDN — Les fonctions</a>
+        </td>
+        <td>Le chapitre complet, avec des exemples progressifs.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Statements/return"
+             target="_blank" rel="noopener">MDN — <code>return</code></a>
+        </td>
+        <td>La référence sur ce que renvoie une fonction.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/function-basics"
+             target="_blank" rel="noopener">javascript.info — Les fonctions</a>
+        </td>
+        <td>Le même chapitre en français, avec exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

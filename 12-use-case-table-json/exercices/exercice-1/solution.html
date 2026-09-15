@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Le registre des emprunts</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 12</a> · Cas pratique</p>
+  <h1 class="titre-exo">Le registre des emprunts</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé la manip « ajouter sans toucher aux données » ?</strong>
+      C'est elle qui montre ce qui arrive quand la page et les données divergent. Si
+      ce n'est pas fait, retournez à la
+      <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <p>
+      Une solution possible. <strong>Seuls les critères comptent</strong> : une autre
+      écriture qui les remplit tous est tout aussi juste.
+    </p>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const emprunts = [
+  { livre: "Dune",                  lecteur: "Karim", jours: 21 },
+  { livre: "Fondation",             lecteur: "Léa",   jours: 5  },
+  { livre: "Les Fourmis",           lecteur: "Tomas", jours: 14 },
+  { livre: "Le Nom du vent",        lecteur: "Amina", jours: -3 },
+  { livre: "Chroniques martiennes", lecteur: "Léa",   jours: -12 }
+];
+
+/* 1 · Les éléments de la page */
+
+const corps    = document.querySelector("tbody");
+const form     = document.querySelector("#form-emprunt");
+const champL   = document.querySelector("#livre");
+const champLec = document.querySelector("#lecteur");
+const champJ   = document.querySelector("#jours");
+const message  = document.querySelector("#message");
+const resume   = document.querySelector("#resume");
+
+/* 2 · Le statut découle des jours restants */
+
+function statutDe(jours) {
+  if (jours &lt; 0)  return { texte: "En retard",  classe: "statut--retard" };
+  if (jours &lt;= 7) return { texte: "Bientôt dû", classe: "statut--bientot" };
+  return { texte: "En cours", classe: "statut--ok" };
+}
+
+/* 3 · Fabriquer une ligne du tableau */
+
+function ajouterLigne(emprunt) {
+
+  const tr = document.createElement("tr");
+
+  const tdLivre = document.createElement("td");
+  tdLivre.textContent = emprunt.livre;
+
+  const tdLecteur = document.createElement("td");
+  tdLecteur.textContent = emprunt.lecteur;
+
+  const tdJours = document.createElement("td");
+  tdJours.textContent = emprunt.jours;
+
+  const tdStatut = document.createElement("td");
+  const badge = document.createElement("span");
+  const statut = statutDe(emprunt.jours);
+  badge.textContent = statut.texte;
+  badge.classList.add("statut");
+  badge.classList.add(statut.classe);
+  tdStatut.append(badge);
+
+  tr.append(tdLivre, tdLecteur, tdJours, tdStatut);
+  corps.append(tr);
+}
+
+/* 4 · Tout redessiner depuis les données */
+
+function afficher() {
+
+  for (const ancienne of corps.querySelectorAll("tr")) {
+    ancienne.remove();
+  }
+
+  for (const emprunt of emprunts) {
+    ajouterLigne(emprunt);
+  }
+
+  let enRetard = 0;
+  for (const emprunt of emprunts) {
+    if (emprunt.jours &lt; 0) {
+      enRetard = enRetard + 1;
+    }
+  }
+
+  resume.textContent = emprunts.length + " emprunt(s) · " + enRetard + " en retard";
+
+  console.log("Tableau :", corps.children.length, "ligne(s) ·", enRetard, "en retard");
+}
+
+/* 5 · Au chargement */
+
+afficher();
+
+/* 6 · Le formulaire ajoute un emprunt */
+
+form.addEventListener("submit", function (evenement) {
+
+  evenement.preventDefault();
+
+  const livre   = champL.value.trim();
+  const lecteur = champLec.value.trim();
+  const saisie  = champJ.value.trim();
+
+  if (livre === "" || lecteur === "" || saisie === "") {
+    message.textContent = "Les trois champs sont obligatoires.";
+    message.classList.add("erreur");
+    console.log("Refusé : un champ est vide");
+    return;
+  }
+
+  const jours = Number(saisie);
+
+  if (isNaN(jours)) {
+    message.textContent = "Les jours restants doivent être un nombre.";
+    message.classList.add("erreur");
+    console.log("Refusé : jours non numérique");
+    return;
+  }
+
+  emprunts.push({ livre: livre, lecteur: lecteur, jours: jours });
+
+  afficher();
+
+  message.textContent = "« " + livre + " » ajouté.";
+  message.classList.remove("erreur");
+
+  champL.value = "";
+  champLec.value = "";
+  champJ.value = "";
+
+  console.log("Ajouté :", livre, "→", emprunts.length, "emprunt(s)");
+});</code></pre>
+    </details>
+
+    <h2>Les cinq choses à retenir</h2>
+
+    <h3>1 · Les données sont la vérité</h3>
+
+<pre><code>emprunts.push({ … });   ← on modifie LES DONNÉES
+afficher();             ← la page se refait toute seule</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La page n'est qu'un reflet.</strong> On ne la retouche jamais à la
+        main : on change les données, et on redessine. C'est ce qui garantit que le
+        tableau, les statuts et le résumé disent tous la même chose.
+      </p>
+      <p>
+        C'est le principe de tous les frameworks modernes — React, Vue, Svelte. Vous
+        venez de l'écrire à la main, en quelques lignes.
+      </p>
+    </div>
+
+    <h3>2 · Une donnée calculée n'est pas stockée</h3>
+
+    <p>
+      Le statut n'existe nulle part dans <code>emprunts</code>. Il se recalcule à
+      chaque affichage :
+    </p>
+
+    <table>
+      <tr><th><code>jours</code></th><th>Statut</th><th>Classe posée</th></tr>
+      <tr><td><code>21</code></td><td>En cours</td><td><code>statut--ok</code></td></tr>
+      <tr><td><code>5</code></td><td>Bientôt dû</td><td><code>statut--bientot</code></td></tr>
+      <tr><td><code>-3</code></td><td>En retard</td><td><code>statut--retard</code></td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi ne pas le stocker ?</strong> Parce qu'il deviendrait faux dès
+        le lendemain. Une donnée qui se déduit d'une autre ne se stocke pas : elle se
+        calcule, au dernier moment.
+      </p>
+      <p>
+        Et parce que toute la règle tient dans <strong>une seule fonction</strong> :
+        changer le seuil de 7 à 3 se fait en un caractère.
+      </p>
+    </div>
+
+    <h3>3 · Les frontières, encore et toujours</h3>
+
+<pre><code>jours = -1   → En retard
+jours =  0   → Bientôt dû     ⚠️ zéro n'est pas négatif
+jours =  7   → Bientôt dû     ⚠️ le ≤ inclut le 7
+jours =  8   → En cours</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>L'ordre des <code>if</code> compte.</strong> Le test
+        <code>jours &lt; 0</code> doit venir <em>en premier</em> : un nombre négatif
+        est aussi <code>&lt;= 7</code>. Inversez les deux lignes, et tous les retards
+        deviennent « Bientôt dû ».
+      </p>
+      <p>
+        <strong>Le résumé, lui, continue d'annoncer <code>2 en retard</code></strong> —
+        il compte <code>emprunt.jours &lt; 0</code> directement, sans passer par
+        <code>statutDe()</code>. Cette contradiction entre le résumé et les badges est
+        votre meilleur indice : deux affichages d'une même réalité qui ne disent plus
+        la même chose.
+      </p>
+      <p>
+        C'est exactement l'ordre des seuils du projet 7, exercice 3.
+      </p>
+    </div>
+
+    <h3>4 · Un tableau HTML se construit comme une liste</h3>
+
+<pre><code>createElement("tr")    ← la ligne      (comme un &lt;li&gt;)
+createElement("td")    ← la cellule    (comme un &lt;span&gt;)
+tr.append(td1, td2, …) ← on remplit
+corps.append(tr)       ← ALORS elle apparaît</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Rien de neuf depuis le projet 9, exercice 3.</strong> Seuls les noms
+        de balises changent. Un tableau n'est pas un objet spécial : c'est du HTML
+        comme le reste.
+      </p>
+      <p>
+        On insère dans le <code>&lt;tbody&gt;</code>, jamais dans le
+        <code>&lt;table&gt;</code>. À l'écran, les deux donnent le même résultat — mais
+        un <code>&lt;tr&gt;</code> ajouté sur le <code>&lt;table&gt;</code> laisse le
+        <code>&lt;tbody&gt;</code> <strong>vide</strong> : le vidage n'efface plus
+        rien, les lignes se dupliquent, et la console annonce
+        <code>0 ligne(s)</code> en permanence.
+      </p>
+    </div>
+
+    <h3>5 · Une vérification qui ne sert jamais</h3>
+
+<pre><code>const jours = Number(saisie);
+if (isNaN(jours)) { … }</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Ce test ne se déclenchera quasiment jamais</strong>, et c'est mesuré :
+        le champ <code>type="number"</code> refuse déjà les lettres — taper « abc »
+        y produit une chaîne <strong>vide</strong>, qui part donc dans la branche
+        « champ obligatoire ».
+      </p>
+      <p>
+        <strong>Gardez-le quand même.</strong> Changez <code>type="number"</code> en
+        <code>type="text"</code> dans la page, et le message apparaît. C'est
+        exactement ce qui arrive le jour où quelqu'un modifie le formulaire : la
+        vérification coûte deux lignes, et elle est déjà là.
+      </p>
+      <p>
+        <em>(Coller « abc » dans un champ <code>type="number"</code> ne la déclenche
+        pas non plus : le navigateur rend une chaîne vide. Seul le changement de type
+        l'atteint.)</em>
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Les lignes s'ajoutent en double à chaque envoi</td>
+        <td>
+          Le tableau n'est pas vidé au début de <code>afficher()</code>
+          (projet 9, exercice 4)
+        </td>
+      </tr>
+      <tr>
+        <td>La nouvelle ligne disparaît au prochain ajout</td>
+        <td>
+          Elle a été insérée dans la page sans passer par <code>push</code> : les
+          données l'ignorent, le redessin l'efface
+        </td>
+      </tr>
+      <tr>
+        <td>Tous les emprunts en retard affichent « Bientôt dû »</td>
+        <td>
+          Le test <code>jours &lt;= 7</code> est placé <strong>avant</strong>
+          <code>jours &lt; 0</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le statut s'affiche mais reste noir</td>
+        <td>
+          La classe <code>statut</code> est posée sans la classe de couleur, ou
+          l'inverse — il en faut <strong>deux</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>La page se recharge à l'envoi, le tableau revient à 5 lignes</td>
+        <td>
+          <code>preventDefault()</code> manque (projet 10, exercice 3)
+        </td>
+      </tr>
+      <tr>
+        <td>Le résumé reste bloqué sur l'ancien compte</td>
+        <td>
+          Il est calculé une seule fois au chargement, hors de
+          <code>afficher()</code>
+        </td>
+      </tr>
+    </table>
+
+    <h2>🎁 Le bonus, une piste</h2>
+
+    <p>
+      Une façon d'aller chercher cinq lecteurs et d'en faire des emprunts :
+    </p>
+
+<pre><code>fetch("https://dummyjson.com/users?limit=5")
+  .then(function (reponse) {
+    return reponse.json();
+  })
+  .then(function (donnees) {
+
+    for (const utilisateur of donnees.users) {
+      emprunts.push({
+        livre:   "À définir",
+        lecteur: utilisateur.firstName,
+        jours:   utilisateur.id * 3 - 5      ← dérivé d'un champ de l'API
+      });
+    }
+
+    afficher();        ← indispensable : les données ont changé
+  })
+  .catch(function (erreur) {
+    console.log("Impossible de charger les lecteurs :", erreur);
+  });</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Le <code>afficher()</code> à l'intérieur du second
+        <code>.then</code> n'est pas optionnel.</strong> Les données arrivent
+        <em>après</em> que la page a été dessinée une première fois. Sans ce second
+        appel, elles restent invisibles.
+      </p>
+      <p>
+        <strong>Et le <code>.catch</code> non plus.</strong> Une requête réseau peut
+        échouer — pas de connexion, serveur indisponible. Sans lui, l'erreur passe
+        inaperçue.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi <code>id * 3 - 5</code> plutôt qu'un nombre fixe ?</strong>
+        Parce qu'une durée identique pour tous donnerait cinq lignes du même statut.
+        En la dérivant d'un champ de l'API, on obtient les
+        <strong>trois statuts</strong> :
+      </p>
+<pre><code>Emily   (id 1)  →  -2 jours  →  En retard
+Michael (id 2)  →   1 jour   →  Bientôt dû
+Sophia  (id 3)  →   4 jours  →  Bientôt dû
+James   (id 4)  →   7 jours  →  Bientôt dû   ← pile sur la frontière
+Emma    (id 5)  →  10 jours  →  En cours</code></pre>
+      <p>
+        <strong>Dériver une donnée d'une autre</strong> est exactement le geste du
+        statut : c'est le métier de qui consomme une API.
+      </p>
+    </div>
+
+    <h2>Fin du parcours</h2>
+
+    <div class="objectif">
+      <p>
+        <strong>Vous venez de terminer les douze projets.</strong> En trois jours,
+        vous êtes passé d'une page HTML vide à une application qui affiche des
+        données, réagit à l'utilisateur et va chercher des informations sur un
+        serveur.
+      </p>
+      <p>
+        <strong>Et sans aucune librairie.</strong> Tout ce que vous avez écrit tient
+        dans le navigateur, sans installation, sans build. C'est la base sur laquelle
+        reposent React, Vue et les autres — vous saurez désormais ce qu'ils font à
+        votre place.
+      </p>
+      <p>
+        <strong>La suite vous appartient :</strong> reprenez le projet 5, votre page
+        libre, et rendez-la dynamique avec ce que vous savez maintenant.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton--clair bouton" href="../../">Projet 12 terminé</a>
+      <a class="bouton" href="../../../">Tous les projets ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

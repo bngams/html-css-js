@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Le squelette d'une page HTML</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 1</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le squelette d'une page HTML</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a> et
+      essayez d'abord — même une tentative ratée rend cette page bien plus utile.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Mon premier site&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Ma première page&lt;/h1&gt;
+  &lt;p&gt;
+    Bonjour ! J'apprends à créer des pages web.
+    Ceci est le tout premier fichier HTML que j'écris à la main.
+  &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <p>
+        Remarquez : le <code>&lt;title&gt;</code> (« Mon premier site ») et le
+        <code>&lt;h1&gt;</code> (« Ma première page ») sont <strong>différents</strong>.
+        Le premier s'affiche dans l'onglet du navigateur, le second dans la page.
+      </p>
+    </details>
+
+    <div class="astuce">
+      <p>
+        💡 <code>&lt;details&gt;</code> — le bloc dépliant ci-dessus — est du HTML pur,
+        sans une ligne de JavaScript. Vous saurez l'écrire d'ici la fin du projet 2.
+      </p>
+    </div>
+
+    <p>
+      Le fichier complet et commenté se trouve dans
+      <code>solution/index.html</code> — ouvrez-le dans VSCode pour lire les
+      commentaires ligne par ligne, ou
+      <a href="solution/">affichez-le dans le navigateur</a>.
+    </p>
+
+    <h2>Ligne par ligne</h2>
+
+    <h3><code>&lt;!DOCTYPE html&gt;</code></h3>
+    <p>
+      Toujours en première ligne, avant tout le reste. Elle demande au navigateur
+      d'interpréter la page selon les règles du HTML moderne. Sans elle, le navigateur
+      passe en « mode compatibilité » et certains styles se comportent différemment —
+      un bug difficile à diagnostiquer quand on ne connaît pas cette cause.
+    </p>
+
+    <h3><code>&lt;html lang="fr"&gt;</code></h3>
+    <p>
+      La balise racine : elle contient tout. L'attribut <code>lang</code> n'a aucun
+      effet visible, mais il sert aux lecteurs d'écran (prononciation), aux moteurs de
+      recherche, et au navigateur (proposition de traduction, césure des mots).
+    </p>
+
+    <h3><code>&lt;meta charset="UTF-8"&gt;</code></h3>
+    <p>
+      À placer le plus haut possible dans le <code>&lt;head&gt;</code>. C'est elle qui
+      fait que « créé » s'affiche « créé » et non « crÃ©Ã© ». UTF-8 couvre les accents
+      français, les emojis et la quasi-totalité des langues du monde.
+    </p>
+
+    <h3><code>&lt;title&gt;</code></h3>
+    <p>
+      Le seul élément du <code>&lt;head&gt;</code> que le visiteur perçoit : onglet du
+      navigateur, favoris, et ligne bleue cliquable dans les résultats de recherche.
+    </p>
+
+    <h3><code>&lt;h1&gt;</code> et <code>&lt;p&gt;</code></h3>
+    <p>
+      Un seul <code>&lt;h1&gt;</code> par page : c'est le titre principal du contenu.
+      Les niveaux suivants (<code>h2</code>, <code>h3</code>…) structurent en
+      sous-parties — vous les utiliserez dès l'exercice 2.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>Les accents s'affichent « Ã© », « Ã  »</td>
+        <td>La ligne <code>&lt;meta charset="UTF-8"&gt;</code> manque, ou elle est
+            placée après du contenu</td>
+      </tr>
+      <tr>
+        <td>L'onglet affiche « travail.html »</td>
+        <td>La balise <code>&lt;title&gt;</code> manque, ou elle est hors du
+            <code>&lt;head&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Le texte du titre s'affiche, mais pas en gros</td>
+        <td>La balise <code>&lt;h1&gt;</code> n'est pas fermée
+            (<code>&lt;/h1&gt;</code> oublié)</td>
+      </tr>
+      <tr>
+        <td>Toute la page s'affiche comme un seul bloc de texte</td>
+        <td>Une balise ouvrante n'est pas fermée : le navigateur « avale » la suite</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>Un outil pour vérifier.</strong> Le
+      <a href="https://validator.w3.org/#validate_by_upload" target="_blank" rel="noopener">validateur
+      du W3C</a> accepte votre fichier et liste les erreurs précises, avec le numéro de
+      ligne. Bien plus rapide que de chercher à l'œil.</p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à mon code</a>
+      <a class="bouton" href="../exercice-2/">Exercice 2 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

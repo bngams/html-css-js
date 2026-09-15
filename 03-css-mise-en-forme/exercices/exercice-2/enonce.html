@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Le modèle de boîte</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 2</p>
+  <h1 class="titre-exo">Le modèle de boîte</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Transformer trois blocs collés les uns aux
+      autres en trois cartes aérées et lisibles, en maîtrisant les espacements.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> l'exercice 1
+        de ce projet. Vous savez écrire une règle et viser une balise, une classe ou
+        un id.
+      </p>
+    </div>
+
+    <h2>📄 Les fichiers</h2>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>travail.html</code></td>
+        <td>🔒 Fourni et figé — la page à habiller</td>
+      </tr>
+      <tr>
+        <td><code>style.css</code></td>
+        <td>👉 <strong>LE FICHIER QUE VOUS MODIFIEZ</strong></td>
+      </tr>
+    </table>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <p>Sept règles à écrire dans <code>style.css</code> :</p>
+
+    <ol class="criteres">
+      <li>
+        <strong>Sélecteur universel</strong> — <code>box-sizing: border-box</code>
+        sur tous les éléments
+      </li>
+      <li>
+        <strong><code>body</code></strong> — police sans empattements avec repli,
+        couleur <code>#333</code>, fond <code>#eef1f5</code>, <code>margin: 0</code>
+      </li>
+      <li>
+        <strong>la classe <code>conteneur</code></strong> — <code>max-width</code> de
+        800px, centré horizontalement, 20px d'espace intérieur
+      </li>
+      <li>
+        <strong>la classe <code>carte</code></strong> — fond blanc, bordure
+        <code>1px solid #d7dee8</code>, 20px d'espace <strong>intérieur</strong>, 20px
+        d'espace <strong>extérieur</strong> en dessous
+      </li>
+      <li>
+        <strong>la classe <code>carte--mise-en-avant</code></strong> — fond
+        <code>#e8f1fb</code>, bordure gauche <code>5px solid #0b6bcb</code>
+      </li>
+      <li><strong><code>h1</code></strong> — pas de marge en haut, 10px en dessous</li>
+      <li>
+        <strong><code>footer</code></strong> — centré, 30px de marge au-dessus, bordure
+        supérieure <code>1px solid #d7dee8</code>, 20px d'espace intérieur en haut
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>Le conteneur</td>
+        <td>Le contenu ne s'étale plus sur toute la largeur : il forme une colonne
+            centrée, avec du gris de chaque côté sur un écran large</td>
+      </tr>
+      <tr>
+        <td>Les cartes</td>
+        <td>Trois rectangles blancs <strong>séparés</strong>, avec du blanc autour de
+            leur texte</td>
+      </tr>
+      <tr>
+        <td>Intérieur vs extérieur</td>
+        <td>Le blanc entoure le texte <em>dans</em> la carte (padding) ; le gris de la
+            page apparaît <em>entre</em> les cartes (margin)</td>
+      </tr>
+      <tr>
+        <td>La carte mise en avant</td>
+        <td>La troisième a un fond bleuté et un trait bleu épais sur son bord gauche
+            uniquement</td>
+      </tr>
+      <tr>
+        <td>Le pied de page</td>
+        <td>Un trait fin le sépare du contenu, et son texte est centré</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — voir la boîte pour de vrai</strong></p>
+      <ol>
+        <li>Clic droit sur une carte → <em>Inspecter</em>.</li>
+        <li>
+          Dans le panneau de droite, descendez tout en bas de l'onglet
+          <em>Styles</em> (Chrome) ou ouvrez l'onglet <em>Layout</em> (Firefox).
+        </li>
+        <li>
+          Un <strong>schéma en couches</strong> apparaît : le contenu au centre, puis
+          <code>padding</code>, <code>border</code>, <code>margin</code> — avec les
+          valeurs réelles en pixels.
+        </li>
+        <li>
+          <strong>Survolez chaque couche avec la souris</strong> : le navigateur la
+          surligne dans la page. Vous <em>voyez</em> où commence et finit chacune.
+        </li>
+      </ol>
+      <p>
+        C'est l'outil qui rend la notion concrète — et celui qu'on garde toute sa
+        carrière pour comprendre pourquoi un élément ne se place pas comme prévu.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — le piège de la largeur</strong></p>
+      <ol>
+        <li>
+          Supprimez temporairement votre règle de l'étape 1 (le
+          <code>box-sizing</code>), enregistrez, rechargez.
+        </li>
+        <li>Regardez la largeur du conteneur dans le schéma de boîte.</li>
+      </ol>
+      <p>
+        Il mesure désormais <strong>840px</strong> au lieu de 800 : les 20px de padding
+        de chaque côté se sont <em>ajoutés</em> à la largeur déclarée. Avec
+        <code>border-box</code>, ils sont compris dedans.
+      </p>
+      <p><strong>Remettez la règle</strong> avant de continuer.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>
+        Dans <code>style.css</code>, <code>Ctrl+F</code> sur <code>TODO</code> : plus
+        aucun marqueur de consigne
+      </li>
+      <li>Les cinq points du tableau de vérification sont constatés</li>
+      <li>
+        Le <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload"
+        target="_blank" rel="noopener">validateur CSS du W3C</a> ne signale aucune
+        erreur
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>35 à 45 minutes.</strong> L'étape 4 est celle où l'on comprend vraiment
+      la différence entre intérieur et extérieur — prenez le temps d'y tester les deux.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page à habiller →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

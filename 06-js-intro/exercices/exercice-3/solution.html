@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Des variables et des calculs</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 3</p>
+  <h1 class="titre-exo">Des variables et des calculs</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez essayé les seize étapes avant d'arriver ici ?</strong>
+      Si ce n'est pas le cas, retournez à la
+      <a href="travail.html">page de travail</a> : chaque étape tient en une ligne,
+      et c'est en les écrivant qu'on retient le choix
+      <code>const</code> / <code>let</code>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <p class="astuce">
+      Ouvrez la console <strong>avant</strong> de lancer le corrigé : la page reste
+      vide, tout s'affiche dedans.
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>script.js</code> en entier</summary>
+
+<pre><code>const NOM_MEDIATHEQUE = "Médiathèque des Trois Rivières";
+const PRIX_ABONNEMENT = 24;
+
+let nombreEmprunts = 0;
+nombreEmprunts = 3;
+nombreEmprunts = nombreEmprunts + 1;
+
+console.log("Emprunts :", nombreEmprunts);
+
+console.log(typeof NOM_MEDIATHEQUE, typeof PRIX_ABONNEMENT, typeof nombreEmprunts);
+
+const moyennePages = (312 + 247 + 190) / 3;
+console.log("Moyenne brute :", moyennePages);
+
+const moyenneArrondie = Math.round(moyennePages);
+console.log("Moyenne arrondie :", moyenneArrondie);
+
+console.log("Le plus long :", Math.max(312, 247, 190));
+
+const prixTTC = PRIX_ABONNEMENT * 1.2;
+console.log("Prix TTC :", prixTTC.toFixed(2), "€");
+
+const gagnant = Math.floor(Math.random() * 6) + 1;
+console.log("Lecteur tiré au sort :", gagnant);</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · <code>const</code> protège, <code>let</code> autorise</h3>
+
+    <p>
+      Le choix n'est pas une question de goût. Il dit au navigateur ce qui a le
+      droit de changer :
+    </p>
+
+    <table>
+      <tr><th>Variable</th><th>Mot-clé</th><th>Pourquoi</th></tr>
+      <tr>
+        <td><code>NOM_MEDIATHEQUE</code></td>
+        <td><code>const</code></td>
+        <td>le nom ne changera jamais</td>
+      </tr>
+      <tr>
+        <td><code>PRIX_ABONNEMENT</code></td>
+        <td><code>const</code></td>
+        <td>le tarif est fixe dans ce programme</td>
+      </tr>
+      <tr>
+        <td><code>nombreEmprunts</code></td>
+        <td><code>let</code></td>
+        <td>il passe de 0 à 3, puis à 4</td>
+      </tr>
+      <tr>
+        <td>
+          <code>moyennePages</code>, <code>prixTTC</code>, <code>gagnant</code>…
+        </td>
+        <td><code>const</code></td>
+        <td>calculées une fois, jamais modifiées ensuite</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Une seule variable méritait <code>let</code> dans tout cet
+        exercice :</strong> <code>nombreEmprunts</code>, la seule qui change de
+        valeur. Toutes les autres sont calculées une fois pour toutes — donc
+        <code>const</code>. C'est exactement ce que dit la règle du cours, appliquée.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>La règle des professionnels :</strong> <code>const</code> par
+        défaut, <code>let</code> seulement quand la valeur doit changer. Un lecteur
+        de votre code voit alors d'un coup d'œil ce qui bouge — et ce qui ne bouge
+        pas.
+      </p>
+    </div>
+
+    <h3>2 · <code>score = score + 1</code> n'est pas une équation</h3>
+
+    <p>
+      À l'étape 5, <code>nombreEmprunts = nombreEmprunts + 1</code> semble absurde
+      en mathématiques. Le <code>=</code> de la programmation se lit
+      <strong>de droite à gauche</strong> :
+    </p>
+
+<pre><code>nombreEmprunts = nombreEmprunts + 1;
+                 └──────┬───────┘
+                   1. on calcule 3 + 1
+                 └──┬──┘
+                   2. on range 4 dedans</code></pre>
+
+    <h3>3 · L'arrondi change réellement la valeur</h3>
+
+    <p>
+      La moyenne de 312, 247 et 190 vaut <code>249.66666666666666</code> — une
+      division qui ne tombe pas juste, comme presque toutes les moyennes.
+      <code>Math.round</code> la ramène à <code>250</code>.
+    </p>
+
+    <table>
+      <tr><th>Outil</th><th>Sur 249.666…</th><th>Effet</th></tr>
+      <tr><td><code>Math.round</code></td><td><code>250</code></td><td>au plus proche</td></tr>
+      <tr><td><code>Math.floor</code></td><td><code>249</code></td><td>toujours en dessous</td></tr>
+      <tr><td><code>Math.ceil</code></td><td><code>250</code></td><td>toujours au-dessus</td></tr>
+    </table>
+
+    <h3>4 · <code>.toFixed()</code> renvoie du TEXTE</h3>
+
+    <div class="attention">
+      <p>
+        <code>24 × 1.2</code> ne donne pas <code>28.8</code> mais
+        <code>28.799999999999997</code>. Ce n'est pas un bug : tous les langages
+        stockent les décimaux en binaire, et certains nombres n'y tombent pas juste.
+      </p>
+      <p>
+        <code>.toFixed(2)</code> règle l'affichage — mais attention au type :
+      </p>
+<pre><code>prixTTC.toFixed(2)              → "28.80"    du TEXTE
+prixTTC.toFixed(2) + 1          → "28.801"   ⚠️ assemblage
+Number(prixTTC.toFixed(2)) + 1  → 29.8       ✅ addition</code></pre>
+      <p>
+        C'est le piège de l'exercice 2 sous une autre forme. La règle :
+        <strong><code>.toFixed()</code> sert à AFFICHER, jamais à calculer.</strong>
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td><code>TypeError: Assignment to constant variable.</code></td>
+        <td>
+          Vous essayez de changer une valeur déclarée avec <code>const</code> —
+          utilisez <code>let</code> si elle doit évoluer
+        </td>
+      </tr>
+      <tr>
+        <td><code>SyntaxError: Identifier 'x' has already been declared</code></td>
+        <td>
+          Vous avez réécrit <code>let</code> devant une boîte qui existait déjà
+          (étape 4)
+        </td>
+      </tr>
+      <tr>
+        <td>La console affiche <code>Emprunts : 01</code></td>
+        <td>
+          Votre compteur contient du <strong>texte</strong> et non un nombre — le
+          <code>+</code> a assemblé au lieu d'additionner
+        </td>
+      </tr>
+      <tr>
+        <td>Le tirage donne parfois <code>0</code> ou <code>7</code></td>
+        <td>
+          Le <code>+ 1</code> manque, ou vous avez utilisé <code>Math.round</code>
+          au lieu de <code>Math.floor</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le tirage ne change jamais au rechargement</td>
+        <td>
+          Vous avez écrit un nombre en dur au lieu d'appeler
+          <code>Math.random()</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le prix s'affiche <code>28.799999999999997</code></td>
+        <td>Le <code>.toFixed(2)</code> a été oublié à l'affichage</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../exercice-4/">Exercice 4 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

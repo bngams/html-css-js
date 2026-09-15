@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Parler à l'utilisateur</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 2</p>
+  <h1 class="titre-exo">Parler à l'utilisateur</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Faire dialoguer votre page avec le visiteur,
+      et découvrir le piège le plus fréquent du débutant : <strong>ce qu'on saisit
+      est toujours du texte</strong>.</p>
+      <p>
+        <strong>Prérequis :</strong> l'exercice 1 — savoir ouvrir la console et lire
+        ce qu'elle répond.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-2/script.js</code>
+      </p>
+      <p>
+        La page <code>travail.html</code> est <strong>fournie et figée</strong> :
+        n'y touchez pas. Elle charge déjà votre fichier avec la balise
+        <code>&lt;script&gt;</code>, tout en bas.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>⚠️ Changement de forme par rapport à l'exercice 1.</strong> Là-bas,
+        rien n'était à enregistrer : vous tapiez dans la console. Ici, vous écrivez
+        dans un <strong>fichier</strong>, et il faut donc
+        <strong>enregistrer puis recharger</strong> à chaque essai.
+      </p>
+      <p>
+        <strong>Gardez la console ouverte</strong> (<code>F12</code>) pendant tout
+        l'exercice : la moitié du résultat s'y affiche, l'autre moitié dans les
+        boîtes de dialogue.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 10 étapes</h2>
+
+    <p>
+      Chaque étape correspond à un marqueur <code>TODO</code> dans
+      <code>script.js</code>. Traitez-les <strong>dans l'ordre</strong> : chacune
+      s'appuie sur la précédente.
+    </p>
+
+    <h3>Se présenter</h3>
+
+    <ol class="criteres">
+      <li>
+        Écrire <code>Le script est chargé</code> <strong>dans la console</strong>
+        — rien ne doit apparaître sur la page
+      </li>
+      <li>
+        Afficher une <strong>boîte d'alerte</strong> :
+        <code>Bienvenue à la médiathèque !</code>
+      </li>
+    </ol>
+
+    <h3>Demander son prénom</h3>
+
+    <ol class="criteres" start="3">
+      <li>
+        Poser la question <code>Comment vous appelez-vous ?</code> et ranger la
+        réponse dans <code>prenom</code>
+      </li>
+      <li>
+        Afficher une alerte qui salue par ce prénom — par exemple
+        <code>Bonjour Camille !</code>
+      </li>
+    </ol>
+
+    <h3>Demander son âge, et tomber dans le piège</h3>
+
+    <ol class="criteres" start="5">
+      <li>
+        Poser la question <code>Quel âge avez-vous ?</code> et ranger la réponse
+        dans <code>ageSaisi</code>
+      </li>
+      <li>
+        Afficher dans la console, en <strong>une seule instruction</strong>, le
+        texte <code>L'an prochain, version texte :</code> puis le calcul
+        <code>ageSaisi + 1</code>
+      </li>
+    </ol>
+
+    <div class="attention">
+      <p>
+        <strong>À l'étape 6, le résultat sera FAUX — et c'est le but.</strong> Si vous
+        saisissez <code>25</code>, la console n'affichera pas <code>26</code> mais
+        <code>251</code>.
+      </p>
+      <p>
+        <strong>Ne corrigez pas tout de suite : constatez d'abord.</strong> Ce
+        résultat est la raison d'être de l'exercice.
+      </p>
+    </div>
+
+    <h3>Sortir du piège</h3>
+
+    <ol class="criteres" start="7">
+      <li>
+        Ranger dans <code>age</code> le même âge, mais <strong>converti en
+        nombre</strong> avec <code>Number(...)</code>
+      </li>
+      <li>
+        Afficher dans la console, en une seule instruction, le texte
+        <code>L'an prochain, version nombre :</code> puis <code>age + 1</code> —
+        cette fois <code>25</code> doit donner <code>26</code>
+      </li>
+    </ol>
+
+    <h3>Une question fermée, puis le bilan</h3>
+
+    <ol class="criteres" start="9">
+      <li>
+        Demander <code>Souhaitez-vous recevoir la newsletter ?</code> avec une boîte
+        à <strong>deux boutons</strong> (<code>confirm</code>), et ranger la réponse
+        dans <code>newsletter</code>
+      </li>
+      <li>
+        Afficher dans la console, en une seule instruction, le texte
+        <code>Récapitulatif :</code> puis <code>prenom</code>, <code>age</code> et
+        <code>newsletter</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Le fichier est bien chargé</td>
+        <td>
+          <code>Le script est chargé</code> apparaît dans la console dès le
+          rechargement
+        </td>
+      </tr>
+      <tr>
+        <td>Les boîtes s'enchaînent</td>
+        <td>
+          Bienvenue → prénom → salutation → âge → newsletter, dans cet ordre
+        </td>
+      </tr>
+      <tr>
+        <td>Le piège du texte</td>
+        <td>
+          Avec <code>25</code> saisi, l'étape 6 affiche <code>251</code> et non
+          <code>26</code>
+        </td>
+      </tr>
+      <tr>
+        <td>La conversion</td>
+        <td>
+          Avec <code>25</code> saisi, l'étape 8 affiche bien <code>26</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Les trois types</td>
+        <td>
+          Dans le récapitulatif, les trois valeurs n'ont pas la même couleur :
+          texte, nombre, booléen
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>script.js</code> : aucun
+          résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — pourquoi la console affiche trois couleurs</strong></p>
+      <ol>
+        <li>Complétez jusqu'à l'étape 10 et rechargez.</li>
+        <li>
+          Dans la console, regardez le récapitulatif : le prénom, l'âge et la
+          réponse newsletter ne sont pas affichés de la même façon.
+        </li>
+        <li>
+          Tapez maintenant dans la console : <code>typeof prenom</code>, puis
+          <code>typeof age</code>, puis <code>typeof newsletter</code>.
+        </li>
+      </ol>
+      <p>
+        Vous obtenez <code>"string"</code>, <code>"number"</code> et
+        <code>"boolean"</code>. La console vous montrait les types <em>par la
+        couleur</em> sans le dire. C'est l'objet de l'exercice 3.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>
+        Les cinq boîtes s'enchaînent sans erreur rouge dans la console :
+        bienvenue → prénom → salutation → âge → newsletter
+      </li>
+      <li>
+        Vous savez expliquer <strong>pourquoi</strong> l'étape 6 donne
+        <code>251</code> et l'étape 8 <code>26</code>
+      </li>
+      <li>
+        Vous savez dire à quoi sert <code>console.log()</code> — et pourquoi il ne
+        s'adresse pas au visiteur
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>script.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>35 à 45 minutes.</strong> Prenez le temps de bien observer l'étape 6
+      avant de la corriger : c'est là que se joue l'essentiel.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

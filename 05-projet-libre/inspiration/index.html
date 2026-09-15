@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspiration — Projet 5</title>
+  <link rel="stylesheet" href="../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../">Projet 5</a> · Inspiration</p>
+  <h1 class="titre-exo">Quatre pages d'exemple</h1>
+
+  <ul class="onglets">
+    <li><a href="../consignes.html">📋 Les consignes</a></li>
+    <li><a href="../depart/">🚀 Le point de départ</a></li>
+    <li><a href="index.html" aria-current="page">💡 Inspiration</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p>
+        <strong>Ce sont des idées, pas un modèle à copier.</strong> Les quatre pages
+        ci-dessous sont volontairement très différentes — en sujet, en couleurs, en
+        disposition — pour vous montrer l'étendue de ce qui est faisable avec ce que
+        vous savez déjà.
+      </p>
+      <p>
+        Regardez-les, redimensionnez-les, ouvrez leur code source si un détail vous
+        intrigue. Puis faites <em>autre chose</em>.
+      </p>
+    </div>
+
+    <h2>Les trois exemples</h2>
+
+    <table>
+      <tr>
+        <th>Page</th>
+        <th>Ce qu'elle montre</th>
+      </tr>
+      <tr>
+        <td><a href="portfolio/">🎨 Portfolio</a></td>
+        <td>
+          Une page personnelle sobre : photo, parcours, réalisations en grille,
+          contact. Palette neutre, beaucoup d'espace blanc
+        </td>
+      </tr>
+      <tr>
+        <td><a href="landing/">🚀 Page de présentation</a></td>
+        <td>
+          Une association qui se présente : accroche, trois arguments, tableau de
+          tarifs, formulaire d'adhésion. Couleurs vives, blocs contrastés
+        </td>
+      </tr>
+      <tr>
+        <td><a href="evenement/">🎪 Page d'événement</a></td>
+        <td>
+          Un festival : bandeau, programme en liste ordonnée, informations pratiques
+          en tableau. Fond sombre, mise en page dense
+        </td>
+      </tr>
+      <tr>
+        <td><a href="dataviz/">📊 Rapport chiffré</a></td>
+        <td>
+          Un bilan annuel : <strong>un graphique en SVG écrit dans la page</strong>,
+          un tableau de données et un lien vers un PDF. Sobre, une seule couleur
+          d'accent
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Les trois premières respectent les 17 points de la checklist</strong> —
+        c'est d'ailleurs un bon exercice de lecture : ouvrez-en une et retrouvez-y les
+        balises sémantiques, la media query, le <code>alt</code> de l'image.
+      </p>
+      <p>
+        <strong>Le rapport chiffré fait exception sur un point</strong>, et
+        volontairement : il n'a pas de <code>&lt;img&gt;</code>, mais un
+        <strong>graphique SVG écrit directement dans la page</strong>. Son équivalent
+        du <code>alt</code> s'écrit alors avec <code>role="img"</code> et des balises
+        <code>&lt;title&gt;</code> et <code>&lt;desc&gt;</code> à l'intérieur du SVG —
+        ouvrez son code, c'est instructif.
+      </p>
+    </div>
+
+    <h2>Ce qu'elles ont en commun</h2>
+
+    <p>
+      Malgré leurs différences d'apparence, les quatre partagent la même ossature —
+      celle des projets 1 à 4 :
+    </p>
+
+    <ul>
+      <li>un squelette valide avec <code>meta viewport</code> ;</li>
+      <li>les quatre régions sémantiques ;</li>
+      <li>une feuille de style externe, des classes nommées par leur rôle ;</li>
+      <li><code>box-sizing</code>, <code>img { max-width: 100% }</code>, des <code>max-width</code> ;</li>
+      <li>une grille en Flexbox qui se réorganise seule ;</li>
+      <li>une seule media query, en mobile-first.</li>
+    </ul>
+
+    <p>
+      Autrement dit : <strong>vous savez déjà tout ce qu'il faut pour en écrire une.</strong>
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../consignes.html">← Revoir les consignes</a>
+      <a class="bouton" href="../depart/">Prendre le point de départ →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

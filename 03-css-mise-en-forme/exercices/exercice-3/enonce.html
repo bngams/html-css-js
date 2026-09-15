@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Disposer avec Flexbox</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 3</p>
+  <h1 class="titre-exo">Disposer avec Flexbox</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Construire une bannière avec menu, et une
+      grille de quatre cartes qui se réorganise toute seule. Puis soigner les
+      finitions.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> les exercices
+        1 et 2 de ce projet.
+      </p>
+    </div>
+
+    <h2>📄 Les fichiers</h2>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>travail.html</code></td>
+        <td>🔒 Fourni et figé</td>
+      </tr>
+      <tr>
+        <td><code>style.css</code></td>
+        <td>👉 <strong>LE FICHIER QUE VOUS MODIFIEZ</strong> — les trois premières
+            règles y sont déjà écrites, vous complétez les huit suivantes</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>La règle à ne pas oublier :</strong> <code>display: flex</code> se pose
+        sur le <strong>parent</strong> — l'élément qui <em>contient</em> ceux que vous
+        voulez aligner. Jamais sur les éléments eux-mêmes. C'est l'erreur n°1 de cet
+        exercice.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <ol class="criteres">
+      <li>
+        <strong><code>.banniere</code></strong> — enfants côte à côte, logo à gauche et
+        menu à droite, alignés verticalement au centre, fond <code>#14457b</code>,
+        15px d'espace intérieur
+      </li>
+      <li>
+        <strong><code>.logo</code></strong> — blanc, gras, <code>1.3rem</code>, sans
+        marge
+      </li>
+      <li>
+        <strong><code>.menu</code></strong> — liens côte à côte, 20px entre eux
+      </li>
+      <li>
+        <strong><code>.menu a</code></strong> — blancs, sans soulignement
+      </li>
+      <li>
+        <strong><code>.grille</code></strong> — cartes côte à côte, passage à la ligne
+        autorisé, 20px entre elles
+      </li>
+      <li>
+        <strong><code>.carte</code></strong> — fond blanc, 20px intérieur, coins
+        arrondis 8px, ombre <code>0 2px 6px rgba(0,0,0,0.12)</code>,
+        <code>flex: 1 1 380px</code>, transition de 0.3s sur l'ombre
+      </li>
+      <li>
+        <strong><code>.carte:hover, .carte:focus</code></strong> — ombre
+        <code>0 6px 16px rgba(0,0,0,0.18)</code>
+      </li>
+      <li>
+        <strong><code>.date</code></strong> — <code>#0b6bcb</code>, gras,
+        <code>0.9rem</code>, sans marge en haut
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>La bannière</td>
+        <td>Une barre bleu foncé, « Médiathèque » à gauche, les trois liens à droite,
+            tous sur la même ligne</td>
+      </tr>
+      <tr>
+        <td>La grille</td>
+        <td><strong>Deux cartes par ligne</strong> dès que la fenêtre est assez large
+            (environ 800 px et plus), blanches, aux coins arrondis, avec une ombre
+            légère. En dessous, elles s'empilent une par une</td>
+      </tr>
+      <tr>
+        <td>Le survol</td>
+        <td>L'ombre s'accentue <strong>progressivement</strong> quand la souris passe
+            sur une carte, et revient doucement en sortant</td>
+      </tr>
+      <tr>
+        <td>Les dates</td>
+        <td>En bleu et en gras, juste sous chaque titre</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — voir Flexbox travailler</strong></p>
+      <ol>
+        <li>
+          Réduisez la largeur de votre fenêtre en la faisant glisser, lentement.
+        </li>
+        <li>
+          Observez la grille : les cartes passent de deux par ligne à une seule,
+          <strong>toutes seules</strong>. Vous n'avez écrit aucune règle pour ça —
+          c'est la largeur de base (380 px) qui décide : dès que deux cartes ne
+          tiennent plus côte à côte, la seconde passe dessous.
+        </li>
+        <li>
+          Supprimez temporairement <code>flex-wrap: wrap</code>, rechargez, et
+          réduisez à nouveau : les cartes se compriment jusqu'à devenir illisibles
+          au lieu de passer à la ligne.
+        </li>
+      </ol>
+      <p>
+        <strong>Remettez la règle.</strong> Vous venez de voir le premier mécanisme du
+        <em>responsive design</em> — le sujet du projet 4.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — l'inspecteur Flexbox</strong></p>
+      <ol>
+        <li>Clic droit sur la grille → <em>Inspecter</em>.</li>
+        <li>
+          Dans le panneau HTML, repérez l'élément <code>&lt;div class="grille"&gt;</code> :
+          un petit badge <strong><code>flex</code></strong> apparaît à côté.
+        </li>
+        <li>Cliquez sur ce badge.</li>
+      </ol>
+      <p>
+        Le navigateur trace les lignes de la disposition par-dessus la page : vous
+        voyez où commence et finit chaque carte, et où se trouvent les
+        <code>gap</code>. Firefox propose en plus un panneau <em>Flexbox</em> très
+        détaillé.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>
+        Dans <code>style.css</code>, <code>Ctrl+F</code> sur <code>TODO</code> : plus
+        aucun marqueur <em>en dehors de l'en-tête du fichier</em>
+      </li>
+      <li>Les quatre points du tableau de vérification sont constatés</li>
+      <li>
+        Le <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload"
+        target="_blank" rel="noopener">validateur CSS du W3C</a> ne signale aucune
+        erreur
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>40 à 50 minutes.</strong> C'est l'exercice le plus dense du projet. Les
+      étapes 1 à 5 sont l'essentiel ; les finitions (6 à 8) vont vite.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page à habiller →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

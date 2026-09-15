@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Rechercher un livre</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #253044;
+      background-color: #f6f8fb;
+    }
+    .page { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #1d6fa5; margin-top: 0; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+
+    .recherche {
+      background-color: #fff;
+      border: 1px solid #dde3e9;
+      border-radius: 10px;
+      padding: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+    #recherche {
+      font: inherit;
+      width: 100%;
+      padding: 0.65em 0.9em;
+      border: 2px solid #c3ccd8;
+      border-radius: 7px;
+      background-color: #fff;
+    }
+    #recherche:focus {
+      outline: none;
+      border-color: #1d6fa5;
+    }
+
+    #compteur {
+      margin: 0.8rem 0 0;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #5a6570;
+    }
+    #compteur.vide { color: #a3261c; }
+
+    #resultats {
+      list-style: none;
+      padding: 0;
+      min-height: 3rem;
+    }
+    .livre {
+      background-color: #fff;
+      border: 1px solid #dde3e9;
+      border-left: 5px solid #c3ccd8;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .livre__titre { font-weight: 600; }
+    .livre__auteur { color: #5a6570; font-size: 0.92rem; white-space: nowrap; }
+
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <h1>Rechercher un livre</h1>
+
+    <div class="recherche">
+      <input id="recherche" type="text" placeholder="Tapez un titre…">
+      <p id="compteur"></p>
+    </div>
+
+    <ul id="resultats"></ul>
+
+    <div class="encadre">
+      <p>
+        <strong>Ceci est le corrigé en fonctionnement.</strong> Ouvrez la console
+        (<kbd>F12</kbd>), puis tapez dans le champ.
+      </p>
+      <p>
+        Une ligne s'affiche <strong>au chargement</strong> — les six livres sont
+        déjà là. Chaque touche frappée ajoute ensuite sa propre ligne : essayez
+        <code>du</code>, puis <code>DU</code>, puis <code>xyz</code>.
+      </p>
+      <p>
+        <strong>Regardez le code source de cette page</strong> (clic droit →
+        <em>Afficher le code source</em>) : la liste y est <strong>vide</strong>.
+        Tout ce que vous voyez est fabriqué, puis refabriqué à chaque frappe.
+      </p>
+    </div>
+
+    <p>
+      <a class="retour" href="../solution.html">← Revenir aux explications</a>
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

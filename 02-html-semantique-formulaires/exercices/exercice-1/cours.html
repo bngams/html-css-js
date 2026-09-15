@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Les balises sémantiques</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 1</p>
+  <h1 class="titre-exo">Les balises sémantiques</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> nommer les grandes parties
+      d'une page pour que le navigateur, les lecteurs d'écran et les moteurs de
+      recherche comprennent ce qu'elles contiennent.</p>
+      <p>
+        Jusqu'ici vos pages étaient une suite de titres et de paragraphes. On va
+        maintenant les <em>organiser</em>.
+      </p>
+    </div>
+
+    <h2>1 · Le problème que ça résout</h2>
+
+    <p>
+      Regardez n'importe quel site : il a une bannière en haut, un menu, un contenu
+      principal, souvent une colonne latérale, et un pied de page. Ces zones existent
+      visuellement. Mais dans le code, pendant longtemps, elles s'écrivaient toutes
+      pareil :
+    </p>
+
+<pre><code>&lt;div&gt;…la bannière…&lt;/div&gt;
+&lt;div&gt;…le menu…&lt;/div&gt;
+&lt;div&gt;…le contenu…&lt;/div&gt;
+&lt;div&gt;…le pied de page…&lt;/div&gt;</code></pre>
+
+    <p>
+      <code>&lt;div&gt;</code> signifie « une division », c'est-à-dire… rien de
+      particulier. Une boîte. Le navigateur ne sait pas ce qu'elle contient, et un
+      lecteur d'écran non plus.
+    </p>
+
+    <p>HTML fournit donc des balises qui <strong>disent ce que la zone est</strong> :</p>
+
+<pre><code>&lt;header&gt;…la bannière…&lt;/header&gt;
+&lt;nav&gt;…le menu…&lt;/nav&gt;
+&lt;main&gt;…le contenu…&lt;/main&gt;
+&lt;footer&gt;…le pied de page…&lt;/footer&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le rendu à l'écran est exactement le même.</strong> Ces balises ne
+        changent rien à l'apparence — elles changent le <em>sens</em>. C'est
+        déroutant au début : on écrit du code dont l'effet ne se voit pas. Il se
+        mesure autrement (notion 5).
+      </p>
+    </div>
+
+    <h2>2 · Les balises de structure</h2>
+
+    <table>
+      <tr>
+        <th>Balise</th>
+        <th>Ce qu'elle contient</th>
+      </tr>
+      <tr>
+        <td><code>&lt;header&gt;</code></td>
+        <td>L'en-tête : titre du site, logo. En haut de la page.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;nav&gt;</code></td>
+        <td>Un menu de navigation — un groupe de liens vers d'autres pages.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;main&gt;</code></td>
+        <td>Le contenu principal. <strong>Un seul par page.</strong></td>
+      </tr>
+      <tr>
+        <td><code>&lt;article&gt;</code></td>
+        <td>Un contenu qui se tient tout seul : un billet de blog, une fiche produit, un commentaire.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;section&gt;</code></td>
+        <td>Une partie thématique d'un document, qui a normalement un titre.</td>
+      </tr>
+      <tr>
+        <td><code>&lt;aside&gt;</code></td>
+        <td>Un contenu à côté du sujet : encadré, publicité, « articles liés ».</td>
+      </tr>
+      <tr>
+        <td><code>&lt;footer&gt;</code></td>
+        <td>Le pied de page : mentions légales, contact, copyright.</td>
+      </tr>
+    </table>
+
+    <h3>Comment elles s'emboîtent</h3>
+
+<pre><code>&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Mon blog&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Accueil&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;article&gt;
+      &lt;h2&gt;Mon premier billet&lt;/h2&gt;
+      &lt;p&gt;…&lt;/p&gt;
+    &lt;/article&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;© 2026&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+
+    <p>
+      Notez que <code>&lt;nav&gt;</code> est <em>dans</em> le
+      <code>&lt;header&gt;</code> : c'est courant, et parfaitement correct. Ces balises
+      s'imbriquent comme toutes les autres.
+    </p>
+
+    <h2>3 · <code>&lt;article&gt;</code> ou <code>&lt;section&gt;</code> ?</h2>
+
+    <p>C'est la question qui revient toujours. Un test simple :</p>
+
+    <div class="astuce">
+      <p>
+        <strong>Est-ce que ce contenu aurait encore du sens, publié seul ailleurs ?</strong>
+      </p>
+      <ul>
+        <li><strong>Oui</strong> → <code>&lt;article&gt;</code>. Un billet de blog garde son sens dans un flux RSS, un email, un autre site.</li>
+        <li><strong>Non</strong> → <code>&lt;section&gt;</code>. La partie « Nos tarifs » d'une page n'a de sens que dans cette page.</li>
+      </ul>
+    </div>
+
+    <p>
+      Une <code>&lt;section&gt;</code> doit normalement commencer par un titre
+      (<code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>…). Si vous n'arrivez pas à lui
+      donner de titre, c'est probablement qu'elle n'est pas une section — mais une
+      simple boîte, et là <code>&lt;div&gt;</code> convient.
+    </p>
+
+    <h2>4 · <code>&lt;div&gt;</code> n'est pas mort</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Ne remplacez pas mécaniquement tous vos <code>&lt;div&gt;</code>.</strong>
+        Un <code>&lt;div&gt;</code> reste le bon choix quand vous groupez des éléments
+        <em>uniquement</em> pour les positionner ou les colorer — c'est-à-dire pour des
+        raisons visuelles, sans intention de sens.
+      </p>
+      <p>
+        Utiliser <code>&lt;section&gt;</code> pour une zone qui n'a rien d'une section
+        est <em>pire</em> que d'utiliser <code>&lt;div&gt;</code> : ça ment au lecteur
+        d'écran.
+      </p>
+    </div>
+
+    <p>
+      Vous en ferez un usage massif au projet 3, quand il s'agira de créer des colonnes
+      et des cartes avec le CSS.
+    </p>
+
+    <h2>5 · À quoi ça sert vraiment</h2>
+
+    <p>Trois bénéfices concrets, dont deux invisibles à l'écran :</p>
+
+    <table>
+      <tr>
+        <th>Bénéfice</th>
+        <th>Qui en profite</th>
+      </tr>
+      <tr>
+        <td>Navigation par régions</td>
+        <td>Une personne aveugle peut sauter directement au contenu principal, sans réécouter le menu à chaque page</td>
+      </tr>
+      <tr>
+        <td>Compréhension du contenu</td>
+        <td>Les moteurs de recherche distinguent l'article du menu et des publicités</td>
+      </tr>
+      <tr>
+        <td>Lisibilité du code</td>
+        <td>Vous, dans six mois, et vos collègues</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le « mode lecture » de votre navigateur</strong> (Firefox, Safari,
+        Edge) repose là-dessus : il ne garde que le <code>&lt;main&gt;</code> ou
+        l'<code>&lt;article&gt;</code> et jette le reste. Une page en
+        <code>&lt;div&gt;</code> ne peut pas être traitée ainsi.
+      </p>
+      <p>
+        Ces navigateurs ne l'activent toutefois que sur des pages <strong>longues</strong>,
+        avec plusieurs paragraphes substantiels — inutile de l'essayer sur les pages
+        courtes de cette formation. La manip de l'énoncé vous montrera l'effet
+        autrement, et de façon fiable.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Structuring_content/Structuring_documents"
+             target="_blank" rel="noopener">MDN — Structurer un document</a>
+        </td>
+        <td>Reprend toutes ces balises avec des schémas de mise en page.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Reference/Elements/section"
+             target="_blank" rel="noopener">MDN — L'élément section</a>
+        </td>
+        <td>Contient le paragraphe le plus clair sur le choix entre section, article et div.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

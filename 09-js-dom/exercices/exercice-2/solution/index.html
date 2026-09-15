@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Le tableau de bord</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #253044;
+      background-color: #f6f8fb;
+    }
+    .page { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #1d6fa5; margin-top: 0; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+
+    #bandeau {
+      padding: 0.9rem 1.1rem;
+      border-radius: 8px;
+      background-color: #eceff3;
+      color: #3d4756;
+      margin-bottom: 1.2rem;
+    }
+    #bandeau.ouvert { background-color: #d1e7dd; color: #0f5132; }
+    #bandeau.ferme  { background-color: #f8d7da; color: #842029; }
+
+    .catalogue { list-style: none; padding: 0; }
+    .livre {
+      background-color: #fff;
+      border: 1px solid #dde3e9;
+      border-left: 5px solid #c3ccd8;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+    .livre.disponible { border-left-color: #2e7d5b; }
+    .livre.emprunte   { border-left-color: #b42318; opacity: 0.7; }
+    .livre.volumineux { background-color: #fffaf0; }
+
+    .livre__titre { font-weight: 600; }
+    .livre__pages { color: #5a6570; font-size: 0.92rem; }
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <h1 id="titre-page">Tableau de bord</h1>
+
+    <p id="bandeau">État de la médiathèque : inconnu</p>
+
+    <ul class="catalogue">
+      <li class="livre disponible">
+        <span class="livre__titre">La Horde du Contrevent</span>
+        <span class="livre__pages">712 pages</span>
+      </li>
+      <li class="livre emprunte">
+        <span class="livre__titre">Dune</span>
+        <span class="livre__pages">900 pages</span>
+      </li>
+      <li class="livre disponible">
+        <span class="livre__titre">Fondation</span>
+        <span class="livre__pages">420 pages</span>
+      </li>
+      <li class="livre disponible">
+        <span class="livre__titre">Le Nom du vent</span>
+        <span class="livre__pages">850 pages</span>
+      </li>
+      <li class="livre emprunte">
+        <span class="livre__titre">Les Fourmis</span>
+        <span class="livre__pages">300 pages</span>
+      </li>
+    </ul>
+
+    <div class="encadre">
+      <p>
+        <strong>Ceci est le corrigé en fonctionnement.</strong> Ouvrez la console
+        (<kbd>F12</kbd>) puis rechargez.
+      </p>
+      <p>
+        <strong>Comparez avec la page de travail :</strong> le titre a changé, le
+        bandeau est passé au vert, trois livres ont pris un fond crème, et le
+        dernier est repassé en disponible.
+      </p>
+      <p>
+        <strong>Aucune de ces couleurs n'est écrite dans le JavaScript.</strong>
+        Elles sont toutes dans le CSS ci-dessus — le code se contente de poser des
+        classes.
+      </p>
+    </div>
+
+    <p>
+      <a class="retour" href="../solution.html">← Revenir aux explications</a>
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

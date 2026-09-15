@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Enchaîner les décisions</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 3</p>
+  <h1 class="titre-exo">Enchaîner les décisions</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous vu les lignes 5 et 6 se contredire ?</strong>
+      C'est le cœur de l'exercice. Si vous ne l'avez pas constaté vous-même,
+      retournez à la <a href="travail.html">page de travail</a> : lire l'explication
+      ne remplace pas le fait de voir un test répondre <code>true</code> là où la
+      réponse est <code>false</code>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>function categorie(age) {
+  if (age &lt; 12) {
+    return "enfant";
+  } else if (age &lt; 18) {
+    return "jeune";
+  } else if (age &lt; 65) {
+    return "adulte";
+  } else {
+    return "senior";
+  }
+}
+
+console.log("8 ans :", categorie(8));
+console.log("15 ans :", categorie(15));
+console.log("30 ans :", categorie(30));
+console.log("70 ans :", categorie(70));
+
+const age = 70;
+
+const testMaths = 18 &lt;= age &lt; 65;
+const testCorrect = age &gt;= 18 &amp;&amp; age &lt; 65;
+
+console.log("18 &lt;= age &lt; 65 (maths) :", testMaths);
+console.log("age &gt;= 18 &amp;&amp; age &lt; 65 (JS) :", testCorrect);
+
+const habitantCommune = true;
+const estEtudiant = false;
+
+const gratuit = age &lt; 12 || (habitantCommune &amp;&amp; estEtudiant);
+
+console.log("Gratuit :", gratuit);
+console.log("Doit payer :", !gratuit);
+
+console.log("Visiteur de", age, "ans, catégorie :", categorie(age));</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Le piège de l'intervalle</h3>
+
+    <div class="attention">
+      <p>
+        <strong>C'est le défaut le plus dangereux de tout le projet.</strong> Le
+        visiteur a 70 ans : il n'est pas entre 18 et 65. La bonne réponse est
+        <code>false</code>. Et pourtant :
+      </p>
+<pre><code>18 &lt;= age &lt; 65        → true      ⚠️ faux, sans erreur</code></pre>
+      <p>
+        JavaScript ne lit pas l'intervalle comme un tout. Il enchaîne
+        <strong>deux comparaisons, de gauche à droite</strong> :
+      </p>
+<pre><code>1.  18 &lt;= 70      → true
+2.  true &lt; 65     → true      (true vaut 1 dans un calcul)</code></pre>
+      <p>
+        À la deuxième étape, la question posée a purement disparu : on ne compare
+        plus un âge, on compare un booléen à 65. Le résultat n'a plus aucun sens —
+        mais il est <em>valide</em>, donc aucune erreur n'apparaît.
+      </p>
+      <p>
+        <strong>La forme correcte répète la variable de chaque côté :</strong>
+      </p>
+<pre><code>age &gt;= 18 &amp;&amp; age &lt; 65    → false    ✅</code></pre>
+    </div>
+
+    <h3>2 · <code>else if</code> : le premier cas vrai gagne</h3>
+
+    <p>
+      Dans une chaîne <code>if</code> / <code>else if</code> / <code>else</code>,
+      dès qu'une condition est satisfaite, son bloc s'exécute et
+      <strong>tout le reste est sauté</strong> — les conditions suivantes ne sont
+      même pas évaluées.
+    </p>
+
+    <p>
+      C'est ce qui rend l'ordre décisif. Avec <code>age &lt; 18</code> placé
+      <em>avant</em> <code>age &lt; 12</code> :
+    </p>
+
+<pre><code>categorie(8)    → "jeune"      au lieu de "enfant"</code></pre>
+
+    <div class="astuce">
+      <p>
+        Un enfant de 8 ans satisfait déjà <code>age &lt; 18</code>. Le cas
+        « enfant » devient <strong>inatteignable</strong> : du code mort, que rien ne
+        signale. <strong>Toujours du plus restrictif au plus large.</strong>
+      </p>
+    </div>
+
+    <h3>3 · Combiner : et, ou, non</h3>
+
+    <table>
+      <tr><th>Écriture</th><th>Se lit</th><th>Vrai quand…</th></tr>
+      <tr><td><code>a &amp;&amp; b</code></td><td>a <strong>et</strong> b</td><td>les deux sont vrais</td></tr>
+      <tr><td><code>a || b</code></td><td>a <strong>ou</strong> b</td><td>au moins un est vrai</td></tr>
+      <tr><td><code>!a</code></td><td><strong>non</strong> a</td><td>a est faux</td></tr>
+    </table>
+
+    <p>
+      À l'étape 7, <code>age</code> vaut 70 (donc pas moins de 12) et
+      <code>estEtudiant</code> est <code>false</code> : le « et » est faux, le « ou »
+      l'est aussi. <code>gratuit</code> vaut <code>false</code>, et
+      <code>!gratuit</code> vaut <code>true</code>.
+    </p>
+
+    <h3>4 · Les parenthèses ne sont pas décoratives</h3>
+
+    <div class="astuce">
+      <p>
+        <code>&amp;&amp;</code> est évalué <strong>avant</strong> <code>||</code>,
+        comme la multiplication avant l'addition :
+      </p>
+<pre><code>true || false &amp;&amp; false      → true
+(true || false) &amp;&amp; false    → false</code></pre>
+      <p>
+        Dans l'étape 7, les parenthèses ne changent pas le résultat — mais elles
+        rendent l'intention <strong>lisible</strong>. Ne retenez pas la règle de
+        priorité : <strong>mettez des parenthèses</strong>, elles ne coûtent rien.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td><code>categorie(8)</code> renvoie <code>"jeune"</code></td>
+        <td>
+          L'ordre des <code>else if</code> est inversé : le cas le plus large passe
+          en premier
+        </td>
+      </tr>
+      <tr>
+        <td>Plusieurs catégories s'affichent pour un même âge</td>
+        <td>
+          Vous avez écrit plusieurs <code>if</code> séparés au lieu d'une chaîne
+          <code>else if</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>categorie(30)</code> renvoie <code>undefined</code></td>
+        <td>
+          Un <code>return</code> manque dans l'un des blocs — le piège de
+          l'exercice 2
+        </td>
+      </tr>
+      <tr>
+        <td><code>SyntaxError</code> sur la ligne du <code>||</code></td>
+        <td>
+          Un seul <code>|</code> au lieu de deux. Sur clavier français :
+          <code>AltGr + 6</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Les deux tests de l'étape 6 donnent le même résultat</td>
+        <td>
+          Vous avez écrit deux fois la forme correcte — l'étape 4 doit garder
+          l'écriture mathématique, volontairement fausse
+        </td>
+      </tr>
+      <tr>
+        <td><code>Doit payer</code> affiche la même chose que <code>Gratuit</code></td>
+        <td>
+          Le <code>!</code> manque devant <code>gratuit</code>
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../exercice-4/">Exercice 4 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

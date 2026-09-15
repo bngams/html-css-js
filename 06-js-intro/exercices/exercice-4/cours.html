@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Du JavaScript dans une page</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 4</p>
+  <h1 class="titre-exo">Du JavaScript dans une page</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> comment une page charge
+      son JavaScript, <strong>où</strong> placer la balise <code>&lt;script&gt;</code>,
+      et pourquoi ce choix décide si votre code fonctionne ou non.</p>
+    </div>
+
+    <h2>1 · La balise <code>&lt;script&gt;</code></h2>
+
+    <p>
+      Depuis l'exercice 2, cette ligne était déjà écrite dans vos pages. La voici
+      enfin expliquée :
+    </p>
+
+<pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>&lt;script&gt;</code></td><td>« ici, du JavaScript »</td></tr>
+      <tr><td><code>src="script.js"</code></td><td>le fichier à charger, comme <code>href</code> pour le CSS</td></tr>
+      <tr><td><code>&lt;/script&gt;</code></td><td>la fermeture, <strong>obligatoire</strong></td></tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>La balise fermante n'est pas optionnelle</strong>, même avec un
+        <code>src</code>. Écrire <code>&lt;script src="…" /&gt;</code>
+        <strong>ne fonctionne pas</strong> : tout ce qui suit dans la page serait
+        avalé. C'est l'une des exceptions aux balises auto-fermantes vues au projet 1.
+      </p>
+    </div>
+
+    <h3>Les deux façons d'écrire du JavaScript</h3>
+
+    <table>
+      <tr><th>Forme</th><th>Quand l'utiliser</th></tr>
+      <tr>
+        <td><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code><br><em>fichier séparé</em></td>
+        <td><strong>Presque toujours.</strong> Réutilisable, relisible, mis en cache par le navigateur</td>
+      </tr>
+      <tr>
+        <td><code>&lt;script&gt; …code… &lt;/script&gt;</code><br><em>dans la page</em></td>
+        <td>Dépannage, ou contrainte technique — page unique à envoyer par mail, CMS qui n'accepte qu'un seul fichier</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        C'est exactement la même distinction qu'au projet 3 entre un fichier
+        <code>style.css</code> et une balise <code>&lt;style&gt;</code> : le fichier
+        séparé est la norme, l'écriture dans la page reste l'exception justifiée.
+      </p>
+    </div>
+
+    <h2>2 · Le problème : le navigateur lit de haut en bas</h2>
+
+    <p>
+      Une page est lue <strong>ligne par ligne, du haut vers le bas</strong>. Quand le
+      navigateur rencontre un <code>&lt;script&gt;</code>, il s'arrête, exécute le
+      code, puis reprend sa lecture.
+    </p>
+
+    <p>
+      Conséquence : <strong>le code ne peut agir que sur ce qui existe déjà</strong> —
+      c'est-à-dire ce qui se trouve <em>au-dessus</em> de lui.
+    </p>
+
+    <h3>L'expérience</h3>
+
+    <p>
+      Une même page, un même code, deux emplacements. Le code cherche le titre
+      <code>&lt;h1&gt;</code> de la page :
+    </p>
+
+<pre><code>document.querySelector("h1")</code></pre>
+
+    <table>
+      <tr>
+        <th>Où est le <code>&lt;script&gt;</code></th>
+        <th>Ce que trouve le code</th>
+      </tr>
+      <tr>
+        <td>Dans le <code>&lt;head&gt;</code></td>
+        <td><code>null</code> — <strong>rien du tout</strong></td>
+      </tr>
+      <tr>
+        <td>À la fin du <code>&lt;body&gt;</code></td>
+        <td>Le titre, et son texte <code>"Bonjour"</code></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Dans le <code>&lt;head&gt;</code>, le <code>&lt;body&gt;</code>
+        n'existe pas encore.</strong> Le navigateur ne l'a pas lu. Votre code cherche
+        un élément qui n'a pas été créé, et reçoit <code>null</code>.
+      </p>
+      <p>
+        C'est <strong>la</strong> cause d'erreur numéro un chez les débutants en
+        JavaScript, et elle n'a rien d'évident : le code est juste, l'emplacement
+        est faux.
+      </p>
+    </div>
+
+    <h2>3 · La solution la plus simple : tout en bas</h2>
+
+<pre><code>&lt;body&gt;
+
+  &lt;h1&gt;Bonjour&lt;/h1&gt;
+  &lt;p&gt;Le contenu de la page…&lt;/p&gt;
+
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+
+    <p>
+      Juste avant <code>&lt;/body&gt;</code>. Tout le contenu a été lu, donc tout
+      existe. C'est la place que vos pages utilisaient depuis l'exercice 2.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Un second avantage :</strong> le visiteur voit la page apparaître
+        pendant que le script se charge, au lieu d'attendre devant un écran blanc.
+      </p>
+    </div>
+
+    <h3>L'autre solution : <code>defer</code></h3>
+
+    <p>
+      On peut garder la balise dans le <code>&lt;head&gt;</code> à condition
+      d'ajouter <code>defer</code> :
+    </p>
+
+<pre><code>&lt;script defer src="script.js"&gt;&lt;/script&gt;</code></pre>
+
+    <p>
+      <code>defer</code> signifie « charge ce fichier maintenant, mais
+      <strong>ne l'exécute qu'une fois la page lue</strong> ». Le code retrouve alors
+      le titre, comme en fin de <code>&lt;body&gt;</code>.
+    </p>
+
+    <table>
+      <tr><th>Emplacement</th><th>Le code trouve le titre ?</th></tr>
+      <tr><td><code>&lt;head&gt;</code> seul</td><td>❌ <code>null</code></td></tr>
+      <tr><td><code>&lt;head&gt;</code> + <code>defer</code></td><td>✅ oui</td></tr>
+      <tr><td>Fin de <code>&lt;body&gt;</code></td><td>✅ oui</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Laquelle choisir ?</strong> Les deux sont correctes et vous
+        rencontrerez les deux. Pour cette formation, retenez
+        <strong>la fin du <code>&lt;body&gt;</code></strong> : c'est la plus simple à
+        comprendre, puisque la raison est visible dans l'ordre des lignes.
+      </p>
+    </div>
+
+    <h2>4 · Toucher à la page : un avant-goût</h2>
+
+    <p>
+      Jusqu'ici votre code parlait au visiteur (<code>alert</code>) ou à vous
+      (<code>console.log</code>). Il peut aussi <strong>modifier la page</strong> :
+    </p>
+
+<pre><code>document.querySelector("h1").textContent = "Nouveau titre";</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>document</code></td><td>la page entière</td></tr>
+      <tr><td><code>.querySelector("h1")</code></td><td>« trouve le premier <code>h1</code> » — un sélecteur CSS, comme au projet 3</td></tr>
+      <tr><td><code>.textContent</code></td><td>le texte affiché dans cet élément</td></tr>
+      <tr><td><code>= "…"</code></td><td>on le remplace</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Vous savez déjà écrire des sélecteurs.</strong>
+        <code>querySelector</code> accepte exactement les mêmes qu'en CSS :
+        <code>"h1"</code>, <code>".carte"</code>, <code>"#total"</code>. Tout le
+        projet 9 sera consacré à cette manipulation de la page.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Si l'élément n'existe pas</strong>, <code>querySelector</code> renvoie
+        <code>null</code>, et tenter de le modifier arrête le programme :
+      </p>
+<pre><code>TypeError: Cannot set properties of null</code></pre>
+      <p>
+        Quand vous voyez ce message, posez-vous <strong>deux</strong> questions : le
+        sélecteur est-il juste ? et surtout, <strong>le script est-il au bon
+        endroit ?</strong>
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/script"
+             target="_blank" rel="noopener">MDN — La balise <code>&lt;script&gt;</code></a>
+        </td>
+        <td>Tous ses attributs, dont <code>defer</code> et <code>async</code>.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Document/querySelector"
+             target="_blank" rel="noopener">MDN — <code>querySelector()</code></a>
+        </td>
+        <td>La méthode qui ouvre tout le projet 9.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/hello-world"
+             target="_blank" rel="noopener">javascript.info — « Hello, world! »</a>
+        </td>
+        <td>Reprend la balise <code>&lt;script&gt;</code> et son placement.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+._*
+
+# Archives de distribution (régénérables depuis les sources)
+*.zip
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+
+# Fichiers temporaires de vérification
+_*.html
+_v*/
+_verif*/

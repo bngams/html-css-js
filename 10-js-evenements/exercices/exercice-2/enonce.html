@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Écouter pendant qu'on tape</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 2</p>
+  <h1 class="titre-exo">Écouter pendant qu'on tape</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Une liste de livres qui se
+      <strong>refiltre à chaque lettre tapée</strong>, sans bouton, sans rechargement.</p>
+      <p>
+        <strong>Prérequis :</strong> l'exercice 1 (<code>addEventListener</code>) et
+        le projet 9 (créer, insérer, vider).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-2/app.js</code>
+      </p>
+      <p>
+        Le <strong>tableau de données</strong> — six livres — vous est fourni. La
+        liste <code>#resultats</code> est <strong>vide</strong> et le champ
+        <code>#recherche</code> est inerte.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>La fonction est rappelée à chaque lettre.</strong>
+      </p>
+      <p>
+        Si vous oubliez de vider la liste au début, les résultats
+        <strong>s'empilent</strong> : taper quatre lettres affiche quatre listes à la
+        suite. Le cours §6 le montre.
+      </p>
+    </div>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <h3>Au chargement</h3>
+
+    <ol class="criteres">
+      <li>
+        Les <strong>six livres</strong> sont affichés, dans l'ordre du tableau. Chaque
+        ligne porte la classe <code>livre</code> et contient <strong>deux
+        éléments</strong> : le titre (<code>livre__titre</code>) et l'auteur
+        (<code>livre__auteur</code>)
+      </li>
+      <li>
+        Le compteur affiche <code>6 livre(s) sur 6</code>
+      </li>
+    </ol>
+
+    <h3>Quand on tape</h3>
+
+    <ol class="criteres" start="3">
+      <li>
+        La liste ne contient plus que les livres dont le <strong>titre</strong>
+        contient ce qui est tapé — <strong>où que ce soit</strong> dans le titre, pas
+        seulement au début
+      </li>
+      <li>
+        La recherche est <strong>insensible à la casse</strong> :
+        <code>du</code>, <code>DU</code> et <code>Du</code> donnent
+        <strong>le même résultat</strong>
+      </li>
+      <li>
+        Le compteur suit : <code>N livre(s) sur 6</code>, où <code>N</code> est le
+        nombre de lignes affichées
+      </li>
+      <li>
+        Quand <strong>aucun livre</strong> ne correspond, le compteur porte la classe
+        <code>vide</code> — il devient rouge. Dès qu'un livre correspond à nouveau,
+        la classe est <strong>retirée</strong>
+      </li>
+      <li>
+        <strong>Effacer le champ</strong> réaffiche les six livres
+      </li>
+      <li>
+        Les résultats ne <strong>s'empilent jamais</strong> : après dix lettres
+        tapées, la liste ne contient que les résultats de la dernière recherche
+      </li>
+    </ol>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres" start="9">
+      <li>
+        <strong>Au chargement</strong> : <code>Au départ :</code> suivi du nombre de
+        livres affichés, puis du mot <code>livre(s)</code>
+      </li>
+      <li>
+        <strong>À chaque frappe</strong> : <code>Recherche :</code> suivi de ce qui
+        est tapé, <code>→</code>, le nombre de résultats, puis
+        <code>résultat(s)</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Rechargez. <strong>Avant toute frappe</strong>, la console affiche exactement
+      cette ligne :
+    </p>
+
+<pre><code>Au départ : 6 livre(s)</code></pre>
+
+    <p>
+      Tapez ensuite <code>du</code>, effacez, tapez <code>DU</code>, effacez, tapez
+      <code>dune</code>, effacez, tapez <code>xyz</code>, puis effacez. La console
+      doit afficher, à la suite :
+    </p>
+
+<pre><code>Recherche : d → 4 résultat(s)
+Recherche : du → 3 résultat(s)
+Recherche :  → 6 résultat(s)      ← après effacement, le champ est vide</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Une ligne par frappe <em>et</em> par effacement.</strong> Taper
+        <code>du</code> en écrit deux (<code>d</code>, puis <code>du</code>), et vider
+        le champ en écrit une troisième — celle au libellé étrange, avec un blanc
+        après les deux-points : c'est normal, la saisie est vide.
+      </p>
+      <p>
+        Seule la <strong>dernière ligne de chaque mot</strong> est reprise dans le
+        tableau ci-dessous.
+      </p>
+    </div>
+
+    <p>Et la page doit se comporter ainsi :</p>
+
+    <table>
+      <tr><th>Saisie</th><th>Lignes</th><th>Compteur</th><th>Titres attendus</th></tr>
+      <tr>
+        <td><em>(vide)</em></td><td>6</td><td>6 livre(s) sur 6</td>
+        <td>les six</td>
+      </tr>
+      <tr>
+        <td><code>du</code></td><td>3</td><td>3 livre(s) sur 6</td>
+        <td>La Horde du Contrevent · Dune · Le Nom du vent</td>
+      </tr>
+      <tr>
+        <td><code>DU</code></td><td>3</td><td>3 livre(s) sur 6</td>
+        <td>les mêmes trois</td>
+      </tr>
+      <tr>
+        <td><code>dune</code></td><td>1</td><td>1 livre(s) sur 6</td>
+        <td>Dune</td>
+      </tr>
+      <tr>
+        <td><code>vent</code></td><td>2</td><td>2 livre(s) sur 6</td>
+        <td>
+          La Horde du Contrevent · Le Nom du vent —
+          <strong>aucun ne commence par « vent »</strong>
+        </td>
+      </tr>
+      <tr>
+        <td><code>xyz</code></td><td>0</td>
+        <td>0 livre(s) sur 6 — <strong>en rouge</strong></td>
+        <td>aucun</td>
+      </tr>
+      <tr>
+        <td><code>du</code> <em>(après xyz)</em></td><td>3</td>
+        <td>3 livre(s) sur 6 — <strong>redevenu gris</strong></td>
+        <td>les trois de « du »</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>La ligne <code>vent</code> teste le critère 3.</strong> Aucun titre ne
+        <em>commence</em> par « vent », mais deux le contiennent. Si vous n'obtenez
+        aucun résultat, votre recherche ne regarde que le début du titre.
+      </p>
+      <p>
+        <strong>La dernière ligne teste le critère 6 :</strong> après un
+        <code>xyz</code> qui met le compteur en rouge, un <code>du</code> doit le
+        faire <strong>redevenir gris</strong>. S'il reste rouge, la classe
+        <code>vide</code> est ajoutée mais jamais retirée.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 4 est celui qu'on rate le plus.</strong> Si
+        <code>du</code> trouve trois livres mais <code>DU</code> n'en trouve aucun,
+        vous avez oublié de mettre <strong>les deux côtés</strong> en minuscules —
+        le titre <em>et</em> la saisie (cours §5).
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — sans le ménage</strong></p>
+      <p>Une fois l'exercice terminé, essayez volontairement ceci :</p>
+      <ol>
+        <li>
+          Mettez en commentaire la boucle qui vide la liste, au début de votre
+          fonction.
+        </li>
+        <li>Enregistrez, rechargez, puis tapez <code>dune</code> lentement.</li>
+      </ol>
+      <p>
+        La liste <strong>gonfle à chaque lettre</strong> au lieu de se réduire. Et
+        elle ne part pas de zéro : les <strong>six livres du chargement</strong>
+        restent en place, puisque plus rien ne les retire.
+      </p>
+<pre><code>d    → 10 lignes   (les 6 du départ + les 4 qui contiennent « d »)
+du   → 13
+dun  → 14
+dune → 15</code></pre>
+      <p>Aucune erreur rouge.</p>
+      <p>Remettez ensuite la boucle.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>La liste se réduit à mesure qu'on tape, et revient à six quand on efface</li>
+      <li><code>du</code> et <code>DU</code> donnent le même résultat</li>
+      <li>Le compteur devient rouge quand rien ne correspond, et seulement alors</li>
+      <li>Rien ne s'empile, quel que soit le nombre de lettres tapées</li>
+      <li>
+        Vous savez dire pourquoi la même fonction sert au chargement
+        <em>et</em> à chaque frappe
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>50 à 60 minutes.</strong> C'est l'exercice le plus long du projet :
+      quatre notions nouvelles, et une fonction appelée depuis deux endroits. Faites
+      d'abord l'affichage des six livres au chargement — le filtrage ensuite.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Les emprunts</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1rem;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #253044;
+      background-color: #f6f8fb;
+    }
+    .page { max-width: 680px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; color: #1d6fa5; margin-top: 0; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+
+    #bilan {
+      background-color: #eef3f8;
+      border-radius: 8px;
+      padding: 0.8rem 1.1rem;
+      font-weight: 600;
+      color: #5a6570;
+      margin-bottom: 1.2rem;
+      min-height: 1.6em;
+    }
+    #bilan.alerte {
+      background-color: #fdecea;
+      color: #a3261c;
+    }
+
+    #emprunts {
+      list-style: none;
+      padding: 0;
+      min-height: 3rem;
+    }
+    .emprunt {
+      background-color: #fff;
+      border: 1px solid #dde3e9;
+      border-left: 5px solid #c3ccd8;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .emprunt.retard { border-left-color: #d9534f; background-color: #fdf6f5; }
+    .emprunt__titre { font-weight: 600; flex: 1; }
+    .emprunt__lecteur { color: #1d6fa5; font-size: 0.92rem; white-space: nowrap; }
+    .emprunt__jours { color: #5a6570; font-size: 0.92rem; white-space: nowrap; }
+
+    .perime { opacity: 0.55; font-style: italic; }
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <h1>Les emprunts en cours</h1>
+
+    <p id="bilan"></p>
+
+    <ul id="emprunts">
+      <li class="emprunt perime">Ancienne ligne — écrite à la main</li>
+      <li class="emprunt perime">Ancienne ligne — écrite à la main</li>
+      <li class="emprunt perime">Ancienne ligne — écrite à la main</li>
+    </ul>
+
+    <div class="encadre">
+      <p>
+        <strong>Ceci est le corrigé en fonctionnement.</strong> Ouvrez la console
+        (<kbd>F12</kbd>) puis rechargez.
+      </p>
+      <p>
+        <strong>Regardez le code source de cette page</strong> (clic droit →
+        <em>Afficher le code source</em>) : les <strong>trois lignes périmées</strong>
+        y figurent toujours, et le bandeau y est <strong>vide</strong>.
+      </p>
+      <p>
+        Tout ce que vous voyez au-dessus a été <strong>fabriqué par le
+        JavaScript</strong> : les anciennes lignes retirées, six emprunts construits,
+        deux marqués en retard, et le bandeau rempli.
+      </p>
+    </div>
+
+    <p>
+      <a class="retour" href="../solution.html">← Revenir aux explications</a>
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Du JavaScript dans une page</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 4</p>
+  <h1 class="titre-exo">Du JavaScript dans une page</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous bien LU l'erreur avant de déplacer la balise ?</strong>
+      C'était le cœur de l'exercice. Si vous avez corrigé sans regarder, retournez à
+      la <a href="travail.html">page de travail</a>, remettez la balise dans le
+      <code>&lt;head&gt;</code>, et lisez le message. Il vous servira toute votre
+      carrière.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Les deux fichiers</h2>
+
+    <h3>1 · Dans <code>travail.html</code> — la balise déplacée</h3>
+
+<pre><code>  &lt;p class="message" id="message"&gt;En attente du script…&lt;/p&gt;
+
+  &lt;!-- … le reste de la page … --&gt;
+
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+
+    <p>
+      Une seule ligne déplacée, et tout fonctionne. C'est la modification la plus
+      courte du projet — et la plus instructive.
+    </p>
+
+    <h3>2 · Dans <code>script.js</code></h3>
+
+    <details>
+      <summary>Afficher <code>script.js</code> en entier</summary>
+
+<pre><code>console.log("script.js chargé");
+
+const titre = document.querySelector("h1");
+
+console.log("Titre trouvé :", titre);
+
+document.querySelector("#compteur").textContent = 47;
+
+document.querySelector("#message").textContent = "emprunts enregistrés aujourd'hui";</code></pre>
+    </details>
+
+    <h2>Les trois choses à retenir</h2>
+
+    <h3>1 · Le navigateur lit de haut en bas</h3>
+
+    <p>
+      C'est toute l'explication. Dans le <code>&lt;head&gt;</code>, le
+      <code>&lt;body&gt;</code> <strong>n'a pas encore été lu</strong> : il n'existe
+      pas. Votre code cherche un <code>&lt;h1&gt;</code> qui n'a pas été créé.
+    </p>
+
+    <table>
+      <tr><th>Emplacement</th><th><code>querySelector("h1")</code> renvoie</th></tr>
+      <tr><td><code>&lt;head&gt;</code> seul</td><td><code>null</code></td></tr>
+      <tr><td><code>&lt;head&gt;</code> + <code>defer</code></td><td>l'élément <code>&lt;h1&gt;</code></td></tr>
+      <tr><td>Fin de <code>&lt;body&gt;</code></td><td>l'élément <code>&lt;h1&gt;</code></td></tr>
+    </table>
+
+    <h3>2 · Chercher est permis, écrire ne l'est pas</h3>
+
+    <div class="attention">
+      <p>
+        <strong>Le point le plus subtil de l'exercice.</strong> Avec la balise dans le
+        <code>&lt;head&gt;</code>, l'erreur ne désigne <strong>pas</strong> la ligne
+        qui cherche le titre. Voici ce qui se passe réellement, ligne par ligne :
+      </p>
+      <table>
+        <tr><th>Ligne</th><th>Résultat</th></tr>
+        <tr>
+          <td><code>console.log("script.js chargé")</code></td>
+          <td>✅ s'affiche</td>
+        </tr>
+        <tr>
+          <td><code>const titre = document.querySelector("h1")</code></td>
+          <td>✅ aucune erreur — <code>titre</code> vaut <code>null</code></td>
+        </tr>
+        <tr>
+          <td><code>console.log("Titre trouvé :", titre)</code></td>
+          <td>✅ affiche <code>null</code></td>
+        </tr>
+        <tr>
+          <td><code>…querySelector("#compteur").textContent = 47</code></td>
+          <td>❌ <strong>c'est ici que tout s'arrête</strong></td>
+        </tr>
+      </table>
+      <p>
+        Le message est :
+        <code>TypeError: Cannot set properties of null (setting 'textContent')</code>
+        — « impossible d'écrire dans <code>null</code> ».
+      </p>
+      <p>
+        <strong>Chercher</strong> un élément absent est permis : on obtient
+        <code>null</code>. C'est en voulant <strong>écrire dedans</strong> que le
+        programme s'arrête. Voilà pourquoi l'erreur désigne une ligne qui, elle, est
+        parfaitement correcte.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>La leçon de méthode :</strong> le numéro de ligne d'une erreur indique
+        où ça <em>casse</em>, pas toujours où est la <em>cause</em>. Ici la cause est
+        dans un autre fichier, et c'est un simple emplacement de balise.
+      </p>
+    </div>
+
+    <h3>3 · <code>querySelector</code> parle le CSS</h3>
+
+    <p>
+      Vous savez déjà écrire des sélecteurs depuis le projet 3. Ce sont exactement les
+      mêmes :
+    </p>
+
+    <table>
+      <tr><th>Sélecteur</th><th>En CSS</th><th>En JavaScript</th></tr>
+      <tr><td>Une balise</td><td><code>h1 { … }</code></td><td><code>querySelector("h1")</code></td></tr>
+      <tr><td>Une classe</td><td><code>.carte { … }</code></td><td><code>querySelector(".carte")</code></td></tr>
+      <tr><td>Un identifiant</td><td><code>#compteur { … }</code></td><td><code>querySelector("#compteur")</code></td></tr>
+    </table>
+
+    <p>
+      Le projet 9 sera entièrement consacré à cette manipulation de la page. Vous
+      venez d'en voir le premier geste.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td><code>TypeError: Cannot set properties of null</code></td>
+        <td>
+          Deux causes possibles : le script est mal placé, <strong>ou</strong> le
+          sélecteur ne correspond à rien. Vérifiez l'emplacement d'abord
+        </td>
+      </tr>
+      <tr>
+        <td>La console affiche <code>Titre trouvé : null</code></td>
+        <td>
+          La balise <code>&lt;script&gt;</code> est encore dans le
+          <code>&lt;head&gt;</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Rien du tout, pas même le premier message</td>
+        <td>
+          Le fichier n'est pas trouvé : vérifiez le <code>src</code> et le nom exact
+          du fichier. L'onglet <em>Réseau</em> montre une erreur 404
+        </td>
+      </tr>
+      <tr>
+        <td>Le compteur affiche <code>47</code> mais pas le message</td>
+        <td>
+          L'identifiant <code>message</code> est mal orthographié dans le sélecteur —
+          le dièse est peut-être oublié
+        </td>
+      </tr>
+      <tr>
+        <td>La moitié de la page a disparu</td>
+        <td>
+          Vous avez écrit <code>&lt;script src="…" /&gt;</code> : cette balise
+          <strong>doit</strong> être fermée par <code>&lt;/script&gt;</code>
+        </td>
+      </tr>
+    </table>
+
+    <h2>🎓 Ce que vous savez faire, à la fin du projet 6</h2>
+
+    <ul>
+      <li>Ouvrir la console et y exécuter du code</li>
+      <li>Parler au visiteur, et lui poser une question</li>
+      <li>Savoir que ce qu'il saisit est du <strong>texte</strong>, et le convertir</li>
+      <li>Créer des variables, choisir entre <code>const</code> et <code>let</code></li>
+      <li>Calculer avec <code>Math</code> et afficher proprement un décimal</li>
+      <li>Charger un fichier <code>.js</code> depuis une page, <strong>au bon endroit</strong></li>
+      <li>Lire un message d'erreur et remonter à sa cause</li>
+    </ul>
+
+    <p>
+      Le projet 7 reprend là où celui-ci s'arrête : les <strong>conditions</strong> et
+      les <strong>fonctions</strong> — apprendre à votre code à décider.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Fin du projet 6 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription à une sortie</title>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     EXERCICE 3 — À VOUS DE JOUER
+
+     C'EST CE FICHIER QUE VOUS MODIFIEZ.
+
+     Cette page n'a volontairement aucune mise en forme : les champs
+     s'afficheront les uns contre les autres, sans espacement. C'est
+     normal — la mise en page, c'est le projet 3.
+
+     ── LE GESTE, pour chaque TODO ───────────────────────────────
+
+     1. EFFACEZ la ligne du TODO en entier, marqueurs compris.
+     2. TAPEZ vos balises à la place, avec le même décalage.
+     3. Enregistrez (Ctrl+S / Cmd+S) puis rechargez (F5).
+
+     Votre code ne doit JAMAIS se trouver à l'intérieur d'un
+     commentaire : il ne s'afficherait pas, sans message d'erreur.
+
+     ── LE MODÈLE ────────────────────────────────────────────────
+
+     Le premier champ (Nom) est écrit en entier, juste en dessous.
+     Observez-le : chaque champ suit exactement le même moule
+     (une étiquette + un champ, reliés par for et id).
+
+     ── AVANT DE TERMINER ────────────────────────────────────────
+
+     Supprimez tous les commentaires de consigne, y compris ce
+     bandeau. Contrôle : cherchez « <!- » avec Ctrl+F, aucun
+     résultat ne doit subsister.
+
+     ↩ Besoin de relire ?
+        L'énoncé et les critères : enonce.html
+        Le cours et ses exemples : cours.html
+     ═══════════════════════════════════════════════════════════════ -->
+
+
+  <h1>Inscription à une sortie</h1>
+
+  <p>Remplissez ce formulaire pour vous inscrire à l'une de nos randonnées.</p>
+
+
+  <form>
+
+    <!-- ══ MODÈLE FOURNI — n'y touchez pas, observez-le ══
+         Une étiquette, puis le champ. Le for du label reprend
+         EXACTEMENT l'id du champ : c'est ce qui les relie. -->
+
+    <p>
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" name="nom" required>
+    </p>
+
+
+    <!-- ÉTAPE 1 — Le champ E-mail, obligatoire.
+         Même moule que le modèle ci-dessus.
+         Quel type fait vérifier la présence d'un @ par le
+         navigateur ? (notion 2)
+         N'oubliez pas l'attribut qui rend le champ obligatoire
+         (notion 5 — il s'écrit seul, sans signe égal). -->
+
+    <!-- TODO: écrire l'étiquette et le champ e-mail -->
+
+
+    <!-- ÉTAPE 2 — La date de naissance.
+         Quel type affiche un sélecteur de date ? (notion 2)
+         Ce champ n'est pas obligatoire. -->
+
+    <!-- TODO: écrire l'étiquette et le champ date -->
+
+
+    <!-- ÉTAPE 3 — La liste déroulante « Sortie souhaitée ».
+         Une étiquette, puis la balise de liste (notion 4),
+         contenant QUATRE choix :
+             Pic du Midi · Boucle des trois lacs
+             Crêtes de Bassiès · Cascade d'Ars
+         Donnez à chaque choix un attribut value court
+         (par exemple value="pic-du-midi"). -->
+
+    <!-- TODO: écrire l'étiquette et la liste déroulante -->
+
+
+    <!-- ÉTAPE 4 — Le groupe de deux boutons radio.
+         Utilisez la balise qui groupe des champs liés, avec son
+         intitulé commun (notion 6) : « Formule souhaitée ».
+
+         Deux choix : Demi-journée et Journée entière.
+
+         ⚠️ Le point clé : les deux boutons partagent le MÊME name
+         (c'est ce qui les rend exclusifs), mais ont chacun leur
+         PROPRE id (pour que leur étiquette puisse les viser). -->
+
+    <!-- TODO: écrire le groupe avec son intitulé et les 2 boutons radio -->
+
+
+    <!-- ÉTAPE 5 — La case à cocher de la newsletter.
+         Quel type produit une case à cocher ? (notion 2)
+         Texte de l'étiquette :
+             Je souhaite recevoir la newsletter -->
+
+    <!-- TODO: écrire la case à cocher et son étiquette -->
+
+
+    <!-- ÉTAPE 6 — La zone de texte « Message », 5 lignes.
+         Attention : cette balise SE FERME, et tout ce qui se
+         trouve entre les deux balises apparaît comme texte déjà
+         saisi. Pour un champ vide, collez-les l'une contre
+         l'autre (notion 4). -->
+
+    <!-- TODO: écrire l'étiquette et la zone de texte -->
+
+
+    <!-- ÉTAPE 7 — Le bouton d'envoi, portant le texte
+         « M'inscrire » (notion 4). -->
+
+    <!-- TODO: écrire le bouton d'envoi -->
+
+  </form>
+
+</body>
+</html>

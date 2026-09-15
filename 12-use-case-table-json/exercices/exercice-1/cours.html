@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Le registre des emprunts</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 12</a> · Cas pratique</p>
+  <h1 class="titre-exo">Le registre des emprunts</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez faire ici :</strong> le projet le plus complet du
+      parcours — un tableau piloté par des données, un formulaire qui l'alimente, et
+      un statut calculé pour chaque ligne.</p>
+      <p>
+        <strong>Aucune notion nouvelle</strong>, sauf pour le bonus
+        (<code>fetch</code>). Ce cours est une <em>carte</em> : il vous dit où
+        retrouver chaque geste.
+      </p>
+    </div>
+
+    <h2>1 · Un tableau HTML, ce sont des lignes et des cellules</h2>
+
+    <p>
+      Le tableau de la page est déjà écrit — sauf son contenu. Sa structure vient du
+      projet 2 :
+    </p>
+
+<pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Livre&lt;/th&gt;&lt;th&gt;Lecteur&lt;/th&gt; … &lt;/tr&gt;   ← l'en-tête, fourni
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+                                              ← VIDE : votre code le remplit
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+
+    <table>
+      <tr><th>Balise</th><th>Rôle</th></tr>
+      <tr><td><code>&lt;tr&gt;</code></td><td>une <strong>ligne</strong></td></tr>
+      <tr><td><code>&lt;td&gt;</code></td><td>une <strong>cellule</strong> de données</td></tr>
+      <tr><td><code>&lt;th&gt;</code></td><td>une cellule d'<strong>en-tête</strong> (déjà écrite)</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Rien de neuf côté JavaScript :</strong> un <code>&lt;tr&gt;</code> se
+        fabrique avec <code>createElement</code> et s'insère avec
+        <code>append</code>, exactement comme les <code>&lt;li&gt;</code> du projet 9.
+        Seuls les noms de balises changent.
+      </p>
+      <p>
+        On insère les lignes dans le <code>&lt;tbody&gt;</code>, pas dans le
+        <code>&lt;table&gt;</code> : <code>document.querySelector("tbody")</code>.
+      </p>
+      <p>
+        <strong>Visuellement, les deux marchent</strong> — et c'est bien le piège. Mais
+        un <code>&lt;tr&gt;</code> ajouté sur le <code>&lt;table&gt;</code> n'entre
+        <em>pas</em> dans le <code>&lt;tbody&gt;</code> : celui-ci reste vide. Votre
+        vidage <code>corps.querySelectorAll("tr")</code> n'efface alors plus rien, les
+        lignes se dupliquent à chaque redessin, et <code>corps.children.length</code>
+        reste bloqué à <code>0</code> dans la console.
+      </p>
+    </div>
+
+    <h2>2 · Une ligne = quatre cellules</h2>
+
+<pre><code>const tr = document.createElement("tr");
+
+const tdLivre = document.createElement("td");
+tdLivre.textContent = emprunt.livre;
+
+// … trois autres cellules …
+
+tr.append(tdLivre, tdLecteur, tdJours, tdStatut);
+corps.append(tr);</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est la construction imbriquée du projet 9, exercice 3.</strong> On
+        fabrique de l'intérieur vers l'extérieur, on n'insère qu'à la fin. Quatre
+        cellules au lieu de deux <code>&lt;span&gt;</code> : même geste, répété.
+      </p>
+    </div>
+
+    <h2>3 · Une donnée qui n'est pas dans les données</h2>
+
+    <p>
+      Le <strong>statut</strong> n'existe nulle part dans le tableau de départ. Il se
+      <em>déduit</em> des jours restants :
+    </p>
+
+<pre><code>jours &lt; 0    → « En retard »    rouge
+jours ≤ 7    → « Bientôt dû »   orange
+sinon        → « En cours »     vert</code></pre>
+
+    <p>Une fonction qui rend le couple texte + classe :</p>
+
+<pre><code>function statutDe(jours) {
+  if (jours &lt; 0)  return { texte: "En retard",  classe: "statut--retard" };
+  if (jours &lt;= 7) return { texte: "Bientôt dû", classe: "statut--bientot" };
+  return { texte: "En cours", classe: "statut--ok" };
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Une fonction qui rend un objet</strong> — le <code>return</code> du
+        projet 7 et l'objet du projet 8, assemblés. Elle regroupe en un seul endroit
+        <em>toute</em> la règle métier : si les seuils changent, une seule ligne
+        change.
+      </p>
+      <p>
+        Les trois <code>return</code> s'excluent : dès que l'un s'exécute, la fonction
+        s'arrête. Pas besoin de <code>else</code>.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Attention aux frontières.</strong> Elles se testent, et elles se
+        trompent facilement :
+      </p>
+<pre><code>jours = -1   → En retard
+jours =  0   → Bientôt dû     ⚠️ zéro n'est PAS négatif
+jours =  7   → Bientôt dû     ⚠️ le 7 est inclus (≤)
+jours =  8   → En cours</code></pre>
+    </div>
+
+    <h2>4 · Tout redessiner, jamais retoucher</h2>
+
+    <p>
+      À chaque changement, on <strong>vide le tableau et on le reconstruit</strong>
+      entièrement depuis les données. C'est le schéma du projet 9, exercice 4 :
+    </p>
+
+<pre><code>function afficher() {
+  for (const ancienne of corps.querySelectorAll("tr")) {
+    ancienne.remove();
+  }
+  for (const emprunt of emprunts) {
+    ajouterLigne(emprunt);
+  }
+  // … puis le résumé
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi ne pas simplement ajouter la nouvelle ligne ?</strong> Parce
+        que le résumé, les statuts et l'ordre dépendent de <em>l'ensemble</em> des
+        données. Tout redessiner garantit que l'affichage ne peut pas diverger des
+        données — au prix de quelques éléments recréés.
+      </p>
+      <p>
+        <strong>Les données sont la vérité, la page n'en est que le reflet.</strong>
+        C'est l'idée que vous retrouverez dans tous les frameworks modernes.
+      </p>
+    </div>
+
+    <h2>5 · Le formulaire ajoute aux données, pas au tableau</h2>
+
+<pre><code>emprunts.push({ livre: livre, lecteur: lecteur, jours: jours });
+afficher();                                  ← et le tableau suit</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>L'ordre compte.</strong> On modifie d'abord les <em>données</em>, puis
+        on redessine. Insérer directement un <code>&lt;tr&gt;</code> dans la page sans
+        toucher au tableau <code>emprunts</code> marcherait… jusqu'au prochain
+        <code>afficher()</code>, qui ferait disparaître la ligne.
+      </p>
+    </div>
+
+    <p>
+      Le reste est le projet 10, exercice 3, à l'identique :
+    </p>
+
+<pre><code>form.addEventListener("submit", function (evenement) {
+  evenement.preventDefault();
+  const livre = champL.value.trim();
+  // … vérifier, puis push, puis afficher
+});</code></pre>
+
+    <h2>6 · Vérifier une saisie numérique</h2>
+
+    <p>
+      Les deux premiers champs sont du texte : <code>.trim()</code> puis comparaison à
+      <code>""</code> suffit (projet 10, exercice 3). Le troisième est un
+      <strong>nombre</strong> :
+    </p>
+
+<pre><code>const jours = Number(champJ.value.trim());
+
+if (isNaN(jours)) { … }        ← ce n'est pas un nombre</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>Number()</code> vient du projet 6, <code>isNaN</code> du projet 7,
+        exercice 4 — souvenez-vous : <strong><code>NaN</code> n'est égal à
+        rien</strong>, pas même à lui-même. C'est pourquoi on le teste avec
+        <code>isNaN</code> et non avec <code>===</code>.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Le champ <code>type="number"</code> filtre déjà beaucoup.</strong>
+        Taper « abc » dedans ne produit pas <code>"abc"</code> : le navigateur rend
+        une chaîne <strong>vide</strong>. Votre test <code>isNaN</code> ne se
+        déclenchera donc quasiment jamais depuis l'interface — il protège contre un
+        collage ou un champ modifié.
+      </p>
+      <p>
+        <strong>Gardez-le quand même.</strong> Une vérification qui ne sert jamais
+        coûte deux lignes ; une vérification manquante coûte un bug.
+      </p>
+    </div>
+
+    <h2>7 · 🎁 Bonus — aller chercher des données ailleurs</h2>
+
+    <p>
+      Jusqu'ici, vos données étaient écrites dans votre fichier. Elles peuvent venir
+      d'un <strong>serveur</strong> :
+    </p>
+
+<pre><code>fetch("https://dummyjson.com/users?limit=5")
+  .then(function (reponse) { return reponse.json(); })
+  .then(function (donnees) {
+    // donnees.users est un tableau d'utilisateurs
+  });</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Deux étapes, deux <code>.then</code> :</strong> la première réponse
+        n'est pas encore les données — c'est une enveloppe, qu'il faut ouvrir avec
+        <code>.json()</code>. Chaque <code>.then</code> dit « quand ce sera prêt,
+        fais ceci ».
+      </p>
+      <p>
+        <strong>C'est le même principe qu'un écouteur d'événement :</strong> du code
+        qui ne s'exécute pas maintenant, mais plus tard. Vous connaissez déjà l'idée
+        depuis le projet 10.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong><code>fetch</code> ne fonctionne pas en double-clic.</strong> Ouverte
+        depuis un fichier (<code>file://</code>), la page se voit refuser la requête.
+        Il faut un serveur local :
+      </p>
+<pre><code>python3 -m http.server 8000</code></pre>
+      <p>
+        Puis ouvrez <code>http://localhost:8000</code>. C'est le seul moment du
+        parcours où un serveur est nécessaire.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Les données d'une API ne sont jamais à votre format.</strong>
+        <code>dummyjson</code> rend des utilisateurs avec <code>firstName</code>,
+        <code>lastName</code>, <code>email</code> — pas des emprunts. À vous de les
+        <em>traduire</em> vers <code>{ livre, lecteur, jours }</code>. Ce travail de
+        traduction est l'essentiel du métier quand on consomme une API.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Window/fetch"
+             target="_blank" rel="noopener">MDN — <code>fetch()</code></a>
+        </td>
+        <td>La référence, pour le bonus.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/JSON"
+             target="_blank" rel="noopener">MDN — travailler avec JSON</a>
+        </td>
+        <td>Le format d'échange, expliqué simplement.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://dummyjson.com/users" target="_blank" rel="noopener">dummyjson.com/users</a>
+        </td>
+        <td>L'API du bonus — ouvrez-la dans un onglet pour voir sa forme.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour au projet</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

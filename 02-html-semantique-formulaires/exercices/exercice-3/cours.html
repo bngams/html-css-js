@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Les formulaires</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 3</p>
+  <h1 class="titre-exo">Les formulaires</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> recueillir des informations
+      auprès de vos visiteurs — un champ de saisie, une liste de choix, une case à
+      cocher — et le faire correctement.</p>
+      <p>
+        C'est le dernier chapitre du projet 2, et le plus utile en pratique : presque
+        tout site a un formulaire de contact ou d'inscription.
+      </p>
+    </div>
+
+    <h2>1 · Le conteneur — <code>&lt;form&gt;</code></h2>
+
+    <p>Tous les champs vivent à l'intérieur d'une balise <code>&lt;form&gt;</code> :</p>
+
+<pre><code>&lt;form&gt;
+  …les champs…
+&lt;/form&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Où partent les données ?</strong> Un vrai formulaire porte deux
+        attributs — <code>action</code> (l'adresse qui reçoit les données) et
+        <code>method</code>. Les traiter demande un serveur ou du JavaScript : ce sera
+        le <strong>jour 3</strong>. Ici, on apprend à <em>construire</em> le
+        formulaire ; l'envoi viendra ensuite.
+      </p>
+    </div>
+
+    <h2>2 · Le champ de base — <code>&lt;input&gt;</code></h2>
+
+    <p>
+      Une balise auto-fermante (comme <code>&lt;img&gt;</code>, projet 1). Son
+      attribut <code>type</code> décide de ce qu'elle devient :
+    </p>
+
+    <table>
+      <tr>
+        <th><code>type</code></th>
+        <th>Ce que l'utilisateur voit</th>
+      </tr>
+      <tr>
+        <td><code>text</code></td>
+        <td>Une ligne de saisie libre</td>
+      </tr>
+      <tr>
+        <td><code>email</code></td>
+        <td>Idem, mais le navigateur vérifie la présence d'un <code>@</code></td>
+      </tr>
+      <tr>
+        <td><code>tel</code></td>
+        <td>Idem — et sur mobile, un clavier numérique s'affiche</td>
+      </tr>
+      <tr>
+        <td><code>number</code></td>
+        <td>Un champ avec des petites flèches haut/bas</td>
+      </tr>
+      <tr>
+        <td><code>date</code></td>
+        <td>Un sélecteur de date fourni par le navigateur</td>
+      </tr>
+      <tr>
+        <td><code>checkbox</code></td>
+        <td>Une case à cocher</td>
+      </tr>
+      <tr>
+        <td><code>radio</code></td>
+        <td>Un bouton rond — un seul choix possible dans un groupe</td>
+      </tr>
+    </table>
+
+<pre><code>&lt;input type="email" id="courriel" name="courriel"&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Choisir le bon <code>type</code> est gratuit et rend service.</strong>
+        <code>type="email"</code> ne demande aucun effort de plus que
+        <code>type="text"</code>, mais il déclenche une vérification automatique et,
+        sur téléphone, affiche le clavier adapté.
+      </p>
+    </div>
+
+    <h2>3 · L'étiquette — <code>&lt;label&gt;</code></h2>
+
+    <p>
+      Un champ seul est une boîte vide : rien ne dit ce qu'il attend. L'étiquette
+      s'écrit dans un <code>&lt;label&gt;</code>, <strong>relié</strong> au champ :
+    </p>
+
+<pre><code>&lt;label for="courriel"&gt;Votre e-mail&lt;/label&gt;
+&lt;input type="email" id="courriel" name="courriel"&gt;</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Le lien se fait par une paire d'attributs</strong> : le
+        <code>for</code> du label reprend <strong>exactement</strong> l'<code>id</code>
+        du champ. C'est le même mécanisme d'<code>id</code> que pour les liens internes
+        du projet 1 — un nom unique qui permet de désigner un élément.
+      </p>
+      <p>
+        Une faute de frappe entre les deux casse le lien <em>silencieusement</em> :
+        aucun message d'erreur.
+      </p>
+    </div>
+
+    <h3>Deux bénéfices immédiats</h3>
+
+    <ul>
+      <li>
+        <strong>Cliquer sur l'étiquette place le curseur dans le champ.</strong>
+        C'est le test le plus simple pour vérifier que le lien fonctionne.
+      </li>
+      <li>
+        <strong>Un lecteur d'écran annonce l'étiquette</strong> quand l'utilisateur
+        arrive sur le champ. Sans <code>&lt;label&gt;</code>, il annonce « zone de
+        texte », sans dire ce qu'on attend.
+      </li>
+    </ul>
+
+    <h3>Et <code>name</code>, alors ?</h3>
+
+    <p>
+      <code>id</code> sert à relier le label au champ <em>dans la page</em>.
+      <code>name</code> est le nom sous lequel la valeur sera <em>envoyée</em> au
+      serveur. On met souvent le même mot dans les deux, mais ils ne servent pas à la
+      même chose.
+    </p>
+
+    <h2>4 · Les autres champs</h2>
+
+    <h3>Une liste déroulante — <code>&lt;select&gt;</code></h3>
+
+<pre><code>&lt;label for="niveau"&gt;Votre niveau&lt;/label&gt;
+&lt;select id="niveau" name="niveau"&gt;
+  &lt;option value="debutant"&gt;Débutant&lt;/option&gt;
+  &lt;option value="confirme"&gt;Confirmé&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+    <p>
+      Chaque choix est une <code>&lt;option&gt;</code>. L'attribut
+      <code>value</code> est ce qui part au serveur ; le texte entre les balises est ce
+      que voit l'utilisateur.
+    </p>
+
+    <h3>Un texte long — <code>&lt;textarea&gt;</code></h3>
+
+<pre><code>&lt;label for="message"&gt;Votre message&lt;/label&gt;
+&lt;textarea id="message" name="message" rows="5"&gt;&lt;/textarea&gt;</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong><code>&lt;textarea&gt;</code> se ferme</strong>, contrairement à
+        <code>&lt;input&gt;</code>. Et attention : tout ce que vous écrivez entre les
+        deux balises apparaît comme texte déjà saisi dans le champ. Pour un champ
+        vide, collez les deux balises l'une contre l'autre.
+      </p>
+    </div>
+
+    <h3>Le bouton d'envoi — <code>&lt;button&gt;</code></h3>
+
+<pre><code>&lt;button type="submit"&gt;Envoyer&lt;/button&gt;</code></pre>
+
+    <h2>5 · Champs obligatoires — <code>required</code></h2>
+
+    <p>
+      Ajoutez <code>required</code> à un champ, et le navigateur refuse l'envoi tant
+      qu'il est vide — en affichant lui-même un message :
+    </p>
+
+<pre><code>&lt;input type="email" id="courriel" name="courriel" required&gt;</code></pre>
+
+    <p>
+      Comme <code>controls</code> sur la vidéo (projet 1), c'est un
+      <strong>attribut booléen</strong> : il s'écrit seul, sans <code>=</code> ni
+      valeur.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Cette vérification n'est pas une sécurité.</strong> Elle rend service à
+        l'utilisateur honnête en lui signalant un oubli, mais elle se contourne en
+        quelques secondes. Toute donnée reçue doit être revérifiée côté serveur — un
+        sujet qui dépasse cette formation, mais qu'il faut savoir.
+      </p>
+    </div>
+
+    <h2>6 · Grouper des champs — <code>&lt;fieldset&gt;</code></h2>
+
+    <p>
+      Pour réunir plusieurs champs liés sous un intitulé commun — typiquement un groupe
+      de boutons radio :
+    </p>
+
+<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Niveau de difficulté souhaité&lt;/legend&gt;
+
+  &lt;input type="radio" id="facile" name="difficulte" value="facile"&gt;
+  &lt;label for="facile"&gt;Facile&lt;/label&gt;
+
+  &lt;input type="radio" id="difficile" name="difficulte" value="difficile"&gt;
+  &lt;label for="difficile"&gt;Difficile&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le point clé des boutons radio :</strong> ils partagent le
+        <strong>même <code>name</code></strong> — c'est ce qui les rend exclusifs,
+        c'est-à-dire qu'en cocher un décoche l'autre. Mais chacun garde son
+        <code>id</code> propre, puisque son label doit le viser individuellement.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Forms/Your_first_form"
+             target="_blank" rel="noopener">MDN — Votre premier formulaire</a>
+        </td>
+        <td>Reprend ce chapitre pas à pas, jusqu'à l'envoi des données.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Extensions/Forms/Basic_native_form_controls"
+             target="_blank" rel="noopener">MDN — Les contrôles de formulaire natifs</a>
+        </td>
+        <td>La liste complète des types de champs, avec leur rendu réel.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

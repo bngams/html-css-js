@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Si… sinon</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 1</p>
+  <h1 class="titre-exo">Si… sinon</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Écrire vos premières conditions, et
+      comprendre pourquoi <code>===</code> doit devenir un réflexe.</p>
+      <p>
+        <strong>Prérequis :</strong> le projet 6 — <code>console.log()</code>,
+        <code>let</code> et <code>const</code>, <code>Number()</code>.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>📁 Le fichier change de nom :</strong>
+        <code>exercices/exercice-1/app.js</code>
+      </p>
+      <p>
+        Ce n'est plus <code>script.js</code>. <code>app.js</code> est la convention
+        du fichier principal d'une application — vous la croiserez partout.
+        Techniquement, rien ne change.
+      </p>
+      <p>
+        La page <code>travail.html</code> reste <strong>figée</strong> : n'y touchez
+        pas.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Tout s'affiche dans la console</strong> (<code>F12</code>), comme à
+        l'exercice 3 du projet 6. La page restera vide du début à la fin.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 10 étapes</h2>
+
+    <h3>Partie 1 — votre première décision</h3>
+
+    <ol class="criteres">
+      <li>
+        Créer une boîte <code>age</code> contenant <code>20</code>, avec le mot-clé
+        qui <strong>interdit</strong> le changement
+      </li>
+      <li>
+        Écrire une condition qui affiche <code>Majeur</code> si <code>age</code> vaut
+        18 ou plus, et <code>Mineur</code> sinon
+      </li>
+      <li>
+        <strong>À faire, pas à écrire :</strong> remplacer 20 par 15, vérifier que la
+        console affiche <code>Mineur</code>, puis <strong>remettre 20</strong>
+      </li>
+    </ol>
+
+    <h3>Partie 2 — le piège de la comparaison</h3>
+
+    <ol class="criteres" start="4">
+      <li>
+        Ranger dans <code>saisie</code> le <strong>texte</strong> <code>"20"</code> —
+        avec les guillemets, comme le renverrait un <code>prompt()</code>
+      </li>
+      <li>
+        Afficher le texte <code>saisie === 20 :</code> puis le résultat de la
+        comparaison <code>saisie === 20</code>
+      </li>
+      <li>
+        Afficher le texte <code>saisie == 20 :</code> puis le résultat de
+        <code>saisie == 20</code> — avec <strong>deux</strong> signes cette fois
+      </li>
+      <li>
+        Ranger dans <code>saisieNombre</code> la saisie <strong>convertie en
+        nombre</strong>
+      </li>
+      <li>
+        Afficher le texte <code>saisieNombre === 20 :</code> puis le résultat de
+        <code>saisieNombre === 20</code>
+      </li>
+    </ol>
+
+    <div class="attention">
+      <p>
+        <strong>Aux étapes 5 et 6, les deux résultats seront différents — et c'est
+        le but.</strong> Ne cherchez pas l'erreur : constatez, et lisez la solution
+        ensuite si l'explication du cours ne suffit pas.
+      </p>
+    </div>
+
+    <h3>Partie 3 — une décision utile</h3>
+
+    <ol class="criteres" start="9">
+      <li>
+        Écrire une condition qui range <code>24</code> dans <code>tarif</code> si le
+        visiteur est majeur, et <code>12</code> sinon
+      </li>
+      <li>
+        Afficher le texte <code>Tarif :</code>, puis <code>tarif</code>, puis le
+        texte <code>€</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Une fois les dix étapes faites, la console doit afficher exactement
+      <strong>cinq lignes</strong> :
+    </p>
+
+<pre><code>Majeur
+saisie === 20 : false
+saisie == 20 : true
+saisieNombre === 20 : true
+Tarif : 24 €</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi cinq et non six ?</strong> Vous aurez écrit six
+        <code>console.log</code> — mais celui du bloc <code>else</code>
+        («&nbsp;Mineur&nbsp;») ne s'exécute pas, puisque <code>age</code> vaut 20.
+        <strong>Un seul des deux blocs d'une condition passe.</strong> C'est le
+        principe même de ce que vous venez d'écrire.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>⚠️ Ne vous fiez pas au nombre de lignes pour vous valider.</strong>
+        Si vous avez oublié de remettre <code>20</code> à l'étape 3, vous obtiendrez
+        <strong>cinq lignes aussi</strong> — mais la première dira
+        <code>Mineur</code> et la dernière <code>Tarif : 12 €</code>.
+      </p>
+      <p>
+        <strong>Les deux lignes à contrôler sont donc la première et la
+        dernière :</strong> <code>Majeur</code> en haut, <code>Tarif : 24 €</code> en
+        bas. Aucune erreur rouge ne signale cet oubli.
+      </p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>La condition fonctionne</td>
+        <td>
+          <code>Majeur</code> avec 20, <code>Mineur</code> avec 15 — et jamais les
+          deux à la fois
+        </td>
+      </tr>
+      <tr>
+        <td>Le piège du type</td>
+        <td>
+          L'étape 5 affiche <code>false</code> alors que <code>"20"</code> et
+          <code>20</code> « se ressemblent »
+        </td>
+      </tr>
+      <tr>
+        <td>La différence entre les deux opérateurs</td>
+        <td>
+          L'étape 6 affiche <code>true</code> là où l'étape 5 affichait
+          <code>false</code>
+        </td>
+      </tr>
+      <tr>
+        <td>La conversion</td>
+        <td>L'étape 8 affiche <code>true</code>, sans rien cacher</td>
+      </tr>
+      <tr>
+        <td>Le tarif</td>
+        <td><code>Tarif : 24 €</code> — et <code>12</code> si vous repassez à 15</td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>app.js</code> : aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — l'erreur qui ne prévient pas</strong></p>
+      <ol>
+        <li>
+          Dans la console, tapez <code>let n = 20;</code> puis Entrée.
+        </li>
+        <li>
+          Tapez ensuite <code>if (n = 18) { console.log("bloc exécuté"); }</code>
+        </li>
+        <li>Tapez enfin <code>n</code> pour voir sa valeur.</li>
+      </ol>
+      <p>
+        Le bloc s'est exécuté, <strong>aucune erreur rouge</strong>, et
+        <code>n</code> vaut désormais 18. Avec un seul <code>=</code>, la condition
+        ne pose aucune question : elle <em>range</em> une valeur, puis se déclenche.
+        <strong>C'est le bogue le plus silencieux du langage</strong> — et
+        <code>===</code> vous en protège.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les cinq lignes s'affichent, sans erreur rouge</li>
+      <li>
+        Vous savez expliquer <strong>pourquoi</strong> l'étape 5 donne
+        <code>false</code> et l'étape 8 <code>true</code>
+      </li>
+      <li>
+        Vous savez que <code>===</code> compare <strong>la valeur et le type</strong>
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>app.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>30 à 40 minutes.</strong> Les étapes 5 à 8 sont le cœur de l'exercice :
+      prenez le temps de comprendre <em>pourquoi</em> les résultats diffèrent.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

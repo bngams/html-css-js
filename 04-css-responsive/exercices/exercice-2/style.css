@@ -1,0 +1,148 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 2 — À VOUS DE JOUER
+
+   👉 C'EST CE FICHIER QUE VOUS MODIFIEZ.
+      La page travail.html, elle, est figée : n'y touchez pas.
+
+   ⚠️ Pour tester : REDIMENSIONNEZ la fenêtre.
+
+   ── L'ORDRE DE CE FICHIER (mobile-first) ─────────────────────
+
+   1. D'abord les règles DE BASE, qui valent pour tous les écrans
+      et sont pensées pour le PLUS PETIT.
+   2. Ensuite, et seulement ensuite, les media queries qui
+      ENRICHISSENT pour les écrans plus larges.
+
+   Cet ordre n'est pas une préférence : en CSS, à spécificité
+   égale, la dernière règle écrite gagne. Une media query placée
+   avant les règles de base serait écrasée par elles.
+
+   ── AVANT DE TERMINER ────────────────────────────────────────
+
+   Cherchez « TODO » avec Ctrl+F : plus aucun marqueur en dehors
+   de cet en-tête.
+
+   ↩ L'énoncé : enonce.html   ·   Le cours : cours.html
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── PARTIE 1 : les bases, déjà écrites pour vous ─────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.conteneur {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.espace {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.pied-page {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding: 1.5rem;
+}
+
+
+/* ── PARTIE 2 : le style de base (petits écrans) ──────────────── */
+
+
+/* ÉTAPE 1 — La bannière, version téléphone.
+   Sur .banniere : fond #14457b, 1rem d'espace intérieur, et un
+   texte centré.
+
+   ⚠️ N'écrivez PAS display:flex ici — sur un téléphone, le logo
+   et le menu doivent rester l'un SOUS l'autre. C'est le
+   comportement par défaut, donc il n'y a rien à faire.           */
+
+/* TODO: écrire la règle de base pour .banniere */
+
+
+/* ÉTAPE 2 — Le logo.
+   Sur .logo : blanc, gras, 1.3rem, aucune marge.                 */
+
+/* TODO: écrire la règle pour .logo */
+
+
+/* ÉTAPE 3 — Le menu, version téléphone.
+   Sur .menu : les liens doivent être côte à côte MAIS pouvoir
+   passer à la ligne s'ils ne tiennent pas — il y en a quatre.
+   Ajoutez aussi 1rem d'espace entre eux et centrez-les
+   horizontalement (rappel du projet 3, notions 4 et 6).          */
+
+/* TODO: écrire la règle pour .menu */
+
+
+/* ÉTAPE 4 — Les liens du menu.
+   Visez les liens DANS le menu (sélecteur descendant) :
+   blancs, sans soulignement.                                     */
+
+/* TODO: écrire la règle pour .menu a */
+
+
+/* ÉTAPE 5 — Le titre principal.
+   Sur h1 : taille 1.6rem — une taille modeste, adaptée au petit
+   écran. Vous l'agrandirez plus bas pour les grands écrans.      */
+
+/* TODO: écrire la règle pour h1 */
+
+
+/* ── PARTIE 3 : les enrichissements ───────────────────────────── */
+
+/* ⚠️ Tout ce qui suit doit être ÉCRIT APRÈS les règles de base,
+      et dans l'ordre CROISSANT des largeurs.                      */
+
+
+/* ÉTAPE 6 — À partir de 700px : la bannière s'étale.
+   Écrivez une media query qui s'applique à partir de 700px
+   (notion 3 — attention au sens de min-width).
+
+   À l'intérieur, une seule règle, sur .banniere :
+     - les enfants côte à côte
+     - le logo à gauche, le menu à droite
+     - alignés verticalement au centre
+     - 1rem d'espace intérieur en haut/bas, 2rem à gauche/droite
+       (padding: 1rem 2rem)
+     - le texte n'a plus besoin d'être centré : text-align: left
+
+   N'y remettez PAS le fond bleu : il est déjà défini à l'étape 1
+   et reste actif (notion 7).                                     */
+
+/* TODO: écrire la media query à partir de 700px */
+
+
+/* ÉTAPE 7 — À partir de 700px toujours : la grille.
+   Dans la MÊME media query que l'étape 6, ajoutez une règle sur
+   .grille pour mettre les trois espaces côte à côte, avec 1rem
+   entre eux.
+
+   Et une règle sur .espace pour retirer la marge du bas, devenue
+   inutile : margin-bottom: 0.                                    */
+
+/* TODO: ajouter .grille et .espace dans la media query ci-dessus */
+
+
+/* ÉTAPE 8 — À partir de 1000px : le titre grandit.
+   Une SECONDE media query, à partir de 1000px, contenant une
+   seule règle : h1 passe à 2.4rem.
+
+   ⚠️ Elle doit être écrite APRÈS celle de 700px (notion 6).      */
+
+/* TODO: écrire la media query à partir de 1000px */

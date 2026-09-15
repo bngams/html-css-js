@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médiathèque — Registre des emprunts</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      background-color: #f9f9f9;
+      color: #253044;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto 1.5rem;
+      padding: 1.5rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 { text-align: center; color: #1d6fa5; margin-top: 0; font-size: 1.6rem; }
+    .encadre {
+      background-color: #fff;
+      border-left: 5px solid #1d6fa5;
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    code {
+      background-color: #e8f1fb;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    kbd {
+      background-color: #253044;
+      color: #fff;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: inherit;
+    }
+
+    .inline-form {
+      display: flex;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid #e3e8ee;
+    }
+    .champ { display: flex; flex-direction: column; flex: 1 1 10rem; }
+    .champ label { font-size: 0.85rem; font-weight: 600; color: #5a6570; }
+    .inline-form input, .inline-form select {
+      font: inherit;
+      padding: 0.5em 0.7em;
+      border: 1px solid #c3ccd8;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+    .inline-form input:focus, .inline-form select:focus {
+      outline: none; border-color: #1d6fa5;
+    }
+    .inline-form button {
+      font: inherit;
+      font-weight: 600;
+      padding: 0.55em 1.3em;
+      color: #fff;
+      background-color: #1d6fa5;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .inline-form button:hover { background-color: #14507a; }
+
+    #message {
+      margin: 0 0 1rem;
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: #1a7a4c;
+      min-height: 1.5em;
+    }
+    #message.erreur { color: #a3261c; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+    table th, table td {
+      border: 1px solid #e3e8ee;
+      padding: 0.6em 0.8em;
+      text-align: left;
+    }
+    table th { background-color: #f4f6f9; color: #14507a; font-size: 0.9rem; }
+    tbody tr:nth-child(even) { background-color: #fbfcfd; }
+
+    .statut { font-weight: 600; font-size: 0.88rem; white-space: nowrap; }
+    .statut--ok      { color: #1a7a4c; }
+    .statut--bientot { color: #b26a00; }
+    .statut--retard  { color: #a3261c; }
+
+    #resume {
+      margin: 1rem 0 0;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #5a6570;
+    }
+
+    .retour { display: inline-block; margin-top: 1rem; color: #1d6fa5; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>Registre des emprunts</h1>
+
+    <form id="form-emprunt" class="inline-form">
+      <div class="champ">
+        <label for="livre">Livre</label>
+        <input type="text" id="livre" name="livre" placeholder="Dune">
+      </div>
+      <div class="champ">
+        <label for="lecteur">Lecteur</label>
+        <input type="text" id="lecteur" name="lecteur" placeholder="Karim">
+      </div>
+      <div class="champ">
+        <label for="jours">Jours restants</label>
+        <input type="number" id="jours" name="jours" placeholder="14">
+      </div>
+      <button type="submit">Ajouter</button>
+    </form>
+
+    <p id="message"></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Livre</th>
+          <th>Lecteur</th>
+          <th>Jours restants</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <p id="resume"></p>
+
+  </div>
+
+  <div class="container">
+
+    <div class="encadre">
+      <p>
+        <strong>Ceci est le corrigé en fonctionnement.</strong> Ouvrez la console
+        (<kbd>F12</kbd>), puis ajoutez un emprunt.
+      </p>
+      <p>
+        <strong>Le statut se calcule</strong> à partir des jours restants : négatif →
+        <em>En retard</em> (rouge), 7 jours ou moins → <em>Bientôt dû</em> (orange),
+        au-delà → <em>En cours</em> (vert). Essayez <code>-5</code>,
+        <code>3</code>, puis <code>30</code>.
+      </p>
+      <p>
+        <strong>Regardez le code source de cette page</strong> (clic droit →
+        <em>Afficher le code source</em>) : le <code>&lt;tbody&gt;</code> y est
+        <strong>vide</strong>. Toutes les lignes sont fabriquées par le JavaScript.
+      </p>
+    </div>
+
+    <p>
+      <a class="retour" href="../solution.html">← Revenir aux explications</a>
+    </p>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Enchaîner les décisions</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 3</p>
+  <h1 class="titre-exo">Enchaîner les décisions</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Enchaîner plusieurs cas avec
+      <code>else if</code>, combiner des conditions avec <strong>et</strong> /
+      <strong>ou</strong> / <strong>non</strong>, et découvrir le piège de
+      l'intervalle.</p>
+      <p>
+        <strong>Prérequis :</strong> l'exercice 1 (<code>if</code> /
+        <code>else</code>, les comparaisons) et l'exercice 2 (écrire une fonction
+        avec <code>return</code>).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-3/app.js</code>
+      </p>
+      <p>
+        Il contient déjà deux valeurs fournies — <code>habitantCommune</code> et
+        <code>estEtudiant</code> — dont vous vous servirez à partir de l'étape 7.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 10 étapes</h2>
+
+    <h3>Partie 1 — quatre tarifs avec <code>else if</code></h3>
+
+    <ol class="criteres">
+      <li>
+        Écrire une fonction <code>categorie(age)</code> qui <strong>renvoie</strong>
+        <code>"enfant"</code> avant 12 ans, <code>"jeune"</code> avant 18,
+        <code>"adulte"</code> avant 65, et <code>"senior"</code> sinon —
+        <strong>une seule chaîne</strong> <code>if</code> /
+        <code>else if</code> / <code>else</code>
+      </li>
+      <li>
+        Afficher en quatre instructions : <code>8 ans :</code> puis
+        <code>categorie(8)</code>, <code>15 ans :</code> puis
+        <code>categorie(15)</code>, <code>30 ans :</code> puis
+        <code>categorie(30)</code>, <code>70 ans :</code> puis
+        <code>categorie(70)</code>
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>L'ordre des cas n'est pas libre.</strong> Allez du plus restrictif au
+        plus large. Si vous mettez <code>age &lt; 18</code> avant
+        <code>age &lt; 12</code>, le cas « enfant » devient inatteignable — et rien
+        ne vous le signalera.
+      </p>
+    </div>
+
+    <h3>Partie 2 — le piège de l'intervalle</h3>
+
+    <ol class="criteres" start="3">
+      <li>Créer une boîte <code>age</code> contenant <code>70</code></li>
+      <li>
+        Ranger dans <code>testMaths</code> l'écriture <strong>mathématique
+        naïve</strong> : <code>18 &lt;= age &lt; 65</code> — c'est
+        <strong>volontairement faux</strong>, ne corrigez pas
+      </li>
+      <li>
+        Ranger dans <code>testCorrect</code> le même test écrit correctement :
+        la variable répétée de chaque côté, reliée par <strong>et</strong>
+      </li>
+      <li>
+        Afficher en deux instructions :
+        <code>18 &lt;= age &lt; 65 (maths) :</code> puis <code>testMaths</code>,
+        puis <code>age &gt;= 18 &amp;&amp; age &lt; 65 (JS) :</code> puis
+        <code>testCorrect</code>
+      </li>
+    </ol>
+
+    <div class="attention">
+      <p>
+        <strong>Le visiteur a 70 ans : il n'est PAS dans l'intervalle 18–65.</strong>
+        La bonne réponse est donc <code>false</code>.
+      </p>
+      <p>
+        L'écriture mathématique répondra pourtant <code>true</code>,
+        <strong>sans la moindre erreur rouge</strong>. C'est le défaut le plus
+        dangereux de ce projet : un test qui ment en silence.
+      </p>
+    </div>
+
+    <h3>Partie 3 — combiner plusieurs conditions</h3>
+
+    <ol class="criteres" start="7">
+      <li>
+        Ranger dans <code>gratuit</code> le test : <code>age</code> inférieur à 12
+        <strong>ou</strong> ( <code>habitantCommune</code> <strong>et</strong>
+        <code>estEtudiant</code> ) — avec des <strong>parenthèses</strong> autour du
+        « et »
+      </li>
+      <li>
+        Afficher le texte <code>Gratuit :</code> puis <code>gratuit</code>
+      </li>
+      <li>
+        Afficher le texte <code>Doit payer :</code> puis <strong>l'inverse</strong>
+        de <code>gratuit</code>, avec l'opérateur « non »
+      </li>
+      <li>
+        Afficher, en une seule instruction : <code>Visiteur de</code>, puis
+        <code>age</code>, puis <code>ans, catégorie :</code>, puis
+        <code>categorie(age)</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>
+      Une fois les dix étapes faites, la console doit afficher exactement
+      <strong>neuf lignes</strong> :
+    </p>
+
+<pre><code>8 ans : enfant
+15 ans : jeune
+30 ans : adulte
+70 ans : senior
+18 &lt;= age &lt; 65 (maths) : true
+age &gt;= 18 &amp;&amp; age &lt; 65 (JS) : false
+Gratuit : false
+Doit payer : true
+Visiteur de 70 ans, catégorie : senior</code></pre>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Les quatre catégories</td>
+        <td>
+          <code>enfant</code>, <code>jeune</code>, <code>adulte</code>,
+          <code>senior</code> — dans cet ordre, une seule par ligne
+        </td>
+      </tr>
+      <tr>
+        <td>Le piège de l'intervalle</td>
+        <td>
+          La ligne 5 affiche <code>true</code> et la ligne 6 <code>false</code>,
+          <strong>pour la même question</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>Le « non »</td>
+        <td>
+          <code>Doit payer</code> affiche exactement l'inverse de
+          <code>Gratuit</code>
+        </td>
+      </tr>
+      <tr>
+        <td>La réutilisation</td>
+        <td>
+          La dernière ligne rappelle <code>categorie(age)</code> : la fonction
+          écrite à l'étape 1 ressert telle quelle
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>app.js</code> : aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — pourquoi l'écriture mathématique ment</strong></p>
+      <p>
+        Sur la page de travail, ouvrez la console (<code>F12</code>) et tapez ces
+        trois lignes, une par une :
+      </p>
+      <ol>
+        <li><code>18 &lt;= 70</code> → <code>true</code></li>
+        <li><code>true &lt; 65</code> → <code>true</code></li>
+        <li><code>18 &lt;= 70 &lt; 65</code> → <code>true</code></li>
+      </ol>
+      <p>
+        JavaScript ne lit pas l'intervalle comme un tout : il enchaîne deux
+        comparaisons. <code>18 &lt;= 70</code> donne <code>true</code>, puis il
+        compare <strong><code>true</code> à 65</strong> — et <code>true</code> vaut
+        <code>1</code> dans un calcul. La question posée a disparu en route.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les neuf lignes s'affichent, sans erreur rouge</li>
+      <li>
+        Vous savez expliquer pourquoi <code>18 &lt;= age &lt; 65</code> répond
+        <code>true</code> pour un visiteur de 70 ans
+      </li>
+      <li>
+        Vous savez que l'ordre des <code>else if</code> va du plus restrictif au plus
+        large
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>app.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>40 à 50 minutes.</strong> Les étapes 4 à 6 sont le cœur de
+      l'exercice : prenez le temps de comprendre <em>pourquoi</em> les deux lignes
+      se contredisent.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

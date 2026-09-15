@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consignes — Votre page, votre thème</title>
+  <link rel="stylesheet" href="styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="./">Projet 5</a> · Consignes</p>
+  <h1 class="titre-exo">Votre page, votre thème</h1>
+
+  <ul class="onglets">
+    <li><a href="consignes.html" aria-current="page">📋 Les consignes</a></li>
+    <li><a href="depart/">🚀 Le point de départ</a></li>
+    <li><a href="inspiration/">💡 Inspiration</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Construire une page web complète, de votre
+      choix, en réinvestissant les quatre projets précédents.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> les projets 1
+        à 4. Vous savez structurer, donner du sens, mettre en forme et adapter.
+      </p>
+    </div>
+
+    <h2>⚠️ Ce projet est différent</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Il n'y a ni fichier à compléter, ni corrigé.</strong> Vous partez d'une
+        page vide et vous décidez de tout : le sujet, le contenu, les couleurs, la
+        disposition.
+      </p>
+      <p>
+        C'est volontaire — il n'existe pas une bonne réponse. Les quatre pages
+        d'inspiration sont là pour donner des idées, <em>pas</em> un modèle à recopier.
+      </p>
+    </div>
+
+    <h2>🎨 Choisissez votre sujet</h2>
+
+    <p>
+      Prenez un sujet qui vous intéresse vraiment : vous y passerez une heure, et on
+      travaille mieux sur ce qu'on aime. Quelques pistes :
+    </p>
+
+    <table>
+      <tr>
+        <th>Type de page</th>
+        <th>Exemples de sujet</th>
+      </tr>
+      <tr>
+        <td><strong>Portfolio / page perso</strong></td>
+        <td>Votre parcours, vos réalisations, un CV en ligne</td>
+      </tr>
+      <tr>
+        <td><strong>Page de présentation</strong></td>
+        <td>Une association, un commerce, un service, un produit</td>
+      </tr>
+      <tr>
+        <td><strong>Page d'événement</strong></td>
+        <td>Un concert, un festival, un mariage, une conférence</td>
+      </tr>
+      <tr>
+        <td><strong>Une passion</strong></td>
+        <td>Un club, une collection, une recette, un voyage</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Un conseil de méthode :</strong> écrivez d'abord <em>tout le
+        contenu</em> en HTML brut, sans aucun style. Vous verrez bien mieux la
+        structure, et le CSS ira ensuite beaucoup plus vite. C'est l'ordre
+        professionnel : le fond, puis la forme.
+      </p>
+    </div>
+
+    <h2>🚀 Comment démarrer</h2>
+
+    <ol class="criteres">
+      <li>
+        <strong>Copiez le dossier <code>depart/</code></strong> quelque part chez vous
+        (sur le Bureau, par exemple) et renommez-le comme votre projet.
+      </li>
+      <li>
+        Ouvrez ce dossier dans VSCode : <em>Fichier → Ouvrir le dossier…</em>
+      </li>
+      <li>
+        Il contient deux fichiers : <code>index.html</code> (le squelette, déjà valide)
+        et <code>style.css</code> (vide, avec les bases).
+      </li>
+      <li>
+        Ouvrez <code>index.html</code> dans le navigateur et travaillez comme depuis le
+        projet 3 : j'écris → j'enregistre → je recharge.
+      </li>
+    </ol>
+
+    <h2>✅ La checklist</h2>
+
+    <p>
+      Votre page doit contenir <strong>au moins</strong> ceci. Cochez au fur et à
+      mesure — c'est votre grille de vérification.
+    </p>
+
+    <h3>Structure et sens <em>(projets 1 et 2)</em></h3>
+
+    <ol class="criteres">
+      <li>Un squelette valide : doctype, <code>lang</code>, <code>charset</code>, <code>title</code>, <code>meta viewport</code></li>
+      <li>Les balises sémantiques : <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code> — et <code>&lt;section&gt;</code> ou <code>&lt;article&gt;</code> selon le cas</li>
+      <li>Une hiérarchie de titres cohérente : un seul <code>&lt;h1&gt;</code>, puis des <code>&lt;h2&gt;</code> sans sauter de niveau</li>
+      <li>Au moins <strong>une liste</strong> (<code>&lt;ul&gt;</code> ou <code>&lt;ol&gt;</code>)</li>
+      <li>Au moins <strong>une image</strong> avec un <code>alt</code> qui la décrit vraiment</li>
+      <li>Au moins <strong>trois liens</strong>, dont un externe qui s'ouvre dans un nouvel onglet</li>
+      <li><strong>Au choix :</strong> un tableau de données <em>ou</em> un formulaire de contact avec ses <code>&lt;label&gt;</code> reliés</li>
+    </ol>
+
+    <h3>Mise en forme <em>(projet 3)</em></h3>
+
+    <ol class="criteres" start="8">
+      <li>Une feuille de style <strong>externe</strong>, liée par <code>&lt;link&gt;</code></li>
+      <li>Vos propres <code>class</code>, nommées par leur <strong>rôle</strong> et non par leur apparence</li>
+      <li>
+        Une <strong>couleur dominante</strong> et une <strong>couleur
+        d'accent</strong> — les gris, les blancs et les fonds ne comptent pas
+      </li>
+      <li>
+        Une police lisible avec sa <strong>liste de repli</strong> (projet 3), et un
+        <code>line-height</code> confortable (projet 4)
+      </li>
+      <li>Des espacements maîtrisés : <code>padding</code> à l'intérieur, <code>margin</code> à l'extérieur</li>
+      <li>Au moins une zone disposée avec <strong>Flexbox</strong></li>
+    </ol>
+
+    <h3>Adaptation <em>(projet 4)</em></h3>
+
+    <ol class="criteres" start="14">
+      <li><code>box-sizing: border-box</code> et <code>img { max-width: 100%; height: auto; }</code></li>
+      <li>Des largeurs en <code>max-width</code>, jamais fixes</li>
+      <li>
+        <strong>Aucune barre de défilement horizontale</strong>, de 360 px à 1600 px —
+        c'est le test décisif
+      </li>
+      <li>Au moins <strong>une media query</strong>, écrite en mobile-first</li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Dix-sept points, mais rien de nouveau :</strong> tout figure dans les
+        projets 1 à 4. Cette checklist est un aide-mémoire, pas un programme
+        supplémentaire. Si un point vous échappe, le projet correspondant est à un clic.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier votre page</h2>
+
+    <table>
+      <tr>
+        <th>Contrôle</th>
+        <th>Comment</th>
+      </tr>
+      <tr>
+        <td><strong>Le HTML est valide</strong></td>
+        <td>
+          <a href="https://validator.w3.org/nu/#file" target="_blank" rel="noopener">Validateur
+          W3C</a> — déposez <code>index.html</code>, aucune erreur attendue
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Le CSS est valide</strong></td>
+        <td>
+          <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload"
+          target="_blank" rel="noopener">Validateur CSS</a> — même chose avec
+          <code>style.css</code>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>La page s'adapte</strong></td>
+        <td>
+          Mode appareil mobile (<code>Ctrl+Maj+M</code>), testez à 360, 768 et 1200 px —
+          et vérifiez qu'aucune barre horizontale n'apparaît jusqu'à 1600 px
+        </td>
+      </tr>
+      <tr>
+        <td><strong>La structure a du sens</strong></td>
+        <td>
+          Inspecteur → onglet <em>Accessibilité</em> : vos régions doivent apparaître
+          (<em>banner</em>, <em>navigation</em>, <em>main</em>, <em>contentinfo</em>)
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Les images ont un vrai <code>alt</code></strong></td>
+        <td>
+          Cassez volontairement un chemin d'image : le texte qui s'affiche doit décrire
+          ce qu'on aurait vu
+        </td>
+      </tr>
+    </table>
+
+    <h2>🖼️ Où trouver des images</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Ne prenez pas n'importe quelle image trouvée sur le web</strong> — la
+        plupart sont protégées par le droit d'auteur. Utilisez des banques d'images
+        libres de droits :
+      </p>
+      <ul>
+        <li><a href="https://unsplash.com/fr" target="_blank" rel="noopener">Unsplash</a> — photographies</li>
+        <li><a href="https://www.pexels.com/fr-fr/" target="_blank" rel="noopener">Pexels</a> — photographies et vidéos</li>
+        <li><a href="https://undraw.co/illustrations" target="_blank" rel="noopener">unDraw</a> — illustrations</li>
+      </ul>
+      <p>
+        Pensez à <strong>redimensionner</strong> vos images avant de les utiliser : une
+        photo de 5 000 px de large ralentit inutilement la page.
+      </p>
+    </div>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>1 heure à 1 h 30.</strong> Si le temps manque, privilégiez la structure
+      et le contenu : une page simple et bien faite vaut mieux qu'une page ambitieuse
+      et inachevée.
+    </p>
+
+    <h2>🎤 La restitution</h2>
+
+    <p>
+      En fin de journée, chacun montre sa page au groupe en deux minutes : le sujet
+      choisi, ce dont vous êtes content, et la difficulté que vous avez rencontrée.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>La difficulté rencontrée est la partie la plus utile</strong> pour tout
+        le monde : c'est souvent celle que trois autres personnes ont eue aussi.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="./">← Retour au projet</a>
+      <a class="bouton" href="depart/">Prendre le point de départ →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 3 — SOLUTION COMMENTÉE
+
+   UNE SEULE media query dans tout ce fichier, et c'est le but de
+   l'exercice : tout le reste s'adapte grâce aux fondations et à
+   flex-basis.
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── PARTIE 1 : les bases, fournies ───────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.conteneur {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.evenement {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.lateral {
+  background-color: #e8f1fb;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.pied-page {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding: 1.5rem;
+}
+
+
+/* ── PARTIE 2 : le style de base (petits écrans) ──────────────── */
+
+
+/* ÉTAPE 1 — L'image de la bannière.
+
+   object-fit: cover demande à l'image de REMPLIR la zone de
+   180px de haut en gardant ses proportions, quitte à rogner le
+   haut et le bas.
+
+   Sans lui, height: 180px écraserait l'image : les personnes et
+   les objets y paraîtraient aplatis.
+
+   Notez que cette règle surcharge le height: auto posé plus haut
+   sur img — c'est la cascade, et c'est voulu : la règle plus
+   spécifique (.banniere img) l'emporte sur la générale (img).    */
+
+.banniere img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+
+/* ÉTAPE 2 — Le bandeau de texte.                                 */
+
+.banniere__texte {
+  background-color: #14457b;
+  padding: 1rem;
+  text-align: center;
+}
+
+
+/* ÉTAPE 3 — Le logo et le menu.
+
+   flex-wrap est indispensable : quatre liens, dont un long
+   (« Nous rejoindre »), ne tiennent pas sur 360px.               */
+
+.logo {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+
+/* ÉTAPE 4 — Le titre, en typographie fluide.
+
+   clamp(minimum, souhaité, maximum) remplace ici DEUX media
+   queries : le titre grandit continûment avec la fenêtre, sans
+   jamais descendre sous 1.6rem ni dépasser 2.8rem.
+
+   5vw = 5% de la largeur de la fenêtre. Sur 360px cela ferait
+   18px, donc le minimum de 1.6rem (≈26px) s'applique. Sur
+   1920px cela ferait 96px, donc le maximum de 2.8rem (≈45px)
+   s'applique. Entre les deux, la taille suit la fenêtre.
+
+   ⚠️ Jamais de vw seul pour du texte : sans le minimum, le titre
+   deviendrait illisible sur un petit écran.                      */
+
+h1 {
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  margin-bottom: 0.5rem;
+}
+
+
+/* ÉTAPE 5 — Le chapô.                                            */
+
+.chapo {
+  color: #5a6570;
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+
+
+/* ÉTAPE 6 — La grille, SANS media query.
+
+   C'est le cœur de l'exercice. flex: 1 1 300px signifie « pars
+   de 300px, puis adapte-toi ». Le navigateur place autant de
+   cartes qu'il peut et renvoie les autres dessous — tout seul.
+
+   Le choix de 300px n'est pas arbitraire. Le calcul, pour une
+   ligne utile de 828px (fenêtre de 860px moins les paddings) :
+     - 2 cartes = 2x300 + 1x16 = 616px  → elles tiennent
+     - 3 cartes = 3x300 + 2x16 = 932px  → elles ne tiennent pas
+
+   Avec une base de 260px, trois cartes seraient passées et la
+   quatrième se serait retrouvée SEULE, étirée sur toute la
+   largeur — un résultat déséquilibré. La base se choisit donc
+   en faisant ce calcul, pas au hasard.
+
+   Résultat : 1 carte par ligne sous 650px, 2 au-delà. Aucun
+   seuil n'a été écrit : c'est le contenu qui décide.           */
+
+.grille {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.evenement {
+  flex: 1 1 300px;
+}
+
+
+/* ÉTAPE 7 — La date.                                             */
+
+.date {
+  color: #0b6bcb;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+
+/* ÉTAPE 8 — L'encadré, version téléphone.
+
+   Rien d'autre qu'une marge : sur petit écran, il se place
+   naturellement SOUS le contenu principal, parce que c'est le
+   comportement par défaut des éléments de bloc.
+
+   Encore du mobile-first : le cas simple ne demande rien.        */
+
+.lateral {
+  margin-top: 1rem;
+}
+
+
+/* ── PARTIE 3 : l'unique enrichissement ───────────────────────── */
+
+
+/* ÉTAPE 9 — À partir de 900px : la colonne latérale.
+
+   C'est le SEUL cas de ce fichier qu'une media query résout, et
+   pour une raison de fond : une colonne latérale ne peut pas
+   « rétrécir » jusqu'à disparaître. Il faut décider d'un seuil
+   en dessous duquel elle passe sous le contenu.
+
+   Les deux valeurs de flex se lisent ainsi :
+     .principal  1 1 auto   → prend toute la place restante
+     .lateral    0 0 260px  → ne grandit pas, ne rétrécit pas :
+                              exactement 260px
+
+   Et margin-top: 0 annule la marge posée à l'étape 8, devenue
+   inutile une fois les deux colonnes côte à côte.                */
+
+@media (min-width: 900px) {
+
+  .disposition {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .principal {
+    flex: 1 1 auto;
+  }
+
+  .lateral {
+    flex: 0 0 260px;
+    margin-top: 0;
+  }
+
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CE QU'IL FAUT RETENIR
+
+   UNE media query dans tout le fichier. Tout le reste s'adapte
+   grâce à :
+     - max-width et les unités relatives     (exercice 1)
+     - flex-wrap + flex-basis                (projet 3)
+     - clamp() pour la typographie           (notion 4)
+     - object-fit pour l'image               (notion 5)
+
+   L'ordre de travail :
+     1. les fondations
+     2. laisser le contenu se placer seul
+     3. une media query SEULEMENT pour ce qui résiste
+
+   Si vous en accumulez dix, c'est qu'une largeur fixe traîne
+   quelque part.
+   ═══════════════════════════════════════════════════════════════ */

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Disposer avec Flexbox</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 3</p>
+  <h1 class="titre-exo">Disposer avec Flexbox</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> placer des éléments côte à
+      côte — la question qui bloque tous les débutants — puis soigner les finitions :
+      coins arrondis, ombres, dégradés et transitions.</p>
+    </div>
+
+    <h2>1 · Le problème : tout s'empile</h2>
+
+    <p>
+      Vous l'avez constaté à l'exercice 2 : vos trois cartes se sont placées
+      <strong>les unes sous les autres</strong>, occupant chacune toute la largeur.
+      Ce n'est pas un défaut, c'est le comportement par défaut d'un élément de type
+      <em>bloc</em> — <code>div</code>, <code>p</code>, <code>section</code>,
+      <code>h1</code>…
+    </p>
+
+    <p>
+      Pendant vingt ans, les mettre côte à côte fut un casse-tête. Depuis
+      <strong>Flexbox</strong>, c'est une ligne de CSS.
+    </p>
+
+    <h2>2 · Le principe : un parent, des enfants</h2>
+
+    <p>
+      Flexbox fonctionne toujours par <strong>paire</strong>. On déclare
+      <code>display: flex</code> sur un élément — le <em>conteneur</em> — et ce sont
+      ses <strong>enfants directs</strong> qui se disposent.
+    </p>
+
+<pre><code>&lt;div class="rangee"&gt;        ← le conteneur : on écrit le CSS ICI
+  &lt;div class="carte"&gt;…&lt;/div&gt;   ← les enfants : ils se placent
+  &lt;div class="carte"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<pre><code>.rangee {
+  display: flex;
+}</code></pre>
+
+    <p>Et voilà : les cartes passent côte à côte.</p>
+
+    <div class="attention">
+      <p>
+        <strong>L'erreur n°1 :</strong> écrire <code>display: flex</code> sur les
+        cartes elles-mêmes. Rien ne se passe comme prévu. La règle va toujours sur le
+        <em>parent</em> — celui qui contient les éléments à aligner.
+      </p>
+    </div>
+
+    <h2>3 · Espacer : <code>gap</code></h2>
+
+    <p>
+      Une fois les éléments côte à côte, ils se touchent. <code>gap</code> crée un
+      espace <strong>entre</strong> eux, sans en ajouter sur les bords :
+    </p>
+
+<pre><code>.rangee {
+  display: flex;
+  gap: 20px;
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>gap</code> remplace avantageusement les <code>margin</code> qu'on posait
+        autrefois sur chaque enfant : pas de marge en trop au début ni à la fin, et
+        rien à corriger quand on ajoute un élément.
+      </p>
+    </div>
+
+    <h2>4 · Répartir sur la ligne : <code>justify-content</code></h2>
+
+    <p>
+      Quand les éléments n'occupent pas toute la largeur, cette propriété décide où va
+      l'espace restant :
+    </p>
+
+    <table>
+      <tr>
+        <th>Valeur</th>
+        <th>Effet</th>
+      </tr>
+      <tr>
+        <td><code>flex-start</code></td>
+        <td>Tout à gauche <em>(par défaut)</em></td>
+      </tr>
+      <tr>
+        <td><code>center</code></td>
+        <td>Groupés au centre</td>
+      </tr>
+      <tr>
+        <td><code>flex-end</code></td>
+        <td>Tout à droite</td>
+      </tr>
+      <tr>
+        <td><code>space-between</code></td>
+        <td>Le premier collé à gauche, le dernier à droite, l'espace réparti entre</td>
+      </tr>
+      <tr>
+        <td><code>space-around</code></td>
+        <td>L'espace réparti autour de chacun</td>
+      </tr>
+    </table>
+
+    <p>
+      <code>space-between</code> est le choix classique d'une barre de navigation : le
+      logo à gauche, le menu à droite.
+    </p>
+
+    <h2>5 · Aligner en hauteur : <code>align-items</code></h2>
+
+    <p>
+      Quand les éléments n'ont pas la même hauteur, cette propriété décide de leur
+      alignement vertical :
+    </p>
+
+    <table>
+      <tr>
+        <th>Valeur</th>
+        <th>Effet</th>
+      </tr>
+      <tr>
+        <td><code>stretch</code></td>
+        <td>Tous étirés à la même hauteur <em>(par défaut)</em></td>
+      </tr>
+      <tr>
+        <td><code>center</code></td>
+        <td>Centrés verticalement</td>
+      </tr>
+      <tr>
+        <td><code>flex-start</code></td>
+        <td>Alignés en haut</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le centrage parfait</strong>, celui qui a longtemps fait souffrir :
+      </p>
+<pre><code>.boite {
+  display: flex;
+  justify-content: center;   /* centré horizontalement */
+  align-items: center;       /* centré verticalement */
+}</code></pre>
+      <p>Deux lignes. C'est tout.</p>
+    </div>
+
+    <h2>6 · Faire passer à la ligne : <code>flex-wrap</code></h2>
+
+    <p>
+      Par défaut, Flexbox <strong>refuse</strong> de passer à la ligne : il comprime
+      les éléments jusqu'à les rendre illisibles. Pour l'autoriser :
+    </p>
+
+<pre><code>.rangee {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}</code></pre>
+
+    <p>
+      Les éléments qui ne tiennent plus passent alors à la ligne suivante. C'est le
+      premier pas vers le responsive du projet 4 — une grille de cartes qui devient
+      une colonne sur téléphone, sans une seule ligne de code en plus.
+    </p>
+
+    <h2>7 · Donner une largeur de base — le raccourci <code>flex</code></h2>
+
+    <p>
+      Sur les <strong>enfants</strong> d'un conteneur flex (et non sur le conteneur,
+      cette fois), une propriété décide de leur largeur :
+    </p>
+
+<pre><code>.carte {
+  flex: 1 1 380px;
+    /*  ↑ ↑   ↑
+        │ │   la largeur de BASE
+        │ peut rétrécir  (1 = oui)
+        peut grandir     (1 = oui)  */
+}</code></pre>
+
+    <table>
+      <tr>
+        <th>Valeur</th>
+        <th>Nom</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td>1<sup>re</sup></td>
+        <td><em>grow</em></td>
+        <td>L'élément peut <strong>grandir</strong> pour occuper l'espace libre</td>
+      </tr>
+      <tr>
+        <td>2<sup>e</sup></td>
+        <td><em>shrink</em></td>
+        <td>Il peut <strong>rétrécir</strong> si la place manque</td>
+      </tr>
+      <tr>
+        <td>3<sup>e</sup></td>
+        <td><em>basis</em></td>
+        <td>Sa largeur de <strong>départ</strong></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>La base n'est pas un minimum</strong> — c'est un point de départ.
+        Le navigateur place autant d'éléments qu'il peut à cette largeur, puis
+        répartit l'espace restant entre eux (parce que <em>grow</em> vaut 1).
+      </p>
+      <p>
+        Conséquence pratique : c'est <strong>la base qui décide du nombre d'éléments
+        par ligne</strong>. Dans une ligne de 860 px, une base de 380 px en laisse
+        passer deux (380 + 20 + 380 = 780) mais pas trois (1180). Une base de 250 px
+        en aurait laissé passer trois.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Rappel sur <code>rem</code></strong> (projet 3, exercice 2, notion 7) :
+        <code>1rem</code> vaut la taille de police de base du navigateur, soit 16 px par
+        défaut. Donc <code>1.3rem</code> ≈ 21 px et <code>0.9rem</code> ≈ 14 px.
+      </p>
+      <p>
+        Vous en écrirez deux dans cet exercice. On préfère <code>rem</code> aux pixels
+        pour les tailles de texte : une personne qui a augmenté la police par défaut de
+        son navigateur verra vos textes suivre son réglage.
+      </p>
+    </div>
+
+    <h2>8 · Les finitions</h2>
+
+    <h3>Coins arrondis</h3>
+
+<pre><code>border-radius: 8px;      /* les 4 coins */
+border-radius: 50%;      /* un cercle, si l'élément est carré */</code></pre>
+
+    <h3>Ombres portées</h3>
+
+<pre><code>box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+         /* décalage-x · décalage-y · flou · couleur */</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>rgba()</code> ajoute un quatrième nombre à <code>rgb()</code> :
+        l'<strong>opacité</strong>, entre 0 (invisible) et 1 (opaque). Une ombre
+        réussie est presque toujours du noir très transparent — <code>0.1</code> à
+        <code>0.2</code>. Au-delà, l'effet devient lourd.
+      </p>
+    </div>
+
+    <h3>Dégradés</h3>
+
+<pre><code>background-image: linear-gradient(to right, #0b6bcb, #14457b);</code></pre>
+
+    <p>
+      La direction peut être <code>to right</code>, <code>to bottom</code>,
+      <code>to bottom right</code>, ou un angle : <code>135deg</code>.
+    </p>
+
+    <h3>Transitions</h3>
+
+    <p>
+      Sans transition, un changement au survol est brutal. <code>transition</code>
+      l'étale dans le temps :
+    </p>
+
+<pre><code>.carte {
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+.carte:hover {
+  background-color: #e8f1fb;
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>La transition se déclare sur l'état NORMAL, pas sur le survol.</strong>
+        C'est l'erreur classique. Posée sur <code>:hover</code> seulement, l'animation
+        ne joue qu'à l'aller — le retour reste brutal.
+      </p>
+    </div>
+
+    <p>
+      <code>:hover</code> est une <strong>pseudo-classe</strong> : elle vise un
+      élément dans un certain état. Vous en croiserez d'autres —
+      <code>:focus</code> (élément sélectionné au clavier),
+      <code>:first-child</code> (le premier de sa fratrie).
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>N'oubliez pas le clavier.</strong> Un effet posé uniquement sur
+        <code>:hover</code> est invisible pour qui navigue au clavier. Sur un élément
+        interactif, écrivez <code>.carte:hover, .carte:focus { … }</code> — les deux
+        états ensemble.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/CSS_layout/Flexbox"
+             target="_blank" rel="noopener">MDN — Flexbox</a>
+        </td>
+        <td>Reprend ce chapitre avec des exemples modifiables en direct.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox"
+             target="_blank" rel="noopener">MDN — Concepts de base de Flexbox</a>
+        </td>
+        <td>L'explication des axes, quand les noms des propriétés deviendront
+            logiques.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/CSS/transition"
+             target="_blank" rel="noopener">MDN — transition</a>
+        </td>
+        <td>Toutes les options : durée, délai, courbe d'accélération.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

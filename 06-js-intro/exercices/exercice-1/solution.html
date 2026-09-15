@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — La console du navigateur</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 1</p>
+  <h1 class="titre-exo">La console du navigateur</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="bac-a-sable.html">🖥️ Bac à sable</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez essayé les douze instructions avant d'arriver ici ?</strong>
+      Si oui, parfait. Sinon, ouvrez le <a href="bac-a-sable.html">bac à sable</a> :
+      cet exercice ne s'apprend qu'en tapant.</p>
+    </div>
+
+    <h2>Les réponses</h2>
+
+    <details>
+      <summary>Afficher les douze résultats</summary>
+
+<pre><code>2 + 3                  → 5
+7 * 8                  → 56
+10 / 4                 → 2.5
+10 % 3                 → 1
+(5 + 3) * 2            → 16
+
+"Bonjour"              → 'Bonjour'
+"Bon" + "jour"         → 'Bonjour'
+"Il est " + 14 + " h"  → 'Il est 14 h'
+"3" + 4                → '34'
+
+Bonjour                → Uncaught ReferenceError: Bonjour is not defined
+3,5 + 1                → 6        ⚠️ faux, sans erreur
+"Bonjour               → SyntaxError</code></pre>
+    </details>
+
+    <h2>Les trois choses à retenir</h2>
+
+    <h3>1 · <code>"3" + 4</code> donne <code>'34'</code></h3>
+
+    <p>
+      Le <code>+</code> a deux métiers en JavaScript : additionner des nombres, et
+      assembler des textes. Quand l'un des deux côtés est du texte,
+      <strong>l'assemblage l'emporte</strong> — le nombre est converti en texte.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi c'est important dès maintenant :</strong> à l'exercice 3, vous
+        demanderez son âge au visiteur. Ce que vous recevrez sera du <em>texte</em>,
+        même s'il a tapé des chiffres. <code>"25" + 1</code> donnera
+        <code>'251'</code>, pas <code>26</code>. Vous verrez alors comment convertir.
+      </p>
+    </div>
+
+    <h3>2 · <code>ReferenceError</code> : le mot n'existe pas</h3>
+
+    <p>
+      <code>Bonjour</code> sans guillemets n'est pas du texte : c'est un
+      <strong>nom</strong>. Le navigateur cherche donc une variable appelée ainsi, ne
+      la trouve pas, et le dit.
+    </p>
+
+    <p>
+      Le message est précis — <em>« Bonjour is not defined »</em>. Prenez l'habitude
+      de le lire en entier : il nomme presque toujours le coupable.
+    </p>
+
+    <h3>3 · <code>3,5 + 1 → 6</code> : le piège silencieux</h3>
+
+    <div class="attention">
+      <p>
+        <strong>Aucune erreur, et pourtant le résultat est faux.</strong> C'est le pire
+        cas de figure : rien ne vous alerte.
+      </p>
+      <p>
+        En JavaScript, la virgule est un opérateur qui évalue ce qu'il y a de chaque
+        côté et ne garde que le <strong>dernier</strong>. <code>3,5 + 1</code> se lit
+        donc « évalue <code>3</code>, puis évalue <code>5 + 1</code>, et garde ce
+        dernier » → <code>6</code>.
+      </p>
+      <p>
+        Vous attendiez <code>4.5</code>, vous obtenez <code>6</code>, et
+        <strong>rien ne vous a prévenu</strong>. Retenez la règle :
+        <strong>le séparateur décimal est le point</strong>.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause</th>
+      </tr>
+      <tr>
+        <td>La console affiche <code>undefined</code> après mon instruction</td>
+        <td>
+          <strong>Ce n'est pas une erreur.</strong> L'instruction a fonctionné mais ne
+          renvoie aucune valeur — c'est normal pour tout ce qui <em>agit</em>
+        </td>
+      </tr>
+      <tr>
+        <td>Je ne trouve pas la zone où taper</td>
+        <td>
+          Elle est tout en bas de l'onglet Console, précédée d'un chevron
+          <code>&gt;</code>. Cliquez dedans
+        </td>
+      </tr>
+      <tr>
+        <td>Mon texte reste en rouge et rien ne s'exécute</td>
+        <td>Un guillemet n'est pas fermé, ou une parenthèse manque</td>
+      </tr>
+      <tr>
+        <td>La console est pleine de messages que je n'ai pas écrits</td>
+        <td>
+          Ce sont ceux de la page ou d'une extension. L'icône 🚫 (Chrome) ou la
+          corbeille (Firefox) vide l'affichage
+        </td>
+      </tr>
+      <tr>
+        <td>Tout a disparu après un rechargement</td>
+        <td>
+          <strong>Normal.</strong> La console ne conserve rien. Utilisez la flèche ↑
+          pour retrouver vos instructions précédentes
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Deux raccourcis qui font gagner du temps :</strong> la flèche ↑ rappelle
+        les instructions déjà tapées, et <code>Maj+Entrée</code> permet d'écrire
+        plusieurs lignes avant d'exécuter.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="bac-a-sable.html">← Retour au bac à sable</a>
+      <a class="bouton" href="../exercice-2/">Exercice 2 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

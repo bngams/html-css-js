@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Écrire du CSS</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 1</p>
+  <h1 class="titre-exo">Écrire du CSS</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  font-size: 18px;
+  color: #333;
+  background-color: #f7f7f5;
+}
+
+h1 {
+  color: #14457b;
+}
+
+h2 {
+  color: #0b6bcb;
+  text-align: center;
+}
+
+.intro {
+  font-weight: bold;
+  color: #1c2024;
+}
+
+#presentation {
+  background-color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: #0b6bcb;
+}
+
+footer {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+}</code></pre>
+    </details>
+
+    <p>
+      Le fichier commenté ligne par ligne est dans
+      <code>solution/style.css</code> — et la page habillée est
+      <a href="solution/">visible ici</a>.
+    </p>
+
+    <h2>Les trois portées, à retenir</h2>
+
+    <table>
+      <tr>
+        <th>Sélecteur</th>
+        <th>Vise</th>
+        <th>Dans cette page</th>
+      </tr>
+      <tr>
+        <td><code>h2</code></td>
+        <td>Tous les éléments de ce type</td>
+        <td>Les <strong>deux</strong> sous-titres</td>
+      </tr>
+      <tr>
+        <td><code>.intro</code></td>
+        <td>Tous ceux qui portent la classe</td>
+        <td>Les <strong>deux</strong> paragraphes d'introduction</td>
+      </tr>
+      <tr>
+        <td><code>#presentation</code></td>
+        <td>L'unique élément portant cet id</td>
+        <td><strong>Un seul</strong> bloc — celui de « Bienvenue »</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le point et le dièse ne sont pas décoratifs.</strong> Écrire
+        <code>intro { … }</code> sans point viserait une balise nommée
+        « intro »… qui n'existe pas. La règle serait simplement ignorée, sans
+        message d'erreur. C'est l'erreur la plus fréquente de cet exercice.
+      </p>
+    </div>
+
+    <h2>Deux points que la solution pousse plus loin</h2>
+
+    <h3>L'héritage : pourquoi une seule règle suffit pour la police</h3>
+
+    <p>
+      Nous n'avons posé la police que sur <code>body</code>, et pourtant tous les
+      paragraphes, titres et listes en héritent. C'est le mécanisme de
+      l'<strong>héritage</strong> : certaines propriétés — police, couleur du texte,
+      alignement — se transmettent aux éléments contenus.
+    </p>
+
+    <p>
+      D'autres ne s'héritent pas, et c'est heureux : un fond posé sur
+      <code>body</code> ne se répète pas sur chaque paragraphe.
+    </p>
+
+    <h3>Retirer un soulignement a un coût</h3>
+
+    <div class="attention">
+      <p>
+        <code>text-decoration: none</code> supprime un repère visuel qui signale un
+        lien. Pour une personne qui distingue mal les couleurs, un lien bleu sans
+        soulignement au milieu d'un texte noir peut devenir invisible.
+      </p>
+      <p>
+        Dans un vrai site, on compense : soulignement au survol, couleur très
+        contrastée, ou un style qui rend le lien évident autrement. Ne vous fiez
+        jamais à la seule couleur.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>Rien ne change du tout dans la page</td>
+        <td>Le fichier n'a pas été enregistré — ou vous rechargez
+            <code>style.css</code> au lieu de <code>travail.html</code></td>
+      </tr>
+      <tr>
+        <td>Une seule règle est ignorée</td>
+        <td>Le point ou le dièse manque devant le nom de la classe ou de l'id</td>
+      </tr>
+      <tr>
+        <td>Une règle est ignorée <em>et</em> la suivante aussi</td>
+        <td>Un point-virgule manque à la fin d'une déclaration : l'erreur se
+            propage à la suivante</td>
+      </tr>
+      <tr>
+        <td>Les deux blocs ont un fond blanc</td>
+        <td>La règle a été écrite avec un point (<code>.presentation</code>)
+            au lieu d'un dièse, ou posée sur <code>section</code></td>
+      </tr>
+      <tr>
+        <td>Un seul paragraphe est en gras</td>
+        <td>La règle vise un id au lieu de la classe, ou une seule occurrence a
+            été traitée</td>
+      </tr>
+      <tr>
+        <td>Le texte est toujours en Times</td>
+        <td>La règle <code>body</code> n'a pas été écrite, ou
+            <code>font-family</code> est mal orthographié</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui sauve :</strong> clic droit sur l'élément récalcitrant →
+        <em>Inspecter</em>. Le panneau des styles montre toutes les règles qui
+        s'appliquent, avec leur fichier et leur ligne. Une règle absente de la liste
+        n'a pas été lue ; une règle <s>barrée</s> a été écrasée par une autre.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à ma page</a>
+      <a class="bouton" href="../exercice-2/">Exercice 2 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML · CSS · JavaScript — 3 jours</title>
+  <link rel="stylesheet" href="01-html-structure/styles/home.css">
+  <style>
+    .jour {
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.4rem;
+      font-size: 1.05rem;
+      font-weight: 650;
+      color: var(--bleu);
+      border-bottom: 2px solid var(--bordure);
+    }
+    .carte--bientot {
+      opacity: 0.55;
+      cursor: default;
+      pointer-events: none;
+    }
+    .carte--bientot .carte__num { color: var(--gris); }
+    .badge {
+      display: inline-block;
+      margin-left: 0.4rem;
+      padding: 0.1em 0.5em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--gris);
+      border-radius: 99px;
+      vertical-align: middle;
+    }
+    .badge--encours {
+      color: #664d03;
+      background: #ffe69c;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="entete">
+    <p class="entete__projet">Formation · 3 jours</p>
+    <h1>HTML · CSS · JavaScript</h1>
+    <p class="entete__intro">
+      Créer des pages web de A à Z, sans rien installer d'autre qu'un éditeur
+      et un navigateur. Chaque projet est indépendant : un cours, des exercices
+      à compléter, et leurs corrigés commentés.
+    </p>
+  </header>
+
+  <main>
+
+    <h2 class="jour">Jour 1 — HTML et CSS</h2>
+
+    <ul class="grille-exos">
+      <li>
+        <a class="carte" href="01-html-structure/">
+          <span class="carte__num">Projet 1</span>
+          <span class="carte__titre">Structure d'une page HTML</span>
+          <span class="carte__concept">🎯 doctype · titres · liens · images · médias</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="02-html-semantique-formulaires/">
+          <span class="carte__num">Projet 2</span>
+          <span class="carte__titre">Sémantique et formulaires</span>
+          <span class="carte__concept">🎯 header/main/article · tableaux · formulaires</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="03-css-mise-en-forme/">
+          <span class="carte__num">Projet 3</span>
+          <span class="carte__titre">CSS — la mise en forme</span>
+          <span class="carte__concept">🎯 sélecteurs · box model · Flexbox · vos propres classes</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="04-css-responsive/">
+          <span class="carte__num">Projet 4</span>
+          <span class="carte__titre">CSS — le responsive</span>
+          <span class="carte__concept">🎯 viewport · media queries · mobile-first</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="05-projet-libre/">
+          <span class="carte__num">Projet 5</span>
+          <span class="carte__titre">Projet libre</span>
+          <span class="carte__concept">🎯 votre page, votre thème</span>
+        </a>
+      </li>
+    </ul>
+
+    <h2 class="jour">Jour 2 — JavaScript, les bases</h2>
+
+    <ul class="grille-exos">
+      <li>
+        <a class="carte" href="06-js-intro/">
+          <span class="carte__num">Projet 6</span>
+          <span class="carte__titre">Découvrir JavaScript</span>
+          <span class="carte__concept">🎯 la console · alert/prompt · let/const · charger un script</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="07-js-bases-1/">
+          <span class="carte__num">Projet 7</span>
+          <span class="carte__titre">Décider et regrouper</span>
+          <span class="carte__concept">🎯 if/else · fonctions · et/ou/non · un jeu complet</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="08-js-bases-2/">
+          <span class="carte__num">Projet 8</span>
+          <span class="carte__titre">Répéter et ranger</span>
+          <span class="carte__concept">🎯 boucles · tableaux · objets · classes</span>
+        </a>
+      </li>
+    </ul>
+
+    <h2 class="jour">Jour 3 — Pages dynamiques</h2>
+
+    <ul class="grille-exos">
+      <li>
+        <a class="carte" href="09-js-dom/">
+          <span class="carte__num">Projet 9</span>
+          <span class="carte__titre">Manipuler la page (DOM)</span>
+          <span class="carte__concept">🎯 sélecteurs · modifier · créer · construire depuis des données</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="10-js-evenements/">
+          <span class="carte__num">Projet 10</span>
+          <span class="carte__titre">Les événements</span>
+          <span class="carte__concept">🎯 click · input · submit · preventDefault</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="11-use-case-tabs/">
+          <span class="carte__num">Projet 11</span>
+          <span class="carte__titre">Cas pratique — les onglets</span>
+          <span class="carte__concept">🎯 un composant complet · data-* · classList</span>
+        </a>
+      </li>
+      <li>
+        <a class="carte" href="12-use-case-table-json/">
+          <span class="carte__num">Projet 12</span>
+          <span class="carte__titre">Cas pratique — tableau dynamique</span>
+          <span class="carte__concept">🎯 tableau · formulaire · statut calculé · bonus fetch</span>
+        </a>
+      </li>
+    </ul>
+
+  </main>
+
+  <footer class="pied">
+    <p>
+      <strong>Comment travailler :</strong> ouvrez un projet, lisez son
+      <em>cours</em>, puis l'<em>énoncé</em>, complétez le fichier qu'il désigne,
+      et comparez avec la <em>solution</em> — après avoir cherché.
+    </p>
+    <p>
+      <strong>Le fichier à modifier change selon le projet</strong> —
+      <code>travail.html</code> aux projets 1 et 2, <code>style.css</code> aux
+      projets 3 et 4, <code>script.js</code> au projet 6, puis <code>app.js</code>
+      à partir du projet 7. L'énoncé de chaque exercice le nomme explicitement, et
+      la page de travail vous le rappelle.
+    </p>
+    <p>
+      Un projet marqué <span class="badge badge--encours">en cours</span> est
+      ouvrable, mais tous ses exercices ne sont pas encore écrits. Ceux marqués
+      « à venir » ne sont pas disponibles.
+    </p>
+  </footer>
+
+</body>
+</html>

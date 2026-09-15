@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Parler à l'utilisateur</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 2</p>
+  <h1 class="titre-exo">Parler à l'utilisateur</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez essayé les dix étapes avant d'arriver ici ?</strong>
+      Surtout l'étape 6, celle qui donne un résultat faux. Si ce n'est pas le cas,
+      retournez à la <a href="travail.html">page de travail</a> : c'est en voyant
+      le <code>251</code> de vos propres yeux que la suite prend son sens.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <p class="astuce">
+      Ouvrez la console <strong>avant</strong> de lancer le corrigé : la moitié du
+      résultat s'y affiche.
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>script.js</code> en entier</summary>
+
+<pre><code>console.log("Le script est chargé");
+
+alert("Bienvenue à la médiathèque !");
+
+let prenom = prompt("Comment vous appelez-vous ?");
+
+alert("Bonjour " + prenom + " !");
+
+let ageSaisi = prompt("Quel âge avez-vous ?");
+
+console.log("L'an prochain, version texte :", ageSaisi + 1);
+
+let age = Number(ageSaisi);
+
+console.log("L'an prochain, version nombre :", age + 1);
+
+let newsletter = confirm("Souhaitez-vous recevoir la newsletter ?");
+
+console.log("Récapitulatif :", prenom, age, newsletter);</code></pre>
+    </details>
+
+    <h2>Les trois choses à retenir</h2>
+
+    <h3>1 · <code>prompt()</code> renvoie <strong>toujours</strong> du texte</h3>
+
+    <div class="attention">
+      <p>
+        C'est le cœur de l'exercice. Le visiteur tape <code>25</code>, vous croyez
+        recevoir le nombre <code>25</code> : vous recevez la chaîne
+        <code>"25"</code>.
+      </p>
+<pre><code>"25" + 1          → "251"     le + assemble deux textes
+Number("25") + 1  → 26        le + additionne deux nombres</code></pre>
+      <p>
+        Et rien ne vous prévient : <strong>aucune erreur rouge</strong>, juste un
+        résultat absurde. Exactement comme le <code>3,5 + 1</code> de l'exercice 1,
+        c'est un piège <em>silencieux</em> — le plus dangereux.
+      </p>
+    </div>
+
+    <p>
+      <code>Number()</code> est la solution : il transforme un texte en nombre. Si
+      le texte n'est pas un nombre — <code>Number("abc")</code> — vous obtenez
+      <code>NaN</code>, pour <em>Not a Number</em>. Vous le croiserez, et c'est
+      souvent le signe qu'une conversion a été oubliée quelque part.
+    </p>
+
+    <h3>2 · Trois valeurs, trois types</h3>
+
+    <p>
+      Le récapitulatif de l'étape 10 affiche trois valeurs de natures différentes,
+      et la console les colore différemment :
+    </p>
+
+    <table>
+      <tr>
+        <th>Valeur</th>
+        <th>Vient de</th>
+        <th>Type</th>
+      </tr>
+      <tr>
+        <td><code>prenom</code></td>
+        <td><code>prompt()</code></td>
+        <td><code>string</code> — du texte</td>
+      </tr>
+      <tr>
+        <td><code>age</code></td>
+        <td><code>Number(...)</code></td>
+        <td><code>number</code> — un nombre</td>
+      </tr>
+      <tr>
+        <td><code>newsletter</code></td>
+        <td><code>confirm()</code></td>
+        <td><code>boolean</code> — vrai ou faux</td>
+      </tr>
+    </table>
+
+    <p>
+      L'instruction <code>typeof</code> permet de le vérifier à tout moment :
+      <code>typeof age</code> répond <code>"number"</code>. C'est le sujet de
+      l'exercice 3.
+    </p>
+
+    <h3>3 · <code>alert()</code> parle au visiteur, <code>console.log()</code> vous parle à vous</h3>
+
+    <p>
+      Les deux affichent un message, mais pas au même destinataire, et pas avec les
+      mêmes conséquences :
+    </p>
+
+    <table>
+      <tr>
+        <th></th>
+        <th><code>alert()</code></th>
+        <th><code>console.log()</code></th>
+      </tr>
+      <tr>
+        <th>Destinataire</th>
+        <td>le visiteur</td>
+        <td>vous</td>
+      </tr>
+      <tr>
+        <th>Bloque la page</th>
+        <td>oui, jusqu'au clic</td>
+        <td>non</td>
+      </tr>
+      <tr>
+        <th>Dans un site livré</th>
+        <td>rare, et jamais pour déboguer</td>
+        <td>à retirer avant la mise en ligne</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Un réflexe à prendre dès aujourd'hui :</strong> quand votre code ne
+        fait pas ce que vous attendez, n'essayez pas de deviner. Placez un
+        <code>console.log()</code> juste avant la ligne suspecte, et regardez ce
+        qu'elle contient vraiment. C'est la méthode la plus rentable du métier.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause</th>
+      </tr>
+      <tr>
+        <td>Rien ne se passe du tout au rechargement</td>
+        <td>
+          Le fichier n'est pas enregistré (<code>Ctrl+S</code>), ou il s'appelle
+          autrement que <code>script.js</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>Uncaught SyntaxError</code> dans la console, et aucune boîte ne
+          s'ouvre
+        </td>
+        <td>
+          Une erreur de frappe <strong>arrête tout le fichier</strong>. Le message
+          indique la ligne : lisez-la
+        </td>
+      </tr>
+      <tr>
+        <td>La console affiche <code>undefined</code> après une alerte</td>
+        <td>
+          <strong>Normal.</strong> <code>alert()</code> ne renvoie rien. Ce n'est
+          pas une erreur
+        </td>
+      </tr>
+      <tr>
+        <td>L'étape 8 affiche <code>NaN</code></td>
+        <td>
+          Le texte saisi n'était pas un nombre — ou vous avez tapé une virgule au
+          lieu d'un point
+        </td>
+      </tr>
+      <tr>
+        <td>Le récapitulatif affiche <code>null</code> à la place du prénom</td>
+        <td>
+          Vous avez cliqué sur <strong>Annuler</strong> : <code>prompt()</code>
+          renvoie alors <code>null</code>, et non un texte vide
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Les valeurs s'affichent collées, comme <code>Récapitulatif :Camille</code>
+        </td>
+        <td>
+          Vous avez utilisé <code>+</code> au lieu d'une <strong>virgule</strong>
+          entre les valeurs de <code>console.log()</code>
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../exercice-3/">Exercice 3 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

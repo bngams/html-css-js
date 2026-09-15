@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Des listes et des boucles</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 1</p>
+  <h1 class="titre-exo">Des listes et des boucles</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Lire un tableau, le parcourir de deux
+      façons, et le modifier.</p>
+      <p>
+        <strong>Prérequis :</strong> le projet 7 — <code>const</code>,
+        <code>console.log()</code> à plusieurs valeurs, les fonctions.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-1/app.js</code>
+      </p>
+      <p>
+        Le tableau des cinq fruits vous est <strong>donné</strong>. Vous n'avez pas
+        à le créer.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        ⚠️ <strong>Le guidage se desserre à partir de ce projet.</strong> Les
+        consignes sont plus courtes qu'au projet 7 : à vous de retourner au cours
+        quand une étape résiste. C'est l'objectif — vous avez maintenant de quoi
+        chercher seul.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 10 étapes</h2>
+
+    <h3>Partie 1 — lire un tableau</h3>
+
+    <ol class="criteres">
+      <li>
+        Afficher <code>Nombre de fruits :</code> puis la <strong>longueur</strong> du
+        tableau
+      </li>
+      <li>
+        Afficher <code>3e fruit :</code> puis le <strong>troisième</strong> fruit —
+        attention à l'index
+      </li>
+      <li>
+        Afficher <code>Dernier :</code> puis le dernier fruit, <strong>sans écrire
+        <code>4</code> en dur</strong>
+      </li>
+      <li>
+        Afficher <code>Case 5 :</code> puis <code>fruits[5]</code> — et constater
+        qu'il ne se passe rien d'alarmant
+      </li>
+    </ol>
+
+    <h3>Partie 2 — parcourir avec <code>for</code></h3>
+
+    <ol class="criteres" start="5">
+      <li>
+        Avec une boucle <code>for</code> classique, afficher une ligne par fruit :
+        le texte <code>→</code>, puis le <strong>numéro de case</strong>, puis le
+        fruit
+      </li>
+    </ol>
+
+    <h3>Partie 3 — parcourir avec <code>for…of</code></h3>
+
+    <ol class="criteres" start="6">
+      <li>
+        Même parcours avec <code>for…of</code>, mais sans le numéro : le texte
+        <code>·</code>, puis le fruit
+      </li>
+    </ol>
+
+    <h3>Partie 4 — modifier le tableau</h3>
+
+    <ol class="criteres" start="7">
+      <li>Ajouter <code>"Kiwi"</code> à la fin du tableau</li>
+      <li>Afficher <code>Après ajout :</code> puis la nouvelle longueur</li>
+      <li>
+        Ranger dans <code>listeTexte</code> tous les fruits assemblés en un seul
+        texte, séparés par <code> - </code>
+      </li>
+      <li>Afficher <code>Liste :</code> puis <code>listeTexte</code></li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <div class="astuce">
+      <p>
+        <strong>⚠️ Attention au décompte.</strong> Vous écrirez
+        <strong>huit</strong> <code>console.log</code> — mais la console affichera
+        <strong>seize lignes</strong>. C'est normal : les étapes 5 et 6 sont des
+        boucles, et chacune répète son affichage <strong>cinq fois</strong>.
+      </p>
+      <p>
+        C'est tout l'intérêt d'une boucle : <em>une</em> instruction écrite,
+        <em>cinq</em> exécutions.
+      </p>
+    </div>
+
+    <p>La console doit afficher exactement ceci :</p>
+
+<pre><code>Nombre de fruits : 5
+3e fruit : Cerise
+Dernier : Poire
+Case 5 : undefined
+→ 0 Pomme
+→ 1 Banane
+→ 2 Cerise
+→ 3 Mangue
+→ 4 Poire
+· Pomme
+· Banane
+· Cerise
+· Mangue
+· Poire
+Après ajout : 6
+Liste : Pomme - Banane - Cerise - Mangue - Poire - Kiwi</code></pre>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>L'index part de zéro</td>
+        <td>
+          Le « 3e fruit » est <code>Cerise</code>, pas <code>Mangue</code>
+        </td>
+      </tr>
+      <tr>
+        <td>La case inexistante</td>
+        <td>
+          <code>Case 5 : undefined</code> — <strong>aucune erreur rouge</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>La boucle <code>for</code></td>
+        <td>
+          Cinq lignes, numérotées de <strong>0 à 4</strong> — pas de sixième ligne
+        </td>
+      </tr>
+      <tr>
+        <td>Le dernier fruit</td>
+        <td>
+          Écrit avec <code>length - 1</code> : si vous aviez mis <code>4</code> en
+          dur, l'étape 7 le laisserait faux
+        </td>
+      </tr>
+      <tr>
+        <td>L'ajout malgré <code>const</code></td>
+        <td>
+          <code>Après ajout : 6</code> — et aucune erreur, alors que le tableau est
+          en <code>const</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>app.js</code> : aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — le piège du chevron</strong></p>
+      <ol>
+        <li>
+          Dans l'étape 5, remplacez <code>i &lt; fruits.length</code> par
+          <code>i &lt;= fruits.length</code>.
+        </li>
+        <li>Enregistrez, rechargez, et regardez la fin de la première liste.</li>
+      </ol>
+      <p>
+        Une sixième ligne apparaît : <code>→ 5 undefined</code>. La boucle a fait un
+        tour de trop, sur une case qui n'existe pas —
+        <strong>sans la moindre erreur</strong>. Remettez le chevron simple.
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les seize lignes s'affichent, dans l'ordre, sans erreur rouge</li>
+      <li>
+        Vous savez dire pourquoi le dernier index est <code>length - 1</code>
+      </li>
+      <li>
+        Vous savez quand préférer <code>for…of</code> à <code>for</code>
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>app.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>35 à 45 minutes.</strong> Les étapes 5 et 6 sont le cœur : écrire une
+      boucle juste du premier coup demande de l'attention aux bornes.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

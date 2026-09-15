@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Pédaleurs — Association cycliste</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="banniere">
+    <div class="conteneur">
+      <nav class="menu">
+        <a href="#pourquoi">Pourquoi nous</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#adhesion">Adhérer</a>
+      </nav>
+      <h1>Les Pédaleurs</h1>
+      <p class="accroche">
+        Le club cycliste qui roule pour le plaisir, pas pour le chrono.
+        Trois sorties par semaine, tous niveaux.
+      </p>
+      <p><a class="bouton-cta" href="#adhesion">Rejoindre le club</a></p>
+    </div>
+  </header>
+
+  <img class="photo-large"
+       src="../assets/velo.svg"
+       alt="Deux cyclistes du club roulant côte à côte sur une route de campagne,
+            au petit matin"
+       width="1200" height="420">
+
+  <main>
+
+    <section id="pourquoi" class="conteneur section">
+      <h2>Pourquoi nous rejoindre</h2>
+
+      <div class="arguments">
+
+        <article class="argument">
+          <h3>Tous les niveaux</h3>
+          <p>
+            Trois groupes selon l'allure. Personne n'est laissé derrière, c'est la
+            règle du club depuis 1998.
+          </p>
+        </article>
+
+        <article class="argument">
+          <h3>Des sorties encadrées</h3>
+          <p>
+            Chaque groupe a son accompagnateur formé aux premiers secours et à la
+            mécanique de dépannage.
+          </p>
+        </article>
+
+        <article class="argument">
+          <h3>Un atelier partagé</h3>
+          <p>
+            Outillage complet et conseils le samedi matin, pour entretenir son vélo
+            soi-même.
+          </p>
+        </article>
+
+      </div>
+
+      <h3 class="sous-section">Nos sorties de la semaine</h3>
+
+      <ul class="sorties">
+        <li><strong>Mardi 18 h</strong> — sortie souple, 30 km, groupe découverte</li>
+        <li><strong>Jeudi 18 h</strong> — travail de côtes, 45 km, groupe confirmé</li>
+        <li><strong>Dimanche 9 h</strong> — la grande sortie, 60 à 90 km, tous groupes</li>
+      </ul>
+    </section>
+
+    <section id="tarifs" class="section-alt">
+      <div class="conteneur">
+        <h2>Nos tarifs</h2>
+
+        <table class="tarifs">
+          <caption>Cotisation annuelle 2026</caption>
+          <thead>
+            <tr>
+              <th scope="col">Formule</th>
+              <th scope="col">Tarif</th>
+              <th scope="col">Inclus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Découverte</th>
+              <td>45 €</td>
+              <td>Trois sorties d'essai, sans engagement</td>
+            </tr>
+            <tr>
+              <th scope="row">Annuelle</th>
+              <td>120 €</td>
+              <td>Sorties illimitées, atelier, assurance</td>
+            </tr>
+            <tr>
+              <th scope="row">Famille</th>
+              <td>200 €</td>
+              <td>Jusqu'à quatre personnes du même foyer</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="adhesion" class="conteneur section">
+      <h2>Demande d'adhésion</h2>
+
+      <form class="formulaire">
+
+        <p class="champ">
+          <label for="nom">Nom et prénom</label>
+          <input type="text" id="nom" name="nom" required>
+        </p>
+
+        <p class="champ">
+          <label for="courriel">E-mail</label>
+          <input type="email" id="courriel" name="courriel" required>
+        </p>
+
+        <p class="champ">
+          <label for="formule">Formule souhaitée</label>
+          <select id="formule" name="formule">
+            <option value="decouverte">Découverte — 45 €</option>
+            <option value="annuelle">Annuelle — 120 €</option>
+            <option value="famille">Famille — 200 €</option>
+          </select>
+        </p>
+
+        <p class="champ">
+          <label for="message">Un mot sur votre pratique</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </p>
+
+        <p><button type="submit" class="bouton-cta">Envoyer ma demande</button></p>
+
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="pied">
+    <div class="conteneur">
+      <p>Les Pédaleurs — maison des associations, 31000 Toulouse</p>
+      <p>
+        <a href="https://fr.wikipedia.org/wiki/Cyclotourisme" target="_blank" rel="noopener">
+          Qu'est-ce que le cyclotourisme ?
+        </a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

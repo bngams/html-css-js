@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club de randonnée — Le blog</title>
+</head>
+<body>
+
+  <header>
+    <h1>Les Marcheurs du Dimanche</h1>
+    <p>Le blog du club de randonnée de Haute-Garonne</p>
+
+    <nav>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Nos sorties</a></li>
+        <li><a href="#">Nous rejoindre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <h2>Nos derniers récits</h2>
+
+    <div>
+
+      <article>
+        <h3>Le pic du Midi par la face nord</h3>
+        <p>
+          Départ à 6 h du parking de La Mongie. La montée est raide mais le
+          panorama récompense l'effort.
+        </p>
+      </article>
+
+      <article>
+        <h3>Boucle des trois lacs</h3>
+        <p>
+          Une sortie familiale de 12 km, accessible aux enfants à partir de huit ans.
+        </p>
+      </article>
+
+    </div>
+
+
+    <aside>
+      <h3>Le saviez-vous ?</h3>
+      <p>
+        Le club compte 142 adhérents et organise une sortie chaque dimanche
+        depuis 1987.
+      </p>
+    </aside>
+
+  </main>
+
+
+  <footer>
+    <p>© 2026 Les Marcheurs du Dimanche — contact@exemple.fr</p>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       EXERCICE 1 — SOLUTION COMMENTÉE
+
+       Les explications sont ici, APRÈS le contenu, et jamais en tête
+       de fichier : le doctype doit occuper la première ligne, et le
+       navigateur cesse de chercher la déclaration d'encodage au-delà
+       des 1024 premiers octets.
+
+       ── Ligne par ligne ────────────────────────────────────────────
+
+       header
+         L'en-tête du site : le titre et le slogan. Le nav est placé
+         À L'INTÉRIEUR, ce qui est le cas le plus courant : le menu
+         fait partie de la bannière.
+
+       nav
+         Un groupe de liens de navigation. Toutes les listes de liens
+         ne sont pas des nav : on réserve la balise aux menus
+         principaux, sinon l'aide à la navigation perd son intérêt.
+
+       main
+         Le contenu principal, UN SEUL par page. C'est lui que vise
+         le lien « aller au contenu » des lecteurs d'écran, et c'est
+         lui que garde le mode lecture du navigateur.
+
+       div  (celui qui reste)
+         Il groupe les deux billets pour des raisons purement
+         visuelles — on lui donnera une disposition en colonnes au
+         projet 3. Aucune intention de sens, donc div est ICI le bon
+         choix. Le remplacer par section serait une erreur : il
+         n'a pas de titre propre et ne forme pas une partie
+         thématique du document.
+
+       article  (x2)
+         Chaque récit se tient tout seul : republié dans un email ou
+         un flux RSS, il garde son sens. C'est le test de la notion 3,
+         et il tranche en faveur d'article plutôt que de section.
+
+       aside
+         Un contenu À CÔTÉ du sujet. L'encadré « Le saviez-vous ? »
+         complète la page sans en être le propos. Placé dans le main
+         ici, ce qui est correct : un aside peut vivre dedans comme
+         dehors.
+
+       footer
+         Le pied de page : copyright et contact.
+
+       ── CE QU'ON NE VOIT PAS ───────────────────────────────────────
+
+       L'apparence est identique à celle du fichier de départ : ces
+       balises ne changent rien au rendu. Leur effet se mesure dans
+       l'onglet Accessibilité des outils de développement, où les
+       zones apparaissent désormais comme banner, navigation, main
+       et contentinfo — un plan de la page qu'un lecteur d'écran
+       peut annoncer et parcourir.
+       ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

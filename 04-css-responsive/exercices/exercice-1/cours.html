@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Le viewport et les unités</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le viewport et les unités</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> les trois fondations du
+      responsive — la balise qui dit au téléphone de ne pas tricher, les unités qui
+      s'adaptent, et la règle qui empêche les images de déborder.</p>
+      <p>
+        Aucune media query dans ce chapitre. Vous verrez qu'on peut déjà aller très
+        loin sans elles.
+      </p>
+    </div>
+
+    <h2>1 · Pourquoi une page « normale » est illisible sur téléphone</h2>
+
+    <p>
+      Prenez une page conçue pour un écran d'ordinateur et ouvrez-la sur un
+      téléphone. Deux choses se produisent :
+    </p>
+
+    <ul>
+      <li>le texte devient minuscule, illisible sans zoomer ;</li>
+      <li>une barre de défilement <strong>horizontale</strong> apparaît.</li>
+    </ul>
+
+    <p>
+      La cause remonte aux débuts du web mobile. À l'époque, aucun site n'était prévu
+      pour les petits écrans. Les téléphones ont donc adopté une ruse : <strong>faire
+      semblant d'avoir un écran large</strong> — environ 980 pixels — puis
+      dézoomer l'ensemble pour le faire tenir.
+    </p>
+
+    <p>
+      Résultat : la page s'affiche en entier, mais en tout petit. C'était un moindre
+      mal en 2007. Aujourd'hui, c'est un défaut.
+    </p>
+
+    <h2>2 · La balise qui corrige tout — <code>meta viewport</code></h2>
+
+    <p>
+      Une seule ligne, dans le <code>&lt;head&gt;</code>, demande au téléphone de
+      cesser de tricher :
+    </p>
+
+<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+
+    <table>
+      <tr>
+        <th>Morceau</th>
+        <th>Ce qu'il demande</th>
+      </tr>
+      <tr>
+        <td><code>width=device-width</code></td>
+        <td>« Utilise la <strong>vraie</strong> largeur de l'écran, pas 980 px »</td>
+      </tr>
+      <tr>
+        <td><code>initial-scale=1.0</code></td>
+        <td>« N'applique aucun zoom au chargement »</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Vous l'écrivez depuis le projet 1</strong> sans qu'on vous ait dit à
+        quoi elle servait : elle est dans toutes les pages de cette formation. La
+        voici expliquée.
+      </p>
+      <p>
+        C'est le <em>prérequis absolu</em> du responsive. Sans elle, toutes les media
+        queries du monde resteront sans effet sur un vrai téléphone — le navigateur
+        croira avoir 980 px de large.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Un piège du développement sur ordinateur :</strong> réduire la fenêtre
+        de votre navigateur fonctionne <em>même sans</em> cette balise. Le défaut ne se
+        voit que sur un vrai téléphone, ou dans le mode appareil mobile de
+        l'inspecteur. C'est pourquoi l'oubli passe si souvent inaperçu.
+      </p>
+    </div>
+
+    <h2>3 · Les unités fixes contre les unités relatives</h2>
+
+    <p>
+      Deuxième fondation : cesser de tout mesurer en pixels.
+    </p>
+
+<pre><code>.carte {
+  width: 600px;     /* FIXE — 600px, même sur un écran de 360px */
+}</code></pre>
+
+    <p>
+      Sur un téléphone de 360 px, cette carte déborde de 240 px. D'où la barre de
+      défilement horizontale — le symptôme le plus courant d'une page mal adaptée.
+    </p>
+
+    <h3>Les unités qui s'adaptent</h3>
+
+    <table>
+      <tr>
+        <th>Unité</th>
+        <th>Relative à</th>
+        <th>Usage</th>
+      </tr>
+      <tr>
+        <td><code>%</code></td>
+        <td>La largeur de l'élément parent</td>
+        <td>Largeurs de blocs</td>
+      </tr>
+      <tr>
+        <td><code>rem</code></td>
+        <td>La taille de police de base du navigateur (16 px par défaut)</td>
+        <td><strong>Tailles de texte et espacements</strong></td>
+      </tr>
+      <tr>
+        <td><code>vw</code></td>
+        <td>1 % de la largeur de la fenêtre</td>
+        <td>Grands titres, à manier avec prudence</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi <code>rem</code> plutôt que <code>px</code> pour le
+        texte :</strong> une personne malvoyante peut augmenter la taille de police par
+        défaut de son navigateur. Les valeurs en <code>rem</code> suivent ce réglage ;
+        celles en <code>px</code> l'ignorent purement et simplement.
+      </p>
+      <p>
+        La conversion est simple : <code>1rem</code> = 16 px, donc
+        <code>1.5rem</code> = 24 px, et <code>0.875rem</code> = 14 px.
+      </p>
+    </div>
+
+    <h2>4 · <code>max-width</code>, l'outil le plus utile du responsive</h2>
+
+    <p>Comparez ces deux règles :</p>
+
+    <table>
+      <tr>
+        <th>Règle</th>
+        <th>Comportement</th>
+      </tr>
+      <tr>
+        <td><code>width: 800px</code></td>
+        <td>Toujours 800 px — <strong>déborde</strong> sur un petit écran</td>
+      </tr>
+      <tr>
+        <td><code>max-width: 800px</code></td>
+        <td><strong>Jusqu'à</strong> 800 px, puis rétrécit librement</td>
+      </tr>
+    </table>
+
+    <p>
+      Vous l'utilisez déjà depuis le projet 3, pour centrer le conteneur. Sa vraie
+      raison d'être, la voici : c'est ce qui rend un bloc adaptable sans une seule
+      media query.
+    </p>
+
+    <h2>5 · Les images, coupables n°1 du débordement</h2>
+
+    <div class="attention">
+      <p>
+        Une image s'affiche par défaut à <strong>sa taille réelle</strong>. Une photo
+        de 1200 px de large dans une page ouverte sur un téléphone de 360 px déborde
+        de 840 px — et emporte toute la mise en page avec elle.
+      </p>
+    </div>
+
+    <p>La règle qui règle définitivement le problème :</p>
+
+<pre><code>img {
+  max-width: 100%;
+  height: auto;
+}</code></pre>
+
+    <table>
+      <tr>
+        <th>Déclaration</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><code>max-width: 100%</code></td>
+        <td>L'image ne dépassera jamais la largeur de son conteneur</td>
+      </tr>
+      <tr>
+        <td><code>height: auto</code></td>
+        <td>La hauteur suit, pour conserver les proportions</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Sans <code>height: auto</code></strong>, une image réduite en largeur
+        garderait sa hauteur d'origine et se retrouverait écrasée. Les deux vont
+        toujours ensemble.
+      </p>
+      <p>
+        Cette règle figure dans presque toutes les feuilles de style
+        professionnelles, posée une fois pour toutes sur <code>img</code>.
+      </p>
+    </div>
+
+    <h2>6 · Ce qu'on obtient sans media query</h2>
+
+    <p>Avec seulement ces trois fondations, une page devient déjà adaptable :</p>
+
+<pre><code>* { box-sizing: border-box; }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.conteneur {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}</code></pre>
+
+    <p>
+      Cette page rétrécit proprement jusqu'au téléphone. Les media queries du
+      chapitre suivant ne serviront qu'à <strong>réorganiser</strong> ce qui ne peut
+      pas se contenter de rétrécir — un menu horizontal, une grille de colonnes.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est l'ordre de travail à retenir :</strong> d'abord les fondations
+        (viewport, unités relatives, <code>max-width</code>), et seulement ensuite les
+        media queries pour les cas récalcitrants. Beaucoup de débutants font l'inverse
+        et empilent les points de rupture pour compenser des largeurs fixes.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Guides/Viewport_meta_element"
+             target="_blank" rel="noopener">MDN — La balise meta viewport</a>
+        </td>
+        <td>L'histoire complète des 980 px et toutes les options de la balise.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Styling_basics/Values_and_units"
+             target="_blank" rel="noopener">MDN — Valeurs et unités</a>
+        </td>
+        <td>Toutes les unités CSS, et quand employer chacune.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/CSS_layout/Responsive_Design"
+             target="_blank" rel="noopener">MDN — Design web responsive</a>
+        </td>
+        <td>Le panorama complet, dont vous verrez la suite à l'exercice 2.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

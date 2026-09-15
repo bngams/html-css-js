@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camille Roux — Relieuse d'art</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="entete">
+    <div class="conteneur entete__inner">
+      <p class="marque">Camille Roux</p>
+      <nav class="menu">
+        <a href="#parcours">Parcours</a>
+        <a href="#travaux">Travaux</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="conteneur">
+        <h1>Relieuse d'art</h1>
+        <p class="hero__texte">
+          Je répare, relie et habille les livres depuis douze ans, dans un atelier
+          du quartier Saint-Cyprien à Toulouse.
+        </p>
+      </div>
+    </section>
+
+    <figure class="illustration">
+      <img src="../assets/atelier.svg"
+           alt="L'atelier : une presse à relier en bois, une pile de livres aux
+                tranches colorées et un ouvrage ouvert sur l'établi"
+           width="1200" height="500">
+      <figcaption class="conteneur">L'atelier, rue des Amidonniers.</figcaption>
+    </figure>
+
+    <section id="parcours" class="conteneur bloc">
+      <h2>Parcours</h2>
+      <ul class="parcours">
+        <li><strong>2014</strong> — Diplôme des métiers d'art, reliure-dorure</li>
+        <li><strong>2016</strong> — Atelier de restauration, Bibliothèque de Toulouse</li>
+        <li><strong>2019</strong> — Ouverture de mon atelier</li>
+        <li><strong>2024</strong> — Prix régional des métiers d'art</li>
+      </ul>
+    </section>
+
+    <section id="travaux" class="conteneur bloc">
+      <h2>Travaux récents</h2>
+
+      <div class="grille">
+
+        <article class="projet">
+          <h3>Herbier de 1890</h3>
+          <p>Restauration complète, consolidation des planches, reliure demi-cuir.</p>
+        </article>
+
+        <article class="projet">
+          <h3>Série « Carnets »</h3>
+          <p>Douze carnets cousus main, papier vergé, couvertures en papier marbré.</p>
+        </article>
+
+        <article class="projet">
+          <h3>Atlas régional</h3>
+          <p>Reprise du dos, nouvelles gardes, dorure au fer sur le plat.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="contact" class="conteneur bloc">
+      <h2>Contact</h2>
+      <p>
+        L'atelier est ouvert du mardi au vendredi, sur rendez-vous.<br>
+        14 rue des Amidonniers, 31000 Toulouse
+      </p>
+      <p>
+        <a class="lien-fort" href="mailto:contact@exemple.fr">Écrire à l'atelier</a>
+        &nbsp;·&nbsp;
+        <a href="https://fr.wikipedia.org/wiki/Reliure" target="_blank" rel="noopener">
+          En savoir plus sur la reliure
+        </a>
+      </p>
+
+      <form class="formulaire">
+
+        <p class="champ">
+          <label for="nom">Votre nom</label>
+          <input type="text" id="nom" name="nom" required>
+        </p>
+
+        <p class="champ">
+          <label for="courriel">Votre e-mail</label>
+          <input type="email" id="courriel" name="courriel" required>
+        </p>
+
+        <p class="champ">
+          <label for="projet">Votre projet</label>
+          <textarea id="projet" name="projet" rows="4"></textarea>
+        </p>
+
+        <p><button type="submit" class="bouton-envoi">Demander un devis</button></p>
+
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="pied">
+    <div class="conteneur">
+      <p>Camille Roux — Relieuse d'art — 2026</p>
+    </div>
+  </footer>
+
+</body>
+</html>

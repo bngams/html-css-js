@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Écouter pendant qu'on tape</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 2</p>
+  <h1 class="titre-exo">Écouter pendant qu'on tape</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé la manip sans le ménage ?</strong> C'est elle qui
+      montre pourquoi une fonction rappelée en boucle doit commencer par faire le
+      vide. Si ce n'est pas fait, retournez à la
+      <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <p>
+      Une solution possible. <strong>Seuls les critères comptent</strong> : une autre
+      écriture qui les remplit tous est tout aussi juste.
+    </p>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const livres = [
+  { titre: "La Horde du Contrevent", auteur: "Alain Damasio" },
+  { titre: "Dune",                   auteur: "Frank Herbert" },
+  { titre: "Fondation",              auteur: "Isaac Asimov" },
+  { titre: "Le Nom du vent",         auteur: "Patrick Rothfuss" },
+  { titre: "Les Fourmis",            auteur: "Bernard Werber" },
+  { titre: "Chroniques martiennes",  auteur: "Ray Bradbury" }
+];
+
+/* 1 · Les éléments de la page */
+
+const champ    = document.querySelector("#recherche");
+const liste    = document.querySelector("#resultats");
+const compteur = document.querySelector("#compteur");
+
+/* 2 · Une fonction qui reconstruit la liste */
+
+function afficher(filtre) {
+
+  for (const ancien of liste.querySelectorAll("li")) {
+    ancien.remove();
+  }
+
+  let trouves = 0;
+
+  for (const livre of livres) {
+
+    const titre = livre.titre.toLowerCase();
+
+    if (titre.includes(filtre)) {
+
+      const li = document.createElement("li");
+      li.classList.add("livre");
+
+      const nom = document.createElement("span");
+      nom.classList.add("livre__titre");
+      nom.textContent = livre.titre;
+
+      const auteur = document.createElement("span");
+      auteur.classList.add("livre__auteur");
+      auteur.textContent = livre.auteur;
+
+      li.append(nom, auteur);
+      liste.append(li);
+
+      trouves = trouves + 1;
+    }
+  }
+
+  compteur.textContent = trouves + " livre(s) sur " + livres.length;
+
+  if (trouves === 0) {
+    compteur.classList.add("vide");
+  } else {
+    compteur.classList.remove("vide");
+  }
+
+  return trouves;
+}
+
+/* 3 · Au chargement : tout afficher */
+
+console.log("Au départ :", afficher(""), "livre(s)");
+
+/* 4 · À chaque frappe : refiltrer */
+
+champ.addEventListener("input", function () {
+
+  const filtre = champ.value.toLowerCase();
+
+  const trouves = afficher(filtre);
+
+  console.log("Recherche :", champ.value, "→", trouves, "résultat(s)");
+});</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Une fonction, deux appelants</h3>
+
+<pre><code>afficher("")                      ← au chargement, une fois
+afficher(champ.value.toLowerCase())  ← à chaque frappe</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le filtre vide affiche tout.</strong> Ce n'est pas un cas
+        particulier à traiter : <code>"n'importe quoi".includes("")</code> rend
+        <code>true</code>. Un seul chemin de code couvre les deux situations.
+      </p>
+    </div>
+
+    <h3>2 · La casse, des deux côtés</h3>
+
+<pre><code>const titre  = livre.titre.toLowerCase();        ← côté données
+const filtre = champ.value.toLowerCase();        ← côté saisie
+
+titre.includes(filtre)</code></pre>
+
+    <table>
+      <tr><th>Ce qu'on met en minuscules</th><th>Taper <code>DU</code> donne</th></tr>
+      <tr><td>Les deux côtés</td><td><code>3</code> ✅</td></tr>
+      <tr><td>Le titre seulement</td><td><code>0</code> ❌</td></tr>
+      <tr><td>La saisie seulement</td><td><code>2</code> ❌ — « Dune » garde son D, mais les deux « du » déjà minuscules passent</td></tr>
+      <tr><td>Aucun</td><td><code>0</code> ❌</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>L'affichage, lui, garde la casse d'origine :</strong> on met en
+        minuscules pour <em>comparer</em>, pas pour <em>afficher</em>. C'est
+        <code>livre.titre</code> — et non <code>titre</code> — qui est écrit dans la
+        page.
+      </p>
+      <p>
+        <strong>Le bug « saisie seulement » est le plus sournois :</strong> il ne se
+        voit pas sur <code>du</code> ni sur <code>DU</code>, qui rendent encore des
+        résultats plausibles. Cherchez <code>dune</code> pour l'attraper —
+        <code>0</code> résultat au lieu de <code>1</code>.
+      </p>
+    </div>
+
+    <h3>3 · Le ménage en première ligne</h3>
+
+    <p>
+      La boucle de <code>remove()</code> est la <strong>première instruction</strong>
+      de la fonction. Comme la fonction est rappelée à chaque lettre, tout oubli se
+      voit immédiatement :
+    </p>
+
+<pre><code>avec le ménage    →  d : 4 lignes · du : 3 · dun : 1 · dune : 1
+sans le ménage    →  d : 10 lignes · du : 13 · dun : 14 · dune : 15   ⚠️</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi 10 et non 4 ?</strong> Les <strong>six livres du
+        chargement</strong> sont déjà dans la liste et ne sont jamais retirés. Chaque
+        frappe empile les siens par-dessus : 6, puis 6+4, puis +3, puis +1, puis +1.
+      </p>
+    </div>
+
+    <h3>4 · Une fonction qui agit et qui rend</h3>
+
+<pre><code>return trouves;</code></pre>
+
+    <p>
+      <code>afficher</code> modifie la page <em>et</em> rend le nombre de résultats.
+      L'appelant s'en sert pour son <code>console.log</code>, sans recompter :
+    </p>
+
+<pre><code>console.log("Au départ :", afficher(""), "livre(s)");</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Une seule source de comptage.</strong> Recompter dans l'appelant
+        ouvrirait la porte à deux vérités qui divergent — la même raison qu'au projet
+        9, exercice 4.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Les résultats s'empilent à chaque lettre</td>
+        <td>
+          Le ménage manque au début de la fonction (cours §6)
+        </td>
+      </tr>
+      <tr>
+        <td><code>du</code> trouve 3 livres, <code>DU</code> n'en trouve aucun</td>
+        <td>
+          Un seul des deux côtés est passé en minuscules (cours §5)
+        </td>
+      </tr>
+      <tr>
+        <td>Le champ semble toujours vide</td>
+        <td>
+          <code>champ.textContent</code> au lieu de <code>champ.value</code>
+          (cours §3)
+        </td>
+      </tr>
+      <tr>
+        <td>Rien ne s'affiche au chargement, tout marche dès qu'on tape</td>
+        <td>
+          L'appel <code>afficher("")</code> au chargement a été oublié
+        </td>
+      </tr>
+      <tr>
+        <td>Le compteur reste rouge même quand des livres réapparaissent</td>
+        <td>
+          La classe <code>vide</code> est ajoutée, jamais retirée : il manque le
+          <code>else</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le titre s'affiche tout en minuscules</td>
+        <td>
+          C'est <code>titre</code> (la version comparée) qui est écrit dans la page
+          au lieu de <code>livre.titre</code>
+        </td>
+      </tr>
+    </table>
+
+    <h2>Ce qui vient ensuite</h2>
+
+    <div class="objectif">
+      <p>
+        Vous savez réagir à un clic et à une frappe. Dans les deux cas, le navigateur
+        n'a rien fait d'autre que vous prévenir.
+      </p>
+      <p>
+        À l'exercice 3, l'événement est un <strong>envoi de formulaire</strong> — et
+        là, le navigateur a un comportement par défaut : recharger la page. Il faudra
+        l'en empêcher.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Exercice 3 — à venir ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

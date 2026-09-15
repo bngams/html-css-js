@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Créer et insérer</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 3</p>
+  <h1 class="titre-exo">Créer et insérer</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Construire une page entière à partir de
+      données : <strong>rien n'est écrit dans le HTML</strong>, tout vient de votre
+      code.</p>
+      <p>
+        <strong>Prérequis :</strong> les exercices 1 et 2 (trouver, modifier,
+        <code>classList</code>) et le projet 8 (tableau d'objets,
+        <code>for…of</code>, l'accumulateur).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-3/app.js</code>
+      </p>
+      <p>
+        Le <strong>tableau de données</strong> — cinq livres — vous est fourni en
+        haut du fichier. La liste <code>#catalogue</code> de la page est
+        <strong>vide</strong>.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Un élément fabriqué n'est pas dans la page tant qu'on ne l'a pas
+        inséré.</strong>
+      </p>
+      <p>
+        Si votre code tourne sans erreur mais que rien ne s'affiche, c'est
+        <em>presque toujours</em> cela : un <code>createElement</code> sans
+        <code>append</code>. Le cours §2 le montre.
+      </p>
+    </div>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <h3>Sur la page</h3>
+
+    <ol class="criteres">
+      <li>
+        Le paragraphe <code>Aucun livre pour l'instant.</code> a
+        <strong>disparu</strong> de la page
+      </li>
+      <li>
+        La liste contient <strong>une ligne par livre</strong>, dans l'ordre du
+        tableau. Chaque ligne porte la classe <code>livre</code> et contient
+        <strong>deux éléments</strong> : le titre (classe <code>livre__titre</code>)
+        et le nombre de pages suivi de <code>pages</code> (classe
+        <code>livre__pages</code>)
+      </li>
+      <li>
+        Les livres de <strong>plus de 700 pages</strong> portent en plus la classe
+        <code>volumineux</code> — leur fond devient crème. Il y en a
+        <strong>trois</strong>
+      </li>
+      <li>
+        Une <strong>dernière ligne</strong> affiche
+        <code>Total : 3182 pages</code> — le total <strong>calculé</strong>, jamais
+        écrit à la main. Cette ligne <strong>ne porte pas</strong> la classe
+        <code>livre</code>
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 2 est le cœur de l'exercice.</strong> Pour chaque livre,
+        six gestes s'enchaînent :
+      </p>
+      <ol>
+        <li>fabriquer le <code>&lt;li&gt;</code></li>
+        <li>lui poser la classe <code>livre</code></li>
+        <li>fabriquer le <code>&lt;span&gt;</code> du titre, le remplir, lui poser sa classe</li>
+        <li>fabriquer le <code>&lt;span&gt;</code> des pages, le remplir, lui poser sa classe</li>
+        <li>insérer les deux <code>&lt;span&gt;</code> dans le <code>&lt;li&gt;</code></li>
+        <li>insérer le <code>&lt;li&gt;</code> dans la liste</li>
+      </ol>
+      <p>
+        <strong>Faites-le d'abord pour un seul livre, en dur</strong>, jusqu'à ce
+        qu'il s'affiche correctement. Ensuite seulement, entourez-le d'une boucle.
+      </p>
+    </div>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres" start="5">
+      <li>
+        <code>Au départ :</code> suivi du nombre d'enfants de la liste
+        <strong>avant</strong> toute insertion, puis du mot
+        <code>élément(s)</code>
+      </li>
+      <li>
+        <code>Lignes créées :</code> suivi du nombre d'enfants
+        <strong>après</strong> la boucle
+      </li>
+      <li>
+        <code>Volumineux :</code> suivi du nombre de livres de plus de 700 pages,
+        <strong>compté par votre boucle</strong>
+      </li>
+      <li>
+        <code>Total des pages :</code> suivi du total
+      </li>
+      <li>
+        <code>Titres en place :</code> suivi du nombre d'éléments de classe
+        <code>livre__titre</code> <strong>trouvés dans la page</strong> — la preuve
+        que vos éléments fabriqués sont bien devenus des éléments comme les autres
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>La console doit afficher exactement ces cinq lignes :</p>
+
+<pre><code>Au départ : 0 élément(s)
+Lignes créées : 5
+Volumineux : 3
+Total des pages : 3182
+Titres en place : 5</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Attention au critère 6.</strong> Après la boucle, la liste contient
+        <strong>cinq</strong> enfants — la ligne de total n'est pas encore là.
+        Affichez le compte <em>avant</em> d'ajouter le total, sinon vous lirez 6.
+      </p>
+    </div>
+
+    <p>Et la page doit ressembler à ceci :</p>
+
+    <table>
+      <tr><th>Élément</th><th>Attendu</th></tr>
+      <tr>
+        <td>Le message d'attente</td>
+        <td><strong>absent</strong></td>
+      </tr>
+      <tr>
+        <td>Les livres</td>
+        <td>5 cartes, titre à gauche, pages à droite</td>
+      </tr>
+      <tr>
+        <td>Fond crème</td>
+        <td>La Horde (712), Dune (900), Le Nom du vent (850)</td>
+      </tr>
+      <tr>
+        <td>Dernière ligne</td>
+        <td><code>Total : 3182 pages</code>, <strong>sans encadré</strong></td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td><strong>Le HTML reste vide</strong></td>
+        <td>
+          Clic droit → <em>Afficher le code source</em> : la liste y est toujours
+          vide. Ce que vous voyez n'existe que dans le DOM
+        </td>
+      </tr>
+      <tr>
+        <td>Cinq lignes distinctes</td>
+        <td>
+          Pas une seule ligne portant le dernier titre — ce serait le piège du
+          cours §4 et §6
+        </td>
+      </tr>
+      <tr>
+        <td>La structure d'une carte</td>
+        <td>
+          Inspectez une ligne : un <code>&lt;li class="livre"&gt;</code> contenant
+          <strong>deux</strong> <code>&lt;span&gt;</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le total</td>
+        <td>
+          <code>3182</code> obtenu par une boucle, pas écrit en dur
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun <code>innerHTML</code></td>
+        <td>
+          Cherchez-le dans <code>app.js</code> : il ne doit pas y figurer
+          (cours §8)
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — pourquoi le <code>createElement</code> doit être dans la
+      boucle</strong></p>
+      <p>Une fois l'exercice terminé, essayez volontairement ceci :</p>
+      <ol>
+        <li>
+          Sortez la ligne <code>const li = document.createElement("li")</code> de la
+          boucle, en la plaçant juste avant.
+        </li>
+        <li>Enregistrez, rechargez.</li>
+      </ol>
+      <p>
+        Une <strong>seule</strong> ligne apparaît, portant le dernier titre. Pourquoi ?
+        Parce qu'<code>append</code> ne copie pas : il <strong>déplace</strong>. Le
+        même élément a été promené cinq fois, et n'a fini qu'à un seul endroit.
+      </p>
+      <p>Remettez ensuite la ligne à sa place.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les cinq lignes s'affichent, sans erreur rouge</li>
+      <li>La page montre cinq cartes plus un total</li>
+      <li>
+        Vous savez dire pourquoi un <code>createElement</code> hors de la boucle ne
+        produit qu'une ligne
+      </li>
+      <li>Votre fichier ne contient aucun <code>innerHTML</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>50 à 60 minutes.</strong> C'est l'exercice le plus long du projet : la
+      construction d'une carte demande six gestes enchaînés. Faites-en une d'abord,
+      la boucle ensuite.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

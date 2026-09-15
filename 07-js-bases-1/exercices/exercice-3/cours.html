@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Enchaîner les décisions</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 3</p>
+  <h1 class="titre-exo">Enchaîner les décisions</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> enchaîner plusieurs cas
+      avec <code>else if</code>, et combiner des conditions avec
+      <strong>et</strong>, <strong>ou</strong>, <strong>non</strong>.</p>
+    </div>
+
+    <h2>1 · Plus de deux cas</h2>
+
+    <p>
+      À l'exercice 1, vous aviez deux chemins : majeur ou mineur. Mais un tarif de
+      médiathèque en compte quatre — enfant, jeune, adulte, senior. Écrire quatre
+      <code>if</code> séparés ne marche pas bien :
+    </p>
+
+<pre><code>if (age &lt; 12)  { … }
+if (age &lt; 18)  { … }   ← un enfant de 8 ans passe AUSSI ici
+if (age &lt; 65)  { … }   ← et ici</code></pre>
+
+    <p>
+      Chaque <code>if</code> est examiné séparément, donc <strong>plusieurs blocs
+      s'exécutent</strong>. Ce n'est pas ce qu'on veut.
+    </p>
+
+    <h2>2 · <code>else if</code> — une seule porte s'ouvre</h2>
+
+<pre><code>if (age &lt; 12) {
+  console.log("enfant");
+} else if (age &lt; 18) {
+  console.log("jeune");
+} else if (age &lt; 65) {
+  console.log("adulte");
+} else {
+  console.log("senior");
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La règle tient en une phrase : le premier cas vrai gagne, les autres
+        ne sont même pas examinés.</strong> Dès qu'une condition est satisfaite,
+        JavaScript exécute son bloc et saute tout le reste de la chaîne.
+      </p>
+    </div>
+
+    <p>
+      C'est pourquoi <code>age &lt; 18</code> ne piège pas les enfants de 8 ans :
+      ils ont déjà été servis par le premier cas.
+    </p>
+
+    <h3>L'ordre change tout</h3>
+
+    <div class="attention">
+      <p>
+        Écrivez la même chaîne dans le mauvais ordre, et des cas deviennent
+        <strong>inatteignables</strong> :
+      </p>
+<pre><code>if (age &lt; 65) {
+  console.log("adulte");
+} else if (age &lt; 18) {   ← JAMAIS atteint
+  console.log("jeune");
+}</code></pre>
+      <p>
+        Avec <code>age = 15</code>, la première condition est déjà vraie : le
+        résultat est <code>"adulte"</code>. La ligne <code>"jeune"</code> est du code
+        mort, et <strong>aucune erreur ne le signale</strong>.
+      </p>
+      <p>
+        <strong>La règle :</strong> du cas le plus restrictif au plus large.
+      </p>
+    </div>
+
+    <h2>3 · Combiner deux conditions</h2>
+
+    <p>
+      Parfois un seul test ne suffit pas : « être adulte <em>et</em> habiter la
+      commune ». Trois opérateurs permettent de composer.
+    </p>
+
+    <table>
+      <tr><th>Opérateur</th><th>Se lit</th><th>Vrai quand…</th></tr>
+      <tr><td><code>&amp;&amp;</code></td><td><strong>et</strong></td><td>les <strong>deux</strong> côtés sont vrais</td></tr>
+      <tr><td><code>||</code></td><td><strong>ou</strong></td><td><strong>au moins un</strong> côté est vrai</td></tr>
+      <tr><td><code>!</code></td><td><strong>non</strong></td><td>inverse : vrai devient faux</td></tr>
+    </table>
+
+<pre><code>age &gt;= 18 &amp;&amp; habitantCommune     les deux
+estEtudiant || estSenior          l'un ou l'autre
+!estAbonne                        pas abonné</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Le <code>|</code> s'obtient avec <code>AltGr + 6</code></strong> sur
+        un clavier français, ou <code>Alt + Maj + L</code> sur un Mac. Il en faut
+        <strong>deux</strong>.
+      </p>
+    </div>
+
+    <h3>Les quatre combinaisons de <code>&amp;&amp;</code></h3>
+
+    <table>
+      <tr><th>Gauche</th><th>Droite</th><th><code>&amp;&amp;</code></th><th><code>||</code></th></tr>
+      <tr><td>vrai</td><td>vrai</td><td><code>true</code></td><td><code>true</code></td></tr>
+      <tr><td>vrai</td><td>faux</td><td><code>false</code></td><td><code>true</code></td></tr>
+      <tr><td>faux</td><td>vrai</td><td><code>false</code></td><td><code>true</code></td></tr>
+      <tr><td>faux</td><td>faux</td><td><code>false</code></td><td><code>false</code></td></tr>
+    </table>
+
+    <h2>4 · Le piège de l'intervalle</h2>
+
+    <div class="attention">
+      <p>
+        <strong>C'est le défaut le plus dangereux de ce cours, parce qu'il ne produit
+        aucune erreur.</strong> En mathématiques on écrit :
+      </p>
+<pre><code>18 ≤ age &lt; 65</code></pre>
+      <p>
+        Transcrit tel quel en JavaScript, cela donne un résultat absurde :
+      </p>
+<pre><code>const age = 70;
+18 &lt;= age &lt; 65        → true      ⚠️ FAUX, et pourtant accepté</code></pre>
+      <p>
+        <strong>Pourquoi ?</strong> JavaScript lit de gauche à droite, en deux temps :
+      </p>
+<pre><code>18 &lt;= 70        → true
+true &lt; 65       → true     (true est converti en 1, et 1 &lt; 65)</code></pre>
+      <p>
+        Le résultat final n'a plus aucun rapport avec la question posée. Un senior de
+        70 ans est classé « adulte », silencieusement.
+      </p>
+      <p>
+        <strong>Et voici le plus troublant :</strong> cette écriture répond
+        <code>true</code> <strong>quel que soit l'âge</strong>. Essayez avec 8, avec
+        200 : toujours <code>true</code>.
+      </p>
+<pre><code>age = 70  →  18 &lt;= 70 donne true,  puis true &lt; 65  → true
+age = 8   →  18 &lt;= 8  donne false, puis false &lt; 65 → true</code></pre>
+      <p>
+        Dans les deux cas, la deuxième comparaison porte sur un
+        <strong>booléen</strong>, pas sur un âge — et <code>true</code> vaut 1,
+        <code>false</code> vaut 0, tous deux inférieurs à 65. Ce test ne se trompe pas
+        de réponse : <strong>il ne pose plus aucune question</strong>.
+      </p>
+      <p>
+        <strong>La forme correcte répète la variable de chaque côté :</strong>
+      </p>
+<pre><code>age &gt;= 18 &amp;&amp; age &lt; 65    → false    ✅</code></pre>
+    </div>
+
+    <h2>5 · Quand un côté suffit : le court-circuit</h2>
+
+    <p>
+      JavaScript s'arrête dès qu'il connaît la réponse. Avec <code>&amp;&amp;</code>,
+      si le côté gauche est faux, le droit n'est <strong>même pas évalué</strong> —
+      le résultat est déjà joué :
+    </p>
+
+<pre><code>false &amp;&amp; …    → false    la droite est ignorée
+true  || …    → true     la droite est ignorée</code></pre>
+
+    <div class="astuce">
+      <p>
+        Ce n'est pas une curiosité : cela permet de tester quelque chose
+        <em>avant</em> de s'en servir. Vous en verrez l'usage au projet 9.
+      </p>
+    </div>
+
+    <h2>6 · La priorité : <code>&amp;&amp;</code> passe avant <code>||</code></h2>
+
+<pre><code>true || false &amp;&amp; false      → true
+(true || false) &amp;&amp; false    → false</code></pre>
+
+    <p>
+      Comme la multiplication passe avant l'addition en mathématiques,
+      <code>&amp;&amp;</code> est évalué avant <code>||</code>. Les deux lignes
+      ci-dessus donnent des résultats <strong>différents</strong>.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Ne retenez pas cette règle : mettez des parenthèses.</strong> Elles
+        ne coûtent rien, lèvent toute ambiguïté, et rendent votre intention lisible
+        par la personne qui relira votre code — vous, dans trois mois.
+      </p>
+    </div>
+
+    <h2>7 · Et toujours : convertir avant de comparer</h2>
+
+    <div class="attention">
+      <p>
+        Le piège du projet 6 ne disparaît pas parce qu'on combine les conditions :
+      </p>
+<pre><code>const saisie = prompt("Votre âge ?");     // du TEXTE</code></pre>
+      <p>
+        Comparer ce texte à un <em>nombre</em> fonctionne — et pas par hasard :
+        JavaScript convertit alors le texte en nombre, <strong>systématiquement</strong>.
+        <code>"30" &gt;= 18</code> est vrai, <code>"8" &gt;= 18</code> est faux, comme
+        on l'attend. Mais dès que les <strong>deux côtés sont du texte</strong>, la
+        comparaison devient alphabétique — et le résultat bascule :
+      </p>
+<pre><code>saisie &lt; "9"            ⚠️ avec saisie = "10", c'est VRAI
+Number(saisie) &lt; 9      ✅ avec saisie = "10", c'est faux</code></pre>
+      <p>
+        C'est le piège de l'exercice 1, section 6 : <code>"10" &lt; "9"</code> est
+        vrai, car <code>"1"</code> vient avant <code>"9"</code> dans l'ordre du
+        dictionnaire.
+      </p>
+      <p>
+        <strong>La règle sûre :</strong> convertissez <strong>une fois</strong>, dans
+        une boîte, dès la saisie — et ne travaillez plus qu'avec le nombre. Vous ne
+        dépendrez plus des conversions automatiques, que vous ne contrôlez pas.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Conditionals"
+             target="_blank" rel="noopener">MDN — Prendre des décisions</a>
+        </td>
+        <td>Reprend <code>else if</code> avec des exemples progressifs.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Expressions_and_operators"
+             target="_blank" rel="noopener">MDN — Opérateurs logiques</a>
+        </td>
+        <td>La référence sur <code>&amp;&amp;</code>, <code>||</code> et le court-circuit.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/logical-operators"
+             target="_blank" rel="noopener">javascript.info — Opérateurs logiques</a>
+        </td>
+        <td>Le même chapitre en français, avec exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

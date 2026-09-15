@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Du JavaScript dans une page</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 4</p>
+  <h1 class="titre-exo">Du JavaScript dans une page</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Comprendre <strong>où</strong> placer la
+      balise <code>&lt;script&gt;</code>, en réparant une page volontairement
+      cassée.</p>
+      <p>
+        <strong>Prérequis :</strong> les exercices 1 à 3 — la console,
+        <code>console.log()</code>, <code>let</code> et <code>const</code>.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>⚠️ DEUX fichiers cette fois :</strong>
+      </p>
+      <ul>
+        <li><code>travail.html</code> — le TODO 1</li>
+        <li><code>script.js</code> — les TODO 2 à 6</li>
+      </ul>
+      <p>
+        C'est le premier exercice du projet où la page <strong>n'est pas
+        figée</strong> : vous y touchez aussi.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>La page vous est livrée CASSÉE, volontairement.</strong> La balise
+        <code>&lt;script&gt;</code> est au mauvais endroit — dans le
+        <code>&lt;head&gt;</code>.
+      </p>
+      <p>
+        <strong>Commencez par constater le bogue</strong> avant de le réparer :
+        c'est tout l'intérêt de l'exercice.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 6 étapes</h2>
+
+    <h3>Étape 1 — constater, puis réparer</h3>
+
+    <div class="astuce">
+      <p>
+        <strong>⚠️ À lire AVANT de toucher au fichier.</strong> Ouvrez d'abord la
+        page avec la console, et <strong>notez sur un papier</strong> le message
+        d'erreur exact et le numéro de ligne qu'il indique.
+      </p>
+      <p>
+        Vous en aurez besoin à la vérification et au bonus — et une fois la balise
+        déplacée, l'erreur aura disparu.
+      </p>
+    </div>
+
+    <ol class="criteres">
+      <li>
+        Ouvrir <code>travail.html</code> dans le navigateur, console ouverte
+        (<code>F12</code>), <strong>lire et noter l'erreur rouge</strong>,
+        <em>puis seulement</em> <strong>déplacer</strong> la balise
+        <code>&lt;script&gt;</code> du <code>&lt;head&gt;</code> vers le bas du
+        <code>&lt;body&gt;</code>, à l'emplacement indiqué
+      </li>
+    </ol>
+
+    <h3>Étapes 2 à 6 — faire écrire le script dans la page</h3>
+
+    <ol class="criteres" start="2">
+      <li>
+        Écrire <code>script.js chargé</code> dans la console
+      </li>
+      <li>
+        Ranger dans <code>titre</code> le premier <code>&lt;h1&gt;</code> de la page,
+        avec la méthode vue au cours
+      </li>
+      <li>
+        Afficher dans la console le texte <code>Titre trouvé :</code> puis
+        <code>titre</code>
+      </li>
+      <li>
+        Remplacer le texte de l'élément d'identifiant <code>compteur</code> par
+        <code>47</code>
+      </li>
+      <li>
+        Remplacer le texte de l'élément d'identifiant <code>message</code> par
+        <code>emprunts enregistrés aujourd'hui</code>
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Rappel :</strong> <code>querySelector()</code> accepte exactement les
+        sélecteurs du CSS. Un <em>identifiant</em> se désigne par un
+        <strong>dièse</strong>, comme dans votre feuille de style au projet 3.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Avant correction</td>
+        <td>
+          Une erreur rouge, et la page qui affiche encore <code>—</code> et
+          <code>En attente du script…</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Après correction</td>
+        <td>
+          <strong>Plus aucune erreur rouge</strong> dans la console
+        </td>
+      </tr>
+      <tr>
+        <td>La console</td>
+        <td>
+          Deux lignes : <code>script.js chargé</code>, puis
+          <code>Titre trouvé :</code> suivi de l'élément <code>&lt;h1&gt;</code> —
+          et non <code>null</code>
+        </td>
+      </tr>
+      <tr>
+        <td>La page</td>
+        <td>
+          Le gros nombre affiche <code>47</code>, et la ligne en dessous
+          <code>emprunts enregistrés aujourd'hui</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <strong>les deux fichiers</strong> :
+          aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — quelle ligne plante, exactement ?</strong></p>
+      <ol>
+        <li>Une fois tout terminé, remettez la balise dans le <code>&lt;head&gt;</code>.</li>
+        <li>Rechargez, console ouverte, et lisez le numéro de ligne de l'erreur.</li>
+        <li>
+          Comparez : l'erreur ne désigne <strong>pas</strong> la ligne du TODO 3,
+          celle qui cherche le <code>&lt;h1&gt;</code>.
+        </li>
+      </ol>
+      <p>
+        Pourquoi ? Parce que <strong>chercher</strong> un élément absent est permis —
+        on obtient <code>null</code>, sans erreur. C'est en voulant
+        <strong>écrire dedans</strong> que tout s'arrête. La solution détaille ce
+        point.
+      </p>
+      <p>Remettez ensuite la balise en bas.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>La page affiche <code>47</code> et son message, sans erreur rouge</li>
+      <li>
+        Vous savez expliquer <strong>pourquoi</strong> une balise
+        <code>&lt;script&gt;</code> dans le <code>&lt;head&gt;</code> ne trouve pas
+        le contenu de la page
+      </li>
+      <li>
+        Vous connaissez les <strong>deux</strong> solutions : la fin du
+        <code>&lt;body&gt;</code>, ou <code>defer</code>
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans les deux fichiers</li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>30 à 40 minutes.</strong> Six étapes seulement, mais la première est la
+      plus instructive de tout le projet.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

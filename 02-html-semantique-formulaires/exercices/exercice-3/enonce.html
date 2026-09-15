@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Les formulaires</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 3</p>
+  <h1 class="titre-exo">Les formulaires</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Construire le formulaire d'inscription à une
+      sortie du club : identité, choix, préférences et message.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> le projet 1
+        (notamment l'attribut <code>id</code>) et les exercices 1 et 2 de ce projet.
+      </p>
+    </div>
+
+    <h2>📄 Le fichier à modifier</h2>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-3/travail.html</code>
+      </p>
+      <p>
+        Le premier champ vous est <strong>donné en entier</strong> comme modèle. Les
+        suivants sont à écrire sur le même moule.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <p>Le formulaire doit contenir, dans cet ordre :</p>
+
+    <ol class="criteres">
+      <li>
+        Un champ <strong>Nom</strong> — texte, <strong>obligatoire</strong>
+        <em>(fourni en modèle)</em>
+      </li>
+      <li>
+        Un champ <strong>E-mail</strong> — du type qui fait vérifier la présence d'un
+        <code>@</code> par le navigateur, obligatoire
+      </li>
+      <li>
+        Un champ <strong>Date de naissance</strong> — du type qui affiche un
+        sélecteur de date
+      </li>
+      <li>
+        Une <strong>liste déroulante « Sortie souhaitée »</strong> avec les quatre
+        sorties du club : Pic du Midi, Boucle des trois lacs, Crêtes de Bassiès,
+        Cascade d'Ars
+      </li>
+      <li>
+        Un <strong>groupe de deux boutons radio</strong> « Demi-journée » /
+        « Journée entière », réunis dans un <code>&lt;fieldset&gt;</code> avec une
+        <code>&lt;legend&gt;</code>
+      </li>
+      <li>
+        Une <strong>case à cocher</strong> « Je souhaite recevoir la newsletter »
+      </li>
+      <li>
+        Une <strong>zone de texte</strong> « Message » de 5 lignes, <strong>vide au
+        départ</strong>
+      </li>
+      <li>Un <strong>bouton d'envoi</strong> portant le texte « M'inscrire »</li>
+      <li>
+        <strong>Chaque champ a son étiquette</strong>, reliée par la paire
+        <code>for</code> / <code>id</code>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td><strong>Le lien étiquette ↔ champ</strong></td>
+        <td>
+          <strong>Cliquez sur le texte de chaque étiquette</strong> : le curseur doit
+          sauter dans le champ correspondant (ou cocher la case). C'est le test le plus
+          fiable — s'il échoue, le <code>for</code> et l'<code>id</code> ne
+          correspondent pas
+        </td>
+      </tr>
+      <tr>
+        <td>Les boutons radio</td>
+        <td>Cocher l'un <strong>décoche</strong> l'autre. Si les deux restent cochables
+            ensemble, c'est que leurs <code>name</code> diffèrent</td>
+      </tr>
+      <tr>
+        <td>La date</td>
+        <td>Un clic ouvre un petit calendrier fourni par le navigateur</td>
+      </tr>
+      <tr>
+        <td>La zone de texte</td>
+        <td>Elle est <strong>vide</strong>. Si du texte ou des espaces y apparaissent,
+            c'est qu'il y a du contenu entre les deux balises</td>
+      </tr>
+      <tr>
+        <td>Les champs obligatoires</td>
+        <td>Cliquez « M'inscrire » sans rien remplir : le navigateur affiche lui-même
+            un message et bloque l'envoi</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Le formulaire n'enverra rien nulle part</strong>, et c'est voulu :
+        traiter les données demande un serveur ou du JavaScript. Selon votre
+        navigateur, la page se rechargera simplement. Vous verrez l'envoi au jour 3.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — casser volontairement le lien étiquette / champ</strong></p>
+      <ol>
+        <li>Dans le champ Nom (celui fourni), modifiez le <code>for</code> du label :
+            remplacez <code>nom</code> par <code>nomm</code>.</li>
+        <li>Enregistrez, rechargez, puis <strong>cliquez sur le mot « Nom »</strong>.</li>
+      </ol>
+      <p>
+        Plus rien ne se passe : le curseur ne saute plus dans le champ. C'est la seule
+        manifestation visible de l'erreur — <strong>aucun message, aucun
+        avertissement</strong>. Voilà pourquoi une coquille entre <code>for</code> et
+        <code>id</code> est si facile à laisser passer.
+      </p>
+      <p><strong>Remettez <code>nom</code></strong> avant de continuer.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li><code>Ctrl+F</code> sur <code>&lt;!-</code> : aucun commentaire de consigne ne subsiste</li>
+      <li>
+        Chaque étiquette réagit au clic — testez-les <strong>toutes</strong>, une par une
+      </li>
+      <li>
+        Le <a href="https://validator.w3.org/nu/#file" target="_blank" rel="noopener">validateur
+        du W3C</a> ne signale aucune erreur. Il repère notamment un
+        <code>for</code> qui ne correspond à aucun <code>id</code>
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>35 à 45 minutes.</strong> C'est l'exercice le plus long du projet, mais
+      aussi le plus répétitif : une fois le modèle du premier champ compris, les
+      suivants s'enchaînent.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Commencer l'exercice →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

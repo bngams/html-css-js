@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Poser ses propres accroches</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 4</p>
+  <h1 class="titre-exo">Poser ses propres accroches</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Habiller une page qui ne contient
+      <em>presque aucune</em> classe : vous devrez d'abord les créer.</p>
+      <p>
+        <strong>Niveau : débutant.</strong> <strong>Prérequis :</strong> les trois
+        exercices précédents de ce projet.
+      </p>
+    </div>
+
+    <h2>⚠️ Cet exercice est différent</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Vous modifiez LES DEUX fichiers.</strong> C'est le seul exercice du
+        projet où le HTML n'est pas figé.
+      </p>
+    </div>
+
+    <table>
+      <tr>
+        <th>Fichier</th>
+        <th>Ce que vous y faites</th>
+      </tr>
+      <tr>
+        <td><code>travail.html</code></td>
+        <td>👉 Vous <strong>ajoutez</strong> les <code>class</code> et l'
+            <code>id</code>, là où les <code>TODO</code> l'indiquent</td>
+      </tr>
+      <tr>
+        <td><code>style.css</code></td>
+        <td>👉 Vous écrivez les <strong>règles qui les visent</strong></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi ce changement ?</strong> Dans les trois exercices précédents,
+        les classes vous étaient fournies. Mais en situation réelle, le HTML n'offre
+        pas toujours la prise dont vous avez besoin — <strong>alors vous la
+        créez</strong>. C'est l'aller-retour permanent du métier.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Le piège du jour : enregistrez les deux fichiers.</strong> Une classe
+        ajoutée dans le HTML mais non enregistrée, et votre règle CSS ne visera rien —
+        sans aucun message d'erreur. Dans VSCode, un point à côté du nom d'un onglet
+        signale un fichier non enregistré.
+      </p>
+    </div>
+
+    <h2>✅ Critères de réussite</h2>
+
+    <h3>Dans <code>travail.html</code> — les accroches à créer</h3>
+
+    <ol class="criteres">
+      <li>Le <code>&lt;header&gt;</code> porte <code>class="banniere"</code></li>
+      <li>Le paragraphe d'introduction porte <code>class="intro"</code></li>
+      <li>Le <code>&lt;div&gt;</code> des formules porte <code>class="rangee"</code></li>
+      <li>
+        Les <strong>trois</strong> <code>&lt;article&gt;</code> portent
+        <code>class="formule"</code>
+      </li>
+      <li>
+        Celui de « Famille » porte <strong>en plus</strong>
+        <code>formule--conseillee</code> — deux classes séparées par une espace
+      </li>
+      <li>La <code>&lt;section&gt;</code> de contact porte <code>id="contact"</code></li>
+    </ol>
+
+    <h3>Dans <code>style.css</code> — les règles à écrire</h3>
+
+    <ol class="criteres">
+      <li>
+        <strong><code>.banniere</code></strong> — fond <code>#14457b</code>, texte
+        blanc, 30px d'espace intérieur, texte centré
+      </li>
+      <li><strong><code>.intro</code></strong> — <code>1.1rem</code>, couleur <code>#5a6570</code></li>
+      <li>
+        <strong><code>.rangee</code></strong> — enfants côte à côte, passage à la ligne
+        autorisé, 20px entre eux
+      </li>
+      <li>
+        <strong><code>.formule</code></strong> — fond blanc, 20px intérieur, coins
+        arrondis 8px, bordure <code>1px solid #d7dee8</code>,
+        <code>flex: 1 1 200px</code>, texte centré
+      </li>
+      <li>
+        <strong><code>.formule--conseillee</code></strong> — bordure
+        <code>2px solid #0b6bcb</code>, fond <code>#e8f1fb</code>
+      </li>
+      <li>
+        <strong><code>.prix</code></strong> — <code>2rem</code>, <code>#14457b</code>,
+        gras, sans marge
+      </li>
+      <li>
+        <strong><code>#contact</code></strong> — fond blanc, 20px intérieur, coins
+        arrondis 8px, 30px de marge au-dessus
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>La classe <code>prix</code> existe déjà</strong> dans le HTML fourni :
+        vous n'avez pas à la créer, seulement à l'utiliser. C'est le premier réflexe —
+        regarder ce qui est déjà là avant d'ajouter.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>Six critères, sept <code>TODO</code> :</strong> c'est normal. Le
+        critère 4 (« les trois <code>&lt;article&gt;</code> portent
+        <code>formule</code> ») correspond à <strong>deux</strong> marqueurs dans le
+        fichier — un pour le premier article, un pour le troisième. Le deuxième est
+        traité à part, puisqu'il reçoit deux classes.
+      </p>
+      <p>
+        Les <strong>ÉTAPE 1 à 7</strong> de <code>travail.html</code> et de
+        <code>style.css</code> portent en revanche <strong>les mêmes numéros</strong> :
+        c'est sur elles que vous faites l'aller-retour. L'ÉTAPE 6 du HTML ne demande
+        rien — elle vous rappelle que l'accroche existe déjà.
+      </p>
+    </div>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez voir</th>
+      </tr>
+      <tr>
+        <td>La bannière</td>
+        <td>Un bandeau bleu foncé pleine largeur, texte blanc centré</td>
+      </tr>
+      <tr>
+        <td>Les formules</td>
+        <td><strong>Trois cartes côte à côte</strong> dès que la fenêtre est assez
+            large (environ 700 px et plus), blanches, aux coins arrondis. Sur une
+            fenêtre plus étroite, elles passent à la ligne — c'est
+            <code>flex-wrap</code> qui travaille</td>
+      </tr>
+      <tr>
+        <td>La formule conseillée</td>
+        <td>Celle du milieu (« Famille ») se distingue : fond bleuté, bordure bleue
+            plus épaisse</td>
+      </tr>
+      <tr>
+        <td>Les prix</td>
+        <td>En gros, en bleu foncé — <strong>les trois</strong>, sans que vous ayez
+            créé la classe</td>
+      </tr>
+      <tr>
+        <td>Le bloc contact</td>
+        <td>Une carte blanche détachée, en bas de page</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — le double tiret n'a rien de magique</strong></p>
+      <ol>
+        <li>
+          Dans <code>travail.html</code>, remplacez
+          <code>formule--conseillee</code> par <code>formule-mise-en-avant</code>
+          — sur la balise <em>et</em> dans votre CSS.
+        </li>
+        <li>Enregistrez les deux, rechargez.</li>
+      </ol>
+      <p>
+        <strong>Rien ne change.</strong> Le double tiret est une simple
+        <em>convention d'écriture</em> entre développeurs pour signaler une variante :
+        le navigateur y voit un nom comme un autre. Ce qui compte, c'est que le nom
+        soit <strong>identique des deux côtés</strong>.
+      </p>
+      <p>Remettez ce que vous préférez — les deux sont corrects.</p>
+    </div>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — voir l'erreur n°1 se produire</strong></p>
+      <ol>
+        <li>
+          Dans <code>travail.html</code>, modifiez une classe en y glissant une faute :
+          <code>class="formul"</code> au lieu de <code>formule</code>.
+        </li>
+        <li>Enregistrez, rechargez.</li>
+        <li>
+          Cette carte perd tout son style. Clic droit dessus → <em>Inspecter</em> : le
+          panneau des styles est <strong>vide</strong> pour cet élément.
+        </li>
+      </ol>
+      <p>
+        Aucun message d'erreur nulle part — ni dans le HTML, ni dans le CSS. Les deux
+        fichiers sont valides, ils ne se parlent simplement plus. <strong>C'est la
+        panne la plus fréquente du métier</strong>, et l'inspecteur est ce qui la
+        révèle en trois secondes.
+      </p>
+      <p><strong>Corrigez la faute</strong> avant de continuer.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>
+        <code>Ctrl+F</code> sur <code>TODO</code> dans <strong>les deux
+        fichiers</strong> : aucun résultat
+      </li>
+      <li>Les cinq points du tableau de vérification sont constatés</li>
+      <li>
+        Le <a href="https://validator.w3.org/nu/#file" target="_blank" rel="noopener">validateur
+        HTML</a> <strong>et</strong> le
+        <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload"
+        target="_blank" rel="noopener">validateur CSS</a> ne signalent aucune erreur
+      </li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>40 à 50 minutes.</strong> L'aller-retour entre les deux fichiers demande
+      un peu d'organisation au début : gardez-les côte à côte dans VSCode.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

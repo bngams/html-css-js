@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Les media queries</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 2</p>
+  <h1 class="titre-exo">Les media queries</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> appliquer des règles
+      différentes selon la largeur de l'écran — et surtout, dans quel ordre les écrire
+      pour ne pas s'y perdre.</p>
+    </div>
+
+    <h2>1 · Ce que les fondations ne suffisent pas à faire</h2>
+
+    <p>
+      L'exercice 1 l'a montré : avec <code>max-width</code>, des unités relatives et
+      <code>img { max-width: 100% }</code>, une page rétrécit déjà proprement.
+    </p>
+
+    <p>Mais certaines choses ne peuvent pas se contenter de <em>rétrécir</em> :</p>
+
+    <ul>
+      <li>un menu horizontal de six liens, qui devient illisible sous 400 px ;</li>
+      <li>une grille de trois colonnes, qui doit passer à une seule ;</li>
+      <li>un titre de 3 rem, écrasant sur un petit écran ;</li>
+      <li>un encadré latéral, qui doit passer <em>sous</em> le contenu.</li>
+    </ul>
+
+    <p>
+      Ces cas demandent de <strong>réorganiser</strong>, pas seulement de
+      redimensionner. C'est le travail des <em>media queries</em>.
+    </p>
+
+    <h2>2 · La syntaxe</h2>
+
+    <p>Une media query est un <strong>bloc qui contient des règles</strong> :</p>
+
+<pre><code>@media (min-width: 700px) {
+
+  .grille {
+    display: flex;
+    gap: 1rem;
+  }
+
+}</code></pre>
+
+    <p>
+      À lire ainsi : « <em>à partir de 700 px de large, applique ces règles</em> ».
+      En dessous, le bloc est ignoré comme s'il n'existait pas.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Deux accolades, pas une.</strong> Une media query enveloppe des règles
+        qui ont déjà leurs propres accolades. L'oubli de la dernière est l'erreur la
+        plus fréquente — et elle casse silencieusement tout ce qui suit dans le
+        fichier.
+      </p>
+    </div>
+
+    <h2>3 · <code>min-width</code> ou <code>max-width</code> ?</h2>
+
+    <table>
+      <tr>
+        <th>Écriture</th>
+        <th>S'applique</th>
+        <th>Sens</th>
+      </tr>
+      <tr>
+        <td><code>(min-width: 700px)</code></td>
+        <td>à partir de 700 px</td>
+        <td>« au moins 700 px » — les <strong>grands</strong> écrans</td>
+      </tr>
+      <tr>
+        <td><code>(max-width: 699px)</code></td>
+        <td>jusqu'à 699 px</td>
+        <td>« au plus 699 px » — les <strong>petits</strong> écrans</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le moyen de ne plus se tromper :</strong> lisez
+        <code>min-width</code> comme « <em>la fenêtre fait au minimum…</em> ». Une
+        largeur minimale de 700 px désigne donc tout ce qui est <em>plus grand</em>.
+        Beaucoup de débutants comprennent l'inverse.
+      </p>
+    </div>
+
+    <h2>4 · L'approche mobile-first</h2>
+
+    <p>
+      Deux façons d'écrire la même page. Elles produisent le même résultat, mais l'une
+      se maintient et l'autre non.
+    </p>
+
+    <h3>❌ Desktop-first — l'ordre spontané</h3>
+
+<pre><code>.grille {
+  display: flex;          /* pensé pour l'ordinateur */
+  gap: 2rem;
+}
+
+@media (max-width: 699px) {
+  .grille {
+    display: block;       /* on DÉFAIT pour le téléphone */
+    gap: 0;
+  }
+}</code></pre>
+
+    <p>
+      On écrit d'abord la version riche, puis on la <em>démonte</em> pour les petits
+      écrans. Chaque ajout futur devra être démonté à son tour.
+    </p>
+
+    <h3>✅ Mobile-first — l'ordre recommandé</h3>
+
+<pre><code>.grille {
+  /* rien : l'empilement est le comportement par défaut */
+}
+
+@media (min-width: 700px) {
+  .grille {
+    display: flex;        /* on ENRICHIT pour l'ordinateur */
+    gap: 2rem;
+  }
+}</code></pre>
+
+    <p>
+      On part du plus simple — un écran étroit, tout empilé — et on <strong>ajoute</strong>
+      à mesure que la place le permet.
+    </p>
+
+    <div class="astuce">
+      <p><strong>Trois raisons de préférer mobile-first :</strong></p>
+      <ul>
+        <li>
+          <strong>On écrit moins.</strong> L'empilement vertical est déjà le
+          comportement par défaut du navigateur : il n'y a rien à écrire pour l'obtenir.
+        </li>
+        <li>
+          <strong>Le cas de base est le plus contraint.</strong> Concevoir d'abord pour
+          360 px force à hiérarchiser ; l'inverse conduit à entasser puis à élaguer.
+        </li>
+        <li>
+          <strong>C'est la convention du métier.</strong> Vous lirez du code écrit
+          ainsi, et vos collègues l'attendront.
+        </li>
+      </ul>
+    </div>
+
+    <h2>5 · Où placer le point de rupture</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Ne visez pas des appareils.</strong> « 375 px pour l'iPhone, 768 px pour
+        l'iPad » était la méthode de 2012 : il existe aujourd'hui des centaines de
+        tailles, et elles changent chaque année.
+      </p>
+    </div>
+
+    <p>
+      La bonne méthode : <strong>élargissez votre fenêtre jusqu'à ce que la mise en
+      page devienne laide, et placez le point de rupture là</strong>. C'est le contenu
+      qui décide, pas le catalogue d'un fabricant.
+    </p>
+
+    <p>Deux ou trois points de rupture suffisent presque toujours :</p>
+
+    <table>
+      <tr>
+        <th>Valeur courante</th>
+        <th>Ce qu'elle sépare</th>
+      </tr>
+      <tr>
+        <td><code>600px</code> – <code>700px</code></td>
+        <td>Téléphone ↔ tablette</td>
+      </tr>
+      <tr>
+        <td><code>900px</code> – <code>1000px</code></td>
+        <td>Tablette ↔ ordinateur</td>
+      </tr>
+    </table>
+
+    <h2>6 · L'ordre compte</h2>
+
+    <p>
+      Les media queries n'ont aucune priorité particulière : elles obéissent à la
+      cascade, comme toute règle CSS (projet 3, exercice 1). En mobile-first, on les
+      écrit donc <strong>de la plus petite à la plus grande</strong>, à la fin du
+      fichier :
+    </p>
+
+<pre><code>/* 1. les règles de base, pour tous les écrans */
+.carte { … }
+
+/* 2. puis les enrichissements, par largeur croissante */
+@media (min-width: 700px)  { … }
+@media (min-width: 1000px) { … }</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Dans l'ordre inverse, la plus petite écraserait la plus grande</strong>
+        sur les écrans concernés par les deux — puisqu'à spécificité égale, c'est la
+        dernière écrite qui gagne. Votre règle « grand écran » serait annulée sans que
+        rien ne le signale.
+      </p>
+    </div>
+
+    <h2>7 · Ce qu'on met dans une media query</h2>
+
+    <p>
+      <strong>Le moins possible.</strong> Une media query ne devrait contenir que ce
+      qui change vraiment :
+    </p>
+
+<pre><code>/* ✅ seulement ce qui diffère */
+@media (min-width: 700px) {
+  .grille { display: flex; }
+}
+
+/* ❌ tout réécrire */
+@media (min-width: 700px) {
+  .grille {
+    display: flex;
+    background: #fff;      /* déjà défini plus haut */
+    padding: 1rem;         /* déjà défini plus haut */
+    border-radius: 8px;    /* déjà défini plus haut */
+  }
+}</code></pre>
+
+    <p>
+      Les propriétés déjà définies hors de la media query restent actives : elles ne
+      sont pas « annulées » par le changement de largeur. N'y répétez que les
+      différences.
+    </p>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/CSS_layout/Media_queries"
+             target="_blank" rel="noopener">MDN — Les media queries</a>
+        </td>
+        <td>Reprend ce chapitre, avec la démarche mobile-first en détail.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_media_queries/Using_media_queries"
+             target="_blank" rel="noopener">MDN — Utiliser les media queries</a>
+        </td>
+        <td>Toutes les conditions possibles : orientation, mode sombre, impression.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

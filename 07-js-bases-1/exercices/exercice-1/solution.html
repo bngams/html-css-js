@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Si… sinon</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 1</p>
+  <h1 class="titre-exo">Si… sinon</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous constaté la différence entre les étapes 5 et 6 ?</strong>
+      C'est le cœur de l'exercice. Si vous ne l'avez pas vue de vos yeux, retournez à
+      la <a href="travail.html">page de travail</a> : lire l'explication ne remplace
+      pas le fait de voir <code>false</code> là où on attend <code>true</code>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const age = 20;
+
+if (age &gt;= 18) {
+  console.log("Majeur");
+} else {
+  console.log("Mineur");
+}
+
+const saisie = "20";
+
+console.log("saisie === 20 :", saisie === 20);
+console.log("saisie == 20 :", saisie == 20);
+
+const saisieNombre = Number(saisie);
+
+console.log("saisieNombre === 20 :", saisieNombre === 20);
+
+let tarif = 0;
+
+if (age &gt;= 18) {
+  tarif = 24;
+} else {
+  tarif = 12;
+}
+
+console.log("Tarif :", tarif, "€");</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Un seul bloc s'exécute</h3>
+
+    <p>
+      Vous avez écrit six <code>console.log</code>, la console en affiche
+      <strong>cinq</strong>. Celui du bloc <code>else</code> n'a jamais tourné,
+      parce que <code>age</code> vaut 20.
+    </p>
+
+    <div class="astuce">
+      <p>
+        Ce n'est pas un oubli, c'est <strong>la définition</strong> d'une condition :
+        elle ouvre deux chemins, et le programme n'en emprunte qu'un. Changez
+        <code>age</code> en 15 et c'est l'autre ligne qui apparaît.
+      </p>
+    </div>
+
+    <h3>2 · <code>===</code> compare la valeur <em>et</em> le type</h3>
+
+    <table>
+      <tr><th>Comparaison</th><th>Résultat</th><th>Pourquoi</th></tr>
+      <tr>
+        <td><code>"20" === 20</code></td>
+        <td><code>false</code></td>
+        <td>texte ≠ nombre — les types diffèrent</td>
+      </tr>
+      <tr>
+        <td><code>"20" == 20</code></td>
+        <td><code>true</code></td>
+        <td>le texte est converti d'abord, puis comparé</td>
+      </tr>
+      <tr>
+        <td><code>Number("20") === 20</code></td>
+        <td><code>true</code></td>
+        <td>deux vrais nombres, sans conversion cachée</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Pourquoi préférer celui qui dit <code>false</code> ?</strong> Parce
+        qu'il dit la vérité. <code>==</code> a l'air plus pratique, mais il masque le
+        problème au lieu de le résoudre — et ses règles de conversion réservent des
+        surprises que personne ne retient.
+      </p>
+      <p>
+        <strong>La règle professionnelle : <code>===</code> toujours.</strong> Si les
+        types ne correspondent pas, on convertit <em>explicitement</em>, avec
+        <code>Number()</code>.
+      </p>
+    </div>
+
+    <h3>3 · Le lien avec <code>prompt()</code></h3>
+
+    <p>
+      Cet exercice utilise <code>"20"</code> écrit à la main, mais c'est exactement ce
+      que vous recevrez d'un <code>prompt()</code> — vu au projet 6, et que vous
+      réutiliserez dès l'exercice 3 de ce projet :
+    </p>
+
+<pre><code>let saisie = prompt("Votre âge ?");   // "20", du TEXTE
+
+if (saisie === 20) { … }              ⚠️ ne se déclenche JAMAIS
+if (Number(saisie) === 20) { … }      ✅</code></pre>
+
+    <p>
+      Une condition qui ne se déclenche jamais, sans aucune erreur rouge, vient
+      presque toujours d'un type non converti. <strong>C'est le premier réflexe de
+      diagnostic à prendre.</strong>
+    </p>
+
+    <h3>4 · Un seul <code>=</code> dans un <code>if</code> ne compare rien</h3>
+
+    <div class="attention">
+      <p>
+        À l'étape 8, remplacer <code>===</code> par <code>=</code> produit :
+      </p>
+<pre><code>TypeError: Assignment to constant variable.</code></pre>
+      <p>
+        Ici l'erreur vous sauve — parce que <code>saisieNombre</code> est un
+        <code>const</code>. <strong>Mais elle n'apparaît pas toujours.</strong> Avec
+        une boîte déclarée en <code>let</code> :
+      </p>
+<pre><code>let n = 20;
+if (n = 18) { console.log("bloc exécuté"); }
+// → le bloc s'exécute, n vaut maintenant 18, AUCUNE erreur</code></pre>
+      <p>
+        Le <code>=</code> a <em>rangé</em> 18 dans <code>n</code>, et la condition
+        s'est déclenchée parce que 18 est une valeur « vraie ». Rien ne vous prévient.
+        C'est la meilleure raison d'écrire <code>===</code> par réflexe.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>La console n'affiche rien du tout</td>
+        <td>
+          Le fichier s'appelle encore <code>script.js</code>, ou n'est pas enregistré.
+          Il doit se nommer <code>app.js</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>SyntaxError: Unexpected token '}'</code></td>
+        <td>
+          Une accolade manque, ou une accolade en trop. Utilisez
+          <code>Maj+Alt+F</code> pour reformater : le décalage rend l'erreur visible
+        </td>
+      </tr>
+      <tr>
+        <td>Les deux lignes <code>Majeur</code> et <code>Mineur</code> s'affichent</td>
+        <td>
+          Vous avez écrit deux <code>if</code> séparés au lieu d'un
+          <code>if … else</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>Tarif : 0 €</code></td>
+        <td>
+          La condition de l'étape 9 n'a rien rangé dans <code>tarif</code> —
+          vérifiez que vous écrivez bien <code>tarif = 24</code> à l'intérieur du bloc
+        </td>
+      </tr>
+      <tr>
+        <td><code>TypeError: Assignment to constant variable.</code></td>
+        <td>
+          Vous essayez de modifier une boîte déclarée en <code>const</code> —
+          <code>tarif</code> doit être en <code>let</code>, puisqu'il change
+        </td>
+      </tr>
+      <tr>
+        <td>L'étape 8 affiche <code>false</code></td>
+        <td>
+          La conversion de l'étape 7 a été oubliée, ou vous comparez encore
+          <code>saisie</code> au lieu de <code>saisieNombre</code>
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../exercice-2/">Exercice 2 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — La console du navigateur</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 1</p>
+  <h1 class="titre-exo">La console du navigateur</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="bac-a-sable.html">🖥️ Bac à sable</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> ce qu'est JavaScript,
+      où il s'exécute, et comment lui parler directement — sans écrire le moindre
+      fichier.</p>
+    </div>
+
+    <h2>1 · Le troisième langage</h2>
+
+    <p>Vous en connaissez déjà deux. Voici la répartition des rôles :</p>
+
+    <table>
+      <tr>
+        <th>Langage</th>
+        <th>Répond à la question</th>
+        <th>Exemple</th>
+      </tr>
+      <tr>
+        <td><strong>HTML</strong></td>
+        <td>Qu'est-ce que c'est ?</td>
+        <td>« ceci est un bouton »</td>
+      </tr>
+      <tr>
+        <td><strong>CSS</strong></td>
+        <td>À quoi ça ressemble ?</td>
+        <td>« il est bleu et arrondi »</td>
+      </tr>
+      <tr>
+        <td><strong>JavaScript</strong></td>
+        <td><strong>Que fait-il ?</strong></td>
+        <td>« au clic, il affiche le prix »</td>
+      </tr>
+    </table>
+
+    <p>
+      HTML et CSS <em>décrivent</em>. JavaScript, lui, <strong>exécute des
+      instructions</strong> : il calcule, il décide, il modifie la page pendant que
+      le visiteur la regarde.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Une différence de nature :</strong> une erreur de CSS passe
+        inaperçue — la règle est ignorée, la page s'affiche quand même. Une erreur
+        de JavaScript <em>arrête</em> le programme. C'est déroutant au début, mais
+        c'est aussi une chance : le navigateur vous dit précisément ce qui ne va pas.
+      </p>
+    </div>
+
+    <h2>2 · Où s'exécute JavaScript</h2>
+
+    <p>
+      <strong>Dans le navigateur du visiteur</strong>, sur sa machine. Pas sur un
+      serveur. C'est ce qui permet à une page de réagir instantanément à un clic,
+      sans rien redemander à Internet.
+    </p>
+
+    <p>
+      Chaque navigateur embarque un <em>moteur JavaScript</em> qui lit et exécute le
+      code. Et ce moteur est accessible directement : c'est la <strong>console</strong>.
+    </p>
+
+    <h2>3 · La console — votre bac à sable</h2>
+
+    <p>
+      La console est une ligne de commande intégrée au navigateur. Vous y tapez une
+      instruction, vous appuyez sur Entrée, le résultat s'affiche aussitôt.
+    </p>
+
+    <table>
+      <tr>
+        <th>Navigateur</th>
+        <th>Comment l'ouvrir</th>
+      </tr>
+      <tr>
+        <td><strong>Chrome / Edge</strong></td>
+        <td><code>F12</code>, puis l'onglet <strong>Console</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Firefox</strong></td>
+        <td><code>F12</code>, puis l'onglet <strong>Console</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Safari</strong></td>
+        <td>
+          <code>Cmd+Alt+C</code> — à activer d'abord dans
+          <em>Réglages → Avancés → Afficher le menu Développement</em>
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      Sur tous les navigateurs, <strong>clic droit sur la page → Inspecter</strong>
+      fonctionne aussi. C'est le même panneau que vous utilisez depuis le projet 3
+      pour le CSS — vous ouvrez simplement un autre onglet.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Rien de ce que vous tapez dans la console n'est enregistré.</strong>
+        Rechargez la page, tout disparaît. C'est précisément ce qui en fait un
+        endroit sûr pour essayer : vous ne pouvez rien casser.
+      </p>
+    </div>
+
+    <h2>4 · Votre première instruction</h2>
+
+    <p>Tapez ceci dans la console, puis Entrée :</p>
+
+<pre><code>2 + 3</code></pre>
+
+    <p>
+      La console affiche <code>5</code>. Vous venez d'exécuter du JavaScript.
+    </p>
+
+    <p>
+      Elle est d'abord une calculatrice, et comprend les opérateurs habituels :
+    </p>
+
+    <table>
+      <tr>
+        <th>Opérateur</th>
+        <th>Effet</th>
+        <th>Exemple</th>
+      </tr>
+      <tr>
+        <td><code>+</code></td>
+        <td>addition</td>
+        <td><code>7 + 3</code> → <code>10</code></td>
+      </tr>
+      <tr>
+        <td><code>-</code></td>
+        <td>soustraction</td>
+        <td><code>7 - 3</code> → <code>4</code></td>
+      </tr>
+      <tr>
+        <td><code>*</code></td>
+        <td>multiplication</td>
+        <td><code>7 * 3</code> → <code>21</code></td>
+      </tr>
+      <tr>
+        <td><code>/</code></td>
+        <td>division</td>
+        <td><code>7 / 2</code> → <code>3.5</code></td>
+      </tr>
+      <tr>
+        <td><code>%</code></td>
+        <td>reste de la division</td>
+        <td><code>7 % 3</code> → <code>1</code></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Le séparateur décimal est le POINT, jamais la virgule.</strong>
+        <code>3.5</code> est un nombre ; <code>3,5</code> est autre chose et vous
+        donnera un résultat inattendu. C'est la convention de tous les langages de
+        programmation.
+      </p>
+    </div>
+
+    <h2>5 · Le texte : les chaînes de caractères</h2>
+
+    <p>
+      Un texte s'écrit entre guillemets — simples ou doubles, au choix, mais les
+      mêmes des deux côtés :
+    </p>
+
+<pre><code>"Bonjour"
+'Bonjour'</code></pre>
+
+    <p>Et le <code>+</code> les assemble, au lieu de les additionner :</p>
+
+<pre><code>"Bon" + "jour"        → "Bonjour"
+"Il est " + 14 + " h" → "Il est 14 h"</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Sans guillemets, ce n'est pas du texte.</strong> Taper
+        <code>Bonjour</code> seul fait chercher au navigateur une <em>variable</em>
+        nommée « Bonjour » — qui n'existe pas. Il répond alors
+        <code>Uncaught ReferenceError: Bonjour is not defined</code>.
+      </p>
+      <p>
+        Cette erreur est votre amie : elle dit exactement ce qui manque. Vous la
+        verrez souvent, et ce n'est pas grave.
+      </p>
+    </div>
+
+    <h2>6 · Lire ce que répond la console</h2>
+
+    <p>Trois sortes de réponses, à savoir distinguer :</p>
+
+    <table>
+      <tr>
+        <th>Ce que vous voyez</th>
+        <th>Ce que ça veut dire</th>
+      </tr>
+      <tr>
+        <td>Une valeur (<code>5</code>, <code>"Bonjour"</code>)</td>
+        <td>Le <strong>résultat</strong> de votre instruction</td>
+      </tr>
+      <tr>
+        <td><code>undefined</code></td>
+        <td>
+          L'instruction a fonctionné mais ne <strong>renvoie rien</strong> —
+          c'est normal, pas une erreur
+        </td>
+      </tr>
+      <tr>
+        <td>Un message en rouge</td>
+        <td>Une <strong>erreur</strong> : le navigateur explique ce qui cloche</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong><code>undefined</code> n'est pas une erreur.</strong> C'est la
+        réponse normale d'une instruction qui <em>agit</em> sans rien retourner —
+        afficher un message, par exemple. Beaucoup de débutants s'en inquiètent
+        pour rien.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/What_is_JavaScript"
+             target="_blank" rel="noopener">MDN — Qu'est-ce que JavaScript ?</a>
+        </td>
+        <td>Reprend ce chapitre, avec la place de JS parmi HTML et CSS.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Tools/Web_Console"
+             target="_blank" rel="noopener">MDN — La console web</a>
+        </td>
+        <td>Toutes les possibilités de la console, au-delà du calcul.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/hello-world"
+             target="_blank" rel="noopener">javascript.info — Bonjour le monde</a>
+        </td>
+        <td>Un tutoriel complet en français, gratuit, très clair.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

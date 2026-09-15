@@ -1,0 +1,257 @@
+/* ═══════════════════════════════════════════════════════════════
+   RAPPORT CHIFFRÉ — exemple d'inspiration
+
+   Parti pris : sobriété au service des données. Une seule couleur
+   d'accent, beaucoup de blanc, et des chiffres qui se lisent d'un
+   coup d'œil.
+
+   Ce que cette page montre et que les autres n'ont pas :
+     - un GRAPHIQUE en SVG écrit dans la page (projet 1, notion 4)
+     - un tableau de données avec scope (projet 2)
+     - un lien vers un PDF (projet 1, notion 7)
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Les fondations (projet 4) ────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: #253044;
+  background-color: #f6f8fb;
+}
+
+.conteneur {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+/* ── En-tête ──────────────────────────────────────────────────── */
+
+.entete {
+  background-color: #fff;
+  border-bottom: 3px solid #1d6fa5;
+  padding: 2rem 0 1.25rem;
+}
+
+.surtitre {
+  margin: 0;
+  color: #1d6fa5;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.entete h1 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  margin: 0.25rem 0 1rem;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.menu a {
+  color: #4a5b74;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.menu a:hover,
+.menu a:focus {
+  border-bottom-color: #1d6fa5;
+}
+
+
+/* ── Contenu ──────────────────────────────────────────────────── */
+
+.chapo {
+  font-size: 1.1rem;
+  color: #4a5b74;
+  padding-top: 1.5rem;
+}
+
+.section {
+  padding: 1.5rem 0 2rem;
+  border-bottom: 1px solid #e0e6ee;
+}
+
+h2 {
+  font-size: 1.35rem;
+  color: #1d6fa5;
+}
+
+
+/* ── Le graphique SVG ─────────────────────────────────────────── */
+
+.graphique {
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #e0e6ee;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* Le SVG se redimensionne tout seul : il a un viewBox et pas de
+   largeur fixe. C'est ce qui le rend adaptable sans media query. */
+.graphique svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.barres rect {
+  fill: #1d6fa5;
+}
+
+/* Les barres réagissent au survol, comme les cartes du projet 3 */
+.barres rect {
+  transition: fill 0.25s;
+}
+
+.barres rect:hover {
+  fill: #14507a;
+}
+
+.valeurs text {
+  fill: #253044;
+  font-size: 15px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.legendes text {
+  fill: #4a5b74;
+  font-size: 14px;
+  text-anchor: middle;
+}
+
+.graduation text {
+  fill: #8494aa;
+  font-size: 12px;
+}
+
+.graphique figcaption {
+  padding-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #4a5b74;
+  font-style: italic;
+}
+
+
+/* ── Tableau de données ───────────────────────────────────────── */
+
+.donnees {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.donnees caption {
+  text-align: left;
+  color: #4a5b74;
+  padding-bottom: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.donnees th,
+.donnees td {
+  border: 1px solid #e0e6ee;
+  padding: 0.65rem 0.8rem;
+  text-align: left;
+}
+
+.donnees thead th {
+  background-color: #1d6fa5;
+  color: #fff;
+}
+
+.hausse {
+  color: #1a7f4b;
+  font-weight: 600;
+}
+
+.baisse {
+  color: #a8342a;
+  font-weight: 600;
+}
+
+.faits {
+  padding-left: 1.2rem;
+  color: #4a5b74;
+}
+
+.faits li {
+  margin-bottom: 0.4rem;
+}
+
+
+/* ── Lien vers le document ────────────────────────────────────── */
+
+.bouton-doc {
+  display: inline-block;
+  background-color: #1d6fa5;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.25s;
+}
+
+.bouton-doc:hover,
+.bouton-doc:focus {
+  background-color: #14507a;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #6b7a91;
+}
+
+.note a {
+  color: #1d6fa5;
+}
+
+
+/* ── Pied de page ─────────────────────────────────────────────── */
+
+.pied {
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7a91;
+}
+
+
+/* ── L'unique media query ─────────────────────────────────────── */
+
+@media (min-width: 700px) {
+
+  .entete {
+    padding: 3rem 0 1.5rem;
+  }
+
+  .graphique {
+    padding: 1.5rem;
+  }
+
+}

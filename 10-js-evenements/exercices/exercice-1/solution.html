@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Le premier clic</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le premier clic</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé la manip des parenthèses ?</strong> C'est elle qui
+      fait comprendre la différence entre confier une fonction et l'appeler. Si ce
+      n'est pas fait, retournez à la
+      <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <p>
+      Une solution possible. <strong>Seuls les critères comptent</strong> : une autre
+      écriture qui les remplit tous est tout aussi juste.
+    </p>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>/* 1 · Trouver les éléments */
+
+const bouton    = document.querySelector("#allumer");
+const lampe     = document.querySelector("#lampe");
+const etat      = document.querySelector("#etat");
+const compteur  = document.querySelector("#compteur");
+const raz       = document.querySelector("#raz");
+
+let clics = 0;
+
+/* 2 · La fonction qui réagit au clic */
+
+function basculer() {
+  clics = clics + 1;
+
+  lampe.classList.toggle("allumee");
+
+  if (lampe.classList.contains("allumee")) {
+    etat.textContent = "La lampe est allumée";
+  } else {
+    etat.textContent = "La lampe est éteinte";
+  }
+
+  compteur.textContent = clics + " clic(s)";
+
+  console.log("Clic n°", clics, "· allumée ?", lampe.classList.contains("allumee"));
+}
+
+/* 3 · Attacher la fonction au bouton */
+
+bouton.addEventListener("click", basculer);
+
+console.log("Écouteur posé sur :", bouton.textContent);
+
+/* 4 · Un second bouton, une fonction anonyme */
+
+raz.addEventListener("click", function () {
+  clics = 0;
+  compteur.textContent = "0 clic(s)";
+  lampe.classList.remove("allumee");
+  etat.textContent = "La lampe est éteinte";
+
+  console.log("Remise à zéro");
+});
+
+console.log("État initial :", etat.textContent);</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Le code s'exécute en deux temps</h3>
+
+    <p>
+      C'est le point qui déroute le plus. Regardez l'ordre réel :
+    </p>
+
+<pre><code>AU CHARGEMENT, une seule fois :
+  · les cinq querySelector
+  · la déclaration de basculer     ← définie, PAS appelée
+  · les deux addEventListener      ← écoutes posées
+  · les deux console.log           ← les 2 lignes que vous voyez
+
+À CHAQUE CLIC, autant de fois qu'on clique :
+  · le corps de basculer           ← appelé par le NAVIGATEUR</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Les deux lignes de console au chargement sont la preuve</strong> que
+        rien ne s'est encore produit : l'écoute est en place, la fonction attend.
+      </p>
+    </div>
+
+    <h3>2 · <code>toggle</code> puis <code>contains</code></h3>
+
+    <p>
+      <code>toggle</code> bascule la classe, mais ne dit pas dans quel état on
+      atterrit. On le demande ensuite à la page :
+    </p>
+
+<pre><code>lampe.classList.toggle("allumee");                  ← on bascule
+lampe.classList.contains("allumee")   → true/false  ← on relit</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Une seule source de vérité.</strong> On aurait pu tenir un
+        <code>let allumee = false</code> renversé à la main — mais il aurait fallu le
+        garder d'accord avec la classe, à chaque endroit du code. La page sait déjà :
+        autant la lire.
+      </p>
+    </div>
+
+    <h3>3 · Le compteur vit hors de la fonction</h3>
+
+<pre><code>let clics = 0;         ← HORS de la fonction : survit aux clics
+
+function basculer() {
+  clics = clics + 1;   ← 1, 2, 3…
+}</code></pre>
+
+    <table>
+      <tr><th>Où est <code>let clics = 0</code></th><th>Résultat au 3ᵉ clic</th></tr>
+      <tr><td>Hors de la fonction</td><td><code>3 clic(s)</code> ✅</td></tr>
+      <tr><td>Dans la fonction</td><td><code>1 clic(s)</code> ❌ — recréé à chaque appel</td></tr>
+    </table>
+
+    <h3>4 · Deux écritures, un même geste</h3>
+
+    <p>
+      Le bouton principal reçoit une fonction <strong>nommée</strong> ; la remise à
+      zéro, une fonction <strong>anonyme</strong>. Ce n'est pas une incohérence : ce
+      sont les deux formes du cours §7, montrées côte à côte.
+    </p>
+
+<pre><code>bouton.addEventListener("click", basculer);          ← nommée
+
+raz.addEventListener("click", function () { … });    ← anonyme</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Écrivez les deux de la même façon si vous préférez</strong> — les
+        critères ne l'imposent pas. La fonction nommée se justifie quand le code est
+        long ou réutilisé ; l'anonyme, quand il tient en trois lignes.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>
+          La lampe s'allume <strong>au chargement</strong>, le bouton
+          <strong>principal</strong> est inerte
+        </td>
+        <td>
+          <code>addEventListener("click", basculer())</code> — les parenthèses
+          appellent la fonction au lieu de la confier (cours §3)
+        </td>
+      </tr>
+      <tr>
+        <td>Le compteur affiche toujours <code>1 clic(s)</code></td>
+        <td>
+          <code>let clics = 0</code> est <strong>dans</strong> la fonction : il est
+          recréé à chaque appel (cours §5)
+        </td>
+      </tr>
+      <tr>
+        <td>La couleur change, mais le texte dit le contraire</td>
+        <td>
+          Le <code>contains</code> est lu <strong>avant</strong> le
+          <code>toggle</code> : on relit l'état d'avant la bascule
+        </td>
+      </tr>
+      <tr>
+        <td><code>TypeError: Cannot read properties of null</code></td>
+        <td>
+          Un identifiant est mal orthographié — ou le <code>&lt;script&gt;</code> ne
+          serait pas en bas du <code>&lt;body&gt;</code> (projet 9, exercice 1)
+        </td>
+      </tr>
+      <tr>
+        <td>Rien ne se passe, aucune erreur</td>
+        <td>
+          La page n'a pas été rechargée après l'enregistrement : l'ancien écouteur
+          est encore en place (cours §8)
+        </td>
+      </tr>
+      <tr>
+        <td>La remise à zéro laisse la lampe allumée</td>
+        <td>
+          Elle remet le compteur mais oublie
+          <code>classList.remove("allumee")</code>
+        </td>
+      </tr>
+    </table>
+
+    <h2>Ce qui vient ensuite</h2>
+
+    <div class="objectif">
+      <p>
+        Vous savez réagir à un clic. Le clic est l'événement le plus simple :
+        il arrive, on agit.
+      </p>
+      <p>
+        À l'exercice 2, l'événement se répète <strong>à chaque touche frappée</strong>,
+        et il faudra lire <em>ce que</em> le visiteur a tapé.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Exercice 2 — à venir ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

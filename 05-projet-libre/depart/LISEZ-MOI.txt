@@ -1,0 +1,35 @@
+VOTRE POINT DE DÉPART — projet 5
+=================================
+
+COPIEZ CE DOSSIER quelque part chez vous (le Bureau, par exemple)
+et renommez-le comme votre projet. Travaillez sur la copie.
+
+Il contient deux fichiers :
+
+  index.html   le squelette HTML, déjà valide
+  style.css    les fondations CSS, le reste est à vous
+
+COMMENT DÉMARRER
+
+  1. Dans VSCode : Fichier > Ouvrir le dossier... > votre copie
+  2. Ouvrez index.html dans le navigateur (double-clic, ou
+     l'extension Live Preview)
+  3. Écrivez, enregistrez (Ctrl+S / Cmd+S), rechargez (F5)
+
+LA CHECKLIST
+
+  Les 17 points attendus sont sur le serveur de la formation :
+
+    http://localhost:8777/05-projet-libre/consignes.html
+
+  Ouvrez-la dans un onglet AVANT de copier ce dossier : une fois
+  la copie faite, le chemin relatif ne fonctionne plus.
+
+UN CONSEIL
+
+  Écrivez d'abord TOUT le contenu en HTML, sans style. Vous
+  verrez mieux la structure, et le CSS ira ensuite beaucoup
+  plus vite.
+
+Il n'y a pas de corrigé pour ce projet : il n'existe pas une
+bonne réponse.

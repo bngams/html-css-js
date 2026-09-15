@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Écouter pendant qu'on tape</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 2</p>
+  <h1 class="titre-exo">Écouter pendant qu'on tape</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> réagir à chaque touche
+      frappée, et lire ce que le visiteur a écrit.</p>
+      <p>
+        <strong>Quatre notions nouvelles</strong>, toutes courtes : l'événement
+        <code>input</code>, <code>.value</code>, <code>.toLowerCase()</code> et
+        <code>.includes()</code>.
+      </p>
+    </div>
+
+    <h2>1 · Le clic ne suffit plus</h2>
+
+    <p>
+      À l'exercice 1, l'action était ponctuelle : on clique, il se passe quelque
+      chose. Une recherche, elle, se raffine <strong>à chaque lettre</strong> — le
+      visiteur n'appuie sur aucun bouton.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong><code>addEventListener</code> ne change pas.</strong> Seul le nom de
+        l'événement change. C'est toute la logique des événements : un même geste,
+        des déclencheurs différents.
+      </p>
+    </div>
+
+    <h2>2 · L'événement <code>input</code></h2>
+
+<pre><code>champ.addEventListener("input", function () {
+  // appelée à CHAQUE modification du champ
+});</code></pre>
+
+    <table>
+      <tr><th>Événement</th><th>Se déclenche…</th></tr>
+      <tr><td><code>"click"</code></td><td>à chaque clic sur l'élément</td></tr>
+      <tr><td><code>"input"</code></td><td>à chaque <strong>modification</strong> d'un champ de saisie</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Chaque lettre déclenche un tour.</strong> Taper <code>dune</code>
+        appelle la fonction <strong>quatre fois</strong> : après le <code>d</code>,
+        après le <code>u</code>, après le <code>n</code>, après le <code>e</code>.
+        Effacer la déclenche aussi.
+      </p>
+    </div>
+
+    <h2>3 · <code>.value</code> — lire ce qui est écrit</h2>
+
+<pre><code>champ.value       → ce que le visiteur a tapé, en TEXTE</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Ce n'est pas <code>textContent</code>.</strong> Un champ de saisie ne
+        contient pas de texte au sens du DOM : ce qu'on y tape vit dans sa propriété
+        <code>.value</code>.
+      </p>
+<pre><code>champ.textContent   → ""            ⚠️ toujours vide
+champ.value         → "dune"        ✅ ce qu'on cherche</code></pre>
+      <p>
+        <code>.value</code> rend <strong>toujours du texte</strong>, même pour un
+        champ numérique. Pour compter avec, il faudrait <code>Number()</code> — comme
+        au projet 6.
+      </p>
+    </div>
+
+    <h2>4 · Une fonction qu'on appelle deux fois</h2>
+
+    <p>
+      La page doit afficher les livres <strong>au chargement</strong>, puis les
+      refiltrer à chaque frappe. C'est le même travail : on l'écrit
+      <strong>une fois</strong>, dans une fonction.
+    </p>
+
+<pre><code>function afficher(filtre) {
+  // vider, construire, compter
+}
+
+afficher("");                                    ← au chargement : tout
+
+champ.addEventListener("input", function () {
+  afficher(champ.value.toLowerCase());           ← à chaque frappe
+});</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La fonction du projet 7 reprend son rôle premier :</strong> éviter
+        d'écrire deux fois la même chose. Le <em>paramètre</em> <code>filtre</code>
+        est ce qui change d'un appel à l'autre.
+      </p>
+    </div>
+
+    <h2>5 · Chercher un texte dans un texte</h2>
+
+    <p>Deux outils, chacun d'une ligne :</p>
+
+<pre><code>"Le Nom du vent".toLowerCase()        → "le nom du vent"
+"le nom du vent".includes("du")      → true
+"le nom du vent".includes("xyz")     → false</code></pre>
+
+    <table>
+      <tr><th>Méthode</th><th>Ce qu'elle rend</th></tr>
+      <tr><td><code>.toLowerCase()</code></td><td>le même texte, tout en minuscules</td></tr>
+      <tr><td><code>.includes(morceau)</code></td><td><code>true</code> ou <code>false</code> — le morceau est-il dedans ?</td></tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Sans <code>toLowerCase</code>, la recherche est sensible à la
+        casse</strong> — et ce n'est jamais ce qu'un visiteur attend :
+      </p>
+<pre><code>"Dune".includes("du")                        → false   ⚠️ le D majuscule
+"Dune".toLowerCase().includes("du")          → true    ✅</code></pre>
+      <p>
+        Il faut mettre en minuscules <strong>les deux côtés</strong> : le titre
+        <em>et</em> ce que le visiteur tape. Sinon, taper <code>DU</code> ne trouve
+        plus rien.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <code>.includes()</code> cherche <strong>n'importe où</strong> dans le texte,
+        pas seulement au début. <code>"Fondation".includes("dation")</code> →
+        <code>true</code>.
+      </p>
+    </div>
+
+    <h2>6 · Vider avant de reconstruire — encore</h2>
+
+    <p>
+      C'est le geste du projet 9, exercice 4. Ici il devient
+      <strong>vital</strong> : la fonction est rappelée à chaque lettre.
+    </p>
+
+<pre><code>for (const ancien of liste.querySelectorAll("li")) {
+  ancien.remove();
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Sans le ménage, les résultats s'empilent.</strong> Taper quatre
+        lettres ajouterait quatre listes à la suite, sans jamais rien retirer.
+      </p>
+      <p>
+        Et toujours la même règle : on boucle sur <code>querySelectorAll</code>,
+        jamais sur <code>.children</code>, qui est une liste vivante (projet 9,
+        exercice 3, section 3 bis).
+      </p>
+    </div>
+
+    <h2>7 · Rendre un résultat</h2>
+
+    <p>
+      La fonction compte au passage. Pour que l'appelant connaisse ce compte, elle le
+      <strong>rend</strong> — le <code>return</code> du projet 7 :
+    </p>
+
+<pre><code>function afficher(filtre) {
+  let trouves = 0;
+  // …
+  return trouves;
+}
+
+console.log("Au départ :", afficher(""), "livre(s)");</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Une fonction qui agit <em>et</em> rend une valeur</strong> est
+        courante. Ici elle modifie la page (son effet) et rend le nombre de résultats
+        (sa valeur) — ce qui évite de recompter ailleurs.
+      </p>
+    </div>
+
+    <h2>8 · ⚠️ Rechargez, puis tapez</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Le réflexe de l'exercice 1 vaut toujours :</strong> l'écouteur se pose
+        au chargement. Sans <strong>F5</strong> après <strong>Ctrl+S</strong>, vous
+        testez l'ancien code.
+      </p>
+      <p>
+        Un symptôme reconnaissable : vous corrigez une erreur, elle persiste à
+        l'identique. Rechargez.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/Element/input_event"
+             target="_blank" rel="noopener">MDN — l'événement <code>input</code></a>
+        </td>
+        <td>La référence, et la différence avec <code>change</code>.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/includes"
+             target="_blank" rel="noopener">MDN — <code>String.includes()</code></a>
+        </td>
+        <td>Courte, avec ses pièges de casse.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

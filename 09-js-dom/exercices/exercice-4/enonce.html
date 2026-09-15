@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Une page qui se construit seule</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 4</p>
+  <h1 class="titre-exo">Une page qui se construit seule</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Reprendre une page qui contient de
+      <strong>vieilles lignes écrites à la main</strong>, faire le ménage, et la
+      reconstruire entièrement à partir des données.</p>
+      <p>
+        <strong>Prérequis :</strong> les exercices 1, 2 et 3 de ce projet. Aucune
+        notion nouvelle : c'est l'exercice de <strong>synthèse</strong>.
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-4/app.js</code>
+      </p>
+      <p>
+        Le <strong>tableau de données</strong> — six emprunts — vous est fourni en
+        haut du fichier. La liste <code>#emprunts</code> contient
+        <strong>trois lignes périmées</strong>, et le bandeau <code>#bilan</code> est
+        vide.
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>L'ordre des opérations décide du résultat.</strong>
+      </p>
+      <p>
+        Vider, construire, relire, résumer — dans cet ordre. Une inversion ne produit
+        <em>aucune erreur rouge</em> : juste un résultat faux. Le cours §7 liste les
+        trois pièges.
+      </p>
+    </div>
+
+    <h2>✅ Les critères d'acceptation</h2>
+
+    <h3>Sur la page</h3>
+
+    <ol class="criteres">
+      <li>
+        Les <strong>trois lignes périmées</strong> ont disparu — plus aucun élément
+        de classe <code>perime</code> dans la page
+      </li>
+      <li>
+        La liste contient <strong>une ligne par emprunt</strong>, dans l'ordre du
+        tableau. Chaque ligne porte la classe <code>emprunt</code> et contient
+        <strong>trois éléments</strong> : le titre (<code>emprunt__titre</code>), le
+        lecteur (<code>emprunt__lecteur</code>) et la durée suivie de
+        <code>jours</code> (<code>emprunt__jours</code>)
+      </li>
+      <li>
+        Les emprunts de <strong>plus de 28 jours</strong> portent en plus la classe
+        <code>retard</code> — leur bordure devient rouge. Il y en a
+        <strong>deux</strong>
+      </li>
+      <li>
+        Le bandeau <code>#bilan</code> affiche
+        <code>6 emprunts, dont 2 en retard</code> — les deux nombres
+        <strong>calculés</strong>, jamais écrits à la main
+      </li>
+      <li>
+        Le bandeau porte la classe <code>alerte</code>, posée
+        <strong>seulement s'il y a au moins un retard</strong>
+      </li>
+    </ol>
+
+    <div class="astuce">
+      <p>
+        <strong>Le critère 5 se teste.</strong> Mettez temporairement toutes les
+        durées sous 28 jours dans le tableau : le bandeau ne doit
+        <em>plus</em> être rouge, et afficher <code>dont 0 en retard</code>. Remettez
+        ensuite les valeurs d'origine.
+      </p>
+      <p>
+        La dernière ligne de console affiche alors <code>Bandeau :</code>
+        <strong>suivi de rien</strong> — c'est normal : le bandeau n'a plus aucune
+        classe.
+      </p>
+    </div>
+
+    <h3>Dans la console</h3>
+
+    <ol class="criteres" start="6">
+      <li>
+        <code>Après le ménage :</code> suivi du nombre d'enfants de la liste
+        <strong>une fois les lignes périmées retirées</strong>, puis du mot
+        <code>élément(s)</code>
+      </li>
+      <li>
+        <code>Lignes construites :</code> suivi du nombre d'enfants après la boucle
+      </li>
+      <li>
+        <code>En retard :</code> suivi du nombre d'emprunts de plus de 28 jours,
+        <strong>compté par votre boucle</strong>
+      </li>
+      <li>
+        <code>Total des jours :</code> suivi du total.
+        <strong>Contrainte de méthode :</strong> obtenez-le en relisant les
+        <code>emprunt__jours</code> de la page, pas en additionnant le tableau. Les
+        deux donnent <code>121</code> — le résultat ne dira donc
+        <em>pas</em> si vous avez respecté la consigne, <strong>vous seul le
+        savez</strong>. C'est un entraînement pour le projet 10, où la page et les
+        données ne diront plus la même chose (cours §5)
+      </li>
+      <li>
+        <code>Durée moyenne :</code> suivi de la moyenne <strong>arrondie</strong>,
+        puis du mot <code>jours</code>
+      </li>
+      <li>
+        <code>Bandeau :</code> suivi des classes du bandeau, après modification
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <p>La console doit afficher exactement ces six lignes :</p>
+
+<pre><code>Après le ménage : 0 élément(s)
+Lignes construites : 6
+En retard : 2
+Total des jours : 121
+Durée moyenne : 20 jours
+Bandeau : alerte</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>La première ligne est un test à elle seule.</strong> Si elle affiche
+        <code>3</code> au lieu de <code>0</code>, le ménage n'a pas eu lieu. Si elle
+        affiche <code>6</code> ou <code>9</code>, vous avez construit
+        <em>avant</em> de vider.
+      </p>
+    </div>
+
+    <p>Et la page doit ressembler à ceci :</p>
+
+    <table>
+      <tr><th>Élément</th><th>Attendu</th></tr>
+      <tr>
+        <td>Les lignes grises en italique</td>
+        <td><strong>absentes</strong></td>
+      </tr>
+      <tr>
+        <td>Les emprunts</td>
+        <td>6 cartes : titre, lecteur, durée</td>
+      </tr>
+      <tr>
+        <td>Bordure rouge</td>
+        <td>Le Nom du vent (45 jours), Chroniques martiennes (30 jours)</td>
+      </tr>
+      <tr>
+        <td>Le bandeau</td>
+        <td><code>6 emprunts, dont 2 en retard</code>, sur fond rouge clair</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td><strong>Le HTML n'a pas changé</strong></td>
+        <td>
+          Clic droit → <em>Afficher le code source</em> : les trois lignes périmées
+          y sont toujours, le bandeau y est toujours vide
+        </td>
+      </tr>
+      <tr>
+        <td>La structure d'une carte</td>
+        <td>
+          Inspectez une ligne : un <code>&lt;li class="emprunt"&gt;</code> contenant
+          <strong>trois</strong> <code>&lt;span&gt;</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le total vient de la page</td>
+        <td>
+          Relisez <strong>votre propre code</strong> : votre boucle porte-t-elle sur
+          <code>querySelectorAll</code>, ou sur <code>emprunts</code> ? Le résultat
+          est <code>121</code> dans les deux cas
+        </td>
+      </tr>
+      <tr>
+        <td>La moyenne est arrondie</td>
+        <td>
+          <code>121 / 6 = 20,1666…</code> → affiché <code>20</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun <code>innerHTML</code></td>
+        <td>
+          Cherchez-le dans <code>app.js</code> : il ne doit pas y figurer
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — l'ordre des opérations</strong></p>
+      <p>Une fois l'exercice terminé, essayez volontairement ceci :</p>
+      <ol>
+        <li>
+          Déplacez le bloc du <strong>ménage</strong> (la boucle de
+          <code>remove()</code>) <em>après</em> la boucle de construction.
+        </li>
+        <li>Enregistrez, rechargez.</li>
+      </ol>
+      <p>
+        La page est <strong>vide</strong>, et <strong>deux lignes mentent</strong> :
+      </p>
+<pre><code>Après le ménage : 3 élément(s)   ⚠️ le ménage n'a plus rien vidé au bon moment
+Lignes construites : 0           ⚠️ votre boucle en a pourtant fabriqué six
+Total des jours : 0
+Durée moyenne : 0 jours</code></pre>
+      <p>
+        Aucune erreur rouge. Vous venez de fabriquer six éléments, puis de les
+        effacer vous-même.
+      </p>
+      <p>Remettez ensuite le ménage à sa place.</p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les six lignes s'affichent, sans erreur rouge</li>
+      <li>La page montre six cartes, dont deux à bordure rouge</li>
+      <li>Le bandeau est rempli et coloré</li>
+      <li>
+        Vous savez dire pourquoi le ménage doit venir <strong>avant</strong> la
+        construction
+      </li>
+      <li>Vous avez écrit ce code <strong>sans revenir au cours</strong></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>45 à 55 minutes.</strong> Rien de nouveau à apprendre : le temps passe
+      dans l'assemblage et dans l'ordre des étapes. Si vous bloquez plus de dix
+      minutes sur un geste, c'est un geste des exercices 1 à 3 — retournez-y.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

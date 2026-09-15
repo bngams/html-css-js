@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Le modèle de boîte</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 2</p>
+  <h1 class="titre-exo">Le modèle de boîte</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> maîtriser les espacements.
+      C'est <em>la</em> notion qui explique pourquoi une page « ne se place pas comme
+      on veut ».</p>
+    </div>
+
+    <h2>1 · Tout élément est une boîte</h2>
+
+    <p>
+      C'est le principe à intégrer une fois pour toutes : <strong>chaque élément HTML
+      occupe une boîte rectangulaire</strong>. Un titre, un paragraphe, une image, un
+      lien — tous. Même quand ça ne se voit pas.
+    </p>
+
+    <p>Cette boîte se compose de quatre couches, de l'intérieur vers l'extérieur :</p>
+
+    <table>
+      <tr>
+        <th>Couche</th>
+        <th>Rôle</th>
+      </tr>
+      <tr>
+        <td><strong>le contenu</strong></td>
+        <td>Le texte ou l'image elle-même</td>
+      </tr>
+      <tr>
+        <td><code>padding</code></td>
+        <td>L'espace <strong>intérieur</strong>, entre le contenu et la bordure</td>
+      </tr>
+      <tr>
+        <td><code>border</code></td>
+        <td>Le trait qui entoure</td>
+      </tr>
+      <tr>
+        <td><code>margin</code></td>
+        <td>L'espace <strong>extérieur</strong>, qui éloigne des éléments voisins</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>L'image qui aide :</strong> pensez à un cadre photo accroché au mur.
+        La photo est le contenu. Le passe-partout blanc autour, c'est le
+        <code>padding</code>. Le cadre en bois, c'est la <code>border</code>. Et
+        l'espace qui le sépare des autres cadres, c'est la <code>margin</code>.
+      </p>
+    </div>
+
+    <h2>2 · <code>padding</code> ou <code>margin</code> ?</h2>
+
+    <p>
+      La confusion entre les deux est le passage obligé. Un seul test permet de
+      trancher :
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Le fond de l'élément s'étend-il dans cet espace ?</strong>
+      </p>
+      <ul>
+        <li><strong>Oui</strong> → c'est du <code>padding</code>. Il est <em>dedans</em>.</li>
+        <li><strong>Non</strong> → c'est de la <code>margin</code>. Elle est <em>dehors</em>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Concrètement : si vous donnez un fond bleu à un bouton et que vous voulez que le
+      bleu déborde autour du texte, c'est du <code>padding</code>. Si vous voulez
+      éloigner ce bouton du suivant, c'est de la <code>margin</code>.
+    </p>
+
+    <h2>3 · Les écritures</h2>
+
+    <p>Chaque propriété accepte de une à quatre valeurs :</p>
+
+<pre><code>padding: 20px;                  /* les 4 côtés */
+padding: 10px 20px;             /* haut/bas, puis gauche/droite */
+padding: 10px 20px 30px 40px;   /* haut, droite, bas, gauche */</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>L'ordre des quatre valeurs suit les aiguilles d'une montre</strong>, en
+        partant du haut : haut → droite → bas → gauche. Le moyen mnémotechnique
+        anglais est « TRouBLe » (Top, Right, Bottom, Left).
+      </p>
+    </div>
+
+    <p>On peut aussi viser un seul côté :</p>
+
+<pre><code>margin-top: 30px;
+margin-bottom: 30px;</code></pre>
+
+    <h2>4 · Les bordures</h2>
+
+    <p>Une bordure se décrit en trois informations, dans cet ordre :</p>
+
+<pre><code>border: 2px solid #0b6bcb;
+     /* épaisseur · style · couleur */</code></pre>
+
+    <table>
+      <tr>
+        <th>Style</th>
+        <th>Rendu</th>
+      </tr>
+      <tr>
+        <td><code>solid</code></td>
+        <td>Un trait plein — le plus courant</td>
+      </tr>
+      <tr>
+        <td><code>dashed</code></td>
+        <td>Des tirets</td>
+      </tr>
+      <tr>
+        <td><code>dotted</code></td>
+        <td>Des points</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Le style est obligatoire.</strong> Écrire
+        <code>border: 2px #0b6bcb;</code> sans <code>solid</code> n'affiche
+        <em>rien</em> : par défaut, le style vaut <code>none</code>. C'est une panne
+        classique, et silencieuse.
+      </p>
+    </div>
+
+    <h2>5 · Le piège de la largeur — <code>box-sizing</code></h2>
+
+    <p>Voici le comportement par défaut, qui surprend tout le monde :</p>
+
+<pre><code>.carte {
+  width: 300px;
+  padding: 20px;
+  border: 5px solid navy;
+}</code></pre>
+
+    <p>
+      Quelle largeur occupe cette carte à l'écran ? <strong>350 pixels</strong>, pas
+      300 : par défaut, <code>width</code> ne désigne que le <em>contenu</em>. Les
+      paddings et bordures s'ajoutent par-dessus.
+    </p>
+
+    <p>Le calcul : 300 + 20 + 20 (paddings) + 5 + 5 (bordures) = 350.</p>
+
+    <div class="astuce">
+      <p>
+        <strong>La correction, universellement adoptée :</strong>
+      </p>
+<pre><code>* {
+  box-sizing: border-box;
+}</code></pre>
+      <p>
+        <code>box-sizing: border-box</code> demande que <code>width</code> désigne la
+        boîte <strong>entière</strong>, bordures comprises. Votre carte fera alors
+        exactement 300 pixels, et le contenu s'adaptera.
+      </p>
+      <p>
+        L'astérisque <code>*</code> est le <strong>sélecteur universel</strong> : il
+        vise tous les éléments. Cette règle se place en première ligne de presque
+        toutes les feuilles de style professionnelles.
+      </p>
+    </div>
+
+    <h2>6 · Centrer un bloc</h2>
+
+    <p>La recette à connaître par cœur :</p>
+
+<pre><code>.conteneur {
+  max-width: 800px;
+  margin: 0 auto;
+}</code></pre>
+
+    <p>
+      <code>auto</code> sur les marges gauche et droite demande au navigateur de
+      répartir l'espace restant équitablement — ce qui centre le bloc.
+      <code>max-width</code> évite qu'il s'étale sur un grand écran, tout en le
+      laissant rétrécir sur un petit.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Deux conditions</strong> pour que ça marche : l'élément doit avoir une
+        largeur limitée (<code>width</code> ou <code>max-width</code>), et
+        <code>margin: 0 auto</code> centre <em>horizontalement</em> seulement. Le
+        centrage vertical relève de Flexbox — exercice 3.
+      </p>
+    </div>
+
+    <h2>7 · Les unités</h2>
+
+    <table>
+      <tr>
+        <th>Unité</th>
+        <th>Sens</th>
+        <th>Quand</th>
+      </tr>
+      <tr>
+        <td><code>px</code></td>
+        <td>Une valeur fixe</td>
+        <td>Bordures, petits espacements précis</td>
+      </tr>
+      <tr>
+        <td><code>%</code></td>
+        <td>Une part de l'élément parent</td>
+        <td>Largeurs qui doivent s'adapter</td>
+      </tr>
+      <tr>
+        <td><code>rem</code></td>
+        <td>Un multiple de la taille de base du navigateur</td>
+        <td>Tailles de texte et espacements — <strong>à préférer</strong></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi <code>rem</code> vaut mieux que <code>px</code> pour le
+        texte :</strong> une personne malvoyante peut augmenter la taille de police par
+        défaut de son navigateur. Les valeurs en <code>rem</code> suivent ce réglage ;
+        celles en <code>px</code> l'ignorent. <code>1rem</code> vaut 16px par défaut,
+        donc <code>1.5rem</code> = 24px.
+      </p>
+      <p>
+        Nous resterons en <code>px</code> dans cet exercice pour ne pas mélanger les
+        difficultés, mais retenez ce point : il compte.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Styling_basics/Box_model"
+             target="_blank" rel="noopener">MDN — Le modèle de boîte</a>
+        </td>
+        <td>Reprend ce chapitre avec des schémas interactifs.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/CSS/box-sizing"
+             target="_blank" rel="noopener">MDN — box-sizing</a>
+        </td>
+        <td>Le détail du piège de la largeur, avec un exemple côte à côte.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Styling_basics/Values_and_units"
+             target="_blank" rel="noopener">MDN — Valeurs et unités</a>
+        </td>
+        <td>Toutes les unités CSS, et quand employer chacune.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

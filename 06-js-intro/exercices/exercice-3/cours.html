@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Des variables et des calculs</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 6</a> · Exercice 3</p>
+  <h1 class="titre-exo">Des variables et des calculs</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> ranger des valeurs dans
+      des variables, savoir de quel <em>type</em> elles sont, et faire des calculs
+      fiables avec l'objet <code>Math</code>.</p>
+    </div>
+
+    <h2>1 · <code>let</code> — une boîte nommée</h2>
+
+    <p>
+      Vous avez déjà utilisé <code>let</code> à l'exercice 2, sans l'étudier. Voici
+      ce qui se passe vraiment :
+    </p>
+
+<pre><code>let prenom = "Camille";</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>let</code></td><td>« crée une boîte »</td></tr>
+      <tr><td><code>prenom</code></td><td>le <strong>nom</strong> de la boîte, choisi par vous</td></tr>
+      <tr><td><code>=</code></td><td>« range dedans » — ce n'est <strong>pas</strong> l'égalité des maths</td></tr>
+      <tr><td><code>"Camille"</code></td><td>la valeur rangée</td></tr>
+    </table>
+
+    <p>Ensuite, le nom remplace la valeur partout où vous l'écrivez :</p>
+
+<pre><code>let prenom = "Camille";
+alert("Bonjour " + prenom);     → Bonjour Camille</code></pre>
+
+    <h3>Changer le contenu</h3>
+
+    <p>
+      Une boîte créée avec <code>let</code> peut être <strong>remplie à
+      nouveau</strong>. On ne réécrit pas <code>let</code> :
+    </p>
+
+<pre><code>let score = 10;
+score = 20;          ← on remplace le contenu
+score = score + 5;   ← on lit l'ancien, on range le nouveau  → 25</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>score = score + 5</code> n'a aucun sens en mathématiques. En
+        programmation, le <code>=</code> se lit toujours
+        <strong>de droite à gauche</strong> : « calcule <code>score + 5</code>, puis
+        range le résultat dans <code>score</code> ».
+      </p>
+    </div>
+
+    <h2>2 · <code>const</code> — une boîte qu'on ne peut plus changer</h2>
+
+    <p>
+      Quand une valeur ne doit <strong>jamais</strong> changer, on écrit
+      <code>const</code> au lieu de <code>let</code> :
+    </p>
+
+<pre><code>const TVA = 0.20;
+TVA = 0.10;    ← ✋ refusé</code></pre>
+
+    <p>Le navigateur répond alors, en rouge :</p>
+
+<pre><code>TypeError: Assignment to constant variable.</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Ce n'est pas une punition, c'est une protection.</strong> Vous dites
+        au navigateur : « cette valeur est fixe ». S'il vous arrive de la modifier
+        par erreur, il vous arrête <em>tout de suite</em>, au lieu de vous laisser
+        chercher pendant une heure.
+      </p>
+    </div>
+
+    <p>Deuxième différence : un <code>const</code> doit recevoir sa valeur
+    immédiatement.</p>
+
+<pre><code>const prix;    ← ✋ SyntaxError: Missing initializer in const declaration</code></pre>
+
+    <h3>Lequel choisir ?</h3>
+
+    <table>
+      <tr><th>Situation</th><th>Utilisez</th></tr>
+      <tr>
+        <td>La valeur ne changera pas (un taux, un nom de site, une limite)</td>
+        <td><code>const</code></td>
+      </tr>
+      <tr>
+        <td>La valeur va évoluer (un score, un total qu'on additionne)</td>
+        <td><code>let</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>La règle des professionnels :</strong> <code>const</code> par défaut,
+        et <code>let</code> seulement quand on a besoin de changer la valeur. Cela
+        rend le code plus sûr et plus lisible — on voit d'un coup d'œil ce qui bouge.
+      </p>
+    </div>
+
+    <h3>Bien nommer ses variables</h3>
+
+    <table>
+      <tr><th>Règle</th><th>Exemple</th></tr>
+      <tr><td>Un nom qui dit ce que c'est</td><td><code>prixTTC</code>, pas <code>x</code></td></tr>
+      <tr><td>Pas d'espace, pas d'accent</td><td><code>nombreArticles</code></td></tr>
+      <tr><td>Plusieurs mots : majuscule à partir du 2ᵉ</td><td><code>prixUnitaire</code> <em>(camelCase)</em></td></tr>
+      <tr><td>Jamais de chiffre en premier</td><td><code>2prix</code> est refusé</td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Rappel de l'exercice 2 — <code>console.log()</code>.</strong> Il
+        accepte <strong>plusieurs valeurs séparées par des virgules</strong>, et les
+        affiche côte à côte :
+      </p>
+<pre><code>console.log("Emprunts :", nombreEmprunts);</code></pre>
+      <p>
+        Tout l'affichage de cet exercice passe par là — et par la
+        <strong>virgule</strong>, pas par le <code>+</code>.
+      </p>
+    </div>
+
+    <h2>3 · Les types de valeurs</h2>
+
+    <p>
+      À l'exercice 2, la console affichait vos trois valeurs avec des couleurs
+      différentes. Voici pourquoi : chaque valeur a un <strong>type</strong>.
+      L'instruction <code>typeof</code> vous le dit.
+    </p>
+
+    <table>
+      <tr><th>Valeur</th><th><code>typeof</code> répond</th><th>C'est…</th></tr>
+      <tr><td><code>5</code></td><td><code>"number"</code></td><td>un nombre</td></tr>
+      <tr><td><code>"5"</code></td><td><code>"string"</code></td><td>du texte</td></tr>
+      <tr><td><code>true</code></td><td><code>"boolean"</code></td><td>vrai ou faux</td></tr>
+      <tr><td><code>undefined</code></td><td><code>"undefined"</code></td><td>une boîte jamais remplie</td></tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Le type change tout</strong>, et vous l'avez déjà vu :
+        <code>"5"</code> et <code>5</code> se ressemblent, mais
+        <code>"5" + 1</code> donne <code>"51"</code> tandis que <code>5 + 1</code>
+        donne <code>6</code>. Quand un calcul donne un résultat absurde,
+        <strong>la première question à se poser est celle du type</strong>.
+      </p>
+    </div>
+
+    <h2>4 · <code>Math</code> — la boîte à outils des nombres</h2>
+
+    <p>
+      <code>Math</code> n'est pas une variable que vous créez : c'est un outil
+      <strong>fourni par le navigateur</strong>, toujours disponible.
+    </p>
+
+    <h3>Arrondir</h3>
+
+    <table>
+      <tr><th>Instruction</th><th>Résultat</th><th>Effet</th></tr>
+      <tr><td><code>Math.round(4.5)</code></td><td><code>5</code></td><td>au plus proche</td></tr>
+      <tr><td><code>Math.round(4.4)</code></td><td><code>4</code></td><td>au plus proche</td></tr>
+      <tr><td><code>Math.floor(4.9)</code></td><td><code>4</code></td><td>toujours en dessous</td></tr>
+      <tr><td><code>Math.ceil(4.1)</code></td><td><code>5</code></td><td>toujours au-dessus</td></tr>
+    </table>
+
+    <h3>Les autres outils utiles</h3>
+
+    <table>
+      <tr><th>Instruction</th><th>Résultat</th></tr>
+      <tr><td><code>Math.abs(-7)</code></td><td><code>7</code> — la valeur absolue</td></tr>
+      <tr><td><code>Math.max(3, 9, 2)</code></td><td><code>9</code></td></tr>
+      <tr><td><code>Math.min(3, 9, 2)</code></td><td><code>2</code></td></tr>
+      <tr><td><code>Math.sqrt(144)</code></td><td><code>12</code> — la racine carrée</td></tr>
+      <tr><td><code>Math.PI</code></td><td><code>3.141592653589793</code></td></tr>
+    </table>
+
+    <h3>Le hasard</h3>
+
+<pre><code>Math.random()      → un nombre entre 0 et 1, par exemple 0.6829…</code></pre>
+
+    <p>
+      Seul, il sert rarement. La formule utile, à retenir telle quelle, tire un
+      entier entre 1 et 6 :
+    </p>
+
+<pre><code>Math.floor(Math.random() * 6) + 1</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi cette formule ?</strong> <code>Math.random()</code> donne un
+        nombre <em>inférieur à 1</em> — jamais 1 exactement. Multiplié par 6, il reste
+        sous 6. <code>Math.floor</code> le descend à l'entier du dessous : on obtient
+        0, 1, 2, 3, 4 ou 5. Le <code>+ 1</code> décale enfin la plage sur 1 à 6.
+      </p>
+    </div>
+
+    <h2>5 · Afficher joliment un nombre décimal</h2>
+
+    <p>Les nombres à virgule réservent parfois des surprises :</p>
+
+<pre><code>0.1 + 0.2     → 0.30000000000000004</code></pre>
+
+    <p>
+      Ce n'est pas un bug de JavaScript : tous les langages font cela, parce qu'un
+      ordinateur stocke les décimaux en binaire. Pour l'affichage, on utilise
+      <code>.toFixed()</code>, qui fixe le nombre de décimales :
+    </p>
+
+<pre><code>(5.678).toFixed(2)     → "5.68"
+(0.1 + 0.2).toFixed(2) → "0.30"</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>⚠️ Attention au type.</strong> Regardez bien les guillemets :
+        <code>.toFixed()</code> renvoie du <strong>texte</strong>, pas un nombre.
+      </p>
+<pre><code>(5.678).toFixed(2) + 1          → "5.681"     ⚠️ assemblage !
+Number((5.678).toFixed(2)) + 1  → 6.68        ✅ addition</code></pre>
+      <p>
+        C'est exactement le piège de l'exercice 2, sous une autre forme. Retenez la
+        règle : <strong><code>.toFixed()</code> sert à AFFICHER, jamais à
+        calculer.</strong>
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Guide/Grammar_and_types"
+             target="_blank" rel="noopener">MDN — Types et grammaire</a>
+        </td>
+        <td>La référence sur <code>let</code>, <code>const</code> et les types.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Math"
+             target="_blank" rel="noopener">MDN — L'objet <code>Math</code></a>
+        </td>
+        <td>La liste complète des outils, au-delà des six vus ici.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/variables"
+             target="_blank" rel="noopener">javascript.info — Les variables</a>
+        </td>
+        <td>Le même chapitre en français, avec des exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

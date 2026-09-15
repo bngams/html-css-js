@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Créer et insérer</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 9</a> · Exercice 3</p>
+  <h1 class="titre-exo">Créer et insérer</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé la manip du <code>createElement</code> sorti de la
+      boucle ?</strong> C'est elle qui fait comprendre qu'<code>append</code> déplace
+      au lieu de copier. Si ce n'est pas fait, retournez à la
+      <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const catalogue = [
+  { titre: "La Horde du Contrevent", pages: 712 },
+  { titre: "Dune", pages: 900 },
+  { titre: "Fondation", pages: 420 },
+  { titre: "Le Nom du vent", pages: 850 },
+  { titre: "Les Fourmis", pages: 300 }
+];
+
+document.querySelector("#vide").remove();
+
+const liste = document.querySelector("#catalogue");
+
+console.log("Au départ :", liste.children.length, "élément(s)");
+
+let volumineux = 0;
+
+for (const livre of catalogue) {
+
+  const li = document.createElement("li");
+  li.classList.add("livre");
+
+  const titre = document.createElement("span");
+  titre.classList.add("livre__titre");
+  titre.textContent = livre.titre;
+
+  const pages = document.createElement("span");
+  pages.classList.add("livre__pages");
+  pages.textContent = livre.pages + " pages";
+
+  li.append(titre, pages);
+
+  if (livre.pages &gt; 700) {
+    li.classList.add("volumineux");
+    volumineux = volumineux + 1;
+  }
+
+  liste.append(li);
+}
+
+console.log("Lignes créées :", liste.children.length);
+console.log("Volumineux :", volumineux);
+
+let totalPages = 0;
+
+for (const livre of catalogue) {
+  totalPages = totalPages + livre.pages;
+}
+
+const total = document.createElement("li");
+total.textContent = "Total : " + totalPages + " pages";
+liste.append(total);
+
+console.log("Total des pages :", totalPages);
+
+console.log("Titres en place :", liste.querySelectorAll(".livre__titre").length);</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Fabriquer, remplir, puis insérer</h3>
+
+    <p>Chaque carte se construit dans cet ordre :</p>
+
+<pre><code>createElement("li")       ← l'élément existe, invisible
+li.classList.add(…)       ← on le prépare
+li.append(titre, pages)   ← on le remplit (deux d'un coup, cours §3)
+liste.append(li)          ← ALORS il apparaît</code></pre>
+
+    <p>
+      <code>append(titre, pages)</code> est un <strong>raccourci</strong>, pas une
+      obligation : <code>li.append(titre)</code> puis <code>li.append(pages)</code>
+      donnent exactement le même résultat. Seuls les critères comptent.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>On assemble hors de la page, on n'insère qu'à la fin.</strong> Tant
+        que le <code>&lt;li&gt;</code> n'est pas dans la liste, on peut le manipuler
+        tranquillement : rien ne s'affiche, rien ne clignote.
+      </p>
+    </div>
+
+    <h3>2 · Le <code>createElement</code> DANS la boucle</h3>
+
+    <div class="attention">
+      <p>
+        <strong>C'est l'erreur qui coûte le plus cher sur ce chapitre.</strong> Sorti
+        de la boucle, il ne fabrique qu'<em>un seul</em> élément. Et comme
+        <code>append</code> <strong>déplace</strong> au lieu de copier, ce même
+        élément est promené cinq fois — pour finir à un seul endroit.
+      </p>
+<pre><code>createElement hors boucle  →  UNE ligne, portant le dernier titre
+createElement dans boucle  →  CINQ lignes                    ✅</code></pre>
+      <p>
+        Un tour de boucle, un élément neuf. C'est la règle.
+      </p>
+    </div>
+
+    <h3>3 · Cinq enfants, puis six</h3>
+
+    <table>
+      <tr><th>Moment</th><th><code>children.length</code></th></tr>
+      <tr><td>Au départ</td><td><code>0</code> — la liste est vide dans le HTML</td></tr>
+      <tr><td>Après la boucle</td><td><code>5</code> — un par livre</td></tr>
+      <tr><td>Après le total</td><td><code>6</code></td></tr>
+    </table>
+
+    <p>
+      Le critère 6 demande le compte <strong>après la boucle</strong>, donc
+      <code>5</code>. Affiché plus bas, il donnerait <code>6</code> — la ligne de
+      total s'étant ajoutée entre-temps.
+    </p>
+
+    <h3>4 · Un élément fabriqué est un élément comme les autres</h3>
+
+    <p>
+      La dernière ligne du corrigé le prouve :
+    </p>
+
+<pre><code>liste.querySelectorAll(".livre__titre").length    → 5</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>querySelectorAll</code> de l'exercice 1 retrouve les éléments que vous
+        venez de fabriquer. <strong>Une fois insérés, rien ne les distingue</strong>
+        de ceux écrits à la main dans le HTML.
+      </p>
+      <p>
+        Le code source de la page, lui, reste vide — ce que vous voyez n'existe que
+        dans le DOM, en mémoire. Rechargez : tout est reconstruit.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Rien ne s'affiche, aucune erreur</td>
+        <td>
+          Les éléments sont fabriqués mais jamais insérés : il manque
+          <code>append</code> (cours §2)
+        </td>
+      </tr>
+      <tr>
+        <td>Une seule ligne, avec le dernier titre</td>
+        <td>
+          Le <code>createElement</code> est <strong>hors</strong> de la boucle —
+          <code>append</code> a déplacé le même élément cinq fois
+        </td>
+      </tr>
+      <tr>
+        <td>Les cartes n'ont ni encadré ni mise en page</td>
+        <td>
+          La classe <code>livre</code> n'a pas été posée sur le
+          <code>&lt;li&gt;</code>
+        </td>
+      </tr>
+      <tr>
+        <td>Le titre et les pages sont collés sur une seule ligne de texte</td>
+        <td>
+          Vous avez écrit <code>li.textContent = …</code> au lieu de créer
+          <strong>deux</strong> <code>&lt;span&gt;</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>TypeError: Cannot read properties of null</code></td>
+        <td>
+          <code>#vide</code> a déjà été retiré et vous le cherchez à nouveau — ou un
+          sélecteur est mal orthographié
+        </td>
+      </tr>
+      <tr>
+        <td><code>Lignes créées : 6</code></td>
+        <td>
+          Le compte est affiché <strong>après</strong> l'ajout du total : remontez-le
+          juste après la boucle
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Exercice 4 — à venir ↑</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

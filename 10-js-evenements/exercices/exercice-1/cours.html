@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Le premier clic</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 10</a> · Exercice 1</p>
+  <h1 class="titre-exo">Le premier clic</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> faire réagir votre code à
+      une action du visiteur.</p>
+      <p>
+        Une seule notion nouvelle : <code>addEventListener</code>. Tout le reste —
+        <code>querySelector</code>, <code>textContent</code>,
+        <code>classList</code> — vient du projet 9.
+      </p>
+    </div>
+
+    <h2>1 · Jusqu'ici, votre code parlait tout seul</h2>
+
+    <p>
+      Au projet 9, votre code s'exécutait <strong>une fois</strong>, au chargement de
+      la page, de haut en bas. Puis il s'arrêtait. La page était construite, et plus
+      rien ne bougeait.
+    </p>
+
+    <p>
+      Un visiteur, lui, <em>agit</em> : il clique, il tape, il envoie un formulaire.
+      Il faut donc du code qui ne s'exécute <strong>pas tout de suite</strong>, mais
+      plus tard — au moment où l'action se produit.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>C'est le renversement du projet 10.</strong> Vous n'écrivez plus
+        « fais ceci » : vous écrivez <em>« quand ceci arrive, fais cela »</em>. Le
+        moment de l'exécution ne vous appartient plus.
+      </p>
+    </div>
+
+    <h2>2 · <code>addEventListener</code> — poser une écoute</h2>
+
+<pre><code>bouton.addEventListener("click", basculer);</code></pre>
+
+    <p>Trois morceaux, dans cet ordre :</p>
+
+    <table>
+      <tr><th>Morceau</th><th>Rôle</th></tr>
+      <tr><td><code>bouton</code></td><td><strong>qui</strong> on écoute — un élément trouvé avec <code>querySelector</code></td></tr>
+      <tr><td><code>"click"</code></td><td><strong>quoi</strong> on attend — le nom de l'événement, entre guillemets</td></tr>
+      <tr><td><code>basculer</code></td><td><strong>quoi faire</strong> — le nom d'une fonction</td></tr>
+    </table>
+
+    <p>
+      Cette ligne ne déclenche rien. Elle <strong>enregistre</strong> une intention :
+      « si un jour on clique sur ce bouton, appelle <code>basculer</code> ». Puis le
+      code continue.
+    </p>
+
+    <h2>3 · ⚠️ Le nom de la fonction, sans parenthèses</h2>
+
+    <div class="attention">
+      <p>
+        <strong>C'est l'erreur numéro un de ce chapitre</strong>, et elle ne produit
+        aucun message clair.
+      </p>
+<pre><code>bouton.addEventListener("click", basculer);     ✅ on DONNE la fonction
+bouton.addEventListener("click", basculer());   ❌ on l'APPELLE tout de suite</code></pre>
+      <p>
+        Avec les parenthèses, JavaScript exécute <code>basculer</code>
+        <strong>immédiatement</strong>, au chargement : la fonction s'exécute
+        maintenant, et le bouton ne reçoit rien à garder. Résultat : la lampe
+        s'allume toute seule au chargement, et le bouton ne fait plus rien.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Une image qui aide :</strong> <code>basculer</code>, c'est le
+        <em>numéro de téléphone</em> — vous le confiez pour qu'on appelle plus tard.
+        <code>basculer()</code>, c'est passer le coup de fil maintenant.
+      </p>
+    </div>
+
+    <h2>4 · La fonction n'est jamais appelée par vous</h2>
+
+<pre><code>function basculer() {
+  lampe.classList.toggle("allumee");
+}
+
+bouton.addEventListener("click", basculer);</code></pre>
+
+    <p>
+      Nulle part vous n'écrivez <code>basculer()</code>. C'est le
+      <strong>navigateur</strong> qui l'appelle, à chaque clic, aussi souvent que le
+      visiteur clique.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>La fonction du projet 7 reprend tout son sens.</strong> On la
+        définissait pour éviter de réécrire ; ici, on la définit parce qu'on ne sait
+        pas <em>quand</em> elle servira.
+      </p>
+    </div>
+
+    <h2>5 · Mémoriser entre deux clics</h2>
+
+    <p>
+      Une variable déclarée <strong>hors</strong> de la fonction survit d'un clic à
+      l'autre. C'est l'accumulateur du projet 8, dans un nouveau décor :
+    </p>
+
+<pre><code>let clics = 0;              ← hors de la fonction : mémoire durable
+
+function basculer() {
+  clics = clics + 1;        ← 1, puis 2, puis 3…
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Déclarée à l'intérieur, elle repart de zéro à chaque clic :</strong>
+      </p>
+<pre><code>function basculer() {
+  let clics = 0;            ⚠️ recréée à chaque appel
+  clics = clics + 1;        → toujours 1
+}</code></pre>
+    </div>
+
+    <h2>6 · Lire l'état plutôt que le deviner</h2>
+
+    <p>
+      <code>classList.toggle</code> pose la classe si elle est absente, la retire si
+      elle est là. Pour savoir dans quel état on vient de tomber, on
+      <strong>interroge la page</strong> :
+    </p>
+
+<pre><code>lampe.classList.toggle("allumee");
+
+if (lampe.classList.contains("allumee")) {
+  etat.textContent = "La lampe est allumée";
+} else {
+  etat.textContent = "La lampe est éteinte";
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>toggle</code> et <code>contains</code> viennent du projet 9, exercice 2.
+        <strong>Rien de neuf</strong> : seul le moment où on les appelle a changé.
+      </p>
+      <p>
+        On aurait pu garder un <code>let allumee = false</code> et le renverser
+        soi-même. Interroger la page évite d'entretenir deux vérités qui peuvent
+        diverger.
+      </p>
+    </div>
+
+    <h2>7 · Une fonction sans nom</h2>
+
+    <p>
+      Quand le code ne sert qu'à un seul écouteur, on peut l'écrire directement à la
+      place du nom :
+    </p>
+
+<pre><code>raz.addEventListener("click", function () {
+  clics = 0;
+  compteur.textContent = "0 clic(s)";
+});</code></pre>
+
+    <table>
+      <tr><th>Forme</th><th>Quand la préférer</th></tr>
+      <tr>
+        <td>Fonction <strong>nommée</strong></td>
+        <td>Le code est long, ou réutilisé par plusieurs écouteurs</td>
+      </tr>
+      <tr>
+        <td>Fonction <strong>anonyme</strong></td>
+        <td>Deux ou trois lignes, utilisées une seule fois</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Les deux formes font exactement la même chose.</strong> Ce n'est pas
+        une progression — la seconde n'est ni plus moderne ni plus savante : c'est un
+        choix de lisibilité, et vous croiserez les deux dans du vrai code.
+      </p>
+    </div>
+
+    <h2>8 · ⚠️ Rechargez, puis cliquez</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Un écouteur se pose au chargement de la page.</strong> Si vous
+        modifiez <code>app.js</code> sans recharger, c'est l'<em>ancien</em> code qui
+        écoute encore — vous testez une version qui n'existe plus.
+      </p>
+      <p>
+        Le réflexe, à chaque essai : <strong>Ctrl+S</strong>, puis
+        <strong>F5</strong>, puis cliquez.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener"
+             target="_blank" rel="noopener">MDN — <code>addEventListener()</code></a>
+        </td>
+        <td>La référence.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/introduction-browser-events"
+             target="_blank" rel="noopener">javascript.info — Les événements du navigateur</a>
+        </td>
+        <td>Le chapitre complet, avec la liste des événements courants.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

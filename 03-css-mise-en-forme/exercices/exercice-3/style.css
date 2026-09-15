@@ -1,0 +1,124 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 3 — À VOUS DE JOUER
+
+   👉 C'EST CE FICHIER QUE VOUS MODIFIEZ.
+      La page travail.html, elle, est figée : n'y touchez pas.
+
+   ── LE GESTE, pour chaque TODO ───────────────────────────────
+
+   1. EFFACEZ la ligne du marqueur en entier.
+   2. ÉCRIVEZ votre règle à la place.
+   3. Enregistrez, puis rechargez travail.html (F5).
+
+   ── RAPPEL FLEXBOX ───────────────────────────────────────────
+
+   display: flex se pose TOUJOURS sur le PARENT — celui qui
+   contient les éléments à aligner, jamais sur les éléments
+   eux-mêmes.
+
+   ── AVANT DE TERMINER ────────────────────────────────────────
+
+   Cherchez « TODO » avec Ctrl+F : aucun résultat ne doit rester.
+
+   ↩ L'énoncé : enonce.html   ·   Le cours : cours.html
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Les bases, déjà écrites pour vous ────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+}
+
+.conteneur {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+/* ── À vous ───────────────────────────────────────────────────── */
+
+
+/* ÉTAPE 1 — La bannière.
+   L'élément qui porte class="banniere" contient deux enfants :
+   le logo et le menu. Faites-les passer côte à côte, avec le logo
+   à gauche et le menu à droite (notion 4), et alignez-les
+   verticalement au centre (notion 5).
+
+   Ajoutez aussi : un fond #14457b et 15px d'espace intérieur.   */
+
+/* TODO: écrire la règle pour la classe banniere */
+
+
+/* ÉTAPE 2 — Le logo.
+   Sur la classe logo : couleur blanche, en gras, taille 1.3rem
+   et aucune marge (les paragraphes en ont par défaut).          */
+
+/* TODO: écrire la règle pour la classe logo */
+
+
+/* ÉTAPE 3 — Les liens du menu.
+   L'élément class="menu" contient trois liens. Mettez-les côte à
+   côte avec un espace de 20px entre eux (notions 2 et 3).       */
+
+/* TODO: écrire la règle pour la classe menu */
+
+
+/* ÉTAPE 4 — L'apparence des liens.
+   Visez les liens situés DANS le menu, en écrivant deux
+   sélecteurs séparés par une espace :
+       .menu a { ... }
+   Cela signifie « les balises a à l'intérieur de .menu ».
+
+   Donnez-leur : couleur blanche, pas de soulignement.           */
+
+/* TODO: écrire la règle pour les liens du menu */
+
+
+/* ÉTAPE 5 — La grille de cartes.
+   L'élément class="grille" contient les quatre cartes.
+   Faites-les passer côte à côte, autorisez le passage à la ligne
+   (notion 6), et mettez 20px d'espace entre elles.              */
+
+/* TODO: écrire la règle pour la classe grille */
+
+
+/* ÉTAPE 6 — Les cartes.
+   Sur la classe carte :
+     - un fond blanc
+     - 20px d'espace intérieur
+     - des coins arrondis de 8px (notion 8)
+     - une ombre douce : 0 2px 6px rgba(0, 0, 0, 0.12)
+     - une largeur de base pour qu'elles tiennent à deux par
+       ligne : ajoutez  flex: 1 1 380px;   (notion 7)
+       (cela signifie « pars de 380px, puis adapte-toi » —
+        c'est cette base qui décide du nombre de cartes par ligne)
+     - une transition sur l'ombre, d'une durée de 0.3s
+       ⚠️ la transition se déclare ICI, pas dans le survol        */
+
+/* TODO: écrire la règle pour la classe carte */
+
+
+/* ÉTAPE 7 — Les cartes au survol.
+   Visez l'état survolé ET l'état focus, ensemble :
+       .carte:hover, .carte:focus { ... }
+
+   Donnez-leur une ombre plus marquée :
+       0 6px 16px rgba(0, 0, 0, 0.18)                            */
+
+/* TODO: écrire la règle pour le survol des cartes */
+
+
+/* ÉTAPE 8 — La date de chaque atelier.
+   Sur la classe date : couleur #0b6bcb, en gras, taille 0.9rem
+   et aucune marge du haut.                                      */
+
+/* TODO: écrire la règle pour la classe date */

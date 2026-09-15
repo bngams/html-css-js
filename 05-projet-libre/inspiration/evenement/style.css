@@ -1,0 +1,227 @@
+/* ═══════════════════════════════════════════════════════════════
+   PAGE D'ÉVÉNEMENT — exemple d'inspiration
+
+   Parti pris : fond sombre et mise en page dense. Une couleur
+   d'accent chaude qui tranche sur le bleu nuit.
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Les fondations (projet 4) ────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: #e8eaf0;
+  background-color: #10131f;
+}
+
+.conteneur {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+/* ── Bandeau ──────────────────────────────────────────────────── */
+
+.bandeau {
+  background-color: #1a1f35;
+  border-bottom: 3px solid #ff7a45;
+  padding: 2.5rem 0 1.75rem;
+}
+
+.surtitre {
+  margin: 0 0 0.5rem;
+  color: #ff7a45;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bandeau h1 {
+  font-size: clamp(2.2rem, 8vw, 4rem);
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+}
+
+.sous-titre {
+  color: #a8b0c4;
+  font-size: 1.1rem;
+  max-width: 32rem;
+  margin: 0 0 1.5rem;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.menu a {
+  color: #e8eaf0;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 0.15rem;
+  transition: border-color 0.2s;
+}
+
+.menu a:hover,
+.menu a:focus {
+  border-bottom-color: #ff7a45;
+}
+
+
+/* ── Sections ─────────────────────────────────────────────────── */
+
+.section {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid #262c45;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #ff7a45;
+  margin-top: 0;
+}
+
+
+/* ── Les trois soirs ──────────────────────────────────────────── */
+
+.soirs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.soir {
+  flex: 1 1 250px;
+  background-color: #1a1f35;
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+.jour {
+  margin: 0;
+  color: #ff7a45;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.soir h3 {
+  margin: 0.2rem 0 0.75rem;
+  font-size: 1.2rem;
+}
+
+.affiche {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #c3c9da;
+}
+
+.affiche li {
+  margin-bottom: 0.35rem;
+}
+
+
+/* ── Tableau d'infos ──────────────────────────────────────────── */
+
+.infos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.infos caption {
+  text-align: left;
+  color: #a8b0c4;
+  padding-bottom: 0.6rem;
+}
+
+.infos th,
+.infos td {
+  border-bottom: 1px solid #262c45;
+  padding: 0.7rem 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.infos th {
+  color: #ff7a45;
+  width: 10rem;
+}
+
+
+/* ── Accès ────────────────────────────────────────────────────── */
+
+.acces {
+  padding-left: 1.2rem;
+}
+
+.acces li {
+  margin-bottom: 0.5rem;
+}
+
+.lien-carte {
+  color: #ff7a45;
+  font-weight: 600;
+}
+
+
+/* ── Pied de page ─────────────────────────────────────────────── */
+
+.pied {
+  padding: 1.75rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #8b93a8;
+}
+
+.pied a {
+  color: #ff7a45;
+}
+
+
+/* ── L'unique media query ─────────────────────────────────────── */
+
+@media (min-width: 750px) {
+
+  .bandeau {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .infos th {
+    width: 14rem;
+  }
+
+}
+
+
+/* ── Visuel de scène ──────────────────────────────────────────── */
+
+.visuel {
+  margin: 0;
+}
+
+.visuel img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.visuel figcaption {
+  padding-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #8b93a8;
+}

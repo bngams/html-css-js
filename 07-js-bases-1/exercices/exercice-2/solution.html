@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Vos premières fonctions</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 2</p>
+  <h1 class="titre-exo">Vos premières fonctions</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous vu la ligne <code>undefined</code> de l'étape 4 ?</strong>
+      C'est le cœur de l'exercice. Si vous ne l'avez pas constatée vous-même,
+      retournez à la <a href="travail.html">page de travail</a> : c'est en voyant une
+      fonction travailler pour rien qu'on retient <code>return</code>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>function addition(a, b) {
+  return a + b;
+}
+
+console.log("5 + 3 =", addition(5, 3));
+
+function soustraction(a, b) {
+  return a - b;
+}
+
+console.log("5 - 3 =", soustraction(5, 3));
+
+function multiplierSansRendre(a, b) {
+  a * b;
+}
+
+console.log("multiplierSansRendre(5, 3) =", multiplierSansRendre(5, 3));
+
+function multiplication(a, b) {
+  return a * b;
+}
+
+console.log("5 × 3 =", multiplication(5, 3));
+
+function prixTTC(prixHT) {
+  return prixHT * 1.2;
+}
+
+console.log("Abonnement :", prixTTC(24));
+console.log("Retard :", prixTTC(2));
+console.log("Perte :", prixTTC(15));
+
+const totalDeuxAbos = prixTTC(24) * 2;
+
+console.log("Deux abonnements :", totalDeuxAbos, "€");</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Sans <code>return</code>, le travail est perdu</h3>
+
+    <div class="attention">
+      <p>
+        <code>multiplierSansRendre</code> fait bien la multiplication. Le résultat est
+        calculé… puis jeté, parce que personne ne le reçoit :
+      </p>
+<pre><code>function multiplierSansRendre(a, b) {
+  a * b;          ← calculé, puis abandonné
+}
+→ undefined</code></pre>
+      <p>
+        <strong>Et aucune erreur rouge n'apparaît.</strong> C'est ce qui rend ce
+        défaut si fréquent : le programme continue, avec une valeur vide qui se
+        propage. Quand une fonction vous renvoie <code>undefined</code> sans raison
+        apparente, <strong>cherchez d'abord le <code>return</code> manquant</strong>.
+      </p>
+    </div>
+
+    <h3>2 · Afficher n'est pas renvoyer</h3>
+
+    <table>
+      <tr><th></th><th><code>console.log(a + b)</code></th><th><code>return a + b</code></th></tr>
+      <tr>
+        <th>Destinataire</th>
+        <td>l'écran</td>
+        <td>le programme qui appelle</td>
+      </tr>
+      <tr>
+        <th>Réutilisable ?</th>
+        <td><strong>non</strong></td>
+        <td><strong>oui</strong></td>
+      </tr>
+      <tr>
+        <th>Multiplié par 10</th>
+        <td><code>NaN</code></td>
+        <td>le résultat ×10</td>
+      </tr>
+    </table>
+
+    <p>
+      C'est exactement pourquoi l'étape 9 fonctionne :
+      <code>prixTTC(24) * 2</code> n'est possible que parce que la fonction
+      <em>renvoie</em> une valeur.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>La règle :</strong> une fonction <em>calcule</em> et
+        <strong>renvoie</strong> ; c'est celui qui l'appelle qui décide d'afficher.
+        Mélanger les deux rend le code inutilisable ailleurs.
+      </p>
+    </div>
+
+    <h3>3 · Paramètre et argument</h3>
+
+    <p>Deux mots pour deux choses différentes — la confusion est fréquente :</p>
+
+<pre><code>function prixTTC(prixHT) {     ← prixHT est le PARAMÈTRE
+  return prixHT * 1.2;
+}
+
+prixTTC(24);                   ← 24 est l'ARGUMENT</code></pre>
+
+    <p>
+      Le paramètre est un <strong>emplacement nommé</strong>, écrit une fois. Les
+      arguments sont les <strong>valeurs réelles</strong>, différentes à chaque
+      appel. C'est ce qui permet d'écrire le calcul une seule fois et de l'utiliser
+      trois fois, comme à l'étape 8.
+    </p>
+
+    <h3>4 · Les décimales à rallonge, et leur irrégularité</h3>
+
+    <table>
+      <tr><th>Calcul</th><th>Résultat</th></tr>
+      <tr><td><code>24 * 1.2</code></td><td><code>28.799999999999997</code></td></tr>
+      <tr><td><code>2 * 1.2</code></td><td><code>2.4</code> — exact</td></tr>
+      <tr><td><code>15 * 1.2</code></td><td><code>18</code> — exact</td></tr>
+    </table>
+
+    <p>
+      Vous aviez vu ce phénomène au projet 6. Ce que cet exercice ajoute, c'est
+      qu'il est <strong>imprévisible</strong> : il ne touche que certains nombres.
+      Impossible de deviner lesquels — d'où la règle :
+      <strong><code>.toFixed(2)</code> pour afficher, jamais pour calculer.</strong>
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>La console affiche <code>undefined</code> pour vos propres fonctions</td>
+        <td>
+          Le <code>return</code> manque — ou vous avez écrit
+          <code>console.log</code> à sa place
+        </td>
+      </tr>
+      <tr>
+        <td><code>ReferenceError: soustraction is not defined</code></td>
+        <td>
+          La fonction n'a pas été écrite, ou son nom est mal orthographié à l'appel
+          (majuscules comprises)
+        </td>
+      </tr>
+      <tr>
+        <td>La dernière ligne affiche <code>NaN</code></td>
+        <td>
+          <code>prixTTC</code> affiche au lieu de renvoyer : il n'y a rien à
+          multiplier par 2
+        </td>
+      </tr>
+      <tr>
+        <td>Rien ne s'affiche, une erreur rouge en haut</td>
+        <td>
+          Une accolade manquante. <code>Maj+Alt+F</code> reformate le fichier et rend
+          le décalage visible
+        </td>
+      </tr>
+      <tr>
+        <td>La console affiche le code d'une fonction au lieu d'un nombre</td>
+        <td>
+          Les parenthèses manquent à l'appel : <code>addition</code> au lieu de
+          <code>addition(5, 3)</code>
+        </td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../exercice-3/">Exercice 3 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

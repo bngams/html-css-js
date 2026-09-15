@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Les tableaux de données</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 2</a> · Exercice 2</p>
+  <h1 class="titre-exo">Les tableaux de données</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> présenter des données
+      chiffrées ou comparatives dans un tableau — et le rendre compréhensible pour
+      quelqu'un qui ne le voit pas.</p>
+    </div>
+
+    <h2>1 · Un tableau, c'est pour des données</h2>
+
+    <div class="attention">
+      <p>
+        <strong>Un tableau sert à présenter des données, jamais à mettre en page.</strong>
+        Dans les années 2000, on construisait des sites entiers avec des tableaux
+        invisibles pour placer les éléments. C'est fini : la mise en page, c'est le
+        CSS (projet 3).
+      </p>
+      <p>
+        Le test : si vos données ont un sens en lignes <em>et</em> en colonnes
+        (un horaire, un tarif, un comparatif), c'est un tableau. Sinon, non.
+      </p>
+    </div>
+
+    <h2>2 · Les trois balises de base</h2>
+
+    <p>Un tableau se construit ligne par ligne, et chaque ligne contient ses cellules :</p>
+
+    <table>
+      <tr>
+        <th>Balise</th>
+        <th>Rôle</th>
+        <th>Mémo</th>
+      </tr>
+      <tr>
+        <td><code>&lt;table&gt;</code></td>
+        <td>Le tableau entier</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><code>&lt;tr&gt;</code></td>
+        <td>Une ligne</td>
+        <td><em>table row</em></td>
+      </tr>
+      <tr>
+        <td><code>&lt;td&gt;</code></td>
+        <td>Une cellule de données</td>
+        <td><em>table data</em></td>
+      </tr>
+    </table>
+
+<pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Lundi&lt;/td&gt;
+    &lt;td&gt;9 h – 17 h&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Mardi&lt;/td&gt;
+    &lt;td&gt;9 h – 17 h&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>On écrit un tableau ligne par ligne, pas colonne par colonne.</strong>
+        Les colonnes n'existent pas en tant que balises : elles se forment toutes
+        seules parce que chaque ligne a le même nombre de cellules.
+      </p>
+    </div>
+
+    <h2>3 · Les cellules d'en-tête — <code>&lt;th&gt;</code></h2>
+
+    <p>
+      Une cellule qui <em>nomme</em> une colonne ou une ligne n'est pas une donnée :
+      c'est un en-tête. Elle s'écrit <code>&lt;th&gt;</code>
+      (<em>table header</em>) au lieu de <code>&lt;td&gt;</code>.
+    </p>
+
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;Jour&lt;/th&gt;
+  &lt;th&gt;Horaires&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+
+    <p>
+      Visuellement, le navigateur met les <code>&lt;th&gt;</code> en gras et les
+      centre. Mais l'essentiel est ailleurs : c'est ce qui permet à un lecteur d'écran
+      d'annoncer « <em>Jour : Lundi</em> » au lieu de lire « Lundi » sans contexte.
+    </p>
+
+    <h2>4 · L'attribut <code>scope</code></h2>
+
+    <p>
+      Un <code>&lt;th&gt;</code> peut nommer une colonne ou une ligne.
+      <code>scope</code> lève l'ambiguïté :
+    </p>
+
+    <table>
+      <tr>
+        <th>Écriture</th>
+        <th>Sens</th>
+      </tr>
+      <tr>
+        <td><code>scope="col"</code></td>
+        <td>Cet en-tête nomme <strong>la colonne</strong> en dessous</td>
+      </tr>
+      <tr>
+        <td><code>scope="row"</code></td>
+        <td>Cet en-tête nomme <strong>la ligne</strong> à droite</td>
+      </tr>
+    </table>
+
+<pre><code>&lt;tr&gt;
+  &lt;th scope="col"&gt;Jour&lt;/th&gt;
+  &lt;th scope="col"&gt;Horaires&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th scope="row"&gt;Lundi&lt;/th&gt;
+  &lt;td&gt;9 h – 17 h&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>scope</code> ne change rien à l'écran. Il sert aux lecteurs d'écran, qui
+        peuvent alors annoncer chaque cellule avec ses deux en-têtes : « <em>Lundi,
+        Horaires : 9 h – 17 h</em> ». Sans lui, l'utilisateur doit mémoriser la
+        position des colonnes.
+      </p>
+    </div>
+
+    <h2>5 · Le titre du tableau — <code>&lt;caption&gt;</code></h2>
+
+    <p>
+      <code>&lt;caption&gt;</code> donne un titre au tableau. Il se place
+      <strong>juste après</strong> <code>&lt;table&gt;</code>, avant toute ligne :
+    </p>
+
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Horaires d'ouverture de la médiathèque&lt;/caption&gt;
+  &lt;tr&gt;
+    …
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+
+    <p>
+      C'est l'équivalent du <code>&lt;figcaption&gt;</code> des images (projet 1) :
+      le titre est <em>lié</em> au tableau, pas simplement posé au-dessus.
+    </p>
+
+    <h2>6 · Les trois sections — <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code></h2>
+
+    <p>
+      Sur un tableau un peu long, on sépare la ligne d'en-tête du corps des données :
+    </p>
+
+<pre><code>&lt;table&gt;
+  &lt;caption&gt;Horaires d'ouverture&lt;/caption&gt;
+
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Jour&lt;/th&gt;
+      &lt;th scope="col"&gt;Horaires&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="row"&gt;Lundi&lt;/th&gt;
+      &lt;td&gt;9 h – 17 h&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+
+    <table>
+      <tr>
+        <th>Balise</th>
+        <th>Contient</th>
+      </tr>
+      <tr>
+        <td><code>&lt;thead&gt;</code></td>
+        <td>La ou les lignes d'en-tête</td>
+      </tr>
+      <tr>
+        <td><code>&lt;tbody&gt;</code></td>
+        <td>Les lignes de données</td>
+      </tr>
+      <tr>
+        <td><code>&lt;tfoot&gt;</code></td>
+        <td>Une ligne de total ou de synthèse <em>(optionnel)</em></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Bénéfice concret :</strong> à l'impression d'un tableau long sur
+        plusieurs pages, le navigateur répète automatiquement le
+        <code>&lt;thead&gt;</code> en haut de chaque page.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Structuring_content/HTML_table_basics"
+             target="_blank" rel="noopener">MDN — Les bases des tableaux HTML</a>
+        </td>
+        <td>Reprend tout ce chapitre, avec des exercices et le style CSS des tableaux.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Structuring_content/Table_accessibility"
+             target="_blank" rel="noopener">MDN — Accessibilité des tableaux</a>
+        </td>
+        <td>Va plus loin sur <code>scope</code>, et les tableaux à double entrée.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

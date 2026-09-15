@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Poser ses propres accroches</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 3</a> · Exercice 4</p>
+  <h1 class="titre-exo">Poser ses propres accroches</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> ajouter vous-même des
+      <code>class</code> et des <code>id</code> dans le HTML, pour pouvoir viser
+      exactement ce que vous voulez en CSS.</p>
+      <p>
+        C'est le dernier exercice du projet — et le seul où vous modifiez
+        <strong>les deux fichiers</strong>.
+      </p>
+    </div>
+
+    <h2>1 · Pourquoi on en arrive là</h2>
+
+    <p>
+      Dans les trois exercices précédents, le HTML était figé et déjà pourvu de
+      classes. Vous n'aviez qu'à les viser. Mais posez-vous la question :
+      <strong>que faire si l'accroche dont vous avez besoin n'existe pas ?</strong>
+    </p>
+
+    <p>Prenons une page réelle :</p>
+
+<pre><code>&lt;p&gt;Un paragraphe ordinaire.&lt;/p&gt;
+&lt;p&gt;Celui-ci doit être en rouge et encadré.&lt;/p&gt;
+&lt;p&gt;Un autre paragraphe ordinaire.&lt;/p&gt;</code></pre>
+
+    <p>
+      Comment viser <strong>le deuxième seulement</strong> ? Le sélecteur
+      <code>p</code> les prendrait tous les trois. Il n'existe aucune classe. Vous êtes
+      bloqué — non par le CSS, mais par le HTML, qui n'offre aucune prise.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>La réponse :</strong> on ajoute la prise. C'est exactement ainsi qu'on
+        travaille en vrai — le HTML et le CSS s'écrivent ensemble, en aller-retour.
+        Le développeur qui a préparé vos exercices précédents avait posé ces classes
+        pour cette raison.
+      </p>
+    </div>
+
+    <h2>2 · Ajouter une classe</h2>
+
+    <p>
+      Une classe est un simple attribut posé sur la balise ouvrante — vous connaissez
+      la syntaxe depuis le projet 1 :
+    </p>
+
+<pre><code>&lt;p class="avertissement"&gt;Celui-ci doit être en rouge et encadré.&lt;/p&gt;</code></pre>
+
+    <p>Et le CSS peut alors le viser :</p>
+
+<pre><code>.avertissement {
+  color: #842029;
+  border: 1px solid #842029;
+}</code></pre>
+
+    <h3>Plusieurs classes sur un même élément</h3>
+
+    <p>
+      Un élément peut en porter plusieurs, <strong>séparées par une espace</strong> :
+    </p>
+
+<pre><code>&lt;div class="carte carte--large"&gt;…&lt;/div&gt;</code></pre>
+
+    <p>
+      Il reçoit alors les deux règles. Vous l'avez déjà vu à l'exercice 2 : une classe
+      de base, puis une classe de variante qui ne change que le nécessaire.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>L'espace sépare deux classes, il n'en crée pas une seule.</strong>
+        <code>class="carte large"</code> pose <em>deux</em> classes. Pour une classe
+        dont le nom fait deux mots, utilisez un tiret :
+        <code>class="carte-large"</code>.
+      </p>
+    </div>
+
+    <h2>3 · Bien nommer ses classes</h2>
+
+    <p>C'est une compétence à part entière. Trois règles suffisent :</p>
+
+    <table>
+      <tr>
+        <th>Règle</th>
+        <th>❌ Évitez</th>
+        <th>✅ Préférez</th>
+      </tr>
+      <tr>
+        <td>Nommer le <strong>rôle</strong>, pas l'apparence</td>
+        <td><code>rouge</code>, <code>gros-texte</code></td>
+        <td><code>alerte</code>, <code>titre-section</code></td>
+      </tr>
+      <tr>
+        <td>Sans accent ni espace</td>
+        <td><code>en-tête</code>, <code>ma classe</code></td>
+        <td><code>en-tete</code>, <code>ma-classe</code></td>
+      </tr>
+      <tr>
+        <td>En minuscules, mots séparés par un tiret</td>
+        <td><code>MaClasse</code>, <code>ma_classe</code></td>
+        <td><code>ma-classe</code></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Pourquoi le rôle plutôt que l'apparence ?</strong> Imaginez une classe
+        nommée <code>rouge</code>. Six mois plus tard, la charte graphique change et
+        les alertes deviennent oranges. Vous vous retrouvez avec
+        <code>.rouge { color: orange; }</code> — absurde, et présent dans cinquante
+        fichiers. Une classe <code>alerte</code> reste juste quelle que soit la
+        couleur.
+      </p>
+    </div>
+
+    <h2>4 · Quand utiliser un <code>id</code> plutôt qu'une classe</h2>
+
+    <p>Vous connaissez les deux depuis les projets 1 et 2. Le partage des rôles :</p>
+
+    <table>
+      <tr>
+        <th></th>
+        <th><code>class</code></th>
+        <th><code>id</code></th>
+      </tr>
+      <tr>
+        <td>Combien par page</td>
+        <td>Autant qu'on veut</td>
+        <td><strong>Un seul</strong> — le nom est unique</td>
+      </tr>
+      <tr>
+        <td>Sélecteur CSS</td>
+        <td><code>.nom</code></td>
+        <td><code>#nom</code></td>
+      </tr>
+      <tr>
+        <td>Usage principal</td>
+        <td><strong>Le style</strong></td>
+        <td>Les liens internes, le JavaScript</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Pour styler, préférez presque toujours la classe.</strong> Un
+        <code>id</code> ne peut toucher qu'un élément : le jour où le même style doit
+        servir ailleurs, tout est à refaire. Gardez l'<code>id</code> pour ce qui doit
+        être <em>unique et désigné</em> : une cible de lien interne (projet 1), un
+        champ relié à son étiquette (projet 2), un élément que le JavaScript ira
+        chercher (jour 3).
+      </p>
+    </div>
+
+    <h2>5 · Choisir la bonne balise, aussi</h2>
+
+    <p>
+      Ajouter une classe ne dispense pas de choisir la balise juste. Le projet 2 vous
+      l'a appris : <code>&lt;section&gt;</code> pour une partie thématique,
+      <code>&lt;article&gt;</code> pour un contenu autonome, et
+      <code>&lt;div&gt;</code> quand le groupement est <strong>purement
+      visuel</strong>.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Et c'est précisément le cas quand on crée une accroche pour le
+        CSS.</strong> Si vous entourez trois éléments d'une boîte uniquement pour les
+        aligner avec Flexbox, cette boîte n'a aucun sens propre :
+        <code>&lt;div class="rangee"&gt;</code> est le bon choix. Y mettre
+        <code>&lt;section&gt;</code> annoncerait au lecteur d'écran une partie
+        thématique qui n'existe pas.
+      </p>
+    </div>
+
+    <h2>6 · La méthode, en pratique</h2>
+
+    <p>L'aller-retour entre les deux fichiers suit toujours le même ordre :</p>
+
+    <table>
+      <tr>
+        <th>Étape</th>
+        <th>Où</th>
+      </tr>
+      <tr>
+        <td>1. Je regarde ce que je veux styler</td>
+        <td>Dans le navigateur</td>
+      </tr>
+      <tr>
+        <td>2. Une accroche existe-t-elle déjà ?</td>
+        <td>Dans le HTML</td>
+      </tr>
+      <tr>
+        <td>3. Sinon, j'ajoute une classe au rôle bien nommé</td>
+        <td><strong>HTML</strong></td>
+      </tr>
+      <tr>
+        <td>4. J'écris la règle qui la vise</td>
+        <td><strong>CSS</strong></td>
+      </tr>
+      <tr>
+        <td>5. J'enregistre les deux, je recharge</td>
+        <td>Navigateur</td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Le piège du jour :</strong> vous modifiez deux fichiers, donc il faut
+        <strong>enregistrer les deux</strong>. Une classe ajoutée en HTML mais non
+        enregistrée, et votre règle CSS ne vise rien — sans aucun message d'erreur.
+        Dans VSCode, un point à côté du nom d'un onglet signale un fichier non
+        enregistré.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr>
+        <th>Ressource</th>
+        <th>Pourquoi celle-là</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Reference/Global_attributes/class"
+             target="_blank" rel="noopener">MDN — L'attribut class</a>
+        </td>
+        <td>La référence, avec les règles de nommage valides.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Styling_basics/Basic_selectors"
+             target="_blank" rel="noopener">MDN — Les sélecteurs de base</a>
+        </td>
+        <td>Reprend classes, id et sélecteurs de type avec des exercices.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Les media queries</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 4</a> · Exercice 2</p>
+  <h1 class="titre-exo">Les media queries</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Vous avez cherché avant d'arriver ici ?</strong> Si oui, parfait.
+      Sinon, retournez à l'onglet <a href="travail.html">À vous de jouer</a>.</p>
+    </div>
+
+    <h2>Le code complet</h2>
+
+    <details>
+      <summary>Afficher le code complet (après avoir essayé !)</summary>
+
+<pre><code>/* ── PARTIE 2 : le style de base (petits écrans) ── */
+
+.banniere {
+  background-color: #14457b;
+  padding: 1rem;
+  text-align: center;
+}
+
+.logo {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+
+/* ── PARTIE 3 : les enrichissements ── */
+
+@media (min-width: 700px) {
+
+  .banniere {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    text-align: left;
+  }
+
+  .grille {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .espace {
+    margin-bottom: 0;
+  }
+
+}
+
+@media (min-width: 1000px) {
+
+  h1 {
+    font-size: 2.4rem;
+  }
+
+}</code></pre>
+    </details>
+
+    <p>
+      Le fichier commenté est dans <code>solution/style.css</code> — et la page est
+      <a href="solution/">visible ici</a>. Redimensionnez-la pour voir les deux
+      basculements.
+    </p>
+
+    <h2>Les trois états de la page</h2>
+
+    <table>
+      <tr>
+        <th>Largeur</th>
+        <th>Media queries actives</th>
+        <th>Résultat</th>
+      </tr>
+      <tr>
+        <td>Moins de 700 px</td>
+        <td><em>aucune</em></td>
+        <td>Tout empilé : logo au-dessus du menu, espaces les uns sous les autres</td>
+      </tr>
+      <tr>
+        <td>700 à 999 px</td>
+        <td>celle de 700 px</td>
+        <td>Bannière étalée, trois espaces côte à côte</td>
+      </tr>
+      <tr>
+        <td>1000 px et plus</td>
+        <td><strong>les deux</strong></td>
+        <td>Idem, plus le titre agrandi</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Notez la troisième ligne :</strong> à 1200 px, les deux media queries
+        s'appliquent <em>en même temps</em>. Elles ne s'excluent pas — elles
+        s'empilent. C'est pourquoi leur ordre d'écriture décide du résultat.
+      </p>
+    </div>
+
+    <h2>Les trois points qui comptent</h2>
+
+    <h3>1 · La règle de base est celle du petit écran</h3>
+
+    <p>
+      Regardez l'étape 1 : la bannière n'a <strong>pas</strong> de
+      <code>display: flex</code>. C'est délibéré — sur un téléphone, le logo et le menu
+      doivent rester l'un sous l'autre, ce qui est déjà le comportement par défaut.
+    </p>
+
+    <div class="astuce">
+      <p>
+        <strong>Voilà l'esprit du mobile-first :</strong> le cas le plus contraint
+        demande le <em>moins</em> de code. On n'écrit que pour enrichir, jamais pour
+        défaire.
+      </p>
+    </div>
+
+    <h3>2 · Une media query n'annule rien</h3>
+
+    <p>
+      Le fond bleu de la bannière n'est écrit <strong>qu'une fois</strong>, dans la
+      partie 2. Il n'est pas répété dans la media query, et pourtant il reste bleu
+      à 1200 px.
+    </p>
+
+    <p>
+      Une media query <em>ajoute</em> des règles quand sa condition est remplie. Tout
+      ce qui est défini en dehors continue de s'appliquer. N'y écrivez donc que les
+      différences — c'est ce qui rend le fichier lisible.
+    </p>
+
+    <h3>3 · <code>flex-wrap</code> sur le menu n'est pas décoratif</h3>
+
+    <p>
+      Quatre liens ne tiennent pas sur une ligne de 360 px. Sans
+      <code>flex-wrap: wrap</code>, Flexbox les comprimerait jusqu'à les rendre
+      illisibles plutôt que de passer à la ligne — il refuse de le faire par défaut.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr>
+        <th>Symptôme</th>
+        <th>Cause probable</th>
+      </tr>
+      <tr>
+        <td>Tout est inversé : étalé sur téléphone, empilé sur ordinateur</td>
+        <td><code>max-width</code> a été écrit au lieu de <code>min-width</code></td>
+      </tr>
+      <tr>
+        <td>Le titre reste petit sur grand écran</td>
+        <td>La media query de 1000 px est écrite <strong>avant</strong> celle de
+            700 px : à spécificité égale, la dernière gagne</td>
+      </tr>
+      <tr>
+        <td>Plus rien ne fonctionne à partir d'un certain point du fichier</td>
+        <td>Une <strong>accolade fermante manque</strong> — une media query en demande
+            deux. Le validateur CSS le signale</td>
+      </tr>
+      <tr>
+        <td>Les liens du menu sont écrasés sur téléphone</td>
+        <td><code>flex-wrap: wrap</code> manque sur <code>.menu</code></td>
+      </tr>
+      <tr>
+        <td>La bannière reste centrée sur grand écran</td>
+        <td><code>text-align: left</code> manque dans la media query : le
+            <code>center</code> de la partie 2 reste actif</td>
+      </tr>
+      <tr>
+        <td>Les espaces gardent un écart vertical entre eux</td>
+        <td><code>margin-bottom: 0</code> manque sur <code>.espace</code> dans la
+            media query</td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Le réflexe qui diagnostique une media query :</strong> ouvrez
+        l'inspecteur et sélectionnez l'élément concerné. Le panneau des styles affiche
+        les règles <em>groupées par media query</em>, avec la condition en en-tête. Si
+        votre bloc n'y figure pas à la largeur testée, sa condition n'est pas remplie —
+        vérifiez le sens de <code>min-</code> / <code>max-</code>.
+      </p>
+    </div>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à ma page</a>
+      <a class="bouton" href="../exercice-3/">Exercice 3 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

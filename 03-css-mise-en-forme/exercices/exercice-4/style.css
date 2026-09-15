@@ -1,0 +1,99 @@
+/* ═══════════════════════════════════════════════════════════════
+   EXERCICE 4 — À VOUS DE JOUER
+
+   ⚠️ CET EXERCICE EST DIFFÉRENT : vous modifiez LES DEUX FICHIERS.
+
+      travail.html → vous y AJOUTEZ les class et l'id
+      style.css    → vous y écrivez les règles qui les visent
+
+   Faites d'abord l'étape correspondante dans travail.html, puis
+   revenez écrire la règle ici. Enregistrez LES DEUX.
+
+   ── AVANT DE TERMINER ────────────────────────────────────────
+
+   Cherchez « TODO » avec Ctrl+F dans LES DEUX fichiers.
+
+   ↩ L'énoncé : enonce.html   ·   Le cours : cours.html
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Les bases, déjà écrites pour vous ────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", sans-serif;
+  color: #333;
+  background-color: #eef1f5;
+  margin: 0;
+}
+
+.conteneur {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+/* ── À vous ───────────────────────────────────────────────────── */
+
+
+/* ÉTAPE 1 — La bannière.
+   Visez la classe que vous venez de poser sur le header.
+   Donnez-lui : fond #14457b, texte blanc, 30px d'espace intérieur,
+   et un texte centré.                                            */
+
+/* TODO: écrire la règle pour la classe banniere */
+
+
+/* ÉTAPE 2 — Le paragraphe d'introduction.
+   Visez la classe intro : taille 1.1rem, couleur #5a6570.        */
+
+/* TODO: écrire la règle pour la classe intro */
+
+
+/* ÉTAPE 3 — La rangée.
+   Visez la classe rangee et alignez les trois formules côte à
+   côte, avec passage à la ligne autorisé et 20px entre elles
+   (rappel de l'exercice 3).                                      */
+
+/* TODO: écrire la règle pour la classe rangee */
+
+
+/* ÉTAPE 4 — Les formules.
+   Visez la classe formule :
+     - fond blanc
+     - 20px d'espace intérieur
+     - coins arrondis de 8px
+     - bordure 1px solid #d7dee8
+     - flex: 1 1 200px  (pour qu'elles se partagent la largeur)
+     - texte centré                                               */
+
+/* TODO: écrire la règle pour la classe formule */
+
+
+/* ÉTAPE 5 — La formule conseillée.
+   Visez la classe formule--conseillee (celle que porte EN PLUS
+   l'article « Famille ») et donnez-lui :
+     - une bordure 2px solid #0b6bcb
+     - un fond #e8f1fb                                            */
+
+/* TODO: écrire la règle pour la classe formule--conseillee */
+
+
+/* ÉTAPE 6 — Le prix.
+   La classe prix existait déjà dans le HTML : vous n'aviez pas à
+   la créer. Visez-la et donnez-lui une taille de 2rem, la couleur
+   #14457b, en gras, sans marge.                                  */
+
+/* TODO: écrire la règle pour la classe prix */
+
+
+/* ÉTAPE 7 — Le bloc de contact.
+   Celui-ci se vise par son id — attention au bon symbole (notion 4).
+   Donnez-lui : fond blanc, 20px d'espace intérieur, coins arrondis
+   de 8px, et 30px de marge au-dessus.                             */
+
+/* TODO: écrire la règle pour l'id contact */

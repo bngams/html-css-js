@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Énoncé — Des moules à objets : les classes</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 4</p>
+  <h1 class="titre-exo">Des moules à objets : les classes</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html" aria-current="page">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p>🎯 <strong>Objectif</strong> — Fabriquer plusieurs objets sur un même
+      moule, et leur donner des <strong>savoir-faire</strong>.</p>
+      <p>
+        <strong>Prérequis :</strong> l'exercice 3 (objets, tableau d'objets, JSON) et
+        le projet 7 (fonctions, <code>return</code>).
+      </p>
+    </div>
+
+    <div class="fichier">
+      <p>
+        <strong>Un seul fichier :</strong>
+        <code>exercices/exercice-4/app.js</code>
+      </p>
+      <p>
+        🎓 <strong>Dernier exercice du projet 8 — et du jour 2.</strong>
+      </p>
+    </div>
+
+    <div class="attention">
+      <p>
+        <strong>⚠️ Une particularité : quatre étapes enrichissent la MÊME
+        classe.</strong>
+      </p>
+      <p>
+        Les étapes 1, 4, 6 et 8 ajoutent chacune un morceau à
+        <code>class Rectangle</code>. Écrivez-les <strong>à l'intérieur</strong> de
+        ses accolades, pas à la suite du fichier.
+      </p>
+    </div>
+
+    <h2>✅ Le travail — 14 étapes</h2>
+
+    <h3>Partie 1 — le moule</h3>
+
+    <ol class="criteres">
+      <li>
+        Écrire une classe <code>Rectangle</code> dont le <code>constructor</code>
+        reçoit <code>largeur</code> et <code>hauteur</code>, et les range dans
+        l'objet — <strong>avec <code>this.</code></strong>
+      </li>
+      <li>
+        Ranger dans <code>premier</code> un <code>Rectangle</code> de
+        <strong>10 sur 5</strong>, fabriqué avec le mot-clé du cours §3
+      </li>
+      <li>
+        Afficher, en une instruction : <code>Premier :</code>, sa largeur,
+        <code>×</code>, sa hauteur
+      </li>
+    </ol>
+
+    <h3>Partie 2 — les savoir-faire</h3>
+
+    <ol class="criteres" start="4">
+      <li>
+        Ajouter à la classe une méthode <code>calculAire()</code> qui
+        <strong>renvoie</strong> largeur × hauteur
+      </li>
+      <li>Afficher <code>Aire :</code> puis le résultat — vous devez obtenir 50</li>
+      <li>
+        Ajouter <code>calculPerimetre()</code> qui renvoie
+        <code>2 × (largeur + hauteur)</code>
+      </li>
+      <li>
+        Afficher <code>Périmètre :</code> puis le résultat — vous devez obtenir 30
+      </li>
+      <li>
+        Ajouter <code>decrire()</code> qui renvoie un texte de la forme
+        <code>Rectangle 10×5, aire 50</code>, en appelant
+        <strong><code>calculAire()</code> depuis l'intérieur</strong>
+      </li>
+      <li>Afficher <code>Description :</code> puis le résultat</li>
+    </ol>
+
+    <div class="attention">
+      <p>
+        <strong><code>this.</code> n'est pas optionnel.</strong> Dans une méthode,
+        écrire <code>largeur</code> seul déclenche
+        <code>ReferenceError: largeur is not defined</code> : JavaScript cherche une
+        <em>variable</em>, pas la propriété de l'objet.
+      </p>
+      <p>
+        Même chose pour appeler une méthode depuis une autre :
+        <code>this.calculAire()</code>.
+      </p>
+    </div>
+
+    <h3>Partie 3 — plusieurs objets sur le même moule</h3>
+
+    <ol class="criteres" start="10">
+      <li>
+        Ranger dans <code>formes</code> un tableau de trois <code>Rectangle</code> :
+        2×3, 4×5, 6×7
+      </li>
+      <li>
+        Avec <code>for…of</code>, afficher une ligne par forme : <code>·</code> puis
+        sa description
+      </li>
+      <li>
+        Calculer dans <code>totalAires</code> la somme des aires,
+        <strong>avec une boucle</strong>
+      </li>
+      <li>Afficher <code>Total des aires :</code> puis <code>totalAires</code></li>
+    </ol>
+
+    <h3>Partie 4 — ce que JSON ne transporte pas</h3>
+
+    <ol class="criteres" start="14">
+      <li>
+        Afficher <code>En JSON :</code> puis <code>premier</code> transformé en texte
+        JSON — et <strong>regarder ce qui manque</strong>
+      </li>
+    </ol>
+
+    <h2>🔍 Comment vérifier</h2>
+
+    <div class="astuce">
+      <p>
+        <strong>Décompte :</strong> sept <code>console.log</code>,
+        <strong>neuf lignes</strong> affichées. L'étape 11 est une boucle sur trois
+        formes.
+      </p>
+    </div>
+
+    <p>La console doit afficher exactement ceci :</p>
+
+<pre><code>Premier : 10 × 5
+Aire : 50
+Périmètre : 30
+Description : Rectangle 10×5, aire 50
+· Rectangle 2×3, aire 6
+· Rectangle 4×5, aire 20
+· Rectangle 6×7, aire 42
+Total des aires : 68
+En JSON : {"largeur":10,"hauteur":5}</code></pre>
+
+    <table>
+      <tr>
+        <th>Ce que vous vérifiez</th>
+        <th>Ce que vous devez constater</th>
+      </tr>
+      <tr>
+        <td>Le moule fonctionne</td>
+        <td><code>Aire : 50</code> et <code>Périmètre : 30</code></td>
+      </tr>
+      <tr>
+        <td>Une méthode appelle l'autre</td>
+        <td>
+          La description contient l'aire calculée, pas un nombre écrit à la main
+        </td>
+      </tr>
+      <tr>
+        <td>Trois objets indépendants</td>
+        <td>
+          Trois aires différentes : 6, 20 et 42 — le même moule, trois résultats
+        </td>
+      </tr>
+      <tr>
+        <td>Le total</td>
+        <td><code>68</code>, obtenu par une boucle</td>
+      </tr>
+      <tr>
+        <td><strong>Ce que JSON perd</strong></td>
+        <td>
+          <code>{"largeur":10,"hauteur":5}</code> — les données sont là,
+          <strong>les méthodes ont disparu</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>Aucun oubli</td>
+        <td>
+          <code>Ctrl+F</code> sur « TODO » dans <code>app.js</code> : aucun résultat
+        </td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p><strong>🧪 Manip — un objet qui a perdu son moule</strong></p>
+      <p>Dans la console de la page de travail, tapez ces trois lignes :</p>
+      <ol>
+        <li><code>const copie = JSON.parse(JSON.stringify(premier));</code></li>
+        <li><code>copie.largeur</code> → <code>10</code>, les données sont là</li>
+        <li>
+          <code>copie.calculAire()</code> →
+          <code>TypeError: copie.calculAire is not a function</code>
+        </li>
+      </ol>
+      <p>
+        L'objet revenu de JSON <strong>ressemble</strong> à un rectangle, mais ce
+        n'en est plus un. C'est la suite directe de l'exercice 3 :
+        <strong>JSON transporte des données, jamais du comportement.</strong>
+      </p>
+    </div>
+
+    <h2>🏁 Comment savoir que j'ai fini</h2>
+
+    <ul>
+      <li>Les neuf lignes s'affichent, sans erreur rouge</li>
+      <li>Vous savez pourquoi <code>this.</code> est nécessaire dans une méthode</li>
+      <li>
+        Vous savez ce que <code>new</code> fait — et ce qui se passe si on l'oublie
+      </li>
+      <li>Aucun <code>TODO</code> ne subsiste dans <code>app.js</code></li>
+    </ul>
+
+    <h2>⏱️ Durée indicative</h2>
+    <p>
+      <strong>40 à 50 minutes.</strong> Les étapes 1 à 9 construisent une seule
+      classe, morceau par morceau : allez-y dans l'ordre.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="cours.html">← Revoir le cours</a>
+      <a class="bouton" href="travail.html">Ouvrir la page de travail →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

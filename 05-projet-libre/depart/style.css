@@ -1,0 +1,46 @@
+/* ═══════════════════════════════════════════════════════════════
+   VOTRE FEUILLE DE STYLE
+
+   Ce fichier est À VOUS. Les quelques règles ci-dessous sont les
+   fondations vues au projet 4 : gardez-les, elles évitent les
+   débordements. Tout le reste est à écrire.
+
+   ↩ La checklist : http://localhost:8777/05-projet-libre/consignes.html
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Les fondations (projet 4) — gardez-les ───────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  margin: 0;
+  line-height: 1.6;
+  font-family: system-ui, "Segoe UI", sans-serif;
+}
+
+
+/* ── À vous d'écrire ──────────────────────────────────────────── */
+
+/* Quelques pistes pour commencer, dans l'ordre où on procède
+   habituellement :
+
+     1. Les couleurs et la police sur body
+     2. Un conteneur centré :
+          .conteneur { max-width: 900px; margin: 0 auto; padding: 1rem; }
+     3. L'en-tête et le menu
+     4. Le contenu : vos sections, vos cartes
+     5. Le pied de page
+     6. Une media query, en dernier, pour ce qui résiste
+
+   Rappel utile : nommez vos classes par leur RÔLE
+   (.carte-produit, .encadre-prix) et non par leur apparence
+   (.bleu, .grand-texte). Le jour où la couleur change, le nom
+   reste juste.                                                   */

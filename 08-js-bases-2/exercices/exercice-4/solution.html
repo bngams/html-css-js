@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Des moules à objets : les classes</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 4</p>
+  <h1 class="titre-exo">Des moules à objets : les classes</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous essayé la manip de l'objet qui perd son moule ?</strong>
+      C'est la conclusion des deux derniers exercices. Si ce n'est pas fait,
+      retournez à la <a href="travail.html">page de travail</a>.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>class Rectangle {
+
+  constructor(largeur, hauteur) {
+    this.largeur = largeur;
+    this.hauteur = hauteur;
+  }
+
+  calculAire() {
+    return this.largeur * this.hauteur;
+  }
+
+  calculPerimetre() {
+    return 2 * (this.largeur + this.hauteur);
+  }
+
+  decrire() {
+    return "Rectangle " + this.largeur + "×" + this.hauteur +
+           ", aire " + this.calculAire();
+  }
+}
+
+const premier = new Rectangle(10, 5);
+
+console.log("Premier :", premier.largeur, "×", premier.hauteur);
+console.log("Aire :", premier.calculAire());
+console.log("Périmètre :", premier.calculPerimetre());
+console.log("Description :", premier.decrire());
+
+const formes = [
+  new Rectangle(2, 3),
+  new Rectangle(4, 5),
+  new Rectangle(6, 7)
+];
+
+for (const forme of formes) {
+  console.log("·", forme.decrire());
+}
+
+let totalAires = 0;
+
+for (const forme of formes) {
+  totalAires = totalAires + forme.calculAire();
+}
+
+console.log("Total des aires :", totalAires);
+
+console.log("En JSON :", JSON.stringify(premier));</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · <code>this.</code> fait le lien avec l'objet courant</h3>
+
+    <div class="attention">
+      <p>
+        <strong>L'erreur numéro un sur ce chapitre.</strong> Dans une méthode,
+        <code>largeur</code> seul ne désigne rien :
+      </p>
+<pre><code>return largeur * this.hauteur;
+→ ReferenceError: largeur is not defined</code></pre>
+      <p>
+        JavaScript cherche une <strong>variable</strong> de ce nom — il n'en existe
+        pas. <code>this.largeur</code> dit « la largeur <em>de cet objet-ci</em> ».
+      </p>
+      <p>
+        La règle vaut aussi pour appeler une méthode depuis une autre :
+        <code>this.calculAire()</code> dans <code>decrire()</code>.
+      </p>
+    </div>
+
+    <h3>2 · Un moule, trois objets, trois résultats</h3>
+
+    <table>
+      <tr><th>Fabrication</th><th><code>calculAire()</code></th></tr>
+      <tr><td><code>new Rectangle(2, 3)</code></td><td>6</td></tr>
+      <tr><td><code>new Rectangle(4, 5)</code></td><td>20</td></tr>
+      <tr><td><code>new Rectangle(6, 7)</code></td><td>42</td></tr>
+    </table>
+
+    <p>
+      La méthode est écrite <strong>une seule fois</strong>, dans la classe. Chaque
+      objet l'exécute avec <em>ses</em> valeurs. C'est le même gain qu'une fonction
+      au projet 7 — appliqué à des objets entiers.
+    </p>
+
+    <div class="astuce">
+      <p>
+        Les objets sont <strong>indépendants</strong> : modifier l'un ne touche ni
+        les autres, ni le moule. C'est pour cela qu'on peut en fabriquer cent sans
+        qu'ils se gênent.
+      </p>
+    </div>
+
+    <h3>3 · Oublier <code>new</code> : une erreur qui se voit</h3>
+
+<pre><code>Rectangle(10, 5)
+→ TypeError: Class constructor Rectangle cannot be invoked without 'new'</code></pre>
+
+    <div class="astuce">
+      <p>
+        Le message dit <strong>exactement</strong> quoi corriger. Après tous les
+        pièges silencieux de ce cours — le <code>undefined</code> d'un
+        <code>return</code> manquant, le <code>NaN</code> d'une conversion oubliée,
+        la ligne en trop d'un <code>&lt;=</code> — celui-là est une faveur.
+      </p>
+    </div>
+
+    <h3>4 · JSON ne transporte pas le comportement</h3>
+
+    <div class="attention">
+      <p>
+        <code>JSON.stringify(premier)</code> donne
+        <code>{"largeur":10,"hauteur":5}</code>. Les <strong>données</strong> sont
+        là ; les <strong>méthodes</strong> ont disparu.
+      </p>
+<pre><code>const copie = JSON.parse(JSON.stringify(premier));
+
+copie.largeur              → 10        ✅
+copie instanceof Rectangle → false     ⚠️
+copie.calculAire()         → TypeError: copie.calculAire is not a function</code></pre>
+      <p>
+        L'objet revenu <strong>ressemble</strong> à un rectangle, mais il a perdu son
+        moule. C'est la suite exacte de l'exercice 3, où une fonction disparaissait
+        du JSON sans avertissement.
+      </p>
+      <p>
+        <strong>Au passage :</strong> <code>instanceof</code> répond à la question
+        « cet objet sort-il de ce moule ? ». Ce n'est pas au programme d'aujourd'hui —
+        aucune étape ne le demande — mais c'est le mot exact pour ce que vous venez
+        de constater.
+      </p>
+    </div>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td><code>ReferenceError: largeur is not defined</code></td>
+        <td>
+          Un <code>this.</code> manque dans une méthode ou dans le
+          <code>constructor</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>TypeError: Class constructor Rectangle cannot be invoked
+          without 'new'</code>
+        </td>
+        <td>Le mot-clé <code>new</code> manque à la fabrication</td>
+      </tr>
+      <tr>
+        <td><code>Aire : undefined</code></td>
+        <td>
+          La méthode n'a pas de <code>return</code> — le piège du projet 7,
+          exercice 2
+        </td>
+      </tr>
+      <tr>
+        <td><code>SyntaxError: Unexpected token '{'</code></td>
+        <td>
+          Une méthode est écrite <strong>hors</strong> des accolades de la classe.
+          Tout le fichier s'arrête : <strong>même les lignes qui marchaient ne
+          s'affichent plus</strong>. Remontez la méthode à l'intérieur de
+          <code>class Rectangle { … }</code>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <code>TypeError: premier.calculAire is not a function</code>
+        </td>
+        <td>
+          La méthode n'a pas été écrite, ou son nom est mal orthographié
+          (majuscules comprises)
+        </td>
+      </tr>
+      <tr>
+        <td><code>SyntaxError</code> dans la classe</td>
+        <td>
+          Une virgule entre deux méthodes : contrairement aux objets littéraux, les
+          méthodes d'une classe <strong>ne se séparent pas</strong> par des virgules
+        </td>
+      </tr>
+      <tr>
+        <td><code>Total des aires : 0</code></td>
+        <td>
+          L'addition est hors de la boucle, ou vous additionnez <code>forme</code> au
+          lieu de <code>forme.calculAire()</code>
+        </td>
+      </tr>
+    </table>
+
+    <h2>🎓 Ce que vous savez faire, à la fin du projet 8</h2>
+
+    <ul>
+      <li>Ranger plusieurs valeurs dans un <strong>tableau</strong>, le parcourir</li>
+      <li>Répéter avec <code>for</code>, <code>for…of</code> et <code>while</code></li>
+      <li>Reconnaître et réparer une <strong>boucle infinie</strong></li>
+      <li>Décrire une chose avec un <strong>objet</strong>, lire et modifier ses propriétés</li>
+      <li>Lire et écrire du <strong>JSON</strong> — et savoir ce qu'il ne transporte pas</li>
+      <li>Fabriquer des objets sur un <strong>moule</strong>, avec leurs savoir-faire</li>
+    </ul>
+
+    <p>
+      Le <strong>jour 3</strong> quitte la console : votre code va enfin
+      <em>modifier la page</em>. C'est le projet 9 — le DOM.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../modules/">📦 Et pour finir, une lecture →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

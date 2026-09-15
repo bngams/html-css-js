@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours — Décrire une chose : les objets</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 8</a> · Exercice 3</p>
+  <h1 class="titre-exo">Décrire une chose : les objets</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html" aria-current="page">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="objectif">
+      <p><strong>Ce que vous allez apprendre ici :</strong> ranger sous un seul nom
+      les <em>caractéristiques</em> d'une chose — et lire la notation
+      <strong>JSON</strong>, celle de toutes les données du web.</p>
+    </div>
+
+    <h2>1 · Le tableau ne suffit plus</h2>
+
+    <p>
+      Un tableau range des valeurs <strong>de même nature</strong>, repérées par un
+      numéro. Mais pour décrire <em>un livre</em>, le numéro ne veut rien dire :
+    </p>
+
+<pre><code>const livre = ["La Horde", "Damasio", 712];
+
+livre[1]     → "Damasio"    ← le 1, c'était l'auteur ? le titre ?</code></pre>
+
+    <p>
+      Un <strong>objet</strong> remplace les numéros par des <strong>noms</strong> :
+    </p>
+
+<pre><code>const livre = {
+  titre: "La Horde du Contrevent",
+  auteur: "Damasio",
+  pages: 712
+};</code></pre>
+
+    <table>
+      <tr><th>Le morceau</th><th>Son rôle</th></tr>
+      <tr><td><code>{ }</code></td><td>les accolades : « ceci est un objet »</td></tr>
+      <tr><td><code>titre</code></td><td>une <strong>clé</strong> — le nom de la case</td></tr>
+      <tr><td><code>:</code></td><td>sépare la clé de sa valeur</td></tr>
+      <tr><td><code>"Damasio"</code></td><td>la <strong>valeur</strong></td></tr>
+      <tr><td>les virgules</td><td>séparent les paires — <strong>pas après la dernière</strong></td></tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        <strong>Tableau ou objet ?</strong> Plusieurs choses <em>du même genre</em> →
+        tableau. Plusieurs <em>aspects d'une seule</em> chose → objet. Une
+        médiathèque a un <strong>tableau</strong> de livres ; chaque livre est un
+        <strong>objet</strong>.
+      </p>
+    </div>
+
+    <h2>2 · Lire une propriété</h2>
+
+<pre><code>livre.titre         → "La Horde du Contrevent"
+livre["auteur"]     → "Damasio"</code></pre>
+
+    <p>
+      Les deux écritures font la même chose. Le point est plus court et se lit mieux ;
+      les crochets servent quand le nom de la clé est <em>dans une variable</em> —
+      vous en aurez besoin à l'étape du parcours.
+    </p>
+
+    <div class="attention">
+      <p>
+        <strong>Une propriété qui n'existe pas rend <code>undefined</code></strong>,
+        sans la moindre erreur :
+      </p>
+<pre><code>livre.editeur       → undefined</code></pre>
+      <p>
+        C'est le même comportement que <code>fruits[5]</code> à l'exercice 1 :
+        JavaScript répond « rien » et continue. Une faute de frappe sur un nom de clé
+        ne se signale donc jamais toute seule.
+      </p>
+    </div>
+
+    <h2>3 · Modifier, ajouter, retirer</h2>
+
+<pre><code>livre.pages = 712;          ← modifie
+livre.editeur = "La Volte"; ← AJOUTE une clé qui n'existait pas
+delete livre.pages;         ← retire la clé</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Comme pour les tableaux, <code>const</code> n'empêche rien de
+        cela.</strong> Il interdit de remplacer l'objet entier
+        (<code>livre = { … }</code>), pas d'en changer le contenu. C'est pourquoi on
+        déclare presque toujours un objet avec <code>const</code>.
+      </p>
+      <p>
+        <strong>Note :</strong> <code>delete</code> n'est demandé par aucune étape
+        aujourd'hui — il figure ici pour que vous le reconnaissiez le jour où vous le
+        croiserez.
+      </p>
+    </div>
+
+    <h2>4 · Parcourir un objet : <code>for…in</code></h2>
+
+    <p>
+      À l'exercice 1, <code>for…in</code> était déconseillé sur un tableau. Voici
+      enfin son usage légitime :
+    </p>
+
+<pre><code>for (const cle in livre) {
+  console.log(cle, "=", livre[cle]);
+}</code></pre>
+
+    <p>
+      À chaque tour, <code>cle</code> contient le <strong>nom</strong> de la
+      propriété. Pour obtenir la valeur, on écrit <code>livre[cle]</code> —
+      <strong>avec des crochets</strong>, puisque le nom est dans une variable.
+    </p>
+
+    <div class="attention">
+      <p>
+        <code>livre.cle</code> ne fonctionnerait pas : JavaScript chercherait une
+        propriété littéralement appelée <code>cle</code>, et rendrait
+        <code>undefined</code>. C'est l'erreur la plus fréquente sur ce point.
+      </p>
+    </div>
+
+    <div class="astuce">
+      <p>
+        <strong>Et pour obtenir seulement les noms, ou seulement les valeurs ?</strong>
+        Ce n'est pas au programme d'aujourd'hui — aucune étape ne le demande — mais
+        vous les croiserez :
+      </p>
+<pre><code>Object.keys(livre)     → ["titre", "auteur", "pages"]
+Object.values(livre)   → ["La Horde du Contrevent", "Damasio", 712]</code></pre>
+      <p>
+        Deux <strong>tableaux</strong> — vous savez déjà les parcourir avec
+        <code>for…of</code>. Retenez surtout <code>for…in</code>, qui donne les deux
+        à la fois.
+      </p>
+    </div>
+
+    <h2>5 · Des objets dans des objets</h2>
+
+<pre><code>const media = {
+  nom: "Trois Rivières",
+  adresse: { ville: "Toulouse", cp: "31000" }
+};
+
+media.adresse.ville     → "Toulouse"</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>⚠️ Le piège à deux étages.</strong> Une clé absente rend
+        <code>undefined</code>, sans erreur — vous le savez. Mais aller chercher
+        <em>dans</em> ce <code>undefined</code> fait tout arrêter :
+      </p>
+<pre><code>media.horaires          → undefined       (pas d'erreur)
+media.horaires.lundi    → TypeError: Cannot read properties of undefined</code></pre>
+      <p>
+        <strong>C'est exactement le mécanisme du projet 7</strong>, quand
+        <code>querySelector</code> ne trouvait rien : <em>chercher</em> est permis,
+        <em>entrer dedans</em> ne l'est pas. Quand vous voyez ce message, remontez
+        d'un cran : c'est le niveau <strong>au-dessus</strong> qui est absent.
+      </p>
+    </div>
+
+    <h2>6 · Un tableau d'objets</h2>
+
+    <p>
+      C'est la structure la plus courante du web — et celle de votre dernier projet :
+    </p>
+
+<pre><code>const catalogue = [
+  { titre: "Dune", pages: 900 },
+  { titre: "La Horde", pages: 712 },
+  { titre: "Fondation", pages: 420 }
+];
+
+catalogue.length        → 3
+catalogue[0].titre      → "Dune"</code></pre>
+
+    <p>Et l'on combine ce qu'on sait déjà :</p>
+
+<pre><code>for (const livre of catalogue) {
+  console.log(livre.titre);
+}</code></pre>
+
+    <div class="astuce">
+      <p>
+        <strong>Rien de neuf ici :</strong> un <code>for…of</code> de l'exercice 1,
+        et un accès par point de la section 2. C'est l'assemblage qui est
+        puissant — et c'est sous cette forme que les données arrivent d'un serveur.
+      </p>
+    </div>
+
+    <h3>Additionner au fil de la boucle : l'accumulateur</h3>
+
+    <p>
+      Pour faire une somme, on part d'une boîte à <code>0</code> et on y ajoute à
+      chaque tour. Ce motif porte un nom — un <strong>accumulateur</strong> — et vous
+      le réutiliserez souvent :
+    </p>
+
+<pre><code>let total = 0;
+
+for (const livre of catalogue) {
+  total = total + livre.pages;
+}</code></pre>
+
+    <div class="attention">
+      <p>
+        <strong>Le <code>.pages</code> n'est pas optionnel.</strong> Ajouter
+        <code>livre</code> tout entier ne provoque aucune erreur : le
+        <code>+</code> se met à coller du texte, et le total devient
+        <code>0[object Object][object Object]…</code> — le piège du projet 6, sous
+        une forme nouvelle.
+      </p>
+    </div>
+
+    <h2>7 · JSON — le même objet, en texte</h2>
+
+    <p>
+      Pour <strong>transmettre</strong> un objet, il faut le transformer en texte.
+      C'est le rôle de JSON — <em>JavaScript Object Notation</em> :
+    </p>
+
+<pre><code>JSON.stringify(livre)
+→ {"titre":"Dune","auteur":"Herbert","pages":900}</code></pre>
+
+    <table>
+      <tr><th>Instruction</th><th>Transforme</th><th>Résultat</th></tr>
+      <tr>
+        <td><code>JSON.stringify(obj)</code></td>
+        <td>objet → texte</td>
+        <td>une <strong>chaîne</strong></td>
+      </tr>
+      <tr>
+        <td><code>JSON.parse(txt)</code></td>
+        <td>texte → objet</td>
+        <td>un <strong>objet</strong></td>
+      </tr>
+    </table>
+
+    <div class="attention">
+      <p>
+        <strong>Le résultat de <code>stringify</code> est du TEXTE.</strong> Il
+        <em>ressemble</em> à l'objet, mais <code>typeof</code> répond
+        <code>"string"</code> — et l'on ne peut plus écrire <code>.titre</code>
+        dessus. C'est la même distinction que <code>"25"</code> et <code>25</code>
+        au projet 6 : l'apparence n'est pas le type.
+      </p>
+    </div>
+
+    <h3>Deux différences avec l'écriture JavaScript</h3>
+
+    <table>
+      <tr><th></th><th>Objet JavaScript</th><th>JSON</th></tr>
+      <tr>
+        <td>Les clés</td>
+        <td><code>titre: …</code></td>
+        <td><code>"titre": …</code> — <strong>toujours entre guillemets doubles</strong></td>
+      </tr>
+      <tr>
+        <td>Les fonctions</td>
+        <td>autorisées</td>
+        <td><strong>perdues sans prévenir</strong></td>
+      </tr>
+    </table>
+
+    <div class="astuce">
+      <p>
+        Un texte JSON mal formé — guillemets simples, virgule en trop — fait échouer
+        <code>JSON.parse</code> avec une <code>SyntaxError</code>. Contrairement aux
+        pièges silencieux de ce cours, <strong>celui-là se voit</strong> : c'est une
+        bonne nouvelle.
+      </p>
+    </div>
+
+    <h2>📚 Pour aller plus loin</h2>
+
+    <table>
+      <tr><th>Ressource</th><th>Pourquoi celle-là</th></tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/Object_basics"
+             target="_blank" rel="noopener">MDN — Les bases des objets</a>
+        </td>
+        <td>Le chapitre complet, avec des exemples progressifs.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://developer.mozilla.org/fr/docs/Learn_web_development/Core/Scripting/JSON"
+             target="_blank" rel="noopener">MDN — Travailler avec JSON</a>
+        </td>
+        <td>Prépare le projet 12, où les données viendront d'un serveur.</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://fr.javascript.info/object"
+             target="_blank" rel="noopener">javascript.info — Les objets</a>
+        </td>
+        <td>Le même chapitre en français, avec exercices corrigés.</td>
+      </tr>
+    </table>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="../../">← Retour aux exercices</a>
+      <a class="bouton" href="enonce.html">Passer à l'énoncé →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>

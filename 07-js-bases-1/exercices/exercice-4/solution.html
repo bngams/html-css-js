@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution — Le jeu de devinette</title>
+  <link rel="stylesheet" href="../../styles/exercice.css">
+</head>
+<body>
+<div class="page">
+
+  <p class="fil"><a href="../../">Projet 7</a> · Exercice 4</p>
+  <h1 class="titre-exo">Le jeu de devinette</h1>
+
+  <ul class="onglets">
+    <li><a href="cours.html">📖 Cours</a></li>
+    <li><a href="enonce.html">📋 Énoncé</a></li>
+    <li><a href="travail.html">✍️ À vous de jouer</a></li>
+    <li><a href="solution.html" aria-current="page">✅ Solution</a></li>
+  </ul>
+
+  <article class="contenu">
+
+    <div class="attention">
+      <p><strong>Avez-vous testé les quatre cas — et l'annulation ?</strong>
+      C'est là que l'exercice se joue. Si vous n'avez essayé que la bonne réponse,
+      retournez à la <a href="travail.html">page de travail</a> : un programme se
+      juge sur ce qu'il fait quand l'utilisateur ne joue pas le jeu.</p>
+    </div>
+
+    <p>
+      <a class="bouton" href="solution/" target="_blank" rel="noopener">
+        ▶ Voir le corrigé en fonctionnement
+      </a>
+    </p>
+
+    <h2>Le fichier complet</h2>
+
+    <details>
+      <summary>Afficher <code>app.js</code> en entier</summary>
+
+<pre><code>const MINIMUM = 1;
+const MAXIMUM = 10;
+
+function tirerSecret() {
+  return Math.floor(Math.random() * MAXIMUM) + MINIMUM;
+}
+
+const secret = tirerSecret();
+
+console.log("[triche] le secret est :", secret);
+
+const saisie = prompt("Devinez un nombre entre 1 et 10");
+const proposition = Number(saisie);
+
+console.log("saisie :", saisie, "→ proposition :", proposition);
+
+function reponse(proposition) {
+  if (isNaN(proposition)) {
+    return "Ce n'est pas un nombre.";
+  } else if (proposition === secret) {
+    return "Gagné !";
+  } else if (proposition &lt; secret) {
+    return "Trop petit.";
+  } else {
+    return "Trop grand.";
+  }
+}
+
+alert(reponse(proposition));
+
+console.log("Proposition :", proposition, "· Secret :", secret,
+            "· Verdict :", reponse(proposition));</code></pre>
+    </details>
+
+    <h2>Les quatre choses à retenir</h2>
+
+    <h3>1 · Tout vient des exercices précédents</h3>
+
+    <p>
+      Ce programme n'introduit rien. Il <strong>assemble</strong> — et c'est
+      exactement ce que fait un développeur :
+    </p>
+
+    <table>
+      <tr><th>Ligne du jeu</th><th>Vu au</th></tr>
+      <tr><td><code>Math.floor(Math.random() * …) + 1</code></td><td>projet 6, exercice 3</td></tr>
+      <tr><td><code>prompt()</code> et <code>alert()</code></td><td>projet 6, exercice 2</td></tr>
+      <tr><td><code>Number()</code></td><td>projet 6, exercice 2</td></tr>
+      <tr><td><code>function</code> et <code>return</code></td><td>exercice 2</td></tr>
+      <tr><td><code>if</code> / <code>else if</code> / <code>else</code></td><td>exercices 1 et 3</td></tr>
+    </table>
+
+    <h3>2 · <code>Number()</code> n'est pas une précaution, c'est le cœur du jeu</h3>
+
+    <div class="attention">
+      <p>
+        Sans la conversion de l'étape 6, la comparaison de l'étape 8 serait
+        <strong>fausse à tous les coups</strong> :
+      </p>
+<pre><code>"7" === 7           → false     le joueur trouve… et perd
+Number("7") === 7   → true      ✅</code></pre>
+      <p>
+        Et <strong>aucune erreur rouge</strong> n'apparaîtrait. Le jeu marcherait,
+        refuserait toutes les bonnes réponses, et rien n'indiquerait pourquoi. C'est
+        le fil rouge de tout le projet 7 : <em>un type mal converti ne plante pas, il
+        ment</em>.
+      </p>
+    </div>
+
+    <h3>3 · L'ordre des cas, encore</h3>
+
+    <p>
+      Le test <code>isNaN</code> doit venir <strong>en premier</strong>. Placé plus
+      bas, il ne serait jamais atteint — pour une raison particulière :
+    </p>
+
+<pre><code>NaN === NaN     → false
+NaN &lt; 7         → false
+NaN &gt; 7         → false</code></pre>
+
+    <div class="astuce">
+      <p>
+        <code>NaN</code> n'est égal à rien, <strong>pas même à lui-même</strong>, et
+        toutes les comparaisons le concernant sont fausses. Sans le test en tête, une
+        saisie <code>abc</code> tomberait dans le <code>else</code> final et
+        s'entendrait répondre « Trop grand. »
+      </p>
+    </div>
+
+    <h3>4 · Le défaut assumé : l'annulation</h3>
+
+    <div class="attention">
+      <p>
+        <strong>Annuler donne « Trop petit. »</strong> — c'est mesurable, et c'est
+        logique :
+      </p>
+<pre><code>prompt annulé      → null
+Number(null)       → 0        un nombre parfaitement valide
+0 &lt; secret         → vrai     donc "Trop petit."</code></pre>
+      <p>
+        Valider <strong>sans rien taper</strong> produit le même effet :
+        <code>Number("")</code> vaut également <code>0</code>.
+      </p>
+      <p>
+        Votre jeu ne peut donc pas distinguer « le joueur propose 0 » de « le joueur
+        renonce ». <strong>Ce n'est pas une faute de votre part</strong> : c'est une
+        limite de cette version, et la reconnaître fait partie du métier.
+      </p>
+    </div>
+
+    <p>
+      La corriger demande un test supplémentaire sur <code>saisie</code> avant la
+      conversion — et, pour redemander plutôt que d'abandonner, une
+      <strong>boucle</strong> : c'est le projet 8.
+    </p>
+
+    <h2>Les erreurs fréquentes</h2>
+
+    <table>
+      <tr><th>Symptôme</th><th>Cause</th></tr>
+      <tr>
+        <td>Le joueur trouve le bon nombre mais lit « Trop petit » ou « Trop grand »</td>
+        <td>
+          La conversion de l'étape 6 manque : on compare du texte à un nombre avec
+          <code>===</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>abc</code> répond « Trop grand. »</td>
+        <td>
+          Le test <code>isNaN</code> n'est pas le premier de la chaîne
+        </td>
+      </tr>
+      <tr>
+        <td>Le secret change entre l'alerte et la console</td>
+        <td>
+          <code>tirerSecret()</code> est appelé deux fois — il ne doit l'être
+          qu'une seule, à l'étape 3
+        </td>
+      </tr>
+      <tr>
+        <td>Le secret vaut parfois <code>0</code> ou <code>11</code></td>
+        <td>
+          Le <code>+ MINIMUM</code> manque, ou vous avez utilisé
+          <code>Math.round</code> au lieu de <code>Math.floor</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>ReferenceError: Cannot access 'secret' before initialization</code></td>
+        <td>
+          <code>reponse</code> est écrite <em>et appelée</em> avant la ligne qui crée
+          <code>secret</code> — c'est le message annoncé en tête de
+          <code>app.js</code>. Remontez la déclaration de <code>secret</code>, ou
+          passez-le en second paramètre
+        </td>
+      </tr>
+      <tr>
+        <td>La boîte affiche <code>undefined</code></td>
+        <td>
+          Un <code>return</code> manque dans l'un des blocs de
+          <code>reponse</code> — le piège de l'exercice 2
+        </td>
+      </tr>
+    </table>
+
+    <h2>🎓 Ce que vous savez faire, à la fin du projet 7</h2>
+
+    <ul>
+      <li>Écrire une condition <code>if</code> / <code>else</code> correcte</li>
+      <li>Choisir <code>===</code> et savoir pourquoi <code>==</code> est piégeux</li>
+      <li>Écrire une fonction avec des paramètres et un <code>return</code></li>
+      <li>Distinguer <strong>afficher</strong> et <strong>renvoyer</strong></li>
+      <li>Enchaîner des cas avec <code>else if</code>, du plus restrictif au plus large</li>
+      <li>Combiner des conditions avec <code>&amp;&amp;</code>, <code>||</code>, <code>!</code></li>
+      <li>Reconnaître qu'un intervalle s'écrit en <strong>deux</strong> comparaisons</li>
+      <li>Assembler tout cela en un programme qui tourne</li>
+    </ul>
+
+    <p>
+      Le projet 8 ajoute la <strong>répétition</strong> — les boucles — et les
+      <strong>collections</strong> : tableaux et objets. Votre jeu pourra enfin
+      redemander.
+    </p>
+
+    <div class="nav-bas">
+      <a class="bouton--clair bouton" href="travail.html">← Retour à la page de travail</a>
+      <a class="bouton" href="../../">Fin du projet 7 →</a>
+    </div>
+
+  </article>
+</div>
+</body>
+</html>
